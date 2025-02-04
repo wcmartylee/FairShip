@@ -7,7 +7,7 @@ import global_variables
 ReconstructibleMCTracks = []
 theTracks = []
 
-r_scale = global_variables.ShipGeo.strawtubes.InnerStrawDiameter / 1.975
+r_scale = global_variables.ShipGeo.strawtubes.InnerStrawDiameter / 1.9928
 
 def initialize(fgeo):
     pass
