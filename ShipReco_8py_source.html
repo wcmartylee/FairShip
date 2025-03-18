@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('ShipReco_8py_source.html',''); initRes
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    vmsize = int(_vmsize.split()[1])</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="comment">#Getting physical memory size</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    pmsize = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    print(<span class="stringliteral">&quot;memory: virtuell = %5.2F MB  physical = %5.2F MB&quot;</span>%(vmsize/1.0E3,pmsize/1.0E3))</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    print(<span class="stringliteral">&quot;memory: virtual = %5.2F MB  physical = %5.2F MB&quot;</span>%(vmsize/1.0E3,pmsize/1.0E3))</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> ROOT,os,sys</div>
@@ -193,7 +193,7 @@ $(document).ready(function(){initNavTree('ShipReco_8py_source.html',''); initRes
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> ut.bookHist(h,<span class="stringliteral">&#39;distu&#39;</span>,<span class="stringliteral">&#39;distance to wire&#39;</span>,100,0.,5.)</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> ut.bookHist(h,<span class="stringliteral">&#39;distv&#39;</span>,<span class="stringliteral">&#39;distance to wire&#39;</span>,100,0.,5.)</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> ut.bookHist(h,<span class="stringliteral">&#39;disty&#39;</span>,<span class="stringliteral">&#39;distance to wire&#39;</span>,100,0.,5.)</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> ut.bookHist(h,<span class="stringliteral">&#39;nmeas&#39;</span>,<span class="stringliteral">&#39;nr measuerements&#39;</span>,100,0.,50.)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> ut.bookHist(h, <span class="stringliteral">&#39;nmeas&#39;</span>, <span class="stringliteral">&#39;nr measurments&#39;</span>, 100, 0., 50.)</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> ut.bookHist(h,<span class="stringliteral">&#39;chi2&#39;</span>,<span class="stringliteral">&#39;Chi2/DOF&#39;</span>,100,0.,20.)</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">import</span> shipDet_conf</div>
@@ -244,10 +244,10 @@ $(document).ready(function(){initNavTree('ShipReco_8py_source.html',''); initRes
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment"># end loop over events</span></div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>SHiP.finish()</div>
 <div class="ttc" id="aclassrootpyPickler_1_1Unpickler_html"><div class="ttname"><a href="classrootpyPickler_1_1Unpickler.html">rootpyPickler.Unpickler</a></div><div class="ttdef"><b>Definition</b> <a href="rootpyPickler_8py_source.html#l00203">rootpyPickler.py:203</a></div></div>
-<div class="ttc" id="aclassshipDigiReco_1_1ShipDigiReco_html"><div class="ttname"><a href="classshipDigiReco_1_1ShipDigiReco.html">shipDigiReco.ShipDigiReco</a></div><div class="ttdef"><b>Definition</b> <a href="shipDigiReco_8py_source.html#l00014">shipDigiReco.py:14</a></div></div>
+<div class="ttc" id="aclassshipDigiReco_1_1ShipDigiReco_html"><div class="ttname"><a href="classshipDigiReco_1_1ShipDigiReco.html">shipDigiReco.ShipDigiReco</a></div><div class="ttdef"><b>Definition</b> <a href="shipDigiReco_8py_source.html#l00012">shipDigiReco.py:12</a></div></div>
 <div class="ttc" id="anamespaceShipReco_html_a3af67a1e483c9215ccec52a6a7e599dd"><div class="ttname"><a href="namespaceShipReco.html#a3af67a1e483c9215ccec52a6a7e599dd">ShipReco.mem_monitor</a></div><div class="ttdeci">mem_monitor()</div><div class="ttdef"><b>Definition</b> <a href="ShipReco_8py_source.html#l00008">ShipReco.py:8</a></div></div>
 <div class="ttc" id="anamespacegeomGeant4_html_a42125a41d1dc64cb48672d7c60266ae1"><div class="ttname"><a href="namespacegeomGeant4.html#a42125a41d1dc64cb48672d7c60266ae1">geomGeant4.addVMCFields</a></div><div class="ttdeci">addVMCFields(shipGeo, controlFile='', verbose=False, withVirtualMC=True)</div><div class="ttdef"><b>Definition</b> <a href="geomGeant4_8py_source.html#l00135">geomGeant4.py:135</a></div></div>
-<div class="ttc" id="anamespaceshipDet__conf_html_a7f232397871353ce80c1ea03eb15bd20"><div class="ttname"><a href="namespaceshipDet__conf.html#a7f232397871353ce80c1ea03eb15bd20">shipDet_conf.configure</a></div><div class="ttdeci">configure(run, ship_geo)</div><div class="ttdef"><b>Definition</b> <a href="shipDet__conf_8py_source.html#l00126">shipDet_conf.py:126</a></div></div>
+<div class="ttc" id="anamespaceshipDet__conf_html_a7f232397871353ce80c1ea03eb15bd20"><div class="ttname"><a href="namespaceshipDet__conf.html#a7f232397871353ce80c1ea03eb15bd20">shipDet_conf.configure</a></div><div class="ttdeci">configure(run, ship_geo)</div><div class="ttdef"><b>Definition</b> <a href="shipDet__conf_8py_source.html#l00125">shipDet_conf.py:125</a></div></div>
 <div class="ttc" id="anamespaceshipRoot__conf_html_a4bb207e902847385c1369c120d9063ec"><div class="ttname"><a href="namespaceshipRoot__conf.html#a4bb207e902847385c1369c120d9063ec">shipRoot_conf.configure</a></div><div class="ttdeci">configure(darkphoton=None)</div><div class="ttdef"><b>Definition</b> <a href="shipRoot__conf_8py_source.html#l00063">shipRoot_conf.py:63</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
