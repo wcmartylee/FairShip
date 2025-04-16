@@ -881,6 +881,7 @@ class ShipDigiReco:
     # pdg    = self.sTree.MCTrack[atrack].GetPdgCode()
     # if not self.PDG.GetParticle(pdg): continue # unknown particle
     pdg = 13 # assume all tracks are muons
+    pdg_hypotheses = [11, 13, 211, 2212]
     meas = hitPosLists[atrack]
     detIDs = hit_detector_ids[atrack]
     nM = meas.size()
@@ -899,8 +900,12 @@ class ShipDigiReco:
     for  i in range(3):   covM[i][i] = resolution*resolution
     covM[0][0]=resolution*resolution*100.
     for  i in range(3,6): covM[i][i] = ROOT.TMath.Power(resolution / nM / ROOT.TMath.Sqrt(3), 2)
-# trackrep
-    rep = ROOT.genfit.RKTrackRep(pdg)
+# create track
+    theTrack = ROOT.genfit.Track()
+# trackrep for different particle hypotheses
+    for pdg in pdg_hypotheses:
+      rep = ROOT.genfit.RKTrackRep(pdg)
+      theTrack.addTrackRep(rep)
 # smeared start state
     stateSmeared = ROOT.genfit.MeasuredStateOnPlane(rep)
     rep.setPosMomCov(stateSmeared, posM, momM, covM)
