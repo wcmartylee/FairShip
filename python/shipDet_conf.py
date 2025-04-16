@@ -271,6 +271,33 @@ def configure_veto(yaml_file):
 
     detectorList.append(Veto)
 
+def configure_strawtubes(yaml_file):
+    with open(yaml_file) as file:
+        config = yaml.safe_load(file)
+
+    strawtubes_geo = AttrDict(config)
+
+    Strawtubes = ROOT.strawtubes()
+    Strawtubes.SetZposition()
+    Strawtubes.SetDeltazFrame(strawtubes_geo.DeltazFrame)
+    Strawtubes.SetFrameLateralWidth(strawtubes_geo.FrameLateralWidth)
+    Strawtubes.SetFrameMaterial(strawtubes_geo.FrameMaterial)
+    Strawtubes.SetInnerStrawDiameter(strawtubes_geo.InnerStrawDiameter)
+    Strawtubes.SetOuterStrawDiameter(strawtubes_geo.OuterStrawDiameter)
+    Strawtubes.SetStrawPitch(
+        strawtubes_geo.StrawPitch,
+        strawtubes_geo.YLayerOffset,
+    )
+    Strawtubes.SetDeltazLayer(strawtubes_geo.DeltazLayer)
+    Strawtubes.SetStrawsPerLayer(strawtubes_geo.StrawsPerLayer)
+    Strawtubes.SetStereoAngle(strawtubes_geo.ViewAngle)
+    Strawtubes.SetWireThickness(strawtubes_geo.WireThickness)
+    Strawtubes.SetVacBox_x(strawtubes_geo.VacBox_x)
+    Strawtubes.SetVacBox_y(strawtubes_geo.VacBox_y)
+    Strawtubes.SetStrawLength()
+
+    detectorList.append(Strawtubes)
+
 
 def configure(run, ship_geo):
     # ---- for backward compatibility ----

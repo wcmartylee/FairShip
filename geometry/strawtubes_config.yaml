@@ -1,0 +1,21 @@
+#Configuration of SST in FairShip (compact version without plane)
+
+z: 0.0
+InnerStrawDiameter: 1.9928 #cm
+StrawPitch: 2 #cm
+DeltazLayer: 1.732 #cm
+YLayerOffset: 1 #cm
+FrameMaterial: "steel"
+FrameLateralWidth: 30 #cm
+DeltazFrame: 100 #cm
+WallThickness: 0.0036 #cm
+OuterStrawDiameter: 2 #cm
+StrawsPerLayer: 300
+ViewAngle: 5 #deg
+WireThickness: 0.003 #cm
+DeltazView: 5 #cm
+VacBox_x: 240 #cm
+VacBox_y: 360 #cm
+StrawLength: 200 #cm
+tr12ydim: 300 #cm
+tr34ydim: 300 #cm
