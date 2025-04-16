@@ -880,7 +880,7 @@ class ShipDigiReco:
     if atrack < 0: continue # these are hits not assigned to MC track because low E cut
     # pdg    = self.sTree.MCTrack[atrack].GetPdgCode()
     # if not self.PDG.GetParticle(pdg): continue # unknown particle
-    pdg = 13 # assume all tracks are muons
+    # pdg = 13 # assume all tracks are muons
     pdg_hypotheses = [11, 13, 211, 2212]
     meas = hitPosLists[atrack]
     detIDs = hit_detector_ids[atrack]
@@ -902,18 +902,19 @@ class ShipDigiReco:
     for  i in range(3,6): covM[i][i] = ROOT.TMath.Power(resolution / nM / ROOT.TMath.Sqrt(3), 2)
 # create track
     theTrack = ROOT.genfit.Track()
+    theTrack.setStateSeed(posM, momM)
+    theTrack.setCovSeed(covM)
 # trackrep for different particle hypotheses
     for pdg in pdg_hypotheses:
       rep = ROOT.genfit.RKTrackRep(pdg)
       theTrack.addTrackRep(rep)
 # smeared start state
-    stateSmeared = ROOT.genfit.MeasuredStateOnPlane(rep)
-    rep.setPosMomCov(stateSmeared, posM, momM, covM)
+#    stateSmeared = ROOT.genfit.MeasuredStateOnPlane(rep)
+#    rep.setPosMomCov(stateSmeared, posM, momM, covM)
 # create track
-    seedState = ROOT.TVectorD(6)
-    seedCov   = ROOT.TMatrixDSym(6)
-    rep.get6DStateCov(stateSmeared, seedState, seedCov)
-    theTrack = ROOT.genfit.Track(rep, seedState, seedCov)
+#    seedState = ROOT.TVectorD(6)
+#    seedCov   = ROOT.TMatrixDSym(6)
+#    rep.get6DStateCov(stateSmeared, seedState, seedCov)
     hitCov = ROOT.TMatrixDSym(7)
     hitCov[6][6] = resolution*resolution
     hitID = 0
@@ -932,6 +933,9 @@ class ShipDigiReco:
       tp.addRawMeasurement(measurement) # package measurement in the TrackPoint
       theTrack.insertPoint(tp)  # add point to Track
       hitID += 1
+    theTrack.determineCardinalRep()
+    theTrack.udpateSeed()
+    trackCand = theTrack.constructTrackCand()
    # print "debug meas",atrack,nM,stationCrossed[atrack],self.sTree.MCTrack[atrack],pdg
     trackCandidates.append([theTrack,atrack])
 
