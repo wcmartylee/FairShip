@@ -1,21 +1,23 @@
-#Configuration of SST in FairShip (compact version without plane)
+#Configuration of SST in FairShip (compact configuration)
 
 z: 0.0
 InnerStrawDiameter: 1.9928 #cm
 StrawPitch: 2 #cm
 DeltazLayer: 1.732 #cm
+DeltazPlane: 0
 YLayerOffset: 1 #cm
+YPlaneOffset: 0
 FrameMaterial: "steel"
 FrameLateralWidth: 30 #cm
 DeltazFrame: 100 #cm
+
 WallThickness: 0.0036 #cm
-OuterStrawDiameter: 2 #cm
-StrawsPerLayer: 300
+
 ViewAngle: 5 #deg
 WireThickness: 0.003 #cm
 DeltazView: 5 #cm
 VacBox_x: 240 #cm
-VacBox_y: 360 #cm
-StrawLength: 200 #cm
-tr12ydim: 300 #cm
-tr34ydim: 300 #cm
+
+#For digitization
+v_drift: 1/30 #mm/ns, reference: NA62 straws of 5 mm radius
+sigma_spatial: 0.012 #cm, reference: Massi's TP section

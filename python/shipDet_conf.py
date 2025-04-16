@@ -277,24 +277,36 @@ def configure_strawtubes(yaml_file):
 
     strawtubes_geo = AttrDict(config)
 
-    Strawtubes = ROOT.strawtubes()
-    Strawtubes.SetZposition()
+    strawtubes_geo.medium = "vacuums" if ship_geo.DecayVolumeMedium == "vacuums" else "air"
+
+    Strawtubes = ROOT.strawtubes(strawtubes_geo.medium)
+    Strawtubes.SetZpositions(
+        ship_geo.TrackStation1.z,
+        ship_geo.TrackStation2.z,
+        ship_geo.TrackStation3.z,
+        ship_geo.TrackStation4.z,
+    )
     Strawtubes.SetDeltazFrame(strawtubes_geo.DeltazFrame)
     Strawtubes.SetFrameLateralWidth(strawtubes_geo.FrameLateralWidth)
     Strawtubes.SetFrameMaterial(strawtubes_geo.FrameMaterial)
     Strawtubes.SetInnerStrawDiameter(strawtubes_geo.InnerStrawDiameter)
-    Strawtubes.SetOuterStrawDiameter(strawtubes_geo.OuterStrawDiameter)
+    Strawtubes.SetOuterStrawDiameter(strawtubes_geo.InnerStrawDiameter + 2*strawtubes_geo.WallThickness)
     Strawtubes.SetStrawPitch(
         strawtubes_geo.StrawPitch,
         strawtubes_geo.YLayerOffset,
+        strawtubes_geo.YPlaneOffset,
     )
     Strawtubes.SetDeltazLayer(strawtubes_geo.DeltazLayer)
-    Strawtubes.SetStrawsPerLayer(strawtubes_geo.StrawsPerLayer)
+    Strawtubes.SetDeltazPlane(strawtubes_geo.DeltazPlane)
+    Strawtubes.SetStrawsPerLayer(int(ship_geo.Yheight/strawtubes_geo.StrawPitch))
     Strawtubes.SetStereoAngle(strawtubes_geo.ViewAngle)
     Strawtubes.SetWireThickness(strawtubes_geo.WireThickness)
     Strawtubes.SetVacBox_x(strawtubes_geo.VacBox_x)
-    Strawtubes.SetVacBox_y(strawtubes_geo.VacBox_y)
+    Strawtubes.SetVacBox_y(600.*u.cm*ship_geo.Yheight/(10.*u.m))
     Strawtubes.SetStrawLength()
+
+    Strawtubes.SetTr12YDim(ship_geo.Yheight/2.0)
+    Strawtubes.SetTr34YDim(ship_geo.Yheight/2.0)
 
     detectorList.append(Strawtubes)
 
@@ -491,71 +503,16 @@ def configure(run, ship_geo):
             ship_geo.cave.floorHeightMuonShield
         )
 
+    configure_strawtubes(
+        fairship + "/geometry/strawtubes_config.yaml"
+    )
 
-    # for backward compatibility
-    if not hasattr(ship_geo.strawtubes, "YPlaneOffset"):
-        ship_geo.strawtubes.YLayerOffset = ship_geo.strawtubes.StrawPitch / 2.0
-        ship_geo.strawtubes.YPlaneOffset = ship_geo.strawtubes.StrawPitch / 4.0
-    if ship_geo.strawDesign > 1:
-        # for backward compatibility
-        if ship_geo.strawDesign == 10 and not hasattr(
-            ship_geo.strawtubes, "DeltazFrame"
-        ):
-            ship_geo.strawtubes.DeltazFrame = 2.5 * u.cm
-            ship_geo.strawtubes.FrameLateralWidth = 1.2 * u.m
-            ship_geo.strawtubes.FrameMaterial = "steel"
-        elif not hasattr(ship_geo.strawtubes, "DeltazFrame"):
-            ship_geo.strawtubes.DeltazFrame = 10.0 * u.cm
-            ship_geo.strawtubes.FrameLateralWidth = 1.0 * u.cm
-            ship_geo.strawtubes.FrameMaterial = "aluminium"
-        ship_geo.strawtubes.medium = "vacuums" if ship_geo.DecayVolumeMedium == "vacuums" else "air"
 
-        Strawtubes = ROOT.strawtubes(ship_geo.strawtubes.medium)
-        Strawtubes.SetZpositions(
-            ship_geo.vetoStation.z,
-            ship_geo.TrackStation1.z,
-            ship_geo.TrackStation2.z,
-            ship_geo.TrackStation3.z,
-            ship_geo.TrackStation4.z,
-        )
-        Strawtubes.SetDeltazFrame(ship_geo.strawtubes.DeltazFrame)
-        Strawtubes.SetFrameLateralWidth(ship_geo.strawtubes.FrameLateralWidth)
-        Strawtubes.SetFrameMaterial(ship_geo.strawtubes.FrameMaterial)
-        Strawtubes.SetDeltazView(ship_geo.strawtubes.DeltazView)
-        Strawtubes.SetInnerStrawDiameter(ship_geo.strawtubes.InnerStrawDiameter)
-        Strawtubes.SetOuterStrawDiameter(ship_geo.strawtubes.OuterStrawDiameter)
-        Strawtubes.SetStrawPitch(
-            ship_geo.strawtubes.StrawPitch,
-            ship_geo.strawtubes.YLayerOffset,
-            ship_geo.strawtubes.YPlaneOffset,
-        )
-        Strawtubes.SetDeltazLayer(ship_geo.strawtubes.DeltazLayer)
-        Strawtubes.SetDeltazPlane(ship_geo.strawtubes.DeltazPlane)
-        Strawtubes.SetStrawsPerLayer(ship_geo.strawtubes.StrawsPerLayer)
-        Strawtubes.SetStereoAngle(ship_geo.strawtubes.ViewAngle)
-        Strawtubes.SetWireThickness(ship_geo.strawtubes.WireThickness)
-        Strawtubes.SetVacBox_x(ship_geo.strawtubes.VacBox_x)
-        Strawtubes.SetVacBox_y(ship_geo.strawtubes.VacBox_y)
-        Strawtubes.SetStrawLength(ship_geo.strawtubes.StrawLength)
-
-        if hasattr(ship_geo.strawtubes, "StrawLengthVeto"):
-            Strawtubes.SetStrawLengthVeto(ship_geo.strawtubes.StrawLengthVeto)
-            Strawtubes.SetStrawLength12(ship_geo.strawtubes.StrawLength12)
-            Strawtubes.SetVetoYDim(ship_geo.strawtubes.vetoydim)
-            Strawtubes.SetTr12YDim(ship_geo.strawtubes.tr12ydim)
-            Strawtubes.SetTr34YDim(ship_geo.strawtubes.tr34ydim)
-        else:
-            Strawtubes.SetStrawLengthVeto(ship_geo.strawtubes.StrawLength)
-            Strawtubes.SetStrawLength12(ship_geo.strawtubes.StrawLength)
-            Strawtubes.SetVetoYDim(ship_geo.Yheight / 2.0)
-            Strawtubes.SetTr12YDim(ship_geo.Yheight / 2.0)
-            Strawtubes.SetTr34YDim(ship_geo.Yheight / 2.0)
-        # for the digitizing step
-        Strawtubes.SetStrawResolution(
-            getParameter("strawtubes.v_drift", ship_geo, latestShipGeo),
-            getParameter("strawtubes.sigma_spatial", ship_geo, latestShipGeo),
-        )
-        detectorList.append(Strawtubes)
+    # for the digitizing step
+    Strawtubes.SetStrawResolution(
+        getParameter("strawtubes.v_drift", ship_geo, latestShipGeo),
+        getParameter("strawtubes.sigma_spatial", ship_geo, latestShipGeo),
+    )
 
     if ship_geo.EcalOption == 1:  # shashlik design TP
         ecal, EcalZSize = posEcal(ship_geo.ecal.z, ship_geo.ecal.File)
