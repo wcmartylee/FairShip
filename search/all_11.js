@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n_0',['n',['../namespacemakeDecay.html#af2fe9da99a6c13f5bdd6d42663620c39',1,'makeDecay.n'],['../classeventDisplay_1_1IO.html#a8e156007b0f68e9796ca7969a2362ca4',1,'eventDisplay.IO.n'],['../classeventDisplay_1_1EventLoop.html#afd394b0902b31831d24db81cee5ab585',1,'eventDisplay.EventLoop.n'],['../classshipDigiReco_1_1ShipDigiReco.html#a0cfd28ec3aa8048eb2e85508503eb6c9',1,'shipDigiReco.ShipDigiReco.n'],['../classTrackInfo.html#a562825371d5fc7be4187eac344a493c7',1,'TrackInfo::N()']]],
+  ['n_0',['n',['../namespacemakeDecay.html#af2fe9da99a6c13f5bdd6d42663620c39',1,'makeDecay.n'],['../classTrackInfo.html#a562825371d5fc7be4187eac344a493c7',1,'TrackInfo::N()'],['../classeventDisplay_1_1IO.html#a8e156007b0f68e9796ca7969a2362ca4',1,'eventDisplay.IO.n'],['../classeventDisplay_1_1EventLoop.html#afd394b0902b31831d24db81cee5ab585',1,'eventDisplay.EventLoop.n'],['../classshipDigiReco_1_1ShipDigiReco.html#a0cfd28ec3aa8048eb2e85508503eb6c9',1,'shipDigiReco.ShipDigiReco.n']]],
   ['n_5f_1',['N_',['../classShipBFieldMap.html#a3cba8a90fad19de37cd6589699f15256',1,'ShipBFieldMap']]],
   ['n_5fe_2',['n_E',['../classFixedTargetGenerator.html#ae7435e29af3557494013f4c469e959d2',1,'FixedTargetGenerator']]],
   ['n_5fevents_3',['n_events',['../namespacemakeMuonDIS.html#a321f78a1f271119e1f593edccaee7064',1,'makeMuonDIS.n_events'],['../classCosmicsGenerator.html#aab375f933193b16006ddc7cd9a6a0241',1,'CosmicsGenerator::n_EVENTS'],['../namespacerun__simScript.html#a0ad5a8757666a018ab23b8e7f5eaeca2',1,'run_simScript.n_EVENTS']]],
@@ -59,7 +59,7 @@ var searchData=
   ['new_5ftree_56',['new_tree',['../namespacerun__simScript.html#a4435f2e074882181ff7ce09cef9ef113',1,'run_simScript']]],
   ['newposdir_57',['newposdir',['../classshipPid_1_1Task.html#ab1fcdf4efdb5d03488033299ef72c4f8',1,'shipPid.Task.newPosDir'],['../classshipVertex_1_1Task.html#a48d187d13d4cb29622188a83429e0432',1,'shipVertex.Task.newPosDir']]],
   ['newton_58',['newton',['../namespaceshipunit.html#afe396cc2d29cee6c307fea8600bf2db5',1,'shipunit.newton'],['../namespacehepunit.html#a6c0c7e015a5399caf7f8391c4c3fd019',1,'hepunit.newton']]],
-  ['nextevent_59',['nextevent',['../classeventDisplay_1_1IO.html#a94c7300f13d1e21f753bb7b0c9ee77ec',1,'eventDisplay.IO.nextEvent'],['../classeventDisplay_1_1EventLoop.html#a96e824b4ba6e1937fb7dd660240f91bd',1,'eventDisplay.EventLoop.NextEvent()'],['../classeventDisplay_1_1IO.html#a33ced57d4b32fc4c6bf3a0243a30071a',1,'eventDisplay.IO.nextEvent()']]],
+  ['nextevent_59',['nextevent',['../classeventDisplay_1_1IO.html#a33ced57d4b32fc4c6bf3a0243a30071a',1,'eventDisplay.IO.nextEvent(self, event=None)'],['../classeventDisplay_1_1IO.html#a94c7300f13d1e21f753bb7b0c9ee77ec',1,'eventDisplay.IO.nextEvent'],['../classeventDisplay_1_1EventLoop.html#a96e824b4ba6e1937fb7dd660240f91bd',1,'eventDisplay.EventLoop.NextEvent()']]],
   ['nextlevel_60',['nextLevel',['../namespacegeomGeant4.html#a0b3a37be8c641c12bb33aa7dabf9d8dc',1,'geomGeant4']]],
   ['nf_61',['nf',['../classGenieGenerator.html#a6daf7957dd1346baf108e818ac551578',1,'GenieGenerator']]],
   ['nhcalsamplings_62',['nHCALSamplings',['../namespacegeometry__config.html#ae805aa003bb27366ce86cbf2949ca925',1,'geometry_config']]],
@@ -99,7 +99,7 @@ var searchData=
   ['nt_96',['nt',['../namespacerun__fixedTarget.html#a3824536a9c3d7dd8855280526d9b7d95',1,'run_fixedTarget']]],
   ['ntagged_97',['ntagged',['../namespacerunPythia8.html#a4147fbd806b90468dee39fd9e8b57c9a',1,'runPythia8']]],
   ['ntest_98',['nTest',['../classCosmicsGenerator.html#aa6e595d8e91dee9dc90267e6e0384dce',1,'CosmicsGenerator']]],
-  ['ntot_99',['ntot',['../namespacemakeMuonDIS.html#a733fd53aa252e7e2d8d7eb70d6c37edb',1,'makeMuonDIS.nTOT'],['../namespaceg4Ex__gap__mergeFiles.html#aebeda73a8e53a1bfc57d2e49e5525ca4',1,'g4Ex_gap_mergeFiles.ntot']]],
+  ['ntot_99',['ntot',['../namespaceg4Ex__gap__mergeFiles.html#aebeda73a8e53a1bfc57d2e49e5525ca4',1,'g4Ex_gap_mergeFiles.ntot'],['../namespacemakeMuonDIS.html#a733fd53aa252e7e2d8d7eb70d6c37edb',1,'makeMuonDIS.nTOT']]],
   ['ntotprim_100',['ntotprim',['../namespacemakeDecay.html#a6ca9ee1ac5dd881b42ce74249e60c74b',1,'makeDecay.ntotprim'],['../classFixedTargetGenerator.html#ad0616dc329316d475f5f37fb301e4c56',1,'FixedTargetGenerator::ntotprim']]],
   ['ntree_101',['nTree',['../classFixedTargetGenerator.html#a4724b22b55854e36ae67fa2246f3cad1',1,'FixedTargetGenerator']]],
   ['ntup_102',['ntup',['../namespacemakeCascade.html#a850c7c17142d5f66455dd4491808ef25',1,'makeCascade.Ntup'],['../namespacemakeDecay.html#acdd2c7879db37638956f0510818ee455',1,'makeDecay.Ntup']]],
