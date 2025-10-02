@@ -11,7 +11,6 @@ from ShipGeoConfig import AttrDict, Config
 # nuTargetPassive = 1  #0 = with active layers, 1 = only passive
 
 # targetOpt      = 5  # 0=solid   >0 sliced, 5: 5 pieces of tungsten, 4 air slits, 17: molybdenum tungsten interleaved with H20
-# strawOpt       = 0  # 4=Aluminium frame 10=steel frame (default)
 
 # Here you can select the MS geometry
 # The first row is the length of the magnets
@@ -406,8 +405,8 @@ def create_config(
     c.chambers = AttrDict()
     magnetIncrease = 100.0 * u.cm
 
-    if strawDesign != 4 and strawDesign != 10:
-        raise ValueError(f"straw design {strawDesign} is not supported, use strawDesign = 4 or 10")
+    if strawDesign > 9:
+        raise ValueError(f"straw design {strawDesign} is not supported, please use strawDesign = [1 .. 9]")
     else:
         c.chambers.Tub1length = 2.5 * u.m
         c.chambers.Tub2length = 17.68 * u.m + extraVesselLength / 2.0

@@ -30,6 +30,7 @@
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
+#include "TGeoArb8.h"
 #include "TGeoCompositeShape.h"
 #include "TGeoManager.h"
 #include "TGeoMaterial.h"
@@ -135,6 +136,10 @@ Bool_t strawtubes::ProcessHits(FairVolume* vol) {
   return kTRUE;
 }
 
+void strawtubes::SetDesign(Int_t design) {
+  f_design = design;  //!  SST design label
+}
+
 void strawtubes::SetzPositions(Double_t z1, Double_t z2, Double_t z3,
                                Double_t z4) {
   f_T1_z = z1;  //!  z-position of tracking station 1
@@ -164,6 +169,10 @@ void strawtubes::SetDeltazLayer(Double_t delta_z_layer) {
   f_delta_z_layer = delta_z_layer;  //!  Distance (z) between layers
 }
 
+void strawtubes::SetCFPlateThickness(Double_t cf_thickness) {
+  f_cf_thickness = cf_thickness;  //!  Thickness of CFRP plate
+}
+
 void strawtubes::SetStereoAngle(Double_t stereo_angle) {
   f_view_angle = stereo_angle;  //!  Stereo view angle
 }
@@ -174,10 +183,6 @@ void strawtubes::SetWireThickness(Double_t wire_thickness) {
 
 void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
-}
-
-void strawtubes::SetFrameMaterial(TString frame_material) {
-  f_frame_material = std::move(frame_material);  //!  Structure frame material
 }
 
 void strawtubes::SetStationEnvelope(Double_t x, Double_t y, Double_t z) {
@@ -192,16 +197,32 @@ void strawtubes::ConstructGeometry() {
       implement here you own way of constructing the geometry. */
 
   TGeoVolume* top = gGeoManager->GetTopVolume();
+  ShipGeo::InitMedium("Aluminium");
+  TGeoMedium* Al = gGeoManager->GetMedium("Aluminium");
+  ShipGeo::InitMedium("steel");
+  TGeoMedium* steel = gGeoManager->GetMedium("steel");
   ShipGeo::InitMedium("mylar");
   TGeoMedium* mylar = gGeoManager->GetMedium("mylar");
   ShipGeo::InitMedium("STTmix8020_1bar");
   TGeoMedium* sttmix8020_1bar = gGeoManager->GetMedium("STTmix8020_1bar");
   ShipGeo::InitMedium("tungsten");
   TGeoMedium* tungsten = gGeoManager->GetMedium("tungsten");
-  ShipGeo::InitMedium(f_frame_material);
-  TGeoMedium* FrameMatPtr = gGeoManager->GetMedium(f_frame_material);
+  ShipGeo::InitMedium("cfrp");
+  TGeoMedium* cfrp = gGeoManager->GetMedium("cfrp");
   ShipGeo::InitMedium(fMedium.c_str());
   TGeoMedium* med = gGeoManager->GetMedium(fMedium.c_str());
+  TGeoMedium* FrameMatPtr;
+
+  if(f_design < 4) {
+    FrameMatPtr = cfrp;
+  } else if(f_design < 7) {
+    FrameMatPtr = Al;
+  } else if(f_design < 10) {
+    FrameMatPtr = steel;
+  } else {
+    LOG(error) << "Unsupported straw design!";
+    LOG(error) << "Please use number 1~9";
+  }
 
   gGeoManager->SetVisLevel(4);
   gGeoManager->SetTopVisible();
@@ -260,7 +281,7 @@ void strawtubes::ConstructGeometry() {
       new TGeoTube("wire", rmin, rmax, straw_length - 4. * eps);
   TGeoVolume* wire = new TGeoVolume("wire", wire_tube, tungsten);
   wire->SetLineColor(6);
-
+  
   // Tracking stations
   // statnb = station number; vnb = view number; lnb = layer number; snb = straw
   // number
@@ -269,8 +290,6 @@ void strawtubes::ConstructGeometry() {
   TGeoBBox* statbox =
       new TGeoBBox("statbox", f_station_width,
                    f_station_height - floor_offset / 2., f_station_length);
-
-  f_frame_material.ToLower();
 
   for (Int_t statnb = 1; statnb < 5; statnb++) {
     // Tracking station loop
@@ -348,6 +367,47 @@ void strawtubes::ConstructGeometry() {
       const Int_t straws_per_layer =
           std::ceil(2 * (f_aperture_height + stereo_growth) / stereo_pitch);
 
+      // CFRP plate
+      TGeoArb8* plate = new TGeoArb8(f_cf_thickness);
+      plate->SetVertex(0, f_aperture_width, f_aperture_height + 2 * stereo_growth);
+      plate->SetVertex(1, f_aperture_width, -f_aperture_height);
+      plate->SetVertex(2, -f_aperture_width, -(f_aperture_height + 2 * stereo_growth));
+      plate->SetVertex(3, -f_aperture_width, f_aperture_height);
+      plate->SetVertex(4, f_aperture_width, f_aperture_height + 2 * stereo_growth);
+      plate->SetVertex(5, f_aperture_width, -f_aperture_height + 2 * stereo_growth);
+      plate->SetVertex(6, -f_aperture_width, -(f_aperture_height + 2 * stereo_growth));
+      plate->SetVertex(7, -f_aperture_width, f_aperture_height);
+
+      TGeoRotation flip_plate;
+      TGeoTranslation move_plate;
+      TGeoHMatrix* dance_plate;
+      
+      if(angle < 0) {
+	flip_plate.SetAngles(0, 180, 0);
+      } else {
+	flip_plate.SetAngles(0, 0, 0);
+      }
+      
+      if(std::fmod(f_design, 3) == 2) {
+	TGeoVolume* cf_plate_mid = new TGeoVolume(nmview + "_cf_plate_mid", plate, cfrp);
+	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view);
+        TGeoCombiTrans dance(move_plate, flip_plate);
+	dance_plate = new TGeoHMatrix(dance);
+        vol->AddNode(cf_plate_mid, statnb * 1e6 + vnb * 1e5 + 7e3, dance_plate);
+      } else if(std::fmod(f_design, 3) == 0) {
+	TGeoVolume* cf_plate_front = new TGeoVolume(nmview + "_cf_plate_front", plate, cfrp);
+	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view - f_delta_z_layer / 2. - f_outer_straw_diameter / 2. - f_cf_thickness);
+	TGeoCombiTrans dance_forward(move_plate, flip_plate);
+	dance_plate = new TGeoHMatrix(dance_forward);
+        vol->AddNode(cf_plate_front, statnb * 1e6 + vnb * 1e5 + 6e3, dance_plate);
+	
+	TGeoVolume* cf_plate_back = new TGeoVolume(nmview + "_cf_plate_back", plate, cfrp);
+	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + f_delta_z_layer / 2. + f_outer_straw_diameter / 2. + f_cf_thickness);
+	TGeoCombiTrans dance_backward(move_plate, flip_plate);
+	dance_plate = new TGeoHMatrix(dance_backward);
+        vol->AddNode(cf_plate_back, statnb * 1e6 + vnb * 1e5 + 8e3, dance_plate);
+      }
+
       for (Int_t lnb = 0; lnb < 2; lnb++) {
         // Layer loop
         TString nmlayer = nmview + "_layer_";
@@ -358,13 +418,15 @@ void strawtubes::ConstructGeometry() {
             f_outer_straw_diameter / 2. + eps / 4);
         TGeoVolume* layerbox = new TGeoVolume(nmlayer, layer, med);
 
-        // The layer box sits in the viewframe.
-        // Hence, z-translate the layer w.r.t. the view
-        vol->AddNode(
-            layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
-            new TGeoTranslation(0, -floor_offset / 2.,
-                                (vnb - 3. / 2.) * f_delta_z_view +
-                                    (lnb - 1. / 2.) * f_delta_z_layer));
+        // The layer box sits individually in the station.
+        // Hence, z-translate the layer w.r.t. the station
+        if(std::fmod(f_design, 3) == 2) {
+          vol->AddNode(layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
+                       new TGeoTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + (lnb - 1. / 2.) * 2 * (f_outer_straw_diameter / 2. + f_cf_thickness)));
+        } else {
+          vol->AddNode(layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
+                       new TGeoTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + (lnb - 1. / 2.) * f_delta_z_layer));
+        }
 
         TGeoRotation r6s;
         TGeoTranslation t6s;
