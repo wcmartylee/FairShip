@@ -322,10 +322,10 @@ parser.add_argument(
 parser.add_argument("-Y", dest="dy", help="max height of vacuum tank", default=6.0, type=float)
 parser.add_argument(
     "--strawDesign",
-    help="Tracker station frame material: 4=Aluminium; 10=steel (default)",
-    default=10,
+    help="Tracker station design [without CF; with CF plate; with CF box] for every frame material: 1~3: CF; 4~6: aluminium; 7~9: steel",
+    default=7,
     type=int,
-    choices=[4, 10],
+    choices=range(1, 10),
 )
 parser.add_argument(
     "-F",

@@ -11,7 +11,6 @@ from ShipGeoConfig import AttrDict, Config
 # nuTargetPassive = 1  #0 = with active layers, 1 = only passive
 
 # targetOpt      = 5  # 0=solid   >0 sliced, 5: 5 pieces of tungsten, 4 air slits, 17: molybdenum tungsten interleaved with H20
-# strawOpt       = 0  # 4=Aluminium frame 10=steel frame (default)
 
 # Here you can select the MS geometry
 # The first row is the length of the magnets
