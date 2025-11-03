@@ -39,12 +39,12 @@ defaultInputFile = True
 globalDesigns = {
      '2023' : {
           'dy' : 6.,
-          'strawDesign' : 10
+          'strawDesign' : 7
      },
      '2025' : {
           'dy' : 6.,
           'ds' : 8,
-          'strawDesign' : 10
+          'strawDesign' : 7
      },
 }
 default = '2025'
@@ -140,10 +140,10 @@ parser.add_argument("-g", dest="geofile", help="geofile for muon shield geometry
 parser.add_argument("-o", "--output", dest="outputDir", help="Output directory",  default=".")
 parser.add_argument("-Y", dest="dy", help="max height of vacuum tank", default=globalDesigns[default]['dy'])
 parser.add_argument("--strawDesign",
-                    help="Tracker station frame material: 4=aluminium; 10=steel (default)",
+                    help="Tracker station design [without CF; with CF plate; with CF box] for every frame material: 1~3: CF; 4~6: aluminium; 7~9: steel",
                     default=globalDesigns[default]['strawDesign'],
                     type=int,
-                    choices=[4,10])
+                    choices=range(1,10))
 parser.add_argument("-F", dest="deepCopy", help="default = False: copy only stable particles to stack, except for HNL events", action="store_true")
 parser.add_argument("-t", "--test", dest="testFlag", help="quick test", action="store_true")
 parser.add_argument("--dry-run", dest="dryrun", help="stop after initialize", action="store_true")
