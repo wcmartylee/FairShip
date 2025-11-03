@@ -54,6 +54,7 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   /**      has to be called after each event to reset the containers      */
   virtual void Reset();
 
+  void SetDesign(Int_t design);
   void SetzPositions(Double_t z1, Double_t z2, Double_t z3, Double_t z4);
   void SetApertureArea(Double_t width, Double_t height);
   void SetStrawDiameter(Double_t outer_straw_diameter, Double_t wall_thickness);
@@ -61,7 +62,6 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   void SetDeltazLayer(Double_t delta_z_layer);
   void SetStereoAngle(Double_t stereo_angle);
   void SetWireThickness(Double_t wire_thickness);
-  void SetFrameMaterial(TString frame_material);
   void SetDeltazView(Double_t delta_z_view);
   void SetStationEnvelope(Double_t x, Double_t y, Double_t z);
   static std::tuple<Int_t, Int_t, Int_t, Int_t> StrawDecode(Int_t detID);
@@ -111,6 +111,7 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   Double_t fTime;                   //!  time
   Double_t fLength;                 //!  length
   Double_t fELoss;                  //!  energy loss
+  Int_t f_design;                   //!  SST design label
   Double_t f_T1_z;                  //!  z-position of tracking station 1
   Double_t f_T2_z;                  //!  z-position of tracking station 2
   Double_t f_T3_z;                  //!  z-position of tracking station 3
@@ -124,7 +125,6 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   Double_t f_delta_z_layer;         //!  Distance (z) between layers
   Double_t f_view_angle;            //!  Stereo view angle
   Double_t f_wire_thickness;        //!  Sense wire thickness
-  TString f_frame_material;         //!  Structure frame material
   Double_t f_delta_z_view;          //!  Distance (z) between stereo views
   Double_t f_station_width;         //!  Station envelope width (x)
   Double_t f_station_height;        //!  Station envelope height (y)

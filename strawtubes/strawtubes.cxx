@@ -216,6 +216,10 @@ void strawtubes::UpdatePointTrackIndices(
 }
 
 void strawtubes::Reset() { fstrawtubesPoints->clear(); }
+void strawtubes::SetDesign(Int_t design) {
+  f_design = design;  //!  SST design label
+}
+
 void strawtubes::SetzPositions(Double_t z1, Double_t z2, Double_t z3,
                                Double_t z4) {
   f_T1_z = z1;  //!  z-position of tracking station 1
@@ -257,10 +261,6 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
-void strawtubes::SetFrameMaterial(TString frame_material) {
-  f_frame_material = frame_material;  //!  Structure frame material
-}
-
 void strawtubes::SetStationEnvelope(Double_t x, Double_t y, Double_t z) {
   f_station_width = x;   //!  Station envelope width (x)
   f_station_height = y;  //!  Station envelope height (y)
@@ -273,16 +273,31 @@ void strawtubes::ConstructGeometry() {
       implement here you own way of constructing the geometry. */
 
   TGeoVolume* top = gGeoManager->GetTopVolume();
+  InitMedium("aluminium");
+  TGeoMedium* Al = gGeoManager->GetMedium("aluminium");
+  InitMedium("steel");
+  TGeoMedium* steel = gGeoManager->GetMedium("steel");
   InitMedium("mylar");
   TGeoMedium* mylar = gGeoManager->GetMedium("mylar");
   InitMedium("STTmix8020_1bar");
   TGeoMedium* sttmix8020_1bar = gGeoManager->GetMedium("STTmix8020_1bar");
   InitMedium("tungsten");
   TGeoMedium* tungsten = gGeoManager->GetMedium("tungsten");
-  InitMedium(f_frame_material);
-  TGeoMedium* FrameMatPtr = gGeoManager->GetMedium(f_frame_material);
+  InitMedium("cfrp");
+  TGeoMedium* cfrp = gGeoManager->GetMedium("cfrp");
   InitMedium(fMedium.c_str());
   TGeoMedium* med = gGeoManager->GetMedium(fMedium.c_str());
+
+  if(f_design < 4) {
+    TGeoMedium* FrameMatPtr = cfrp;
+  } else if(f_design < 7) {
+    TGeoMedium* FrameMatPtr = Al;
+  } else if(f_design < 10) {
+    TGeoMedium* FrameMatPtr = steel;
+  } else {
+    LOG(ERROR) << "Unsupported straw design!";
+    LOG(ERROR) << "Please use number 1~9";
+  }
 
   gGeoManager->SetVisLevel(4);
   gGeoManager->SetTopVisible();
