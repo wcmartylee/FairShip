@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('strawtubes_8cxx_source.html',''); init
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classstrawtubes.html#a62363a63aad6039db2047531cf8ae0cf">   39</a></span><a class="code hl_function" href="classstrawtubes.html#a62363a63aad6039db2047531cf8ae0cf">strawtubes::strawtubes</a>()</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    : FairDetector(<span class="stringliteral">&quot;Strawtubes&quot;</span>, kTRUE, <a class="code hl_enumvalue" href="ShipDetectorList_8h.html#a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd">kStraw</a>)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    : FairDetector(<span class="stringliteral">&quot;strawtubes&quot;</span>, kTRUE, <a class="code hl_enumvalue" href="ShipDetectorList_8h.html#a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd">kStraw</a>)</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    , fTrackID(-1)</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    , fVolumeID(-1)</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    , fPos()</div>
@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('strawtubes_8cxx_source.html',''); init
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classstrawtubes.html#a23ed2c046613502278cc4c2a2441582a">   52</a></span><a class="code hl_function" href="classstrawtubes.html#a62363a63aad6039db2047531cf8ae0cf">strawtubes::strawtubes</a>(std::string medium)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    : FairDetector(<span class="stringliteral">&quot;Strawtubes&quot;</span>, kTRUE, <a class="code hl_enumvalue" href="ShipDetectorList_8h.html#a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd">kStraw</a>)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    : FairDetector(<span class="stringliteral">&quot;strawtubes&quot;</span>, kTRUE, <a class="code hl_enumvalue" href="ShipDetectorList_8h.html#a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd">kStraw</a>)</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    , fTrackID(-1)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    , fVolumeID(-1)</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    , fPos()</div>
@@ -414,8 +414,8 @@ $(document).ready(function(){initNavTree('strawtubes_8cxx_source.html',''); init
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    TGeoMedium *Al                = gGeoManager-&gt;GetMedium(<span class="stringliteral">&quot;aluminium&quot;</span>);</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <a class="code hl_function" href="classstrawtubes.html#a7d7144f63ba9faaed99fc942690e0c27">InitMedium</a>(<span class="stringliteral">&quot;mylar&quot;</span>);</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    TGeoMedium *mylar             = gGeoManager-&gt;GetMedium(<span class="stringliteral">&quot;mylar&quot;</span>);</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <a class="code hl_function" href="classstrawtubes.html#a7d7144f63ba9faaed99fc942690e0c27">InitMedium</a>(<span class="stringliteral">&quot;STTmix9010_2bar&quot;</span>);</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    TGeoMedium *sttmix9010_2bar   = gGeoManager-&gt;GetMedium(<span class="stringliteral">&quot;STTmix9010_2bar&quot;</span>);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <a class="code hl_function" href="classstrawtubes.html#a7d7144f63ba9faaed99fc942690e0c27">InitMedium</a>(<span class="stringliteral">&quot;STTmix8020_1bar&quot;</span>);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    TGeoMedium *sttmix8020_1bar   = gGeoManager-&gt;GetMedium(<span class="stringliteral">&quot;STTmix8020_1bar&quot;</span>);</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <a class="code hl_function" href="classstrawtubes.html#a7d7144f63ba9faaed99fc942690e0c27">InitMedium</a>(<span class="stringliteral">&quot;tungsten&quot;</span>);</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    TGeoMedium *tungsten          = gGeoManager-&gt;GetMedium(<span class="stringliteral">&quot;tungsten&quot;</span>);</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <a class="code hl_function" href="classstrawtubes.html#a7d7144f63ba9faaed99fc942690e0c27">InitMedium</a>(<a class="code hl_variable" href="classstrawtubes.html#a3c4c6e033485f496b614f5253a2dc38c">f_frame_material</a>);</div>
@@ -464,7 +464,7 @@ $(document).ready(function(){initNavTree('strawtubes_8cxx_source.html',''); init
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    rmin = <a class="code hl_variable" href="classstrawtubes.html#a2c3b2535c871522868dc3f32d3b9a68c">f_wire_thickness</a> / 2. + eps;</div>
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    rmax = <a class="code hl_variable" href="classstrawtubes.html#a150665aba5f021b053f06b1259e8ccd2">f_inner_straw_diameter</a> / 2. - eps;</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    TGeoTube *gas_tube = <span class="keyword">new</span> TGeoTube(<span class="stringliteral">&quot;gas&quot;</span>, rmin, rmax, straw_length - 2. * eps);</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    TGeoVolume *gas = <span class="keyword">new</span> TGeoVolume(<span class="stringliteral">&quot;gas&quot;</span>, gas_tube, sttmix9010_2bar);</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    TGeoVolume *gas = <span class="keyword">new</span> TGeoVolume(<span class="stringliteral">&quot;gas&quot;</span>, gas_tube, sttmix8020_1bar);</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    gas-&gt;SetLineColor(5);</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="comment">// Only the gas is sensitive</span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    AddSensitiveVolume(gas);</div>
@@ -699,7 +699,7 @@ $(document).ready(function(){initNavTree('strawtubes_8cxx_source.html',''); init
 <div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>}</div>
 </div>
 <div class="ttc" id="aShipDetectorList_8h_html"><div class="ttname"><a href="ShipDetectorList_8h.html">ShipDetectorList.h</a></div></div>
-<div class="ttc" id="aShipDetectorList_8h_html_a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd"><div class="ttname"><a href="ShipDetectorList_8h.html#a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd">kStraw</a></div><div class="ttdeci">@ kStraw</div><div class="ttdef"><b>Definition</b> <a href="ShipDetectorList_8h_source.html#l00020">ShipDetectorList.h:20</a></div></div>
+<div class="ttc" id="aShipDetectorList_8h_html_a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd"><div class="ttname"><a href="ShipDetectorList_8h.html#a1806da1a0fbae8ab81f7330906f65680a95d4e15538db337d7d209dd9f84127fd">kStraw</a></div><div class="ttdeci">@ kStraw</div><div class="ttdef"><b>Definition</b> <a href="ShipDetectorList_8h_source.html#l00021">ShipDetectorList.h:21</a></div></div>
 <div class="ttc" id="aShipStack_8h_html"><div class="ttname"><a href="ShipStack_8h.html">ShipStack.h</a></div></div>
 <div class="ttc" id="aclassShipStack_html"><div class="ttname"><a href="classShipStack.html">ShipStack</a></div><div class="ttdef"><b>Definition</b> <a href="ShipStack_8h_source.html#l00046">ShipStack.h:47</a></div></div>
 <div class="ttc" id="aclassstrawtubesPoint_html"><div class="ttname"><a href="classstrawtubesPoint.html">strawtubesPoint</a></div><div class="ttdef"><b>Definition</b> <a href="strawtubesPoint_8h_source.html#l00010">strawtubesPoint.h:11</a></div></div>
