@@ -31,15 +31,13 @@ var hierarchy =
       [ "UpstreamTagger", "classUpstreamTagger.html", null ],
       [ "exitHadronAbsorber", "classexitHadronAbsorber.html", null ],
       [ "muon", "classmuon.html", null ],
-      [ "simpleTarget", "classsimpleTarget.html", null ],
       [ "splitcal", "classsplitcal.html", null ],
       [ "strawtubes", "classstrawtubes.html", null ],
       [ "veto", "classveto.html", null ]
     ] ],
     [ "FairField", null, [
       [ "ShipBellField", "classShipBellField.html", null ],
-      [ "ShipConstField", "classShipConstField.html", null ],
-      [ "ShipGoliathField", "classShipGoliathField.html", null ]
+      [ "ShipConstField", "classShipConstField.html", null ]
     ] ],
     [ "FairFieldFactory", null, [
       [ "ShipFieldCreator", "classShipFieldCreator.html", null ]
@@ -78,8 +76,6 @@ var hierarchy =
     ] ],
     [ "FairModule", null, [
       [ "ShipCave", "classShipCave.html", null ],
-      [ "ShipChamber", "classShipChamber.html", null ],
-      [ "ShipGoliath", "classShipGoliath.html", null ],
       [ "ShipMagnet", "classShipMagnet.html", null ],
       [ "ShipMuonShield", "classShipMuonShield.html", null ],
       [ "ShipTAUMagneticSpectrometer", "classShipTAUMagneticSpectrometer.html", null ],
@@ -166,17 +162,13 @@ var hierarchy =
         [ "vetoHit", "classvetoHit.html", null ]
       ] ],
       [ "ShipMCTrack", "classShipMCTrack.html", null ],
+      [ "ShipParticle", "classShipParticle.html", null ],
       [ "TrackInfo", "classTrackInfo.html", null ],
       [ "Tracklet", "classTracklet.html", null ],
-      [ "pid", "classpid.html", null ],
       [ "splitcalCluster", "classsplitcalCluster.html", null ],
       [ "vetoHitOnTrack", "classvetoHitOnTrack.html", null ]
     ] ],
-    [ "TParticle", null, [
-      [ "ShipParticle", "classShipParticle.html", null ]
-    ] ],
     [ "ShipFieldMaker::transformInfo", "structShipFieldMaker_1_1transformInfo.html", null ],
-    [ "TTCluster.TTCluster", "classTTCluster_1_1TTCluster.html", null ],
     [ "TVirtualMagField", null, [
       [ "ShipBFieldMap", "classShipBFieldMap.html", null ],
       [ "ShipCompField", "classShipCompField.html", null ]
@@ -191,6 +183,7 @@ var hierarchy =
         [ "SBTDetector.SBTDetector", "classSBTDetector_1_1SBTDetector.html", null ],
         [ "UpstreamTaggerDetector.UpstreamTaggerDetector", "classUpstreamTaggerDetector_1_1UpstreamTaggerDetector.html", null ],
         [ "muonDetector.muonDetector", "classmuonDetector_1_1muonDetector.html", null ],
+        [ "splitcalDetector.splitcalDetector", "classsplitcalDetector_1_1splitcalDetector.html", null ],
         [ "strawtubesDetector.strawtubesDetector", "classstrawtubesDetector_1_1strawtubesDetector.html", null ],
         [ "timeDetector.timeDetector", "classtimeDetector_1_1timeDetector.html", null ]
       ] ]
