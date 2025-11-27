@@ -249,6 +249,10 @@ void strawtubes::SetDeltazLayer(Double_t delta_z_layer) {
   f_delta_z_layer = delta_z_layer;  //!  Distance (z) between layers
 }
 
+void strawtubes::SetCFPlateThickness(Double_t cf_thickness) {
+  f_cf_thickness = cf_thickness;  //!  Thickness of CFRP plate
+}
+
 void strawtubes::SetStereoAngle(Double_t stereo_angle) {
   f_view_angle = stereo_angle;  //!  Stereo view angle
 }

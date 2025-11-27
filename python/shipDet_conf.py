@@ -237,6 +237,7 @@ def configure_strawtubes(yaml_file, ship_geo):
         ship_geo.strawtubes_geo.y_layer_offset,
     )
     strawtubes.SetDeltazLayer(ship_geo.strawtubes_geo.delta_z_layer)
+    strawtubes.SetCFPlateThickness(ship_geo.strawtubes_geo.cf_thickness)
     strawtubes.SetStereoAngle(ship_geo.strawtubes_geo.view_angle)
     strawtubes.SetWireThickness(ship_geo.strawtubes_geo.wire_thickness)
     strawtubes.SetDeltazView(ship_geo.strawtubes_geo.delta_z_view)

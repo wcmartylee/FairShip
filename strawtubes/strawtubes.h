@@ -60,6 +60,7 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   void SetStrawDiameter(Double_t outer_straw_diameter, Double_t wall_thickness);
   void SetStrawPitch(Double_t straw_pitch, Double_t layer_offset);
   void SetDeltazLayer(Double_t delta_z_layer);
+  void SetCFPlateThickness(Double_t cf_thickness);
   void SetStereoAngle(Double_t stereo_angle);
   void SetWireThickness(Double_t wire_thickness);
   void SetDeltazView(Double_t delta_z_view);
@@ -123,6 +124,7 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   Double_t f_straw_pitch;           //!  Distance (y) between straws in a layer
   Double_t f_offset_layer;          //!  Offset (y) of straws between layers
   Double_t f_delta_z_layer;         //!  Distance (z) between layers
+  Double_t f_cf_thickness;          //!  Thickness of CFRP plate
   Double_t f_view_angle;            //!  Stereo view angle
   Double_t f_wire_thickness;        //!  Sense wire thickness
   Double_t f_delta_z_view;          //!  Distance (z) between stereo views
