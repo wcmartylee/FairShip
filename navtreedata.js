@@ -28,42 +28,45 @@ var NAVTREE =
     [ "FairShip documentation", "index.html", null ],
     [ "Changelog", "md_CHANGELOG.html", [
       [ "Unreleased", "md_CHANGELOG.html#autotoc_md1", [
-        [ "Added", "md_CHANGELOG.html#autotoc_md2", null ],
-        [ "Fixed", "md_CHANGELOG.html#autotoc_md3", null ],
-        [ "Changed", "md_CHANGELOG.html#autotoc_md4", null ],
-        [ "Removed", "md_CHANGELOG.html#autotoc_md5", null ]
+        [ "Changed", "md_CHANGELOG.html#autotoc_md2", null ],
+        [ "Added", "md_CHANGELOG.html#autotoc_md3", null ],
+        [ "Removed", "md_CHANGELOG.html#autotoc_md4", null ],
+        [ "Fixed", "md_CHANGELOG.html#autotoc_md5", null ],
+        [ "Changed", "md_CHANGELOG.html#autotoc_md6", null ],
+        [ "Removed", "md_CHANGELOG.html#autotoc_md7", null ]
       ] ],
-      [ "25.01", "md_CHANGELOG.html#autotoc_md6", [
-        [ "Added", "md_CHANGELOG.html#autotoc_md7", null ],
-        [ "Fixed", "md_CHANGELOG.html#autotoc_md8", null ],
-        [ "Changed", "md_CHANGELOG.html#autotoc_md9", null ],
-        [ "Removed", "md_CHANGELOG.html#autotoc_md10", null ]
+      [ "25.01", "md_CHANGELOG.html#autotoc_md8", [
+        [ "Added", "md_CHANGELOG.html#autotoc_md9", null ],
+        [ "Fixed", "md_CHANGELOG.html#autotoc_md10", null ],
+        [ "Changed", "md_CHANGELOG.html#autotoc_md11", null ],
+        [ "Removed", "md_CHANGELOG.html#autotoc_md12", null ]
       ] ],
-      [ "24.11", "md_CHANGELOG.html#autotoc_md11", [
-        [ "Added", "md_CHANGELOG.html#autotoc_md12", null ],
-        [ "Fixed", "md_CHANGELOG.html#autotoc_md13", null ],
-        [ "Changed", "md_CHANGELOG.html#autotoc_md14", null ],
-        [ "Removed", "md_CHANGELOG.html#autotoc_md15", null ]
+      [ "24.11", "md_CHANGELOG.html#autotoc_md13", [
+        [ "Added", "md_CHANGELOG.html#autotoc_md14", null ],
+        [ "Fixed", "md_CHANGELOG.html#autotoc_md15", null ],
+        [ "Changed", "md_CHANGELOG.html#autotoc_md16", null ],
+        [ "Removed", "md_CHANGELOG.html#autotoc_md17", null ]
       ] ],
-      [ "24.10 - Freiburg", "md_CHANGELOG.html#autotoc_md16", [
-        [ "Added", "md_CHANGELOG.html#autotoc_md17", null ],
-        [ "Fixed", "md_CHANGELOG.html#autotoc_md18", null ],
-        [ "Changed", "md_CHANGELOG.html#autotoc_md19", null ],
-        [ "Removed", "md_CHANGELOG.html#autotoc_md20", null ]
+      [ "24.10 - Freiburg", "md_CHANGELOG.html#autotoc_md18", [
+        [ "Added", "md_CHANGELOG.html#autotoc_md19", null ],
+        [ "Fixed", "md_CHANGELOG.html#autotoc_md20", null ],
+        [ "Changed", "md_CHANGELOG.html#autotoc_md21", null ],
+        [ "Removed", "md_CHANGELOG.html#autotoc_md22", null ]
       ] ]
     ] ],
     [ "README", "md_field_2README.html", null ],
     [ "FairShip", "md_README.html", [
-      [ "Introduction", "md_README.html#autotoc_md23", [
-        [ "Branches", "md_README.html#autotoc_md24", null ]
+      [ "Introduction", "md_README.html#autotoc_md25", [
+        [ "Branches", "md_README.html#autotoc_md26", null ]
       ] ],
-      [ "Build Instructions using CVMFS", "md_README.html#autotoc_md25", null ],
-      [ "Local build, without access to CVMFS", "md_README.html#autotoc_md26", null ],
-      [ "Run instructions", "md_README.html#autotoc_md27", null ],
-      [ "Docker instructions", "md_README.html#autotoc_md28", null ],
-      [ "Troubleshooting information", "md_README.html#autotoc_md29", null ],
-      [ "Documentation", "md_README.html#autotoc_md30", null ],
-      [ "Contributing code", "md_README.html#autotoc_md31", null ]
+      [ "Build Instructions using CVMFS", "md_README.html#autotoc_md27", null ],
+      [ "Local build, without access to CVMFS", "md_README.html#autotoc_md28", null ],
+      [ "Run instructions", "md_README.html#autotoc_md29", null ],
+      [ "Docker instructions", "md_README.html#autotoc_md30", null ],
+      [ "Troubleshooting information", "md_README.html#autotoc_md31", null ],
+      [ "Documentation", "md_README.html#autotoc_md32", null ],
+      [ "License", "md_README.html#autotoc_md33", null ],
+      [ "Contributing code", "md_README.html#autotoc_md34", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -103,38 +106,38 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AddDiMuonDecayChannelsToG4_8py.html",
-"ShipGeoCave_8cxx_source.html",
-"add__noise__to__field_8py.html#ac8c461fc99cff345995bf60fcdfefa01",
-"classEvtCalcGenerator.html#a230ae1a2f467fc8c8d74c03371a1e3cd",
-"classHNLPythia8Generator.html#ae41fd81a284fdfbd98d28cffa1187877",
-"classPythia8Generator.html#a17e88a1dee12e9ae5a32b04f09605ea5",
-"classShipConstField.html#a3466da0b073f6e5ab6a33f31a7f40f87",
-"classShipMuonShield.html#a21c4058626af3ba4afb7100f8d1e4023",
-"classTEvtGenDecayer.html#a6104f028716bdc82cee0a8ffc2f781e6",
-"classTimeDetHit.html#a571b03abb8bdcda0b7477741a6b7537f",
-"classeventDisplay_1_1EventLoop.html#aa95a933be734644383743cbd001e4c03",
-"classhnl_1_1CKMmatrix.html",
-"classrpvsusy_1_1constants.html#a0188fb762c1c6bb7e7968cfd33bf213b",
-"classsplitcal.html#af077f919feb93daf96b733fefb14a4ec",
-"classstrawtubesPoint.html#a1db026136d9a235b306df4eb725dd717",
-"convertRALMap_8py.html#a5f671477f0f68c291783d295f35fab1d",
-"functions_func_b.html",
-"geomGeant4_8py.html#a0b3a37be8c641c12bb33aa7dabf9d8dc",
-"makeCascade_8py.html#a6740986b9c5adf5151e0cb2001c62333",
-"md_CHANGELOG.html#autotoc_md20",
-"namespaceShipGeo.html#a297e8f3d133236610c284d1c08a447ff",
-"namespaceconvertNoisyMap.html#aea17f538e9c111c7c196c4765c3d029a",
-"namespaceg4Ex__args.html#a43cb6dcda680bf4f89b9939104e450a8",
-"namespacehepunit.html#aa0b20f68fad6c7a8be24b639d4bb0abd",
-"namespacemakeMuonDIS.html#ae6604713bfdf9f671121f945ee4f102f",
-"namespacemergeMbias.html#ac1ba9c5e18f9a604f0c372e588cc6a67",
-"namespacerun__fixedTarget.html#af1277424a1c78c806b635aedae63a6c4",
-"namespaceshipunit.html#a020b78cceabc2e8d54655a64de9f231d",
-"namespacestudy__thinTarget.html#a87163e57320d77f666a40f70746316b3",
-"run__fixedTarget_8py.html#a6da492a6b2ce007f57e5a1b618fb40e2",
-"shipPatRec_8py.html#ac3ea0f3e8b39de2e6778b74f798568c2",
-"study__GammaConv_8py.html#a0e406399d5b657e9fc43b13fd28cfa09"
+"ACTSReco_8py.html",
+"ShipFieldCreator_8cxx.html",
+"add__muonresponse_8py.html#af5d46a3b2e105010a458541395bd0d40",
+"classDPPythia8Generator.html#add32973876a62b60efac6d7a92e10345",
+"classHNLPythia8Generator.html#aaea0a3e2bf81106eaf2c2b06c45f7c7a",
+"classPythia6Generator.html#a6828ac9a3d867c173db4ef0450cbc2b0",
+"classShipCompField.html#a8c1719b290f971db98d667dd3fc24f8e",
+"classShipMagnet.html#a3d8c2575a8a1c3b31ee82dfc84d2ed9d",
+"classSiliconTargetPoint.html#aede3d2058b87e8c3a7e4f99df5e52a31",
+"classTimeDet.html#adea48348d5b84f2767fd2579294eab8f",
+"classeventDisplay_1_1EventLoop.html#a072471dac48b91e6328176bbc585c072",
+"classg4Ex__gap_1_1MyTrackingActionD.html#a3a13e379b6b61313a6926274b29e2ece",
+"classshipDigiReco_1_1ShipDigiReco.html#a7a8ad5ed24bdbedcc91f32db71c2fa5d",
+"classsplitcalDetector_1_1splitcalDetector.html#a3af47a5d2a74d476ad5af3e3aaa33009",
+"classtimeDetector_1_1timeDetector.html#a164829fc891ecb1fcb042e850fb9abed",
+"dir_7837fde3ab9c1fb2fc5be7b717af8d79.html",
+"functions_vars_f.html",
+"hepunit_8py.html#a0522fceb45d64d0d4cf3bacf445ace51",
+"makeDecay_8py.html#aabc207b3a8656d874bd06f6f24d1214e",
+"muDIS__mergeFiles_8py.html#ae633d630389477c65ffb7896803ee8db",
+"namespaceShipStyle.html#a90e8ee15a057ed865466cbfdf471ca84",
+"namespaceevd__addParticleFollower.html#a978d88e08ac2b36036f6a27074d5d89b",
+"namespaceg4Ex__gap.html#a9dad6d7db7d78ebcf0ef06e53fe188ca",
+"namespaceinspectGeant4Geo.html#a4b772d604d4af9e7575633f7cf48e7b2",
+"namespacemake__nTuple__SBT.html#a8476581cc097472daab51b5184bbea76",
+"namespacepythia8darkphoton__conf.html",
+"namespacerun__reco.html#aa2d053442cc575863e21b3cb0d599b84",
+"namespaceshipunit.html#a5299b09901398d2f1fe193a7b6b47033",
+"proton__bremsstrahlung_8py.html#a47e461cd92265e129840b8b3f5e64edb",
+"run__fixedTarget_8py.html#a8c4fa759e68132c5a6896a17a4990205",
+"shipRoot__conf_8py.html#a4bb207e902847385c1369c120d9063ec",
+"study__GammaConv_8py.html#a44a01e2df41768e0929bf937753d45d7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
