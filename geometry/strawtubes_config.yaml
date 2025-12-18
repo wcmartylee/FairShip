@@ -9,7 +9,7 @@ SST:
   straw_pitch: 2               # Distance (y) between straws in a layer in cm
   y_layer_offset: 1            # Offset (y) of straws between layers in cm
   delta_z_layer: 1.732         # Distance (z) between layers in cm
-  cf_thickness: 0.02           # Thickness of CFRP plate in cm
+  cf_thickness: 0.01           # Thickness of CFRP plate in cm (half length)
   delta_z_view: 12             # Distance (z) between stereo views in cm
   view_angle: 4.57             # Stereo angle in degree
   station_width: 300           # (x) in cm (half length)
