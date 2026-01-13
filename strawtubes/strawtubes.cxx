@@ -361,10 +361,6 @@ void strawtubes::ConstructGeometry() {
       new TGeoTube("wire", rmin, rmax, straw_length - 4. * eps);
   TGeoVolume* wire = new TGeoVolume("wire", wire_tube, tungsten);
   wire->SetLineColor(6);
-
-  // CFRP plate
-  TGeoBBox* plate = new TGeoBBox("plate", f_aperture_width, f_aperture_height, f_cf_thickness);
-  TGeoVolume* cf_plate = new TGeoVolume("cf_plate", plate, cfrp);
   
   // Tracking stations
   // statnb = station number; vnb = view number; lnb = layer number; snb = straw
@@ -440,15 +436,6 @@ void strawtubes::ConstructGeometry() {
           nmview = nmstation + "_y1";
       }
 
-      if(std::fmod(f_design, 3) == 2) {
-	vol->AddNode(cf_plate, statnb * 1e6 + vnb * 1e5 + 7e3, new TGeoTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view));
-      } else if(std::fmod(f_design, 3) == 0) {
-	vol->AddNode(cf_plate, statnb * 1e6 + vnb * 1e5 + 6e3,
-		     new TGeoTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view - f_delta_z_view / 2. - f_outer_straw_diameter / 2. - f_cf_thickness));
-	vol->AddNode(cf_plate, statnb * 1e6 + vnb * 1e5 + 8e3,
-		     new TGeoTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view + f_delta_z_view / 2. + f_outer_straw_diameter / 2. + f_cf_thickness));
-      }
-
       // Adjustments in the stereo views
       // stereo_growth: extension of stereo views beyond aperture
       // stereo_pitch: straw pitch in stereo views
@@ -464,6 +451,44 @@ void strawtubes::ConstructGeometry() {
       straws_per_layer =
           std::ceil(2 * (f_aperture_height + stereo_growth) / stereo_pitch);
 
+      // CFRP plate
+      TGeoArb8* plate = new TGeoArb8(f_cf_thickness);
+      plate->SetVertex(0, f_aperture_width, f_aperture_height + stereo_growth);
+      plate->SetVertex(1, f_aperture_width, -f_aperture_height);
+      plate->SetVertex(2, -f_aperture_width, -(f_aperture_height + stereo_growth));
+      plate->SetVertex(3, -f_aperture_width, f_aperture_height);
+      plate->SetVertex(4, f_aperture_width, f_aperture_height + stereo_growth);
+      plate->SetVertex(5, f_aperture_width, -f_aperture_height + stereo_growth);
+      plate->SetVertex(6, -f_aperture_width, -(f_aperture_height + stereo_growth));
+      plate->SetVertex(7, -f_aperture_width, f_aperture_height);
+
+      TGeoRotation flip_plate;
+      TGeoTranslation move_plate;
+      TGeoCombiTrans dance_plate;
+      
+      if(angle < 0) {
+	flip_plate.SetAngles(0, 180, 0);
+      } else {
+	flip_plate.SetAngles(0, 0, 0);
+      }
+      
+      if(std::fmod(f_design, 3) == 2) {
+	TGeoVolume* cf_plate_mid = new TGeoVolume(nmview + "cf_plate_mid", plate, cfrp);
+	move_plate.SetTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view);
+	dance_plate = new TGeoCombiTrans(move_plate, flip_plate);
+        vol->AddNode(cf_plate_mid, statnb * 1e6 + vnb * 1e5 + 7e3, new TGeoHMatrix(dance_plate));
+      } else if(std::fmod(f_design, 3) == 0) {
+	TGeoVolume* cf_plate_front = new TGeoVolume(nmview + "cf_plate_front", plate, cfrp);
+	move_plate.SetTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view - f_delta_z_view / 2. - f_outer_straw_diameter / 2. - f_cf_thickness);
+	dance_plate = new TGeoCombiTrans(move_plate, flip_plate);
+        vol->AddNode(cf_plate_front, statnb * 1e6 + vnb * 1e5 + 6e3, new TGeoHMatrix(dance_plate));
+	
+	TGeoVolume* cf_plate_back = new TGeoVolume(nmview + "cf_plate_back", plate, cfrp);
+	move_plate.SetTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view + f_delta_z_view / 2. + f_outer_straw_diameter / 2. + f_cf_thickness);
+	dance_plate = new TGeoCombiTrans(move_plate, flip_plate);
+        vol->AddNode(cf_plate_back, statnb * 1e6 + vnb * 1e5 + 8e3, new TGeoHMatrix(dance_plate));
+      }
+
       for (Int_t lnb = 0; lnb < 2; lnb++) {
         // Layer loop
         TString nmlayer = nmview + "_layer_";
@@ -476,13 +501,13 @@ void strawtubes::ConstructGeometry() {
 
         // The layer box sits individually in the station.
         // Hence, z-translate the layer w.r.t. the station
-	if(std::fmod(f_design, 3) == 2) {
-	  vol->AddNode(layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
-		       new TGeoTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + (lnb - 1. / 2.) * (f_delta_z_layer + f_cf_thickness * 2)));
-	} else {
-	  vol->AddNode(layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
-		       new TGeoTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + (lnb - 1. / 2.) * f_delta_z_layer));
-	}
+        if(std::fmod(f_design, 3) == 2) {
+          vol->AddNode(layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
+                       new TGeoTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + (lnb - 1. / 2.) * 2 * (f_outer_straw_diameter / 2. + f_cf_thickness)));
+        } else {
+          vol->AddNode(layerbox, statnb * 1e6 + vnb * 1e5 + lnb * 1e4,
+                       new TGeoTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + (lnb - 1. / 2.) * f_delta_z_layer));
+        }
 
         TGeoRotation r6s;
         TGeoTranslation t6s;
