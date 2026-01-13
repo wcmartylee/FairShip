@@ -389,9 +389,9 @@ def create_config(
         c.z - 31.450 * u.m
     )  # Relative position of decay vessel centre to spectrometer magnet
     c.decayVolume.z0 = c.decayVolume.z - c.decayVolume.length / 2.0
-    if strawDesign != 4 and strawDesign != 10:
+    if strawDesign > 9:
         print(
-            "this design ", strawDesign, " is not supported, use strawDesign = 4 or 10"
+            "This design ", strawDesign, " is not supported. Please use strawDesign = [1 .. 9]"
         )
         1 / 0
     else:

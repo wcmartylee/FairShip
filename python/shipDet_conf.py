@@ -344,7 +344,7 @@ def configure(run, ship_geo):
         ship_geo.Bfield.YokeWidth = 200.0 * u.cm
         ship_geo.Bfield.YokeDepth = 200.0 * u.cm
         ship_geo.Bfield.CoilThick = 25.0 * u.cm
-    if ship_geo.strawDesign > 1:
+    if ship_geo.strawDesign < 10:
         if ship_geo.magnetDesign > 3:
             B = ship_geo.Bfield
             magnet = ROOT.ShipMagnet(
@@ -442,7 +442,7 @@ def configure(run, ship_geo):
 
     # -----   Magnetic field   -------------------------------------------
     if not hasattr(ship_geo.Bfield, "fieldMap"):
-        if ship_geo.strawDesign == 4 or ship_geo.strawDesign == 10:
+        if ship_geo.strawDesign < 10:
             fMagField = ROOT.ShipBellField(
                 "wilfried",
                 ship_geo.Bfield.max,

@@ -291,16 +291,17 @@ void strawtubes::ConstructGeometry() {
   TGeoMedium* cfrp = gGeoManager->GetMedium("cfrp");
   InitMedium(fMedium.c_str());
   TGeoMedium* med = gGeoManager->GetMedium(fMedium.c_str());
+  TGeoMedium* FrameMatPtr;
 
   if(f_design < 4) {
-    TGeoMedium* FrameMatPtr = cfrp;
+    FrameMatPtr = cfrp;
   } else if(f_design < 7) {
-    TGeoMedium* FrameMatPtr = Al;
+    FrameMatPtr = Al;
   } else if(f_design < 10) {
-    TGeoMedium* FrameMatPtr = steel;
+    FrameMatPtr = steel;
   } else {
-    LOG(ERROR) << "Unsupported straw design!";
-    LOG(ERROR) << "Please use number 1~9";
+    LOG(error) << "Unsupported straw design!";
+    LOG(error) << "Please use number 1~9";
   }
 
   gGeoManager->SetVisLevel(4);
@@ -373,8 +374,6 @@ void strawtubes::ConstructGeometry() {
   TGeoBBox* statbox =
       new TGeoBBox("statbox", f_station_width,
                    f_station_height - floor_offset / 2., f_station_length);
-
-  f_frame_material.ToLower();
 
   for (Int_t statnb = 1; statnb < 5; statnb++) {
     // Tracking station loop
