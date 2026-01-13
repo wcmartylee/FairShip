@@ -28,6 +28,7 @@
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
+#include "TGeoArb8.h"
 #include "TGeoCompositeShape.h"
 #include "TGeoManager.h"
 #include "TGeoMaterial.h"
@@ -464,7 +465,7 @@ void strawtubes::ConstructGeometry() {
 
       TGeoRotation flip_plate;
       TGeoTranslation move_plate;
-      TGeoCombiTrans dance_plate;
+      TGeoHMatrix* dance_plate;
       
       if(angle < 0) {
 	flip_plate.SetAngles(0, 180, 0);
@@ -475,18 +476,21 @@ void strawtubes::ConstructGeometry() {
       if(std::fmod(f_design, 3) == 2) {
 	TGeoVolume* cf_plate_mid = new TGeoVolume(nmview + "cf_plate_mid", plate, cfrp);
 	move_plate.SetTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view);
-	dance_plate = new TGeoCombiTrans(move_plate, flip_plate);
-        vol->AddNode(cf_plate_mid, statnb * 1e6 + vnb * 1e5 + 7e3, new TGeoHMatrix(dance_plate));
+        TGeoCombiTrans dance(move_plate, flip_plate);
+	dance_plate = new TGeoHMatrix(dance);
+        vol->AddNode(cf_plate_mid, statnb * 1e6 + vnb * 1e5 + 7e3, dance_plate);
       } else if(std::fmod(f_design, 3) == 0) {
 	TGeoVolume* cf_plate_front = new TGeoVolume(nmview + "cf_plate_front", plate, cfrp);
 	move_plate.SetTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view - f_delta_z_view / 2. - f_outer_straw_diameter / 2. - f_cf_thickness);
-	dance_plate = new TGeoCombiTrans(move_plate, flip_plate);
-        vol->AddNode(cf_plate_front, statnb * 1e6 + vnb * 1e5 + 6e3, new TGeoHMatrix(dance_plate));
+	TGeoCombiTrans dance_forward(move_plate, flip_plate);
+	dance_plate = new TGeoHMatrix(dance_forward);
+        vol->AddNode(cf_plate_front, statnb * 1e6 + vnb * 1e5 + 6e3, dance_plate);
 	
 	TGeoVolume* cf_plate_back = new TGeoVolume(nmview + "cf_plate_back", plate, cfrp);
 	move_plate.SetTranslation(0, 0, (vnb - 3. / 2.) * f_delta_z_view + f_delta_z_view / 2. + f_outer_straw_diameter / 2. + f_cf_thickness);
-	dance_plate = new TGeoCombiTrans(move_plate, flip_plate);
-        vol->AddNode(cf_plate_back, statnb * 1e6 + vnb * 1e5 + 8e3, new TGeoHMatrix(dance_plate));
+	TGeoCombiTrans dance_backward(move_plate, flip_plate);
+	dance_plate = new TGeoHMatrix(dance_backward);
+        vol->AddNode(cf_plate_back, statnb * 1e6 + vnb * 1e5 + 8e3, dance_plate);
       }
 
       for (Int_t lnb = 0; lnb < 2; lnb++) {
