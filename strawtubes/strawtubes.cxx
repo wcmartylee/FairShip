@@ -257,6 +257,10 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
+void strawtubes::ImportFrame(char gdml) {
+  f_gdml = TGeoManager::Import(gdml);  //!  Station frame
+}
+
 void strawtubes::SetFrameMaterial(TString frame_material) {
   f_frame_material = frame_material;  //!  Structure frame material
 }
@@ -381,8 +385,9 @@ void strawtubes::ConstructGeometry() {
     top->AddNode(vol, statnb,
                  new TGeoTranslation(0, floor_offset / 2., T_station_z));
 
-    TGeoVolume* statframe =
-        new TGeoVolume(nmstation + "_frame", detcomp1, FrameMatPtr);
+    TGeoVolume* statframe = f_gdml->GetTopVolume();
+    statframe->SetName(nmstation + "_frame");
+    statframe->SetMedium(FrameMatPtr);
     vol->AddNode(statframe, statnb * 1e6,
                  new TGeoTranslation(0, -floor_offset / 2., 0));
     statframe->SetLineColor(kRed);
