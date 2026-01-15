@@ -481,13 +481,13 @@ void strawtubes::ConstructGeometry() {
         vol->AddNode(cf_plate_mid, statnb * 1e6 + vnb * 1e5 + 7e3, dance_plate);
       } else if(std::fmod(f_design, 3) == 0) {
 	TGeoVolume* cf_plate_front = new TGeoVolume(nmview + "_cf_plate_front", plate, cfrp);
-	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view - f_delta_z_view / 2. - f_outer_straw_diameter / 2. - f_cf_thickness);
+	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view - f_delta_z_layer / 2. - f_outer_straw_diameter / 2. - f_cf_thickness);
 	TGeoCombiTrans dance_forward(move_plate, flip_plate);
 	dance_plate = new TGeoHMatrix(dance_forward);
         vol->AddNode(cf_plate_front, statnb * 1e6 + vnb * 1e5 + 6e3, dance_plate);
 	
 	TGeoVolume* cf_plate_back = new TGeoVolume(nmview + "_cf_plate_back", plate, cfrp);
-	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + f_delta_z_view / 2. + f_outer_straw_diameter / 2. + f_cf_thickness);
+	move_plate.SetTranslation(0, -floor_offset / 2., (vnb - 3. / 2.) * f_delta_z_view + f_delta_z_layer / 2. + f_outer_straw_diameter / 2. + f_cf_thickness);
 	TGeoCombiTrans dance_backward(move_plate, flip_plate);
 	dance_plate = new TGeoHMatrix(dance_backward);
         vol->AddNode(cf_plate_back, statnb * 1e6 + vnb * 1e5 + 8e3, dance_plate);
