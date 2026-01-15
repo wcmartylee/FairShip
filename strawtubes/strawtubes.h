@@ -12,6 +12,7 @@
 #include "Detector.h"
 #include "TLorentzVector.h"
 #include "TVector3.h"
+#include "TGeoManager.h"
 
 class strawtubesPoint;
 class FairVolume;
@@ -43,6 +44,8 @@ class strawtubes : public SHiP::Detector<strawtubesPoint> {
   void SetCFPlateThickness(Double_t cf_thickness);
   void SetStereoAngle(Double_t stereo_angle);
   void SetWireThickness(Double_t wire_thickness);
+  void ImportFrame(char gdml);
+  void SetFrameMaterial(TString frame_material);
   void SetDeltazView(Double_t delta_z_view);
   void SetStationEnvelope(Double_t x, Double_t y, Double_t z);
   static std::array<Int_t, 4> StrawDecode(Int_t detID);
@@ -77,6 +80,8 @@ class strawtubes : public SHiP::Detector<strawtubesPoint> {
   Double_t f_cf_thickness;          //!  Thickness of CFRP plate
   Double_t f_view_angle;            //!  Stereo view angle
   Double_t f_wire_thickness;        //!  Sense wire thickness
+  TGeoManager f_gdml;               //!  Station frame
+  TString f_frame_material;         //!  Structure frame material
   Double_t f_delta_z_view;          //!  Distance (z) between stereo views
   Double_t f_station_width;         //!  Station envelope width (x)
   Double_t f_station_height;        //!  Station envelope height (y)
