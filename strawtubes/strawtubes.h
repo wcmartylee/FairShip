@@ -62,7 +62,7 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   void SetDeltazLayer(Double_t delta_z_layer);
   void SetStereoAngle(Double_t stereo_angle);
   void SetWireThickness(Double_t wire_thickness);
-  void ImportFrame(char gdml);
+  void ImportFrame(const char* gdml);
   void SetFrameMaterial(TString frame_material);
   void SetDeltazView(Double_t delta_z_view);
   void SetStationEnvelope(Double_t x, Double_t y, Double_t z);
@@ -126,7 +126,7 @@ class strawtubes : public FairDetector, public ISTLPointContainer {
   Double_t f_delta_z_layer;         //!  Distance (z) between layers
   Double_t f_view_angle;            //!  Stereo view angle
   Double_t f_wire_thickness;        //!  Sense wire thickness
-  TGeoManager f_gdml;               //!  Station frame
+  TGeoVolume* f_frame;              //!  Station frame
   TString f_frame_material;         //!  Structure frame material
   Double_t f_delta_z_view;          //!  Distance (z) between stereo views
   Double_t f_station_width;         //!  Station envelope width (x)

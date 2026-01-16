@@ -257,8 +257,9 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
-void strawtubes::ImportFrame(char gdml) {
-  f_gdml = TGeoManager::Import(gdml);  //!  Station frame
+void strawtubes::ImportFrame(const char* gdml) {
+  TGeoManager* frame_gdml = TGeoManager::Import(gdml);  //!  Station frame
+  f_frame = frame_gdml->GetTopVolume()->GetNode("P-Frame_4_x_6-0")->GetVolume();
 }
 
 void strawtubes::SetFrameMaterial(TString frame_material) {
@@ -317,7 +318,7 @@ void strawtubes::ConstructGeometry() {
   move_up->RegisterYourself();
 
   // Composite shape to create frame
-  TGeoCompositeShape* detcomp1 =
+  [[maybe_unused]] TGeoCompositeShape* detcomp1 =
       new TGeoCompositeShape("detcomp1", "(detbox1:move_up)-detbox2");
 
   // Volume: straw
@@ -385,12 +386,15 @@ void strawtubes::ConstructGeometry() {
     top->AddNode(vol, statnb,
                  new TGeoTranslation(0, floor_offset / 2., T_station_z));
 
-    TGeoVolume* statframe = f_gdml->GetTopVolume();
-    statframe->SetName(nmstation + "_frame");
-    statframe->SetMedium(FrameMatPtr);
-    vol->AddNode(statframe, statnb * 1e6,
-                 new TGeoTranslation(0, -floor_offset / 2., 0));
-    statframe->SetLineColor(kRed);
+    TGeoTranslation translate;
+    TGeoRotation rotate;
+    rotate.SetAngles(90, 90, 90);
+    TGeoCombiTrans combine(translate, rotate);
+    TGeoHMatrix* rotate_frame = new TGeoHMatrix(combine);
+    f_frame->SetName(nmstation + "_frame");
+    f_frame->SetMedium(FrameMatPtr);
+    vol->AddNode(f_frame, statnb * 1e6, rotate_frame);
+    f_frame->SetLineColor(kRed);
 
     for (Int_t vnb = 0; vnb < 4; vnb++) {
       // View loop
