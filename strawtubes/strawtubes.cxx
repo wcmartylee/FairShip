@@ -185,9 +185,8 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
-void strawtubes::ImportFrame(const char* gdml) {
-  TGeoManager* frame_gdml = TGeoManager::Import(gdml);  //!  Station frame
-  f_frame = frame_gdml->GetTopVolume()->GetNode("P-Frame_4_x_6-0")->GetVolume();
+void strawtubes::ImportFrame(const char* path) {
+  f_path = path;  //!  Station frame
 }
 
 void strawtubes::SetFrameMaterial(TString frame_material) {
@@ -328,14 +327,12 @@ void strawtubes::ConstructGeometry() {
     top->AddNode(vol, statnb,
                  new TGeoTranslation(0, floor_offset / 2., T_station_z));
 
-    TGeoTranslation translate;
-    TGeoRotation rotate;
-    rotate.SetAngles(90, 90, 90);
-    TGeoCombiTrans combine(translate, rotate);
-    TGeoHMatrix* rotate_frame = new TGeoHMatrix(combine);
+    TGeoVolume* f_frame = TGeoVolume::Import(f_path, "statframe");
     f_frame->SetName(nmstation + "_frame");
-    f_frame->SetMedium(FrameMatPtr);
-    vol->AddNode(f_frame, statnb * 1e6, rotate_frame);
+    f_frame->SetMedium(air);
+    f_frame->GetNode("V-Frame_4_x_6-0_1")->GetVolume()->SetMedium(FrameMatPtr);
+    vol->AddNode(f_frame, statnb * 1e6,
+		 new TGeoTranslation(0, -floor_offset / 2., 0));
     f_frame->SetLineColor(kRed);
 
     for (Int_t vnb = 0; vnb < 4; vnb++) {

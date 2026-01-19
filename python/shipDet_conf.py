@@ -391,7 +391,7 @@ def configure(run, ship_geo):
 
     configure_strawtubes(
         os.path.join(os.environ["FAIRSHIP"], "geometry", "strawtubes_config.yaml"),
-        os.path.join(os.environ["FAIRSHIP"], "geometry", "frame.gdml"),
+        os.path.join(os.environ["FAIRSHIP"], "geometry", "frame.root"),
         ship_geo,
     )
 
