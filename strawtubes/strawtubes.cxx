@@ -257,8 +257,8 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
-void strawtubes::ImportFrame(const char* path) {
-  f_path = path;  //!  Station frame
+void strawtubes::ImportFrame(const char* frame_path) {
+  f_frame_path = frame_path;  //!  Path to station frame design file
 }
 
 void strawtubes::SetFrameMaterial(TString frame_material) {
@@ -277,8 +277,6 @@ void strawtubes::ConstructGeometry() {
       implement here you own way of constructing the geometry. */
 
   TGeoVolume* top = gGeoManager->GetTopVolume();
-  InitMedium("air");
-  TGeoMedium* air = gGeoManager->GetMedium("air");
   InitMedium("mylar");
   TGeoMedium* mylar = gGeoManager->GetMedium("mylar");
   InitMedium("STTmix8020_1bar");
@@ -296,31 +294,11 @@ void strawtubes::ConstructGeometry() {
   // Epsilon to avoid overlapping volumes
   Double_t eps = 0.0001;
   // Straw (half) length
-  Double_t straw_length = f_aperture_width + 2. * eps;
-  // Width of frame: standard HEA 500 I-beam width
-  Double_t frame_width = 49.;
+  Double_t straw_length = f_aperture_width;
   // Offset due to floor space limitation
   Double_t floor_offset = 14.;
 
   Double_t rmin, rmax, T_station_z;
-
-  // Arguments of boxes are half-lengths
-  [[maybe_unused]] TGeoBBox* detbox1 = new TGeoBBox(
-      "detbox1", f_aperture_width + frame_width,
-      f_aperture_height + frame_width - floor_offset / 2., f_station_length);
-  [[maybe_unused]] TGeoBBox* detbox2 = new TGeoBBox(
-      "detbox2", straw_length + eps,
-      f_aperture_height +
-          TMath::Tan(f_view_angle * TMath::Pi() / 180.0) * straw_length * 2 +
-          f_offset_layer / TMath::Cos(f_view_angle * TMath::Pi() / 180.0) + eps,
-      f_station_length + eps);
-  TGeoTranslation* move_up =
-      new TGeoTranslation("move_up", 0, floor_offset / 2., 0);
-  move_up->RegisterYourself();
-
-  // Composite shape to create frame
-  [[maybe_unused]] TGeoCompositeShape* detcomp1 =
-      new TGeoCompositeShape("detcomp1", "(detbox1:move_up)-detbox2");
 
   // Volume: straw
   rmin = f_inner_straw_diameter / 2.;
@@ -387,13 +365,13 @@ void strawtubes::ConstructGeometry() {
     top->AddNode(vol, statnb,
                  new TGeoTranslation(0, floor_offset / 2., T_station_z));
 
-    TGeoVolume* f_frame = TGeoVolume::Import(f_path, "statframe");
-    f_frame->SetName(nmstation + "_frame");
-    f_frame->SetMedium(air);
-    f_frame->GetNode("V-Frame_4_x_6-0_1")->GetVolume()->SetMedium(FrameMatPtr);
-    vol->AddNode(f_frame, statnb * 1e6,
+    // Import station frame
+    TGeoVolume* statframe = TGeoVolume::Import(f_frame_path, "statframe");
+    statframe->SetName(nmstation + "_frame");
+    statframe->SetMedium(med);
+    statframe->GetNode("V-Frame_4_x_6-0_1")->GetVolume()->SetMedium(FrameMatPtr);
+    vol->AddNode(statframe, statnb * 1e6,
 		 new TGeoTranslation(0, -floor_offset / 2., 0));
-    f_frame->SetLineColor(kRed);
 
     for (Int_t vnb = 0; vnb < 4; vnb++) {
       // View loop
