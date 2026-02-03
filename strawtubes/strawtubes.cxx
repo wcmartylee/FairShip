@@ -30,7 +30,7 @@
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
-#include "TGeoArb8.h"
+#include "TGeoTrd2.h"
 #include "TGeoCompositeShape.h"
 #include "TGeoManager.h"
 #include "TGeoMaterial.h"
@@ -279,6 +279,11 @@ void strawtubes::ConstructGeometry() {
       new TGeoBBox("statbox", f_station_width,
                    f_station_height - floor_offset / 2., f_station_length);
 
+  // Base of 2nd and 3rd station
+  TGeoTrd2* base = new TGeoTrd2("base", 288, 249, 89, 50, 50);
+
+  f_frame_material.ToLower();
+
   for (Int_t statnb = 1; statnb < 5; statnb++) {
     // Tracking station loop
     TString nmstation = "Tr";
@@ -306,6 +311,17 @@ void strawtubes::ConstructGeometry() {
     // z-translate the station to its (absolute) position
     top->AddNode(vol, statnb,
                  new TGeoTranslation(0, floor_offset / 2., T_station_z));
+
+    if(statnb == 2 || statnb == 3) {
+      TGeoVolume* statbase = new TGeoVolume(nmstation + "_base", base, steel);
+      TGeoRotation roll_base;
+      TGeoTranslation move_base;
+      move_base.SetTranslation(0, -386, T_station_z);
+      roll_base.SetAngles(0, -90, 0);
+      TGeoCombiTrans place(move_base, roll_base);
+      TGeoHMatrix* place_base = new TGeoHMatrix(place);
+      top->AddNode(statbase, statnb + 4, place_base);
+    }
 
     // Import station frame
     TGeoVolume* statframe = TGeoVolume::Import(f_frame_path, "statframe");
