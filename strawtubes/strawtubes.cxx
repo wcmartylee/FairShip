@@ -257,7 +257,7 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
-void strawtubes::ImportFrame(const char* frame_path) {
+void strawtubes::ImportFrame(TString frame_path) {
   f_frame_path = frame_path;  //!  Path to station frame design file
 }
 
