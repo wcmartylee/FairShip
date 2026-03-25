@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['readme_0',['README',['../md_field_2README.html',1,'']]]
+  ['fairship_0',['FairShip',['../md_README.html',1,'']]],
+  ['fairship_20documentation_1',['FairShip documentation',['../index.html',1,'']]]
 ];

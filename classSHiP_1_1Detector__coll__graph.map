@@ -1,0 +1,5 @@
+<map id="SHiP::Detector&lt; PointType &gt;" name="SHiP::Detector&lt; PointType &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="25,79,234,104"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,107,31"/>
+<area shape="rect" id="node3" href="$classISTLPointContainer.html" title="Interface for detectors using STL containers (std::vector) for MC points." alt="" coords="131,5,277,31"/>
+</map>

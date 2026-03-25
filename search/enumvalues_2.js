@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['jun25_0',['Jun25',['../ShipTargetStation_8h.html#ad749a6600285f6f5e62395e3fb2e888daf48ee0ab1b4f1317ac08188f698f32c1',1,'ShipTargetStation.h']]]
+  ['gval1_0',['GVal1',['../autolink_8cpp.html#a656d63cf384d2a6f23c2c18523a7bc5ea0f016f49e4f3bcd072319b9d68bc927d',1,'autolink.cpp']]],
+  ['gval2_1',['GVal2',['../autolink_8cpp.html#a656d63cf384d2a6f23c2c18523a7bc5ea811876e2eea5c16ae0594a95d98fbd55',1,'autolink.cpp']]]
 ];

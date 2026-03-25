@@ -1,42 +1,14 @@
 <map id="splitcal/splitcalCluster.cxx" name="splitcal/splitcalCluster.cxx">
-<area shape="rect" id="Node000001" title=" " alt="" coords="403,5,595,31"/>
-<area shape="rect" id="Node000002" href="$splitcalCluster_8h.html" title=" " alt="" coords="105,79,231,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="446,33,235,78,234,73,445,28"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="255,79,323,104"/>
-<area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="466,33,337,77,336,72,464,28"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="347,79,434,104"/>
-<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="483,33,421,73,418,69,480,28"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="459,79,539,104"/>
-<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="501,31,501,65,496,65,496,31"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="563,79,613,104"/>
-<area shape="poly" id="edge21_Node000001_Node000015" title=" " alt="" coords="515,29,564,68,561,72,511,33"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="637,79,712,104"/>
-<area shape="poly" id="edge22_Node000001_Node000016" title=" " alt="" coords="528,28,634,71,632,76,526,33"/>
-<area shape="rect" id="Node000017" title=" " alt="" coords="736,79,811,104"/>
-<area shape="poly" id="edge23_Node000001_Node000017" title=" " alt="" coords="543,28,723,74,722,80,542,33"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,61,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="148,106,69,148,66,143,145,102"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="137,225,199,251"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="171,104,171,212,165,212,165,104"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="170,299,254,324"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="162,105,144,132,127,169,118,210,120,230,126,249,146,273,171,290,168,294,142,277,122,252,114,231,113,210,122,168,140,130,157,103"/>
-<area shape="rect" id="Node000006" href="$splitcalHit_8h.html" title=" " alt="" coords="235,152,335,177"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="188,102,256,142,253,147,185,106"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="516,299,607,324"/>
-<area shape="poly" id="edge17_Node000002_Node000009" title=" " alt="" coords="217,101,299,123,396,152,484,186,517,205,541,224,557,253,563,284,558,285,552,255,537,227,514,209,481,191,394,157,298,128,216,107"/>
-<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="268,180,200,220,198,216,265,175"/>
-<area shape="poly" id="edge11_Node000006_Node000005" title=" " alt="" coords="282,179,226,287,222,285,277,177"/>
-<area shape="rect" id="Node000007" href="$ShipHit_8h.html" title=" " alt="" coords="275,225,357,251"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="293,177,308,212,303,214,288,179"/>
-<area shape="poly" id="edge12_Node000006_Node000009" title=" " alt="" coords="336,166,376,172,421,182,467,199,510,223,537,252,554,284,550,287,532,256,506,227,465,204,420,187,375,177,335,172"/>
-<area shape="rect" id="Node000010" href="$splitcalPoint_8h.html" title=" " alt="" coords="381,225,496,251"/>
-<area shape="poly" id="edge13_Node000006_Node000010" title=" " alt="" coords="311,175,402,217,400,222,309,180"/>
-<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="301,253,242,293,239,288,298,248"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="278,299,357,324"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="319,251,320,285,314,285,314,251"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="356,248,509,292,508,297,355,253"/>
-<area shape="poly" id="edge15_Node000010_Node000005" title=" " alt="" coords="403,253,263,297,261,292,401,248"/>
-<area shape="poly" id="edge16_Node000010_Node000009" title=" " alt="" coords="460,248,531,289,528,294,457,253"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="381,299,491,324"/>
-<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="441,251,440,285,434,285,436,251"/>
+<area shape="rect" id="node1" title=" " alt="" coords="204,5,396,31"/>
+<area shape="rect" id="node2" href="$splitcalCluster_8h.html" title=" " alt="" coords="70,79,197,104"/>
+<area shape="rect" id="node10" title=" " alt="" coords="221,79,283,104"/>
+<area shape="rect" id="node11" title=" " alt="" coords="308,79,388,104"/>
+<area shape="rect" id="node12" title=" " alt="" coords="412,79,463,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,299,96,324"/>
+<area shape="rect" id="node4" title=" " alt="" coords="40,152,96,177"/>
+<area shape="rect" id="node5" title=" " alt="" coords="79,225,142,251"/>
+<area shape="rect" id="node6" title=" " alt="" coords="271,299,355,324"/>
+<area shape="rect" id="node7" href="$splitcalHit_8h.html" title=" " alt="" coords="171,152,271,177"/>
+<area shape="rect" id="node8" href="$DetectorHit_8h.html" title=" " alt="" coords="167,225,276,251"/>
+<area shape="rect" id="node9" title=" " alt="" coords="169,299,247,324"/>
 </map>

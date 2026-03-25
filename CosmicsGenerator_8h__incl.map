@@ -1,15 +1,14 @@
 <map id="shipgen/CosmicsGenerator.h" name="shipgen/CosmicsGenerator.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="206,5,414,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,127,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="272,33,119,77,118,72,270,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="151,79,210,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,33,215,74,213,69,288,28"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="235,79,295,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="305,32,282,69,277,66,300,30"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="319,79,394,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="320,30,344,66,339,69,315,32"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="419,79,497,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="335,28,423,70,420,75,333,33"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="522,79,626,104"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="353,28,519,72,517,78,352,33"/>
+<area shape="rect" id="node1" title=" " alt="" coords="347,5,555,31"/>
+<area shape="rect" id="node2" href="$Generator_8h.html" title=" " alt="" coords="169,79,268,104"/>
+<area shape="rect" id="node8" title=" " alt="" coords="292,79,351,104"/>
+<area shape="rect" id="node9" title=" " alt="" coords="375,79,435,104"/>
+<area shape="rect" id="node10" title=" " alt="" coords="460,79,535,104"/>
+<area shape="rect" id="node11" title=" " alt="" coords="559,79,638,104"/>
+<area shape="rect" id="node12" title=" " alt="" coords="663,79,767,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,152,80,177"/>
+<area shape="rect" id="node4" title=" " alt="" coords="104,152,163,177"/>
+<area shape="rect" id="node5" title=" " alt="" coords="187,152,250,177"/>
+<area shape="rect" id="node6" title=" " alt="" coords="274,152,395,177"/>
+<area shape="rect" id="node7" title=" " alt="" coords="419,152,519,177"/>
 </map>
