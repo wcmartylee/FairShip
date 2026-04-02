@@ -14,6 +14,7 @@ it in future.
 ### Added
 
 ### Changed
+* Make artificial retina the baseline option for pattern recognition
 
 ### Fixed
 
