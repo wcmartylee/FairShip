@@ -88,6 +88,9 @@ var annotated_dup =
     [ "timeDetector", "namespacetimeDetector.html", [
       [ "timeDetector", "classtimeDetector_1_1timeDetector.html", "classtimeDetector_1_1timeDetector" ]
     ] ],
+    [ "tracking_benchmark", "namespacetracking__benchmark.html", [
+      [ "TrackingBenchmark", "classtracking__benchmark_1_1TrackingBenchmark.html", "classtracking__benchmark_1_1TrackingBenchmark" ]
+    ] ],
     [ "UpstreamTaggerDetector", "namespaceUpstreamTaggerDetector.html", [
       [ "UpstreamTaggerDetector", "classUpstreamTaggerDetector_1_1UpstreamTaggerDetector.html", "classUpstreamTaggerDetector_1_1UpstreamTaggerDetector" ]
     ] ],
@@ -186,9 +189,10 @@ var annotated_dup =
     [ "UpstreamTagger", "classUpstreamTagger.html", "classUpstreamTagger" ],
     [ "UpstreamTaggerHit", "classUpstreamTaggerHit.html", "classUpstreamTaggerHit" ],
     [ "UpstreamTaggerPoint", "classUpstreamTaggerPoint.html", "classUpstreamTaggerPoint" ],
+    [ "VectorMCPointSource", "classVectorMCPointSource.html", "classVectorMCPointSource" ],
     [ "Vehicle", "structVehicle.html", "structVehicle" ],
-    [ "veto", "classveto.html", "classveto" ],
     [ "Veto", "classVeto.html", null ],
+    [ "veto", "classveto.html", "classveto" ],
     [ "vetoContFact", "classvetoContFact.html", "classvetoContFact" ],
     [ "vetoHit", "classvetoHit.html", "classvetoHit" ],
     [ "vetoHitOnTrack", "classvetoHitOnTrack.html", "classvetoHitOnTrack" ],

@@ -25,7 +25,7 @@ var searchData=
   ['removestupidfiles_22',['removeStupidFiles',['../namespacecompactingBackgroundProduction.html#a2ef4dfa3747c8b70bb5fa33fb5285056',1,'compactingBackgroundProduction']]],
   ['rename_23',['rename',['../namespaceeventDisplay.html#a02d796b1588b1728f5ea48bdd9fed8ca',1,'eventDisplay']]],
   ['reporterror_24',['reportError',['../namespacerootUtils.html#ab807114738eb9dfb5fef001e2fa9bc54',1,'rootUtils']]],
-  ['reset_25',['Reset',['../classShipStack.html#a5bb6dccf7ca53edb0560b1152ec2b33c',1,'ShipStack::Reset()'],['../classSHiP_1_1Detector.html#a103ca9a2efe245ed360682958561bbf7',1,'SHiP::Detector::Reset()']]],
+  ['reset_25',['Reset',['../classVectorMCPointSource.html#a11f856e3d204b2c86ad8f053dad589b5',1,'VectorMCPointSource::Reset()'],['../classShipStack.html#a5bb6dccf7ca53edb0560b1152ec2b33c',1,'ShipStack::Reset()'],['../classSHiP_1_1Detector.html#a103ca9a2efe245ed360682958561bbf7',1,'SHiP::Detector::Reset()']]],
   ['residuals_26',['residuals',['../classshipVertex_1_1Task.html#a60a1daec91df01bdd81f1f0bb4aef1f2',1,'shipVertex::Task']]],
   ['resol_27',['Resol',['../classTimeDetHit.html#a6940b7d3e545c87bdd4d0c1f5981d350',1,'TimeDetHit']]],
   ['retina_5ffunc_28',['retina_func',['../namespaceshipPatRec.html#a648c8439282898a7361984046d28b0b7',1,'shipPatRec']]],
@@ -41,7 +41,8 @@ var searchData=
   ['run4beauty_38',['run4beauty',['../namespaceextractMuonsAndUpdateWeight.html#aa0feb4b8f8e763d2c876eda743804b27',1,'extractMuonsAndUpdateWeight.run4beauty()'],['../namespaceextractNeutrinosAndUpdateWeight.html#af7e96fcc0ed95760bbd1c692e634b12d',1,'extractNeutrinosAndUpdateWeight.run4beauty()']]],
   ['run4charm_39',['run4Charm',['../namespaceextractMuonsAndUpdateWeight.html#a3fb8815e9900666740bca8a1de5ff952',1,'extractMuonsAndUpdateWeight.run4Charm()'],['../namespaceextractNeutrinosAndUpdateWeight.html#ad0934631f9f43998aa7d2f046885b735',1,'extractNeutrinosAndUpdateWeight.run4Charm()']]],
   ['run4charm1gev_40',['run4Charm1GeV',['../namespaceextractNeutrinosAndUpdateWeight.html#a2cc5a49e49291b2d6d78f3fbdf9af7a4',1,'extractNeutrinosAndUpdateWeight']]],
-  ['run_5ftrack_5fpattern_5frecognition_41',['run_track_pattern_recognition',['../namespaceshipStrawTracking.html#a93d9dcfd6fdabe536f787157aa73b69f',1,'shipStrawTracking']]],
-  ['runproduction_42',['runProduction',['../namespacemergeMbias.html#a42594bc0dc3dc66ce0c4ced498916cae',1,'mergeMbias']]],
-  ['runtracking_43',['runTracking',['../namespaceACTSReco.html#ae428b0e0d4fea0e7f90e19668dd48bd0',1,'ACTSReco']]]
+  ['run_5fphase_41',['run_phase',['../namespacerun__tracking__benchmark.html#a1d8f150281346821d2717300c993a3ca',1,'run_tracking_benchmark']]],
+  ['run_5ftrack_5fpattern_5frecognition_42',['run_track_pattern_recognition',['../namespaceshipStrawTracking.html#a93d9dcfd6fdabe536f787157aa73b69f',1,'shipStrawTracking']]],
+  ['runproduction_43',['runProduction',['../namespacemergeMbias.html#a42594bc0dc3dc66ce0c4ced498916cae',1,'mergeMbias']]],
+  ['runtracking_44',['runTracking',['../namespaceACTSReco.html#ae428b0e0d4fea0e7f90e19668dd48bd0',1,'ACTSReco']]]
 ];

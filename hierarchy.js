@@ -41,6 +41,9 @@ var hierarchy =
       [ "strawtubesContFact", "classstrawtubesContFact.html", null ],
       [ "vetoContFact", "classvetoContFact.html", null ]
     ] ],
+    [ "FairDataSourceI", null, [
+      [ "VectorMCPointSource< PointType >", "classVectorMCPointSource.html", null ]
+    ] ],
     [ "FairDetector", null, [
       [ "SHiP::Detector< MTCDetPoint >", "classSHiP_1_1Detector.html", [
         [ "MTCDetector", "classMTCDetector.html", null ]
@@ -207,6 +210,7 @@ var hierarchy =
       [ "splitcalCluster", "classsplitcalCluster.html", null ],
       [ "vetoHitOnTrack", "classvetoHitOnTrack.html", null ]
     ] ],
+    [ "tracking_benchmark.TrackingBenchmark", "classtracking__benchmark_1_1TrackingBenchmark.html", null ],
     [ "ShipFieldMaker::transformInfo", "structShipFieldMaker_1_1transformInfo.html", null ],
     [ "TVirtualMagField", null, [
       [ "ShipBFieldMap", "classShipBFieldMap.html", null ],
