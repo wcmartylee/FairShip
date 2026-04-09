@@ -248,7 +248,6 @@ def configure_strawtubes(yaml_file: str, frame_design: str, ship_geo) -> None:
     strawtubes.SetWireThickness(ship_geo.strawtubes_geo.wire_thickness)
     strawtubes.SetDeltazView(ship_geo.strawtubes_geo.delta_z_view)
     strawtubes.ImportFrame(frame_design)
-    strawtubes.SetFrameMaterial(ship_geo.strawtubes_geo.frame_material)
     strawtubes.SetStationEnvelope(
         ship_geo.strawtubes_geo.station_width,
         ship_geo.strawtubes_geo.station_height,

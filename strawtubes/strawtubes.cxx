@@ -30,6 +30,7 @@
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
+#include "TGeoArb8.h"
 #include "TGeoTrd2.h"
 #include "TGeoCompositeShape.h"
 #include "TGeoManager.h"
@@ -189,10 +190,6 @@ void strawtubes::ImportFrame(TString frame_path) {
   f_frame_path = frame_path;  //!  Path to station frame design file
 }
 
-void strawtubes::SetFrameMaterial(TString frame_material) {
-  f_frame_material = frame_material;  //!  Structure frame material
-}
-
 void strawtubes::SetStationEnvelope(Double_t x, Double_t y, Double_t z) {
   f_station_width = x;   //!  Station envelope width (x)
   f_station_height = y;  //!  Station envelope height (y)
@@ -281,8 +278,6 @@ void strawtubes::ConstructGeometry() {
 
   // Base of 2nd and 3rd station
   TGeoTrd2* base = new TGeoTrd2("base", 288, 249, 89, 50, 50);
-
-  f_frame_material.ToLower();
 
   for (Int_t statnb = 1; statnb < 5; statnb++) {
     // Tracking station loop
