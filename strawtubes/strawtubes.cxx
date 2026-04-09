@@ -274,8 +274,6 @@ void strawtubes::ConstructGeometry() {
   // Base of 2nd and 3rd station
   TGeoTrd2* base = new TGeoTrd2("base", 288, 249, 89, 50, 50);
 
-  f_frame_material.ToLower();
-
   for (Int_t statnb = 1; statnb < 5; statnb++) {
     // Tracking station loop
     TString nmstation = "Tr";
