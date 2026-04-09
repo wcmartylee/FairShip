@@ -29,6 +29,7 @@
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
 #include "TGeoArb8.h"
+#include "TGeoTrd2.h"
 #include "TGeoCompositeShape.h"
 #include "TGeoManager.h"
 #include "TGeoMaterial.h"
@@ -180,6 +181,10 @@ void strawtubes::SetDeltazView(Double_t delta_z_view) {
   f_delta_z_view = delta_z_view;  //!  Distance (z) between stereo views
 }
 
+void strawtubes::ImportFrame(TString frame_path) {
+  f_frame_path = frame_path;  //!  Path to station frame design file
+}
+
 void strawtubes::SetStationEnvelope(Double_t x, Double_t y, Double_t z) {
   f_station_width = x;   //!  Station envelope width (x)
   f_station_height = y;  //!  Station envelope height (y)
@@ -225,31 +230,11 @@ void strawtubes::ConstructGeometry() {
   // Epsilon to avoid overlapping volumes
   Double_t eps = 0.0001;
   // Straw (half) length
-  Double_t straw_length = f_aperture_width + 2. * eps;
-  // Width of frame: standard HEA 500 I-beam width
-  Double_t frame_width = 49.;
+  Double_t straw_length = f_aperture_width;
   // Offset due to floor space limitation
   Double_t floor_offset = 14.;
 
   Double_t rmin, rmax, T_station_z;
-
-  // Arguments of boxes are half-lengths
-  [[maybe_unused]] TGeoBBox* detbox1 = new TGeoBBox(
-      "detbox1", f_aperture_width + frame_width,
-      f_aperture_height + frame_width - floor_offset / 2., f_station_length);
-  [[maybe_unused]] TGeoBBox* detbox2 = new TGeoBBox(
-      "detbox2", straw_length + eps,
-      f_aperture_height +
-          TMath::Tan(f_view_angle * TMath::Pi() / 180.0) * straw_length * 2 +
-          f_offset_layer / TMath::Cos(f_view_angle * TMath::Pi() / 180.0) + eps,
-      f_station_length + eps);
-  TGeoTranslation* move_up =
-      new TGeoTranslation("move_up", 0, floor_offset / 2., 0);
-  move_up->RegisterYourself();
-
-  // Composite shape to create frame
-  TGeoCompositeShape* detcomp1 =
-      new TGeoCompositeShape("detcomp1", "(detbox1:move_up)-detbox2");
 
   // Volume: straw
   rmin = f_inner_straw_diameter / 2.;
@@ -286,6 +271,11 @@ void strawtubes::ConstructGeometry() {
       new TGeoBBox("statbox", f_station_width,
                    f_station_height - floor_offset / 2., f_station_length);
 
+  // Base of 2nd and 3rd station
+  TGeoTrd2* base = new TGeoTrd2("base", 288, 249, 89, 50, 50);
+
+  f_frame_material.ToLower();
+
   for (Int_t statnb = 1; statnb < 5; statnb++) {
     // Tracking station loop
     TString nmstation = "Tr";
@@ -314,11 +304,24 @@ void strawtubes::ConstructGeometry() {
     top->AddNode(vol, statnb,
                  new TGeoTranslation(0, floor_offset / 2., T_station_z));
 
-    TGeoVolume* statframe =
-        new TGeoVolume(nmstation + "_frame", detcomp1, FrameMatPtr);
+    if(statnb == 2 || statnb == 3) {
+      TGeoVolume* statbase = new TGeoVolume(nmstation + "_base", base, steel);
+      TGeoRotation roll_base;
+      TGeoTranslation move_base;
+      move_base.SetTranslation(0, -386, T_station_z);
+      roll_base.SetAngles(0, -90, 0);
+      TGeoCombiTrans place(move_base, roll_base);
+      TGeoHMatrix* place_base = new TGeoHMatrix(place);
+      top->AddNode(statbase, statnb + 4, place_base);
+    }
+
+    // Import station frame
+    TGeoVolume* statframe = TGeoVolume::Import(f_frame_path, "statframe");
+    statframe->SetName(nmstation + "_frame");
+    statframe->SetMedium(med);
+    statframe->GetNode("V-Frame_4_x_6-0_1")->GetVolume()->SetMedium(FrameMatPtr);
     vol->AddNode(statframe, statnb * 1e6,
-                 new TGeoTranslation(0, -floor_offset / 2., 0));
-    statframe->SetLineColor(kRed);
+		 new TGeoTranslation(0, -floor_offset / 2., 0));
 
     for (Int_t vnb = 0; vnb < 4; vnb++) {
       // View loop

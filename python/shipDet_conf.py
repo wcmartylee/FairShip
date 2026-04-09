@@ -208,7 +208,7 @@ def configure_veto(yaml_file: str, z0) -> None:
     detectorList.append(Veto)
 
 
-def configure_strawtubes(yaml_file: str, ship_geo) -> None:
+def configure_strawtubes(yaml_file: str, frame_design: str, ship_geo) -> None:
     with open(yaml_file) as file:
         config = yaml.safe_load(file)
 
@@ -242,6 +242,7 @@ def configure_strawtubes(yaml_file: str, ship_geo) -> None:
     strawtubes.SetStereoAngle(ship_geo.strawtubes_geo.view_angle)
     strawtubes.SetWireThickness(ship_geo.strawtubes_geo.wire_thickness)
     strawtubes.SetDeltazView(ship_geo.strawtubes_geo.delta_z_view)
+    strawtubes.ImportFrame(frame_design)
     strawtubes.SetStationEnvelope(
         ship_geo.strawtubes_geo.station_width,
         ship_geo.strawtubes_geo.station_height,
@@ -379,6 +380,7 @@ def configure(run, ship_geo):
 
     configure_strawtubes(
         os.path.join(os.environ["FAIRSHIP"], "geometry", "strawtubes_config.yaml"),
+        os.path.join(os.environ["FAIRSHIP"], "geometry", "strawtubes_frame_design.root"),
         ship_geo,
     )
 
