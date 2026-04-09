@@ -4,7 +4,7 @@
 
 #include "EvtCalcGenerator.h"
 
-#include <math.h>
+#include <cmath>
 
 #include "FairLogger.h"
 #include "FairPrimaryGenerator.h"
@@ -12,8 +12,6 @@
 #include "TDatabasePDG.h"
 #include "TFile.h"
 #include "TMath.h"
-
-using namespace ShipUnit;
 
 // -----   Default constructor   -------------------------------------------
 EvtCalcGenerator::EvtCalcGenerator() {}
@@ -23,14 +21,14 @@ Bool_t EvtCalcGenerator::Init(const char* fileName) {
   return Init(fileName, 0);
 }
 // -----   Default constructor   -------------------------------------------
-Bool_t EvtCalcGenerator::Init(const char* fileName, const int firstEvent) {
+Bool_t EvtCalcGenerator::Init(const char* fileName, const int startEvent) {
   fInputFile = std::unique_ptr<TFile>(TFile::Open(fileName, "read"));
   LOGF(info, "Info EvtCalcGenerator: Opening input file %s", fileName);
 
   fTree =
       std::unique_ptr<TTree>(dynamic_cast<TTree*>(fInputFile->Get("LLP_tree")));
   fNevents = fTree->GetEntries();
-  fn = firstEvent;
+  fn = startEvent;
 
   auto* branches = fTree->GetListOfBranches();
   nBranches = branches->GetEntries();

@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 
-def parse_comparison_file(comparison_file):
+def parse_comparison_file(comparison_file: Path):
     """
     Parse a comparison result file and extract summary.
 
@@ -81,7 +81,7 @@ def parse_comparison_file(comparison_file):
     }
 
 
-def generate_comment(comparison_dir):
+def generate_comment(comparison_dir) -> str:
     """Generate markdown PR comment from comparison results."""
     comparison_files = list(Path(comparison_dir).glob("comparison_*.txt"))
 
@@ -111,9 +111,7 @@ def generate_comment(comparison_dir):
     if no_ref == len(results):
         lines.append("**First run**: No reference metrics available yet")
     elif has_diff == 0:
-        lines.append(
-            "**All configurations match reference** (no significant differences)"
-        )
+        lines.append("**All configurations match reference** (no significant differences)")
     else:
         lines.append(f"**{has_diff} configuration(s) have differences**")
 
@@ -183,19 +181,15 @@ def generate_comment(comparison_dir):
     lines.append("Default comparison uses 5% tolerance for histogram statistics")
     lines.append("and 3σ for fit parameters.")
     lines.append("")
-    lines.append(
-        "Metrics stored in git notes: `refs/notes/ci/physics-metrics/<config>`"
-    )
+    lines.append("Metrics stored in git notes: `refs/notes/ci/physics-metrics/<config>`")
     lines.append("</details>")
 
     return "\n".join(lines)
 
 
-def main():
+def main() -> int:
     """Generate PR comment from comparison results."""
-    parser = argparse.ArgumentParser(
-        description="Generate PR comment from comparison results"
-    )
+    parser = argparse.ArgumentParser(description="Generate PR comment from comparison results")
     parser.add_argument(
         "comparison_dir",
         help="Directory containing comparison_*.txt files",

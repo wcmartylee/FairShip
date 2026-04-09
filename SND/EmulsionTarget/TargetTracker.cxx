@@ -12,9 +12,7 @@
 
 #include "TargetTracker.h"
 
-#include <stddef.h>  // for NULL
-#include <string.h>
-
+#include <cstring>
 #include <iosfwd>    // for ostream
 #include <iostream>  // for operator<<, basic_ostream,etc
 
@@ -26,17 +24,15 @@
 #include "FairGeoNode.h"
 #include "FairGeoTransform.h"
 #include "FairGeoVolume.h"
-#include "FairLink.h"
-#include "FairRootManager.h"
 #include "FairRun.h"  // for FairRun
 #include "FairRun.h"
 #include "FairRuntimeDb.h"  // for FairRuntimeDb
 #include "FairRuntimeDb.h"
 #include "FairVolume.h"
 #include "ShipDetectorList.h"
+#include "ShipGeoUtil.h"
 #include "ShipStack.h"
 #include "ShipUnit.h"
-#include "TClonesArray.h"
 #include "TGeoArb8.h"
 #include "TGeoBBox.h"
 #include "TGeoCompositeShape.h"
@@ -59,60 +55,14 @@
 using std::cout;
 using std::endl;
 
-using namespace ShipUnit;
-
-TargetTracker::TargetTracker()
-    : FairDetector("TargetTracker", "", kTRUE),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fTTPoints(nullptr) {}
+TargetTracker::TargetTracker() : Detector("TargetTracker", kTRUE, ktauTT) {}
 
 TargetTracker::TargetTracker(const char* name, Double_t TTX, Double_t TTY,
-                             Double_t TTZ, Bool_t Active, const char* Title)
-    : FairDetector(name, true, ktauTT),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fTTPoints(nullptr) {
+                             Double_t TTZ, Bool_t Active, const char* /*Title*/)
+    : Detector(name, Active, ktauTT) {
   TTrackerX = TTX;
   TTrackerY = TTY;
   TTrackerZ = TTZ;
-}
-
-TargetTracker::~TargetTracker() {
-  if (fTTPoints) {
-    fTTPoints->clear();
-    delete fTTPoints;
-  }
-}
-
-void TargetTracker::Initialize() { FairDetector::Initialize(); }
-
-// -----   Private method InitMedium
-Int_t TargetTracker::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != NULL) return ShipMedium->getMediumIndex();
-  return geoBuild->createMedium(ShipMedium);
 }
 
 void TargetTracker::SetSciFiParam(Double_t scifimat_width_,
@@ -148,16 +98,16 @@ void TargetTracker::SetNumberTT(Int_t n) { fNTT = n; }
 void TargetTracker::SetDesign(Int_t Design) { fDesign = Design; }
 
 void TargetTracker::ConstructGeometry() {
-  InitMedium("vacuum");
+  ShipGeo::InitMedium("vacuum");
   TGeoMedium* vacuum = gGeoManager->GetMedium("vacuum");
 
-  InitMedium("CarbonComposite");
+  ShipGeo::InitMedium("CarbonComposite");
   TGeoMedium* CarbonComposite = gGeoManager->GetMedium("CarbonComposite");
 
-  InitMedium("SciFiMat");
+  ShipGeo::InitMedium("SciFiMat");
   TGeoMedium* SciFiMat = gGeoManager->GetMedium("SciFiMat");
 
-  InitMedium("Airex");
+  ShipGeo::InitMedium("Airex");
   TGeoMedium* Airex = gGeoManager->GetMedium("Airex");
 
   // Target Tracker
@@ -321,45 +271,4 @@ void TargetTracker::DecodeTTID(Int_t detID, Int_t& NTT, int& nplane,
     ishor = kTRUE;
 
   nplane = (detID - NTT * 1000 - idir * 100);
-}
-
-void TargetTracker::EndOfEvent() { fTTPoints->clear(); }
-
-void TargetTracker::Register() {
-  /** This will create a branch in the output tree called
-   TargetPoint, setting the last parameter to kFALSE means:
-   this collection will not be written to the file, it will exist
-   only during the simulation.
-   */
-
-  if (!fTTPoints) {
-    fTTPoints = new std::vector<TTPoint>();
-  }
-  FairRootManager::Instance()->RegisterAny("TTPoint", fTTPoints, kTRUE);
-}
-
-TClonesArray* TargetTracker::GetCollection(Int_t iColl) const {
-  return nullptr;
-}
-
-void TargetTracker::UpdatePointTrackIndices(
-    const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fTTPoints) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
-}
-
-void TargetTracker::Reset() { fTTPoints->clear(); }
-
-TTPoint* TargetTracker::AddHit(Int_t trackID, Int_t detID, TVector3 pos,
-                               TVector3 mom, Double_t time, Double_t length,
-                               Double_t eLoss, Int_t pdgCode) {
-  fTTPoints->emplace_back(trackID, detID, pos, mom, time, length, eLoss,
-                          pdgCode);
-  return &(fTTPoints->back());
 }

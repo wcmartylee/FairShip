@@ -3,15 +3,14 @@
 # SPDX-FileCopyrightText: Copyright CERN for the benefit of the SHiP Collaboration
 """Generate GENIE neutrino interaction events from flux histograms.
 
-This “launcher” wraps `genie_utils` (gmkspl/gevgen/gntpc helpers) and adds:
+This "launcher" wraps `genie_utils` (gmkspl/gevgen/gntpc helpers) and adds:
 - Argument parsing with sensible defaults and validation
-- Optional *nudet* mode (disables charm/tau decays via GXMLPATH)
 - Automatic neutrino/antineutrino scaling based on flux hist sums
 - Structured logging and robust error reporting
 
 Typical use
 -----------
-$ python $FAIRSHIP/macro/makeGenieEvents sim \
+$ python $FAIRSHIP/macro/makeGenieEvents.py sim \
     --seed 65539 \
     --output ./work \
     --filedir /eos/experiment/ship/data/Mbias/background-prod-2018 \
@@ -21,14 +20,13 @@ $ python $FAIRSHIP/macro/makeGenieEvents sim \
     --emin 0.5 --emax 350 \
     --xsec-file gxspl-FNALsmall.xml \
     --flux-file pythia8_Geant4_1.0_withCharm_nu.root \
-    --event-generator-list CC \
-    --nudet
+    --event-generator-list CC
 
 Notes
 -----
 - This tool *does not* modify your parent shell environment.
-- `--nudet` sets `GXMLPATH` for the child process only (you can override path
-  with `--gxmlpath`).
+- GXMLPATH is automatically set to $FAIRSHIP_ROOT/shipgen/genie_config by default.
+- Use `--gxmlpath` to override the default GXMLPATH if needed.
 
 """
 
@@ -36,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
@@ -70,9 +69,7 @@ NUPDGLIST = [16, -16, 14, -14, 12, -12]
 # ------------------------------ Helpers ---------------------------------------
 
 
-def extract_nu_over_nubar(
-    neutrino_flux: Path, particles: Sequence[int]
-) -> dict[int, float]:
+def extract_nu_over_nubar(neutrino_flux: Path, particles: Sequence[int]) -> dict[int, float]:
     """Compute ν/ν̄ = sum(nu)/sum(nubar) from 1D flux histograms."""
     f = ROOT.TFile(str(neutrino_flux), "READ")
     if not f or f.IsZombie():
@@ -85,20 +82,14 @@ def extract_nu_over_nubar(
             h_nubar = f.Get(get_1D_flux_name(-fam))
             if not h_nu or not h_nubar:
                 raise FileNotFoundError(
-                    f"Missing hists {get_1D_flux_name(fam)} / "
-                    f"{get_1D_flux_name(-fam)} in {neutrino_flux}"
+                    f"Missing hists {get_1D_flux_name(fam)} / {get_1D_flux_name(-fam)} in {neutrino_flux}"
                 )
             s_nu = float(h_nu.GetSumOfWeights())
             s_nubar = float(h_nubar.GetSumOfWeights())
             if s_nubar <= 0.0:
-                raise FileNotFoundError(
-                    f"ν̄ sum of weights is zero for family {fam} in {neutrino_flux}"
-                )
+                raise FileNotFoundError(f"ν̄ sum of weights is zero for family {fam} in {neutrino_flux}")
             ratios[fam] = s_nu / s_nubar
-            log_output = (
-                f"ν/ν̄ ratio for |PDG|={fam}: "
-                f"{ratios[fam]:.4f} (nu={s_nu}, nubar={s_nubar})"
-            )
+            log_output = f"ν/ν̄ ratio for |PDG|={fam}: {ratios[fam]:.4f} (nu={s_nu}, nubar={s_nubar})"
             logging.info(log_output)
         return ratios
     finally:
@@ -109,15 +100,15 @@ def _ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
 
-def _build_env(nudet: bool, gxmlpath: Path | None) -> Mapping[str, str | None] | None:
-    """Build per-call env overrides (sets GXMLPATH only in nudet mode)."""
-    if not nudet:
-        return None
-    val = (
-        str(gxmlpath)
-        if gxmlpath
-        else "/eos/experiment/ship/user/aiuliano/GENIE_FNAL_nu_splines"
-    )
+def _build_env(gxmlpath: Path | None) -> Mapping[str, str | None] | None:
+    """Build per-call env overrides (sets GXMLPATH)."""
+    fairship_root_path = os.getenv("FAIRSHIP_ROOT") or os.getenv("FAIRSHIP")
+    if not fairship_root_path:
+        raise OSError(
+            "FAIRSHIP_ROOT (or FAIRSHIP) environment variable is not set. "
+            "Please run inside the FairShip alienv environment."
+        )
+    val = str(gxmlpath) if gxmlpath else fairship_root_path + "/shipgen/genie_config"
     return {"GXMLPATH": val}
 
 
@@ -177,17 +168,11 @@ def make_events(
         out_dir = work_dir / f"genie-{pdg_name}_{N}_events"
         _ensure_dir(out_dir)
 
-        nudet_suffix = "_nudet" if env_vars and env_vars.get("GXMLPATH") else ""
-        filename = (
-            f"run_{run}_{pdg_name}_{N}_events_{targetcode}_{emin}_{emax}_GeV_"
-            f"{process or 'ALL'}{nudet_suffix}.ghep.root"
-        )
+        filename = f"run_{run}_{pdg_name}_{N}_events_{targetcode}_{emin}_{emax}_GeV_{process or 'ALL'}.ghep.root"
         ghep_path = out_dir / filename
-        gst_path = out_dir / f"genie-{filename}"
+        gst_path = out_dir / f"genie-{filename.replace('ghep.root', 'gst.root')}"
 
-        logging.info(
-            f"Generating {N} events for PDG {pdg_name} (run={run}) -> {ghep_path}"
-        )
+        logging.info(f"Generating {N} events for PDG {pdg_name} (run={run}) -> {ghep_path}")
 
         generate_genie_events(
             nevents=N,
@@ -218,9 +203,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     # sim command
     ap = sub.add_parser("sim", help="Make GENIE simulation file(s)")
-    ap.add_argument(
-        "-s", "--seed", type=int, default=65539, help="RNG seed (default: GENIE 65539)"
-    )
+    ap.add_argument("-s", "--seed", type=int, default=65539, help="RNG seed (default: GENIE 65539)")
     ap.add_argument(
         "-o",
         "--output",
@@ -265,9 +248,7 @@ def _build_parser() -> argparse.ArgumentParser:
         choices=sorted(TARGET_CODE),
         help="Target material",
     )
-    ap.add_argument(
-        "-n", "--nevents", type=int, default=100, help="Events per neutrino species"
-    )
+    ap.add_argument("-n", "--nevents", type=int, default=100, help="Events per neutrino species")
     ap.add_argument("--emin", type=float, default=0.5, help="Min Eν [GeV]")
     ap.add_argument("--emax", type=float, default=350.0, help="Max Eν [GeV]")
     ap.add_argument(
@@ -278,12 +259,7 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help="GENIE generator list (e.g. CC, CCDIS, CCQE, CharmCCDIS, RES, CCRES, ...)",
     )
-    ap.add_argument(
-        "--nudet", action="store_true", help="Disable charm & tau decays via GXMLPATH"
-    )
-    ap.add_argument(
-        "--gxmlpath", type=Path, default=None, help="Override GXMLPATH in --nudet mode"
-    )
+    ap.add_argument("--gxmlpath", type=Path, default=None, help="Override GXMLPATH")
     ap.add_argument(
         "-p",
         "--particles",
@@ -302,15 +278,9 @@ def _build_parser() -> argparse.ArgumentParser:
     )
 
     # spline command
-    ap1 = sub.add_parser(
-        "spline", help="Make a new cross-section spline (xsec_splines.xml)"
-    )
-    ap1.add_argument(
-        "-t", "--target", type=str, default="iron", choices=sorted(TARGET_CODE)
-    )
-    ap1.add_argument(
-        "-o", "--output", dest="work_dir", type=Path, default=Path("./work")
-    )
+    ap1 = sub.add_parser("spline", help="Make a new cross-section spline (xsec_splines.xml)")
+    ap1.add_argument("-t", "--target", type=str, default="iron", choices=sorted(TARGET_CODE))
+    ap1.add_argument("-o", "--output", dest="work_dir", type=Path, default=Path("./work"))
     ap1.add_argument("-n", "--nknots", type=int, default=500)
     ap1.add_argument("--emax", type=float, default=400.0)
 
@@ -344,7 +314,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     # sim
-    env_vars = _build_env(nudet=bool(args.nudet), gxmlpath=args.gxmlpath)
+    env_vars = _build_env(gxmlpath=args.gxmlpath)
     targetcode = _target_code(args.target)
 
     splines = (args.splinedir / args.xsec_file).resolve()
@@ -357,12 +327,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     particles = _pdg_list(args.particles)
     nu_over_nubar = extract_nu_over_nubar(flux, particles)
 
-    logging.info(
-        f"Seed: {args.seed} | "
-        f"Target: {args.target} ({targetcode}) | "
-        f"Process: {args.evtype or 'ALL'} | "
-        f"nudet={bool(args.nudet)}"
-    )
+    logging.info(f"Seed: {args.seed} | Target: {args.target} ({targetcode}) | Process: {args.evtype or 'ALL'}")
     make_events(
         run=int(args.run),
         nevents=int(args.nevents),

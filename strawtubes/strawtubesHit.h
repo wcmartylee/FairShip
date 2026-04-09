@@ -3,14 +3,12 @@
 // Collaboration
 
 #ifndef STRAWTUBES_STRAWTUBESHIT_H_
-#define STRAWTUBES_STRAWTUBESHIT_H_ 1
+#define STRAWTUBES_STRAWTUBESHIT_H_
 
-#include "ShipHit.h"
-#include "TObject.h"
-#include "TVector3.h"
+#include "DetectorHit.h"
 #include "strawtubesPoint.h"
 
-class strawtubesHit : public ShipHit {
+class strawtubesHit : public SHiP::DetectorHit {
  public:
   /** Default constructor **/
   strawtubesHit();
@@ -23,7 +21,7 @@ class strawtubesHit : public ShipHit {
   strawtubesHit(Int_t detID, Float_t tdc);
   strawtubesHit(strawtubesPoint* p, Double_t t0);
   /** Destructor **/
-  virtual ~strawtubesHit();
+  ~strawtubesHit() override = default;
 
   /** Accessors **/
   Int_t GetStationNumber() const;
@@ -32,8 +30,8 @@ class strawtubesHit : public ShipHit {
   Int_t GetStrawNumber() const;
 
   /** Output to screen **/
-  using ShipHit::Print;
-  virtual void Print() const;
+  using SHiP::DetectorHit::Print;
+  void Print() const;
   Float_t GetTDC() const { return fdigi; }
   void setInvalid() { flag = false; }
   bool isValid() const { return flag; }
@@ -43,9 +41,9 @@ class strawtubesHit : public ShipHit {
   strawtubesHit& operator=(const strawtubesHit& point) = default;
 
  private:
-  Float_t flag;  ///< flag
+  Bool_t flag{true};  ///< validity flag
 
-  ClassDef(strawtubesHit, 5);
+  ClassDef(strawtubesHit, 6);
 };
 
 #endif  // STRAWTUBES_STRAWTUBESHIT_H_

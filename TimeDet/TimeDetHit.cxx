@@ -19,15 +19,20 @@
 using std::cout;
 using std::endl;
 
-Double_t speedOfLight =
-    TMath::C() * 100. / 1000000000.0;  // from m/sec to cm/ns
+namespace {
+constexpr Double_t speedOfLight = 29.9792458;  // TMath::C() * 100 / 1e9, cm/ns
+}  // namespace
 
 // -----   Default constructor   --------------
-TimeDetHit::TimeDetHit() : ShipHit() { flag = true; }
+TimeDetHit::TimeDetHit() : SHiP::DetectorHit() {}
 
 // -----   constructor from TimeDetPoint from
 // TimeDetHit-------------------------------
-TimeDetHit::TimeDetHit(TimeDetPoint* p, Double_t t0) : ShipHit() {
+TimeDetHit::TimeDetHit(TimeDetPoint* p, Double_t t0) : SHiP::DetectorHit() {
+  if (!p) {
+    LOG(error) << "TimeDetHit: null TimeDetPoint pointer";
+    return;
+  }
   fDetectorID = p->GetDetectorID();
   Float_t lpos, lneg;
   Dist(p->GetX(), lpos, lneg);
@@ -35,11 +40,7 @@ TimeDetHit::TimeDetHit(TimeDetPoint* p, Double_t t0) : ShipHit() {
   t_1 = gRandom->Gaus(0, sigma) + lneg / v_drift + t0 + p->GetTime();
   sigma = Resol(lpos);  // in ns
   t_2 = gRandom->Gaus(0, sigma) + lpos / v_drift + t0 + p->GetTime();
-  flag = true;
 }
-
-// -----   Destructor   -------------------------
-TimeDetHit::~TimeDetHit() {}
 
 // ---- return time information for a given track extrapolation
 std::vector<double> TimeDetHit::GetTime(Double_t x) const {
@@ -53,10 +54,7 @@ std::vector<double> TimeDetHit::GetTime(Double_t x) const {
   Double_t dt = 1. / TMath::Sqrt(w1 + w2);
   Double_t t =
       ((t_1 - lneg / v_drift) * w1 + (t_2 - lpos / v_drift) * w2) / (w1 + w2);
-  std::vector<double> m;
-  m.push_back(t);
-  m.push_back(dt);
-  return m;
+  return {t, dt};
 }
 // ---- return mean time information
 std::vector<double> TimeDetHit::GetTime() const {
@@ -69,22 +67,14 @@ std::vector<double> TimeDetHit::GetTime() const {
   Float_t r1 = Resol(lneg);
   Float_t r2 = Resol(lpos);
   Double_t dt = TMath::Sqrt(r1 * r1 + r2 * r2);
-  std::vector<double> m;
-  m.push_back(t0);
-  m.push_back(dt);
-  return m;
+  return {t0, dt};
 }
 // -----   resolution function-------------------
 Double_t TimeDetHit::Resol(Double_t x) const {
   return par[0] * TMath::Exp((x - par[2]) / par[1]) + par[3];
 }
 
-std::vector<double> TimeDetHit::GetMeasurements() const {
-  std::vector<double> m;
-  m.push_back(t_1);
-  m.push_back(t_2);
-  return m;
-}
+std::vector<double> TimeDetHit::GetMeasurements() const { return {t_1, t_2}; }
 
 // distance to edges
 void TimeDetHit::Dist(Float_t x, Float_t& lpos, Float_t& lneg) const {

@@ -4,7 +4,7 @@
 
 #include "GenieGenerator.h"
 
-#include <math.h>
+#include <cmath>
 
 #include "FairPrimaryGenerator.h"
 #include "MeanMaterialBudget.h"
@@ -33,7 +33,7 @@ GenieGenerator::GenieGenerator() {}
 // -----   Default constructor   -------------------------------------------
 Bool_t GenieGenerator::Init(const char* fileName) { return Init(fileName, 0); }
 // -----   Default constructor   -------------------------------------------
-Bool_t GenieGenerator::Init(const char* fileName, const int firstEvent) {
+Bool_t GenieGenerator::Init(const char* fileName, const int startEvent) {
   fNuOnly = false;
   fInputFile = TFile::Open(fileName);
   LOG(info) << "Opening input file " << fileName;
@@ -43,7 +43,7 @@ Bool_t GenieGenerator::Init(const char* fileName, const int firstEvent) {
   }
   fTree = dynamic_cast<TTree*>(fInputFile->Get("gst"));
   fNevents = fTree->GetEntries();
-  fn = firstEvent;
+  fn = startEvent;
   fTree->SetBranchAddress("Ev", &Ev);  // incoming neutrino energy
   fTree->SetBranchAddress("pxv", &pxv);
   fTree->SetBranchAddress("pyv", &pyv);
@@ -85,13 +85,9 @@ std::vector<double> GenieGenerator::Rotate(Double_t x, Double_t y, Double_t z,
   // rotate around z-axis
   Double_t pxr = c * px1 - s * py;
   Double_t pyr = s * px1 + c * py;
-  std::vector<double> pout;
-  pout.push_back(pxr);
-  pout.push_back(pyr);
-  pout.push_back(pzr);
-  // cout << "Info GenieGenerator: rotated" << pout[0] << " " << pout[1] << " "
-  // << pout[2] << " " << x << " " << y << " " << z <<endl;
-  return pout;
+  // cout << "Info GenieGenerator: rotated" << pxr << " " << pyr << " "
+  // << pzr << " " << x << " " << y << " " << z <<endl;
+  return {pxr, pyr, pzr};
 }
 
 // -----   Destructor   ----------------------------------------------------
@@ -382,7 +378,6 @@ Bool_t GenieGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
   Double_t x = 0.;
   Double_t y = 0.;
   Double_t z = 0.;
-  Int_t count = 0;
   while (prob2int < gRandom->Uniform(0., 1.)) {
     // place x,y,z uniform along path
     z = gRandom->Uniform(start[2], end[2]);
@@ -396,7 +391,7 @@ Bool_t GenieGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
       // get local material at this point, to calculate probability that
       // interaction is at this point.
       TGeoNode* node = gGeoManager->FindNode(x, y, z);
-      TGeoMaterial* mat = 0;
+      TGeoMaterial* mat = nullptr;
       if (node && !gGeoManager->IsOutside()) {
         mat = node->GetVolume()->GetMaterial();
         // cout << "Info GenieGenerator: mat " <<  count << ", " <<
@@ -407,7 +402,6 @@ Bool_t GenieGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
           cout << "***WARNING*** GenieGenerator: prob2int > Maximum density????"
                << prob2int << " maxrho:" << mparam[7]
                << " material: " << mat->GetName() << endl;
-        count += 1;
       } else {
         prob2int = 0.;
       }

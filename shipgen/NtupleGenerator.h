@@ -5,25 +5,26 @@
 #ifndef SHIPGEN_NTUPLEGENERATOR_H_
 #define SHIPGEN_NTUPLEGENERATOR_H_
 
-#include "FairGenerator.h"
 #include "FairLogger.h"  // for FairLogger, MESSAGE_ORIGIN
+#include "Generator.h"
 #include "TROOT.h"
 #include "TTree.h"  // for TTree
 
 class FairPrimaryGenerator;
 
-class NtupleGenerator : public FairGenerator {
+class NtupleGenerator : public SHiP::Generator {
  public:
   /** default constructor **/
   NtupleGenerator();
 
   /** destructor **/
-  virtual ~NtupleGenerator();
+  ~NtupleGenerator() override;
 
   /** public method ReadEvent **/
-  Bool_t ReadEvent(FairPrimaryGenerator*);
-  virtual Bool_t Init(const char*, int);  //!
-  virtual Bool_t Init(const char*);       //!
+  using SHiP::Generator::Init;
+  Bool_t ReadEvent(FairPrimaryGenerator*) override;
+  Bool_t Init(const char*, int) override;
+  Bool_t Init(const char*) override;
   Int_t GetNevents();
 
  private:
@@ -37,7 +38,6 @@ class NtupleGenerator : public FairGenerator {
   FairLogger* fLogger;  //!   don't make it persistent, magic ROOT command
   int fNevents;
   int fn;
-  ClassDef(NtupleGenerator, 1);
 };
 
 #endif  // SHIPGEN_NTUPLEGENERATOR_H_ /* !PNDntGENERATOR_H */

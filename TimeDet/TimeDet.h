@@ -8,8 +8,7 @@
 #include <map>
 #include <vector>
 
-#include "FairDetector.h"
-#include "ISTLPointContainer.h"
+#include "Detector.h"
 #include "TLorentzVector.h"
 #include "TVector3.h"
 
@@ -17,7 +16,7 @@ class TimeDetPoint;
 class FairVolume;
 class TClonesArray;
 
-class TimeDet : public FairDetector, public ISTLPointContainer {
+class TimeDet : public SHiP::Detector<TimeDetPoint> {
  public:
   /**      Name :  Detector Name
    *       Active: kTRUE for active detectors (ProcessHits() will be called)
@@ -28,28 +27,10 @@ class TimeDet : public FairDetector, public ISTLPointContainer {
   /** default constructor */
   TimeDet();
 
-  /** destructor */
-  virtual ~TimeDet();
-
-  /** Initialization of the detector is done here */
-  virtual void Initialize();
-
   /**   this method is called for each step during simulation
    *    (see FairMCApplication::Stepping())
    */
-  virtual Bool_t ProcessHits(FairVolume* v = 0);
-
-  /**       Registers the produced collections in FAIRRootManager. */
-  virtual void Register();
-
-  /** Gets the produced collections */
-  virtual TClonesArray* GetCollection(Int_t iColl) const;
-
-  /** Update track indices in point collection (for std::vector migration) */
-  void UpdatePointTrackIndices(const std::map<Int_t, Int_t>& indexMap);
-
-  /** has to be called after each event to reset the containers */
-  virtual void Reset();
+  Bool_t ProcessHits(FairVolume* v = 0) override;
 
   /** Sets detector position along z */
   void SetZposition(Double_t z) { fzPos = z; }
@@ -67,33 +48,9 @@ class TimeDet : public FairDetector, public ISTLPointContainer {
   double GetZBar(int ir, int ic) const;
 
   /**  Create the detector geometry */
-  void ConstructGeometry();
-
-  /**      This method is an example of how to add your own point
-   *       of type TimeDetPoint to the clones array
-   */
-  TimeDetPoint* AddHit(Int_t trackID, Int_t detID, TVector3 pos, TVector3 mom,
-                       Double_t time, Double_t length, Double_t eLoss,
-                       Int_t pdgCode, TVector3 Lpos, TVector3 Lmom);
-
-  virtual void EndOfEvent();
-  virtual void FinishPrimary() { ; }
-  virtual void FinishRun() { ; }
-  virtual void BeginPrimary() { ; }
-  virtual void PostTrack() { ; }
-  virtual void PreTrack() { ; }
-  virtual void BeginEvent() { ; }
+  void ConstructGeometry() override;
 
  private:
-  /** Track information to be stored until the track leaves the active volume.*/
-  Int_t fTrackID;       //!  track index
-  Int_t fVolumeID;      //!  volume id
-  TLorentzVector fPos;  //!  position at entrance
-  TLorentzVector fMom;  //!  momentum at entrance
-  Double_t fTime;       //!  time
-  Double_t fLength;     //!  length
-  Double_t fELoss;      //!  energy loss
-
   /** Detector parameters.*/
   Double_t fzPos;  //!  z-position of veto station
 
@@ -117,16 +74,10 @@ class TimeDet : public FairDetector, public ISTLPointContainer {
   Double_t fxOv;  //! Overlap along x
   Double_t fyOv;  //! Overlap along y
 
-  TGeoVolume* fDetector;  // Timing detector object
+  TimeDet(const TimeDet&) = delete;
+  TimeDet& operator=(const TimeDet&) = delete;
 
-  /** container for data points */
-  std::vector<TimeDetPoint>* fTimeDetPoints;
-
-  TimeDet(const TimeDet&);
-  TimeDet& operator=(const TimeDet&);
-  Int_t InitMedium(const char* name);
-
-  ClassDef(TimeDet, 3)
+  ClassDefOverride(TimeDet, 5)
 };
 
 #endif  // TIMEDET_TIMEDET_H_

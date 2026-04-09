@@ -4,8 +4,7 @@
 
 #include "strawtubesHit.h"
 
-#include <math.h>
-
+#include <cmath>
 #include <iostream>
 #include <tuple>
 
@@ -23,17 +22,22 @@
 using std::cout;
 using std::endl;
 
-Double_t speedOfLight =
-    TMath::C() * 100. / 1000000000.0;  // from m/sec to cm/ns
+namespace {
+constexpr Double_t speedOfLight = 29.9792458;  // TMath::C() * 100 / 1e9, cm/ns
+}  // namespace
 // -----   Default constructor   -------------------------------------------
-strawtubesHit::strawtubesHit() : ShipHit() { flag = true; }
+strawtubesHit::strawtubesHit() : SHiP::DetectorHit() {}
 // -----   Standard constructor   ------------------------------------------
-strawtubesHit::strawtubesHit(Int_t detID, Float_t tdc) : ShipHit(detID, tdc) {
-  flag = true;
-}
+strawtubesHit::strawtubesHit(Int_t detID, Float_t tdc)
+    : SHiP::DetectorHit(detID, tdc) {}
 // -----   constructor from strawtubesPoint
 // ------------------------------------------
-strawtubesHit::strawtubesHit(strawtubesPoint* p, Double_t t0) : ShipHit() {
+strawtubesHit::strawtubesHit(strawtubesPoint* p, Double_t t0)
+    : SHiP::DetectorHit() {
+  if (!p) {
+    LOG(error) << "strawtubesHit: null strawtubesPoint pointer";
+    return;
+  }
   TVector3 start = TVector3();
   TVector3 stop = TVector3();
   fDetectorID = p->GetDetectorID();
@@ -45,13 +49,10 @@ strawtubesHit::strawtubesHit(strawtubesPoint* p, Double_t t0) : ShipHit() {
   Double_t t_drift =
       fabs(gRandom->Gaus(p->dist2Wire(), sigma_spatial)) / v_drift;
   fdigi = t0 + p->GetTime() + t_drift + (stop[0] - p->GetX()) / speedOfLight;
-  flag = true;
 }
 
 // -------------------------------------------------------------------------
 
-// -----   Destructor   ----------------------------------------------------
-strawtubesHit::~strawtubesHit() {}
 // -------------------------------------------------------------------------
 
 Int_t strawtubesHit::GetStationNumber() const {

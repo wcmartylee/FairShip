@@ -4,7 +4,7 @@
 
 #include "DPPythia8Generator.h"
 
-#include <math.h>
+#include <cmath>
 
 #include "FairPrimaryGenerator.h"
 #include "Pythia8/Pythia.h"
@@ -30,8 +30,7 @@ DPPythia8Generator::DPPythia8Generator() {
   fpbremPDF = 0;
   fdy = kFALSE;
   fDPminM = 0.5;
-  fextFile = "";
-  fInputFile = NULL;
+  fInputFile = nullptr;
   fnRetries = 0;
   fnDPtot = 0;
   fShipEventNr = 0;
@@ -42,17 +41,12 @@ DPPythia8Generator::DPPythia8Generator() {
 
 // -----   Default constructor   -------------------------------------------
 Bool_t DPPythia8Generator::Init() {
-#if PYTHIA_VERSION_INTEGER >= 8300
   if (fUseRandom1) fRandomEngine = std::make_shared<PyTr1Rng>();
   if (fUseRandom3) fRandomEngine = std::make_shared<PyTr3Rng>();
-#else
-  if (fUseRandom1) fRandomEngine = new PyTr1Rng();
-  if (fUseRandom3) fRandomEngine = new PyTr3Rng();
-#endif
   fPythia->setRndmEnginePtr(fRandomEngine);
   // fPythiaHadDecay->setRndmEnginePtr(fRandomEngine);
   fn = 0;
-  if (fextFile && *fextFile) {
+  if (fextFile) {
     /*if (0 == strncmp("/eos",fextFile,4) ) {
      if (0 == strncmp("/eos",fextFile,4) ) {
      TString tmp = gSystem->Getenv("EOSSHIP");
@@ -65,8 +59,9 @@ Bool_t DPPythia8Generator::Init() {
       return kFALSE; }
     }else{
       fLogger->Info(MESSAGE_ORIGIN,"Open external file with charm or beauty
-    hadrons: %s",fextFile); fInputFile  = new TFile(fextFile); if (!fInputFile)
-    { fLogger->Fatal(MESSAGE_ORIGIN, "Error opening input file"); return kFALSE;
+    hadrons: %s",fextFile); fInputFile  = new TFile(fextFile->c_str()); if
+    (!fInputFile) { fLogger->Fatal(MESSAGE_ORIGIN, "Error opening input file");
+    return kFALSE;
     }
     }
     if (fInputFile->IsZombie()) {
@@ -177,7 +172,7 @@ Bool_t DPPythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
       dec_chain;  // pythia indices of the particles to be stored on the stack
   std::vector<int> dpvec;  // pythia indices of DP particles
   do {
-    if (fextFile && *fextFile) {
+    if (fextFile) {
       // take charm or beauty hadron from external file
       // correct for too much Ds produced by pythia6
       /*bool x = true;
@@ -297,7 +292,7 @@ Bool_t DPPythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
           Rsq = dx * dx + dy * dy;
         }
       }
-      if (fextFile && *fextFile) {
+      if (fextFile) {
         // take grand mother particle from input file, to know if primary or
         // secondary production
         // cpg->AddTrack((Int_t)mid[0],mpx[0],mpy[0],mpz[0],xm/cm+dx,ym/cm+dy,zm/cm,-1,false,mE[0],0.,1.);
@@ -405,7 +400,7 @@ Bool_t DPPythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
     px = fPythia->event[k].px();
     py = fPythia->event[k].py();
     e = fPythia->event[k].e();
-    if (fextFile && *fextFile) {
+    if (fextFile) {
       im += 1;
     };
     cpg->AddTrack((Int_t)fPythia->event[k].id(), px, py, pz, xS / cm, yS / cm,

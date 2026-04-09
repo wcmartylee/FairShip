@@ -10,8 +10,6 @@
 // #include "FairGeoMedia.h"
 // #include "FairGeoBuilder.h"
 
-#include <stddef.h>  // for NULL
-
 #include <iosfwd>    // for ostream
 #include <iostream>  // for operator<<, basic_ostream, etc
 
@@ -26,7 +24,8 @@
 #include "TObjArray.h"  // for TObjArray
 #include "TString.h"    // for TString
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 ShipTAUMagneticSpectrometer::~ShipTAUMagneticSpectrometer() {}
 

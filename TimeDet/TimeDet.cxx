@@ -17,12 +17,12 @@
 #include "FairGeoMedia.h"
 #include "FairGeoNode.h"
 #include "FairGeoVolume.h"
-#include "FairLink.h"
 #include "FairRootManager.h"
 #include "FairRun.h"
 #include "FairRuntimeDb.h"
 #include "FairVolume.h"
 #include "ShipDetectorList.h"
+#include "ShipGeoUtil.h"
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
@@ -40,15 +40,7 @@ using std::cout;
 using std::endl;
 
 TimeDet::TimeDet()
-    : FairDetector("TimeDet", kTRUE, kTimeDet),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      //
+    : Detector("TimeDet", kTRUE, kTimeDet),
       fzPos(0),
       fxSize(450),
       fySize(650),
@@ -60,11 +52,7 @@ TimeDet::TimeDet()
       fNCol(3),
       fNRow(148),
       fxCenter(0),
-      fyCenter(0),
-      //
-      fDetector(0),
-      //
-      fTimeDetPoints(nullptr) {
+      fyCenter(0) {
   fNBars = fNCol * fNRow;
   if (fNCol > 1)
     fxOv = (fxBar * fNCol - fxSize) / static_cast<double>(fNCol - 1);
@@ -77,14 +65,7 @@ TimeDet::TimeDet()
 }
 
 TimeDet::TimeDet(const char* name, Bool_t active)
-    : FairDetector(name, active, kTimeDet),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
+    : Detector(name, active, kTimeDet),
       //
       fzPos(0),
       fxSize(450),
@@ -97,11 +78,7 @@ TimeDet::TimeDet(const char* name, Bool_t active)
       fNCol(3),
       fNRow(148),
       fxCenter(0),
-      fyCenter(0),
-      //
-      fDetector(0),
-      //
-      fTimeDetPoints(nullptr) {
+      fyCenter(0) {
   fNBars = fNCol * fNRow;
   if (fNCol > 1)
     fxOv = (fxBar * fNCol - fxSize) / static_cast<double>(fNCol - 1);
@@ -111,35 +88,6 @@ TimeDet::TimeDet(const char* name, Bool_t active)
     fyOv = (fyBar * fNRow - fySize) / static_cast<double>(fNRow - 1);
   else
     fyOv = 0;
-}
-
-void TimeDet::Initialize() { FairDetector::Initialize(); }
-
-TimeDet::~TimeDet() {
-  if (fTimeDetPoints) {
-    fTimeDetPoints->clear();
-    delete fTimeDetPoints;
-  }
-}
-
-Int_t TimeDet::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != NULL) return ShipMedium->getMediumIndex();
-
-  return geoBuild->createMedium(ShipMedium);
-
-  return 0;
 }
 
 Bool_t TimeDet::ProcessHits(FairVolume* vol) {
@@ -164,7 +112,7 @@ Bool_t TimeDet::ProcessHits(FairVolume* vol) {
     }
 
     fTrackID = gMC->GetStack()->GetCurrentTrackNumber();
-
+    fEventID = gMC->CurrentEvent();
     Int_t uniqueId;
     gMC->CurrentVolID(uniqueId);
     if (uniqueId > 1000000)  // Solid scintillator case
@@ -187,7 +135,7 @@ Bool_t TimeDet::ProcessHits(FairVolume* vol) {
     // cout << uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean <<
     // "): " << gMC->CurrentVolName() << endl;
 
-    AddHit(fTrackID, uniqueId, TVector3(xmean, ymean, zmean),
+    AddHit(fEventID, fTrackID, uniqueId, TVector3(xmean, ymean, zmean),
            TVector3(fMom.Px(), fMom.Py(), fMom.Pz()), fTime, fLength, fELoss,
            pdgCode, TVector3(Pos.X(), Pos.Y(), Pos.Z()),
            TVector3(Mom.Px(), Mom.Py(), Mom.Pz()));
@@ -200,39 +148,10 @@ Bool_t TimeDet::ProcessHits(FairVolume* vol) {
   return kTRUE;
 }
 
-void TimeDet::EndOfEvent() { fTimeDetPoints->clear(); }
-
-void TimeDet::Register() {
-  /** This will create a branch in the output tree called
-      TimeDetPoint, setting the last parameter to kFALSE means:
-      this collection will not be written to the file, it will exist
-      only during the simulation.
-  */
-
-  fTimeDetPoints = new std::vector<TimeDetPoint>();
-  FairRootManager::Instance()->RegisterAny("TimeDetPoint", fTimeDetPoints,
-                                           kTRUE);
-}
-
-TClonesArray* TimeDet::GetCollection(Int_t iColl) const { return nullptr; }
-
-void TimeDet::UpdatePointTrackIndices(const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fTimeDetPoints) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
-}
-
-void TimeDet::Reset() { fTimeDetPoints->clear(); }
-
 void TimeDet::ConstructGeometry() {
   TGeoVolume* top = gGeoManager->GetTopVolume();
 
-  InitMedium("polyvinyltoluene");
+  ShipGeo::InitMedium("polyvinyltoluene");
   TGeoMedium* Scint = gGeoManager->GetMedium("polyvinyltoluene");
 
   ///////////////////////////////////////////////////////
@@ -264,15 +183,6 @@ void TimeDet::ConstructGeometry() {
   ///////////////////////////////////////////////////////
 
   return;
-}
-
-TimeDetPoint* TimeDet::AddHit(Int_t trackID, Int_t detID, TVector3 pos,
-                              TVector3 mom, Double_t time, Double_t length,
-                              Double_t eLoss, Int_t pdgCode, TVector3 Lpos,
-                              TVector3 Lmom) {
-  fTimeDetPoints->emplace_back(trackID, detID, pos, mom, time, length, eLoss,
-                               pdgCode, Lpos, Lmom);
-  return &(fTimeDetPoints->back());
 }
 
 void TimeDet::GetBarRowCol(int ib, int& irow, int& icol) const {

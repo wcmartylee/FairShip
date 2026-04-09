@@ -85,15 +85,17 @@ below "N" is the line number of the event,
 #ifndef SHIPGEN_PYTHIA6GENERATOR_H_
 #define SHIPGEN_PYTHIA6GENERATOR_H_
 
-#include "FairGenerator.h"
+#include "Generator.h"
 
 class TDatabasePDG;
 class FairPrimaryGenerator;
 
-class Pythia6Generator : public FairGenerator {
+class Pythia6Generator : public SHiP::Generator {
  public:
   /** Default constructor without arguments should not be used. **/
   Pythia6Generator();
+
+  using SHiP::Generator::Init;
 
   /** Standard constructor.
    ** @param fileName The input file name
@@ -101,13 +103,13 @@ class Pythia6Generator : public FairGenerator {
   explicit Pythia6Generator(const char* fileName);
 
   /** Destructor. **/
-  virtual ~Pythia6Generator();
+  ~Pythia6Generator() override;
 
   /** Reads on event from the input file and pushes the tracks onto
    ** the stack. Abstract method in base class.
    ** @param primGen  pointer to the CbmrimaryGenerator
    **/
-  virtual Bool_t ReadEvent(FairPrimaryGenerator* primGen);
+  Bool_t ReadEvent(FairPrimaryGenerator* primGen) override;
 
   void SetVerbose(Int_t verb) { fVerbose = verb; };
 
@@ -124,8 +126,6 @@ class Pythia6Generator : public FairGenerator {
   /** PDG data base */
 
   //  TDatabasePDG *fPDG; //!
-
-  ClassDef(Pythia6Generator, 1);
 };
 
 #endif  // SHIPGEN_PYTHIA6GENERATOR_H_

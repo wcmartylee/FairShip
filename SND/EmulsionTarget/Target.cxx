@@ -12,12 +12,11 @@
 
 #include "Target.h"
 
-#include <stddef.h>  // for NULL
-#include <string.h>
-
+#include <cstring>
 #include <iosfwd>    // for ostream
 #include <iostream>  // for operator<<, basic_ostream,etc
 #include <tuple>
+#include <vector>
 
 #include "FairGeoBuilder.h"
 #include "FairGeoInterface.h"
@@ -27,17 +26,15 @@
 #include "FairGeoNode.h"
 #include "FairGeoTransform.h"
 #include "FairGeoVolume.h"
-#include "FairLink.h"
-#include "FairRootManager.h"
 #include "FairRun.h"  // for FairRun
 #include "FairRun.h"
 #include "FairRuntimeDb.h"  // for FairRuntimeDb
 #include "FairRuntimeDb.h"
 #include "FairVolume.h"
 #include "ShipDetectorList.h"
+#include "ShipGeoUtil.h"
 #include "ShipStack.h"
 #include "ShipUnit.h"
-#include "TClonesArray.h"
 #include "TGeoArb8.h"
 #include "TGeoBBox.h"
 #include "TGeoCompositeShape.h"
@@ -61,58 +58,12 @@
 using std::cout;
 using std::endl;
 
-using namespace ShipUnit;
-
-Target::Target()
-    : FairDetector("Target", "", kTRUE),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fTargetPoints(nullptr) {}
+Target::Target() : Detector("Target", kTRUE, ktauTarget) {}
 
 Target::Target(const char* name, const Double_t Ydist, Bool_t Active,
-               const char* Title)
-    : FairDetector(name, true, ktauTarget),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fTargetPoints(nullptr) {
+               const char* /*Title*/)
+    : Detector(name, Active, ktauTarget) {
   Ydistance = Ydist;
-}
-
-Target::~Target() {
-  if (fTargetPoints) {
-    fTargetPoints->clear();
-    delete fTargetPoints;
-  }
-}
-
-void Target::Initialize() { FairDetector::Initialize(); }
-
-// -----   Private method InitMedium
-Int_t Target::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != NULL) return ShipMedium->getMediumIndex();
-  return geoBuild->createMedium(ShipMedium);
 }
 
 //--------------Options for detector construction
@@ -216,13 +167,13 @@ void Target::SetHpTParam(Int_t n, Double_t dd,
 void Target::ConstructGeometry() {
   // cout << "Design = " << fDesign << endl;
 
-  InitMedium("air");
+  ShipGeo::InitMedium("air");
   TGeoMedium* air = gGeoManager->GetMedium("air");
 
-  InitMedium("PlasticBase");
+  ShipGeo::InitMedium("PlasticBase");
   TGeoMedium* PBase = gGeoManager->GetMedium("PlasticBase");
 
-  InitMedium("NuclearEmulsion");
+  ShipGeo::InitMedium("NuclearEmulsion");
   TGeoMedium* NEmu = gGeoManager->GetMedium("NuclearEmulsion");
 
   TGeoMaterial* NEmuMat =
@@ -250,7 +201,7 @@ void Target::ConstructGeometry() {
 
   TGeoMedium* Emufilm = new TGeoMedium("EmulsionFilm", 100, emufilmmixture);
 
-  InitMedium("tungsten");
+  ShipGeo::InitMedium("tungsten");
   TGeoMedium* tungsten = gGeoManager->GetMedium("tungsten");
 
   Int_t NPlates = number_of_plates;  // Number of doublets emulsion + Pb
@@ -412,11 +363,10 @@ Bool_t Target::ProcessHits(FairVolume* vol) {
 
     // cout<< "detID = " << detID << endl;
     Int_t MaxLevel = gGeoManager->GetLevel();
-    const Int_t MaxL = MaxLevel;
-    // cout << "MaxLevel = " << MaxL << endl;
+    // cout << "MaxLevel = " << MaxLevel << endl;
     // cout << gMC->CurrentVolPath()<< endl;
 
-    Int_t motherV[MaxL];
+    std::vector<Int_t> motherV(MaxLevel);
     Bool_t EmTop = false;
     Int_t NPlate = 0;
     const char* name;
@@ -435,7 +385,7 @@ Bool_t Target::ProcessHits(FairVolume* vol) {
 
     Int_t NWall = 0, NColumn = 0, NRow = 0;
 
-    for (Int_t i = 0; i < MaxL; i++) {
+    for (Int_t i = 0; i < MaxLevel; i++) {
       motherV[i] = gGeoManager->GetMother(i)->GetNumber();
       const char* mumname = gMC->CurrentVolOffName(i);
       if (motherV[0] == 1 && motherV[0] != detID) {
@@ -510,42 +460,4 @@ std::tuple<Int_t, Int_t, Int_t, Int_t, Bool_t> Target::DecodeBrickID(
   Bool_t EmTop = static_cast<Bool_t>(divt_E1.rem);
 
   return std::make_tuple(NWall, NRow, NColumn, NPlate, EmTop);
-}
-
-void Target::EndOfEvent() { fTargetPoints->clear(); }
-
-void Target::Register() {
-  /** This will create a branch in the output tree called
-      TargetPoint, setting the last parameter to kFALSE means:
-      this collection will not be written to the file, it will exist
-      only during the simulation.
-  */
-
-  if (!fTargetPoints) {
-    fTargetPoints = new std::vector<TargetPoint>();
-  }
-  FairRootManager::Instance()->RegisterAny("TargetPoint", fTargetPoints, kTRUE);
-}
-
-TClonesArray* Target::GetCollection(Int_t iColl) const { return nullptr; }
-
-void Target::UpdatePointTrackIndices(const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fTargetPoints) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
-}
-
-void Target::Reset() { fTargetPoints->clear(); }
-
-TargetPoint* Target::AddHit(Int_t trackID, Int_t detID, TVector3 pos,
-                            TVector3 mom, Double_t time, Double_t length,
-                            Double_t eLoss, Int_t pdgCode) {
-  fTargetPoints->emplace_back(trackID, detID, pos, mom, time, length, eLoss,
-                              pdgCode);
-  return &(fTargetPoints->back());
 }

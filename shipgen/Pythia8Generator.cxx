@@ -5,7 +5,8 @@
 #include "Pythia8Generator.h"
 
 #include <TGeoManager.h>
-#include <math.h>
+
+#include <cmath>
 
 #include "FairPrimaryGenerator.h"
 #include "HNLPythia8Generator.h"
@@ -29,8 +30,7 @@ Pythia8Generator::Pythia8Generator() {
   fId = 2212;         // proton
   fMom = 400;         // proton
   fFDs = 7.7 / 10.4;  // correction for Pythia6 to match measured Ds production
-  fextFile = "";
-  fInputFile = NULL;
+  fInputFile = nullptr;
   targetName = "";
   xOff = 0;
   yOff = 0;
@@ -41,17 +41,12 @@ Pythia8Generator::Pythia8Generator() {
 
 // -----   Default constructor   -------------------------------------------
 Bool_t Pythia8Generator::Init() {
-#if PYTHIA_VERSION_INTEGER >= 8300
   if (fUseRandom1) fRandomEngine = std::make_shared<PyTr1Rng>();
   if (fUseRandom3) fRandomEngine = std::make_shared<PyTr3Rng>();
-#else
-  if (fUseRandom1) fRandomEngine = new PyTr1Rng();
-  if (fUseRandom3) fRandomEngine = new PyTr3Rng();
-#endif
-  if (fextFile && *fextFile) {
-    fInputFile = TFile::Open(fextFile);
+  if (fextFile) {
+    fInputFile = TFile::Open(fextFile->c_str());
     LOG(info) << "Open external file with charm or beauty hadrons: "
-              << fextFile;
+              << *fextFile;
     if (!fInputFile) {
       LOG(fatal) << "Error opening input file.";
       return kFALSE;
@@ -92,13 +87,8 @@ Bool_t Pythia8Generator::Init() {
     Int_t n = 1;
     while (n != 0) {
       n = fPythia->particleData.nextId(n);
-#if PYTHIA_VERSION_INTEGER >= 8300
       std::shared_ptr<Pythia8::ParticleDataEntry> p =
           fPythia->particleData.particleDataEntryPtr(n);
-#else
-      Pythia8::ParticleDataEntry* p =
-          fPythia->particleData.particleDataEntryPtr(n);
-#endif
       if (p->tau0() > 1) {
         std::string particle = std::to_string(n) + ":mayDecay = false";
         fPythia->readString(particle);
@@ -205,7 +195,6 @@ Bool_t Pythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
     Double_t prob2int = -1.;
     Double_t rndm = 0.;
     Double_t sigma;
-    Int_t count = 0;
     Double_t zinterStart = start[2];
     // simulate more downstream interaction points for interactions down in the
     // cascade
@@ -217,7 +206,7 @@ Bool_t Pythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
       // if (!subprocCodes[nI]<90){continue;}  //if process is not inelastic, go
       // to next. Changed by taking now collision length
       prob2int = -1.;
-      Int_t intLengthFactor = 1;  // for nucleons
+      Double_t intLengthFactor = 1;  // for nucleons
       if (TMath::Abs(ancestors[nI]) < 1000) {
         intLengthFactor = 1.16;
       }  // for mesons
@@ -233,7 +222,7 @@ Bool_t Pythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
             mparam[8] * intLengthFactor *
             1.7;  // 1.7 = interaction length / collision length from PDG Tables
         TGeoNode* node = gGeoManager->FindNode(point[0], point[1], point[2]);
-        TGeoMaterial* mat = 0;
+        TGeoMaterial* mat = nullptr;
         if (node && !gGeoManager->IsOutside()) {
           mat = node->GetVolume()->GetMaterial();
           Double_t n = mat->GetDensity() / mat->GetA();
@@ -245,7 +234,6 @@ Bool_t Pythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
           prob2int = 0.;
         }
         rndm = gRandom->Uniform(0., 1.);
-        count += 1;
       }
       zinterStart = zinter;
     }

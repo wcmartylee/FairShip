@@ -4,7 +4,7 @@
 
 #include "HNLPythia8Generator.h"
 
-#include <math.h>
+#include <cmath>
 
 #include "BeamSmearingUtils.h"
 #include "FairPrimaryGenerator.h"
@@ -29,8 +29,7 @@ HNLPythia8Generator::HNLPythia8Generator() {
   fFDs = 7.7 / 10.4;  // correction for Pythia6 to match measured Ds production
   fsmearBeam = 8 * mm;  // default value for smearing beam (8 mm)
   fPaintBeam = 5 * cm;  // default value for painting beam (5 cm)
-  fextFile = "";
-  fInputFile = NULL;
+  fInputFile = nullptr;
   fnRetries = 0;
   fShipEventNr = 0;
   fPythia = new Pythia8::Pythia();
@@ -42,19 +41,14 @@ Bool_t HNLPythia8Generator::Init() {
   if (debug) {
     List(9900015);
   }
-#if PYTHIA_VERSION_INTEGER >= 8300
   if (fUseRandom1) fRandomEngine = std::make_shared<PyTr1Rng>();
   if (fUseRandom3) fRandomEngine = std::make_shared<PyTr3Rng>();
-#else
-  if (fUseRandom1) fRandomEngine = new PyTr1Rng();
-  if (fUseRandom3) fRandomEngine = new PyTr3Rng();
-#endif
   fPythia->setRndmEnginePtr(fRandomEngine);
   fn = 0;
-  if (fextFile && *fextFile) {
-    fInputFile = TFile::Open(fextFile);
+  if (fextFile) {
+    fInputFile = TFile::Open(fextFile->c_str());
     LOG(info) << "Open external file with charm or beauty hadrons: "
-              << fextFile;
+              << *fextFile;
     if (!fInputFile) {
       LOG(fatal) << "Error opening input file.";
       return kFALSE;
@@ -115,7 +109,7 @@ Bool_t HNLPythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
       dec_chain;  // pythia indices of the particles to be stored on the stack
   std::vector<int> hnls;  // pythia indices of HNL particles
   do {
-    if (fextFile && *fextFile) {
+    if (fextFile) {
       // take charm or beauty hadron from external file
       // correct for too much Ds produced by pythia6
       bool x = true;
@@ -193,7 +187,7 @@ Bool_t HNLPythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
       tm = fPythia->event[im].tProd();
       // foresee finite beam size
       auto [dx, dy] = CalculateBeamOffset(fsmearBeam, fPaintBeam);
-      if (fextFile && *fextFile) {
+      if (fextFile) {
         // take grand mother particle from input file, to know if primary or
         // secondary production
         cpg->AddTrack((Int_t)mid[0], mpx[0], mpy[0], mpz[0], xm / cm + dx / cm,
@@ -269,7 +263,7 @@ Bool_t HNLPythia8Generator::ReadEvent(FairPrimaryGenerator* cpg) {
     px = fPythia->event[k].px();
     py = fPythia->event[k].py();
     e = fPythia->event[k].e();
-    if (fextFile && *fextFile) {
+    if (fextFile) {
       im += 1;
     }
     cpg->AddTrack((Int_t)fPythia->event[k].id(), px, py, pz, xS / cm, yS / cm,

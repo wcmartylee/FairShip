@@ -4,8 +4,7 @@
 
 #include "splitcalHit.h"
 
-#include <math.h>
-
+#include <cmath>
 #include <iostream>
 
 #include "FairLogger.h"
@@ -23,23 +22,22 @@
 #include "TRandom3.h"
 #include "TVector3.h"
 #include "splitcal.h"
+#include "splitcalPoint.h"
 using std::cout;
 using std::endl;
 
-Double_t speedOfLight =
-    TMath::C() * 100. / 1000000000.0;  // from m/sec to cm/ns
+namespace {
+constexpr Double_t speedOfLight = 29.9792458;  // TMath::C() * 100 / 1e9, cm/ns
+}  // namespace
 // -----   Default constructor   -------------------------------------------
-splitcalHit::splitcalHit() : ShipHit() { flag = true; }
+splitcalHit::splitcalHit() : SHiP::DetectorHit() {}
 // -----   Standard constructor   ------------------------------------------
-splitcalHit::splitcalHit(Int_t detID, Float_t tdc) : ShipHit(detID, tdc) {
-  flag = true;
-}
+splitcalHit::splitcalHit(Int_t detID, Float_t tdc)
+    : SHiP::DetectorHit(detID, tdc) {}
 // -----   constructor from vector of splitcalPoints
 // ------------------------------------------
 splitcalHit::splitcalHit(const std::vector<splitcalPoint>& points, Double_t t0)
-    : ShipHit() {
-  flag = true;
-
+    : SHiP::DetectorHit() {
   // Empty vector check
   if (points.empty()) {
     LOG(error)
@@ -59,9 +57,7 @@ splitcalHit::splitcalHit(const std::vector<splitcalPoint>& points, Double_t t0)
     pointE += point.GetEnergyLoss();
   }
 
-  // fdigi = t0 + t;
-  fdigi = t0;
-  // SetDigi(SetTimeRes(fdigi));
+  fdigi = t0 + firstPoint.GetTime();
   SetDetectorID(detID);
 
   TGeoNavigator* navigator = gGeoManager->GetCurrentNavigator();
@@ -90,28 +86,6 @@ splitcalHit::splitcalHit(const std::vector<splitcalPoint>& points, Double_t t0)
 
   double zPassiveHalfLength = box->GetDZ();
 
-  // std::cout<< "----------------------"<<std::endl;
-  // std::cout<< "-- pointX = " << pointX << std::endl;
-  // std::cout<< "-- pointY = " << pointY << std::endl;
-  // std::cout<< "-- pointZ = " << pointZ << std::endl;
-  // std::cout<< "-- detID = " << detID << std::endl;
-  // std::cout<< "-- stripName = " << stripName << std::endl;
-  // std::cout<< "-- isPrec = " << isPrec << std::endl;
-  // std::cout<< "-- nL = " << nL << std::endl;
-  // std::cout<< "-- nMx = " << nMx << std::endl;
-  // std::cout<< "-- nMy = " << nMy << std::endl;
-  // std::cout<< "-- nS = " << nS << std::endl;
-  // std::cout<< "-- stripCoordinatesLocal[0] = " << stripCoordinatesLocal[0] <<
-  // std::endl; std::cout<< "-- stripCoordinatesLocal[1] = " <<
-  // stripCoordinatesLocal[1] << std::endl; std::cout<< "--
-  // stripCoordinatesLocal[2] = " << stripCoordinatesLocal[2] << std::endl;
-  // std::cout<< "-- stripCoordinatesMaster[0] = " << stripCoordinatesMaster[0]
-  // << std::endl; std::cout<< "-- stripCoordinatesMaster[1] = " <<
-  // stripCoordinatesMaster[1] << std::endl; std::cout<< "--
-  // stripCoordinatesMaster[2] = " << stripCoordinatesMaster[2] << std::endl;
-
-  // TGeoNode* check = navigator->FindNode(pointX,pointY,pointZ);
-
   SetEnergy(pointE);
   if (isPrec == 1)
     SetXYZ(pointX, pointY, stripCoordinatesMaster[2]);
@@ -122,7 +96,7 @@ splitcalHit::splitcalHit(const std::vector<splitcalPoint>& points, Double_t t0)
                2 * (zHalfLength + zPassiveHalfLength));
 }
 
-std::string splitcalHit::GetPaddedString(int& id) {
+std::string splitcalHit::GetPaddedString(int id) {
   // zero padded string
   int totalLength = 9;
   std::string stringID = std::to_string(id);
@@ -132,9 +106,8 @@ std::string splitcalHit::GetPaddedString(int& id) {
   return encodedID;
 }
 
-std::string splitcalHit::GetDetectorElementName(int& id) {
+std::string splitcalHit::GetDetectorElementName(int id) {
   std::string encodedID = GetPaddedString(id);
-  // std::cout << "-- encodedID = " << encodedID <<std::endl;
   int isPrec, nL, nMx, nMy, nS;
   Decoder(encodedID, isPrec, nL, nMx, nMy, nS);
 
@@ -153,13 +126,13 @@ std::string splitcalHit::GetDetectorElementName(int& id) {
     SetIsY(false);
   }
   name = name + std::to_string(id);
-  // std::cout << "--GetDetectorElementName - name  = " << name <<std::endl;
 
   return name;
 }
 
-void splitcalHit::Decoder(std::string& encodedID, int& isPrecision, int& nLayer,
-                          int& nModuleX, int& nModuleY, int& nStrip) {
+void splitcalHit::Decoder(const std::string& encodedID, int& isPrecision,
+                          int& nLayer, int& nModuleX, int& nModuleY,
+                          int& nStrip) {
   std::string substring;
 
   substring = encodedID.substr(0, 1);
@@ -178,16 +151,12 @@ void splitcalHit::Decoder(std::string& encodedID, int& isPrecision, int& nLayer,
   nStrip = atoi(substring.c_str());
 }
 
-void splitcalHit::Decoder(int& id, int& isPrecision, int& nLayer, int& nModuleX,
+void splitcalHit::Decoder(int id, int& isPrecision, int& nLayer, int& nModuleX,
                           int& nModuleY, int& nStrip) {
   std::string encodedID = GetPaddedString(id);
   Decoder(encodedID, isPrecision, nLayer, nModuleX, nModuleY, nStrip);
 }
 
-// -------------------------------------------------------------------------
-
-// -----   Destructor   ----------------------------------------------------
-splitcalHit::~splitcalHit() {}
 // -------------------------------------------------------------------------
 
 // -----   Public method Print   -------------------------------------------

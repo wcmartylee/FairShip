@@ -36,9 +36,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 if args.testing_code:
-    print(
-        "test code, output file name overwritten as: muonsProduction_wsoft_Tr_test.root"
-    )
+    print("test code, output file name overwritten as: muonsProduction_wsoft_Tr_test.root")
     args.outputfile = "muonsProduction_wsoft_Tr_test.root"
     selectedmuons = "SelectedMuonsTr_test.txt"
 else:
@@ -47,17 +45,13 @@ else:
 path = args.path
 logging.info(f"Path to MuonBackground : {path}")
 
-fsel = open(selectedmuons, "w")
+fsel = open(selectedmuons, "w")  # noqa: SIM115
 csvwriter = csv.writer(fsel)
 
 output_file = r.TFile.Open(args.outputfile, "recreate")
-output_tree = r.TTree(
-    "MuonAndSoftInteractions", "Muon information and soft interaction tracks"
-)
+output_tree = r.TTree("MuonAndSoftInteractions", "Muon information and soft interaction tracks")
 
-imuondata = r.TVectorD(
-    10
-)  # 10 values: pid, px, py, pz, x, y, z, weight,time_of_hit,nmuons_in_event
+imuondata = r.TVectorD(10)  # 10 values: pid, px, py, pz, x, y, z, weight,time_of_hit,nmuons_in_event
 output_tree.Branch("imuondata", imuondata)
 
 track_array = r.TObjArray()
@@ -90,12 +84,10 @@ h["n_muon"] = r.TH2I(
     0.0,
     6,
 )
-h["n_softtracks"] = r.TH1I(
-    "n_softtracks", "Number of soft tracks per muon;;(unweighted)", 200, 0, 2000
-)
+h["n_softtracks"] = r.TH1I("n_softtracks", "Number of soft tracks per muon;;(unweighted)", 200, 0, 2000)
 
 
-def printMCTrack(n, MCTrack):
+def printMCTrack(n: int, MCTrack) -> None:
     """Print MCTrack truth."""
     mcp = MCTrack[n]
 
@@ -106,9 +98,7 @@ def printMCTrack(n, MCTrack):
         particle_name = pdg.GetParticle(mcp.GetPdgCode()).GetName()
 
         if particle_name == "mu+" or particle_name == "mu-":
-            particle_name = (
-                f"{RED}{particle_name}{RESET}       "  # Highlight muons in red
-            )
+            particle_name = f"{RED}{particle_name}{RESET}       "  # Highlight muons in red
 
         print(
             " %6s %-10s %10i %6.3F %6.3F %7.3F %7.3F %7.3F %7.3F %6s %10.3F %28s"
@@ -147,7 +137,7 @@ def printMCTrack(n, MCTrack):
         )
 
 
-def dump(event, pcut=0, print_whole_event=True):
+def dump(event, pcut: float = 0, print_whole_event: bool = True) -> None:
     """Dump the whole event."""
     if print_whole_event:
         print(
@@ -251,7 +241,7 @@ for inputFolder in os.listdir(path):
             trackingstation_id = hit.GetStationNumber()
             pid = hit.PdgCode()
             P = r.TMath.Sqrt(hit.GetPx() ** 2 + hit.GetPy() ** 2 + hit.GetPz() ** 2)
-            if abs(pid) == 13 and trackingstation_id == 1 and P > P_threshold / u.GeV:
+            if abs(pid) == 13 and trackingstation_id == 1 and P_threshold / u.GeV < P:
                 track_id = hit.GetTrackID()
                 particle_name = pdg.GetParticle(hit.PdgCode()).GetName()
                 if track_id not in muon_ids:
@@ -287,9 +277,7 @@ for inputFolder in os.listdir(path):
 
             track_array.Clear()
             for track in event.MCTrack:
-                if track.GetMotherId() == muon_ and (
-                    not track.GetProcName().Data() == "Muon nuclear interaction"
-                ):
+                if track.GetMotherId() == muon_ and track.GetProcName().Data() != "Muon nuclear interaction":
                     track_array.Add(track)
 
             muon_UpstreamTaggerPoints.Clear()
@@ -299,7 +287,7 @@ for inputFolder in os.listdir(path):
             for hit in event.UpstreamTaggerPoint:
                 track_id = hit.GetTrackID()
 
-                if not (track_id == muon_):
+                if track_id != muon_:
                     continue
 
                 if muon_UpstreamTaggerPoints.GetSize() == ubt_index:
@@ -317,11 +305,7 @@ for inputFolder in os.listdir(path):
 
                 trackingstation_id = hit.GetStationNumber()
 
-                if (
-                    abs(hit.PdgCode()) == 13
-                    and trackingstation_id == 1
-                    and P > P_threshold / u.GeV
-                ):
+                if abs(hit.PdgCode()) == 13 and trackingstation_id == 1 and P_threshold / u.GeV < P:
                     if global_event_nr not in events_["Tr_noSBT"]:
                         events_["Tr_noSBT"][global_event_nr] = set()
 
@@ -330,9 +314,7 @@ for inputFolder in os.listdir(path):
                     if global_event_nr not in processed_events:
                         processed_events[global_event_nr] = []
 
-                    if (
-                        track_id not in processed_events[global_event_nr]
-                    ):  # only save the info of first SBT hit
+                    if track_id not in processed_events[global_event_nr]:  # only save the info of first SBT hit
                         processed_events[global_event_nr].append(track_id)
 
                         particle_name = pdg.GetParticle(hit.PdgCode()).GetName()
@@ -382,9 +364,7 @@ for inputFolder in os.listdir(path):
 for type_ in events_:
     # Calculate total number of muons
     total_muons = sum(len(muons) for muons in events_[type_].values())
-    print(
-        f"{type_}, \tnEvents:{sum(bool(len(muons)) for muons in events_[type_].values())}, \tnMuons:{total_muons}"
-    )
+    print(f"{type_}, \tnEvents:{sum(bool(len(muons)) for muons in events_[type_].values())}, \tnMuons:{total_muons}")
 output_file.cd()
 output_tree.Write()
 for histname in h:

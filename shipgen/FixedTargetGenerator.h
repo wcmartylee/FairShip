@@ -5,40 +5,44 @@
 #ifndef SHIPGEN_FIXEDTARGETGENERATOR_H_
 #define SHIPGEN_FIXEDTARGETGENERATOR_H_
 
-#include "FairGenerator.h"
 #include "FairLogger.h"  // for FairLogger, MESSAGE_ORIGIN
+#include "Generator.h"
 #include "GenieGenerator.h"
 #include "Pythia8/Pythia.h"
 #include "TNtuple.h"
 #include "TROOT.h"
 #include "TTree.h"
 
-#if PYTHIA_VERSION_INTEGER >= 8315
 namespace Pythia8 {
 class EvtGenDecays;
 }
-#else
-class EvtGenDecays;
-#endif
 
 class FairPrimaryGenerator;
 
-class FixedTargetGenerator : public FairGenerator {
+class FixedTargetGenerator : public SHiP::Generator {
  public:
   /** default constructor **/
   FixedTargetGenerator();
 
   /** destructor **/
-  virtual ~FixedTargetGenerator();
+  ~FixedTargetGenerator() override;
 
   /** public method ReadEvent **/
-  Bool_t ReadEvent(FairPrimaryGenerator*);
+  Bool_t ReadEvent(FairPrimaryGenerator*) override;
   void SetParameters(char*);
-  void Print();  //!
+  void Print();
+  Bool_t Init(const char* inFile) override { return Init(inFile, 0); };
 
-  virtual Bool_t Init();  //!
+  Bool_t Init(const char* inFile, int startEvent) override {
+    LOG(warning) << "Init with files not implemented for FixedTargetGenerator. "
+                    "Using default Init() instead";
+    return Init();
+  };
+  using SHiP::Generator::Init;
+  Bool_t Init() override;
+
   Bool_t InitForCharmOrBeauty(TString fInName, Int_t nev, Double_t npots = 5E13,
-                              Int_t nStart = 0);  //!
+                              Int_t nStart = 0);
 
   void SetMom(Double_t mom) { fMom = mom; };
   void UseRandom1() {
@@ -102,11 +106,7 @@ class FixedTargetGenerator : public FairGenerator {
   Pythia8::Pythia* GetPythiaN() { return fPythiaN; }
 
  private:
-#if PYTHIA_VERSION_INTEGER >= 8300
   std::shared_ptr<Pythia8::RndmEngine> fRandomEngine;  //!
-#else
-  Pythia8::RndmEngine* fRandomEngine;  //!
-#endif
 
  protected:
   Double_t fMom;       // proton momentum
@@ -119,13 +119,8 @@ class FixedTargetGenerator : public FairGenerator {
   FairLogger* fLogger;        //!   don't make it persistent, magic ROOT command
   Pythia8::Pythia* fPythiaN;  //!
   Pythia8::Pythia* fPythiaP;  //!
-#if PYTHIA_VERSION_INTEGER >= 8315
-  Pythia8::EvtGenDecays* evtgenN;  //!
-  Pythia8::EvtGenDecays* evtgenP;  //!
-#else
-  EvtGenDecays* evtgenN;  //!
-  EvtGenDecays* evtgenP;  //!
-#endif
+  Pythia8::EvtGenDecays* evtgenN;         //!
+  Pythia8::EvtGenDecays* evtgenP;         //!
   GenieGenerator* fMaterialInvestigator;  //!
   Bool_t withNtuple;  //! special option for Dark Photon physics studies
   TNtuple* fNtuple;   //!
@@ -148,7 +143,5 @@ class FixedTargetGenerator : public FairGenerator {
   Float_t n_id, n_px, n_py, n_pz, n_M, n_E, n_mpx, n_mpy, n_mpz, n_mE, n_mid,
       ck;
   Int_t heartbeat;
-
-  ClassDef(FixedTargetGenerator, 2);
 };
 #endif  // SHIPGEN_FIXEDTARGETGENERATOR_H_

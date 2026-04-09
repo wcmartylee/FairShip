@@ -24,7 +24,7 @@ import sys
 import ROOT
 
 
-def convert_tree_to_rntuple(input_file, tree_name, output_file, ntuple_name):
+def convert_tree_to_rntuple(input_file, tree_name, output_file, ntuple_name) -> bool:
     """
     Convert a TTree to RNTuple format.
 
@@ -56,9 +56,7 @@ def convert_tree_to_rntuple(input_file, tree_name, output_file, ntuple_name):
 
     # Convert using RNTupleImporter
     try:
-        importer = ROOT.ROOT.Experimental.RNTupleImporter.Create(
-            input_file, tree_name, output_file
-        )
+        importer = ROOT.ROOT.Experimental.RNTupleImporter.Create(input_file, tree_name, output_file)
 
         if not importer:
             print("ERROR: Failed to create RNTupleImporter")
@@ -101,7 +99,7 @@ def convert_tree_to_rntuple(input_file, tree_name, output_file, ntuple_name):
         return False
 
 
-def main():
+def main() -> int:
     """Parse arguments and run the TTree to RNTuple conversion."""
     parser = argparse.ArgumentParser(
         description="Convert TTree to RNTuple using ROOT's RNTupleImporter",
@@ -119,9 +117,7 @@ Examples:
         """,
     )
 
-    parser.add_argument(
-        "-f", "--input-file", required=True, help="Input ROOT file containing TTree"
-    )
+    parser.add_argument("-f", "--input-file", required=True, help="Input ROOT file containing TTree")
     parser.add_argument(
         "-t",
         "--tree-name",
@@ -149,9 +145,7 @@ Examples:
         else:
             args.output_file = args.input_file + "_rntuple.root"
 
-    success = convert_tree_to_rntuple(
-        args.input_file, args.tree_name, args.output_file, args.ntuple_name
-    )
+    success = convert_tree_to_rntuple(args.input_file, args.tree_name, args.output_file, args.ntuple_name)
 
     if success:
         print()

@@ -3,15 +3,15 @@
 
 """Convert files from EventCalc to ROOT format."""
 
-import sys
 import os
+import sys
 from argparse import ArgumentParser
 
 import numpy as np
 import ROOT as r
 
 
-def parse_file(infile):
+def parse_file(infile: str):
     """
     Parse the given text file and extracts process type, sample points, and variables.
 
@@ -61,7 +61,7 @@ def parse_file(infile):
         return None, None, None
 
 
-def check_consistency_infile(nvars, ncols):
+def check_consistency_infile(nvars, ncols) -> None:
     """
     Check the consistency between number of columns in the input file (ncols) and variables (nvars).
 
@@ -74,7 +74,7 @@ def check_consistency_infile(nvars, ncols):
     return
 
 
-def convert_file(infile, outdir):
+def convert_file(infile, outdir) -> str | None:
     """
     Create a ROOT file with a TTree containing the variables from the parsed input text file.
 
@@ -114,19 +114,17 @@ def convert_file(infile, outdir):
     infile = f"{outdir}/{fname}"
     parsed_data = parse_file(infile)
     outfile = infile.split(".dat")[0] + ".root"
-    ncols   = len(parsed_data[0][2])
+    ncols = len(parsed_data[0][2])
     nvardau = 6  # qualifiers for each daughter
     remaining_vars = ncols - len(vars_names)
 
-    if (remaining_vars % nvardau)!=0:
-        raise ValueError(f"- convertEvtCalc - Error: number of daughters is not exact.")
+    if (remaining_vars % nvardau) != 0:
+        raise ValueError("- convertEvtCalc - Error: number of daughters is not exact.")
 
-    ndau    = remaining_vars // nvardau
+    ndau = remaining_vars // nvardau
     print(f"- convertEvtCalc - Max multiplicity of daughters: {ndau}")
 
-    vars_names.extend(
-        f"{var}{i}" for i in range(1, ndau + 1) for var in daughter_vars
-    )
+    vars_names.extend(f"{var}{i}" for i in range(1, ndau + 1) for var in daughter_vars)
 
     try:
         check_consistency_infile(nvars=len(vars_names), ncols=ncols)
@@ -148,9 +146,9 @@ def convert_file(infile, outdir):
         for pt, sp, vars in parsed_data:
             for row in zip(*vars):
                 for i, value in enumerate(row):
-                    if i < len(vars_names)-1:
+                    if i < len(vars_names) - 1:
                         branch_f[vars_names[i]][0] = value
-                branch_f["ndau"][0] = ndau/1.
+                branch_f["ndau"][0] = ndau / 1.0
                 tree.Fill()
 
         tree.Write()
@@ -159,7 +157,7 @@ def convert_file(infile, outdir):
         return outfile
 
 
-def main():
+def main() -> None:
     """Convert files from EventCalc to ROOT format."""
     parser = ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -169,17 +167,13 @@ def main():
         """Supports retrieving file from EOS via the XRootD protocol.""",
         required=True,
     )
-    parser.add_argument(
-        "-o", "--outputdir", help="""Output directory, must exist.""", default="."
-    )
+    parser.add_argument("-o", "--outputdir", help="""Output directory, must exist.""", default=".")
     args = parser.parse_args()
     print(f"Opening input file for conversion: {args.inputfile}")
     if not os.path.isfile(args.inputfile):
         raise FileNotFoundError("EvtCalc: input .dat file does not exist")
     if not os.path.isdir(args.outputdir):
-        print(
-            f"Warning: The specified directory {args.outputdir} does not exist. Creating it now."
-        )
+        print(f"Warning: The specified directory {args.outputdir} does not exist. Creating it now.")
         command = f"mkdir {args.outputdir}"
         os.system(command)
     outputfile = convert_file(infile=args.inputfile, outdir=args.outputdir)
