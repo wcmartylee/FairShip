@@ -11,9 +11,13 @@ Until April 2024 (inclusive) no changelog was kept. We might try to reconstruct
 it in future.
 
 ## Unreleased
+
 ### Added
 
+* Add new 2026_04_01_SHiP_MainSpectrometerField_V13.root fieldmap
+
 ### Changed
+* Make artificial retina the baseline option for pattern recognition
 
 ### Fixed
 
