@@ -3,13 +3,12 @@
 // Collaboration
 
 #ifndef VETO_VETOHIT_H_
-#define VETO_VETOHIT_H_ 1
-#include "ShipHit.h"
+#define VETO_VETOHIT_H_
+#include "DetectorHit.h"
 
-class vetoPoint;
 class TGeoNode;
 
-class vetoHit : public ShipHit {
+class vetoHit : public SHiP::DetectorHit {
  public:
   /** Default constructor **/
   vetoHit();
@@ -21,7 +20,7 @@ class vetoHit : public ShipHit {
    **/
   vetoHit(Int_t detID, Float_t adc);
   /** Destructor **/
-  virtual ~vetoHit();
+  ~vetoHit() override = default;
 
   /** Accessors **/
   Double_t GetX() const;
@@ -34,8 +33,8 @@ class vetoHit : public ShipHit {
   void SetTDC(Double_t val) { ft = val; }
 
   /** Output to screen **/
-  using ShipHit::Print;
-  virtual void Print(Int_t detID) const;
+  using SHiP::DetectorHit::Print;
+  void Print(Int_t detID) const;
   Float_t GetADC() const { return fdigi; }
   Float_t GetTDC() const { return ft; }
   Double_t GetEloss() const { return fdigi; }
@@ -47,10 +46,10 @@ class vetoHit : public ShipHit {
   vetoHit& operator=(const vetoHit& point) = default;
 
  private:
-  Double_t ft;
-  Float_t flag;  ///< flag
+  Double_t ft{-1.};
+  Bool_t flag{true};  ///< validity flag
 
-  ClassDef(vetoHit, 1);
+  ClassDef(vetoHit, 2);
 };
 
 #endif  // VETO_VETOHIT_H_

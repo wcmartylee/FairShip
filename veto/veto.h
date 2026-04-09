@@ -8,8 +8,7 @@
 #include <map>
 #include <vector>
 
-#include "FairDetector.h"
-#include "ISTLPointContainer.h"
+#include "Detector.h"
 #include "TGeoVolume.h"
 #include "TLorentzVector.h"
 #include "TVector3.h"
@@ -27,7 +26,7 @@ class TClonesArray;
  * the detector geometry, processing hits, and handling input parameters.
  */
 
-class veto : public FairDetector, public ISTLPointContainer {
+class veto : public SHiP::Detector<vetoPoint> {
  public:
   /**      Name :  Veto
    *       Active: kTRUE for active detectors (ProcessHits() will be called)
@@ -36,28 +35,10 @@ class veto : public FairDetector, public ISTLPointContainer {
 
   veto();
 
-  /**       destructor     */
-  virtual ~veto();
-
-  /**      Initialization of the detector is done here    */
-  virtual void Initialize();
-
   /**       this method is called for each step during simulation
    *       (see FairMCApplication::Stepping())
    */
-  virtual Bool_t ProcessHits(FairVolume* v = 0);
-
-  /**       Registers the produced collections in FAIRRootManager.     */
-  virtual void Register();
-
-  /** Gets the produced collections */
-  virtual TClonesArray* GetCollection(Int_t iColl) const;
-
-  /** Update track indices in point collection (for std::vector migration) */
-  void UpdatePointTrackIndices(const std::map<Int_t, Int_t>& indexMap);
-
-  /**      has to be called after each event to reset the containers      */
-  virtual void Reset();
+  Bool_t ProcessHits(FairVolume* v = 0) override;
 
   void SetFastMuon() { fFastMuon = true; }  // kill all tracks except of muons
   void SetFollowMuon() {
@@ -73,7 +54,7 @@ class veto : public FairDetector, public ISTLPointContainer {
   }
 
   /**      Create the detector geometry        */
-  void ConstructGeometry();
+  void ConstructGeometry() override;
 
   void SetVesselStructure(Float_t a, Float_t b, Float_t c, TString d, Float_t l,
                           TString e, TString f, TString v, Float_t r) {
@@ -88,28 +69,11 @@ class veto : public FairDetector, public ISTLPointContainer {
     f_RibThickness = r;
   }
 
-  /**      This method is an example of how to add your own point
-   *       of type vetoPoint to the clones array
-   */
-  vetoPoint* AddHit(Int_t trackID, Int_t detID, TVector3 pos, TVector3 mom,
-                    Double_t time, Double_t length, Double_t eLoss,
-                    Int_t pdgcode, TVector3 Lpos, TVector3 Lmom);
-
   /** The following methods can be implemented if you need to make
    *  any optional action in your detector during the transport.
    */
 
-  virtual void CopyClones(TClonesArray* cl1, TClonesArray* cl2, Int_t offset) {
-    ;
-  }
-  virtual void SetSpecialPhysicsCuts() { ; }
-  virtual void EndOfEvent();
-  virtual void FinishPrimary() { ; }
-  virtual void FinishRun() { ; }
-  virtual void BeginPrimary() { ; }
-  virtual void PostTrack() { ; }
-  virtual void PreTrack();
-  virtual void BeginEvent() { ; }
+  void PreTrack() override;
 
   inline void SetUseSupport(Int_t use = 1) { fUseSupport = use; }
   inline Int_t GetUseSupport() const { return fUseSupport; }
@@ -121,20 +85,6 @@ class veto : public FairDetector, public ISTLPointContainer {
   /** Track information to be stored until the track leaves the
   active volume.
   */
-  //!  track index
-  Int_t fTrackID;
-  //!  volume id
-  Int_t fVolumeID;
-  //!  position at entrance
-  TLorentzVector fPos;
-  //!  momentum at entrance
-  TLorentzVector fMom;
-  //!  time
-  Float_t fTime;
-  //!  length
-  Float_t fLength;
-  //!  energy loss
-  Float_t fELoss;
 
   Bool_t fFastMuon, fFollowMuon;
 
@@ -176,12 +126,9 @@ class veto : public FairDetector, public ISTLPointContainer {
   Int_t fUseSupport;
   //! Flag option for Liquid Scintillator (Default=True).
   Int_t fLiquidVeto;
-  /** container for data points */
-  std::vector<vetoPoint>* fvetoPoints;
 
-  veto(const veto&);
-  veto& operator=(const veto&);
-  Int_t InitMedium(const char* name);
+  veto(const veto&) = delete;
+  veto& operator=(const veto&) = delete;
   /** Adds a solid Trapezoid of thickness (along z) wz with start cross-section
    * dimensions of wX_start * wY_start and end cross-section dimensions of
    * wX_end *wY_end
@@ -250,7 +197,7 @@ class veto : public FairDetector, public ISTLPointContainer {
 
   TGeoVolume* MakeSegments();
 
-  ClassDef(veto, 1)
+  ClassDefOverride(veto, 3)
 };
 
 #endif  // VETO_VETO_H_

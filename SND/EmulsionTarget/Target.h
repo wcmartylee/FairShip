@@ -13,37 +13,25 @@
 #ifndef SND_EMULSIONTARGET_TARGET_H_
 #define SND_EMULSIONTARGET_TARGET_H_
 
-#include <map>
-#include <string>  // for string
 #include <tuple>
-#include <vector>
 
-#include "FairDetector.h"
-#include "FairModule.h"  // for FairModule
-#include "ISTLPointContainer.h"
-#include "Rtypes.h"  // for ShipMuonShield::Class, Bool_t, etc
-#include "TLorentzVector.h"
-#include "TVector3.h"
+#include "Detector.h"
+#include "TargetPoint.h"
 
-class TargetPoint;
 class FairVolume;
-class TClonesArray;
 
-class Target : public FairDetector, public ISTLPointContainer {
+class Target : public SHiP::Detector<TargetPoint> {
  public:
   Target(const char* name, const Double_t Ydist, Bool_t Active,
          const char* Title = "NuTauTarget");
   Target();
-  virtual ~Target();
-
-  /**      Create the detector geometry        */
 
   // Set options for detector construction (active/passive, which design)
   void SetDetectorDesign(Int_t Design);
   void MakeNuTargetPassive(Bool_t a);
   void MergeTopBot(Bool_t SingleEmFilm);
 
-  void ConstructGeometry();
+  void ConstructGeometry() override;
 
   void SetTargetWallDimension(Double_t WallXDim, Double_t WallYDim,
                               Double_t WallZDim);
@@ -83,82 +71,13 @@ class Target : public FairDetector, public ISTLPointContainer {
       Int_t n, Double_t dd,
       Double_t DZ);  // other detector's parameters (needed for positioning)
 
-  /**      Initialization of the detector is done here    */
-  virtual void Initialize();
-
   /**       this method is called for each step during simulation
    *       (see FairMCApplication::Stepping())
    */
-  virtual Bool_t ProcessHits(FairVolume* v = 0);
+  Bool_t ProcessHits(FairVolume* v = 0) override;
 
-  /**       Registers the produced collections in FAIRRootManager.     */
-  virtual void Register();
-
-  /** Gets the produced collections */
-  virtual TClonesArray* GetCollection(Int_t iColl) const;
-
-  /** Update track indices in point collection (for std::vector migration) */
-  void UpdatePointTrackIndices(const std::map<Int_t, Int_t>& indexMap);
-
-  /**      has to be called after each event to reset the containers      */
-  virtual void Reset();
-
-  /**      This method is an example of how to add your own point
-   *       of type TargetPoint to the clones array
-   */
-
-  TargetPoint* AddHit(Int_t trackID, Int_t detID, TVector3 pos, TVector3 mom,
-                      Double_t time, Double_t length, Double_t eLoss,
-                      Int_t pdgCode);
-
-  /*
-     TargetPoint* AddHit(Int_t trackID, Int_t detID,
-                      TVector3 pos, TVector3 mom,
-                      Double_t time, Double_t length,
-                      Double_t eLoss, Int_t pdgCode,
-                      Int_t EmTop, Int_t EmBot, Int_t EmCESTop, Int_t EmCESBot,
-     Int_t TT, Int_t NPlate, Int_t NColumn, Int_t NRow, Int_t NWall);
-  */
-
-  /** The following methods can be implemented if you need to make
-   *  any optional action in your detector during the transport.
-   */
-
-  virtual void CopyClones(TClonesArray* cl1, TClonesArray* cl2, Int_t offset) {
-    ;
-  }
-  virtual void SetSpecialPhysicsCuts() { ; }
-  virtual void EndOfEvent();
-  virtual void FinishPrimary() { ; }
-  virtual void FinishRun() { ; }
-  virtual void BeginPrimary() { ; }
-  virtual void PostTrack() { ; }
-  virtual void PreTrack() { ; }
-  virtual void BeginEvent() { ; }
-
-  Target(const Target&);
-  Target& operator=(const Target&);
-
- ClassDef(Target, 5)
-
-     private :
-
-     /** Track information to be stored until the track leaves the
-      active volume.
-      */
-     Int_t fTrackID;    //!  track index
-  Int_t fVolumeID;      //!  volume id
-  TLorentzVector fPos;  //!  position at entrance
-  TLorentzVector fMom;  //!  momentum at entrance
-  Double32_t fTime;     //!  time
-  Double32_t fLength;   //!  length
-  Double32_t fELoss;    //!  energy loss
-
-  /** container for data points */
-  std::vector<TargetPoint>* fTargetPoints;
-
-  // switch for building the detector with active layers or with passive
-  // material only
+  Target(const Target&) = delete;
+  Target& operator=(const Target&) = delete;
 
  protected:
   Bool_t fPassive;  // 0 = with Emulsion, 1 = only lead + rohacell
@@ -232,7 +151,7 @@ class Target : public FairDetector, public ISTLPointContainer {
   Double_t fHpTDZ;
   Int_t fnHpT;
 
-  Int_t InitMedium(const char* name);
+  ClassDefOverride(Target, 5)
 };
 
 #endif  // SND_EMULSIONTARGET_TARGET_H_

@@ -4,15 +4,15 @@
 
 #include "MuonBackGenerator.h"
 
-#include <math.h>
-
 #include <algorithm>
+#include <cmath>
 #include <unordered_map>
 
 #include "BeamSmearingUtils.h"
 #include "FairPrimaryGenerator.h"
 #include "ShipMCTrack.h"
 #include "ShipUnit.h"
+#include "TChain.h"
 #include "TDatabasePDG.h"  // for TDatabasePDG
 #include "TFile.h"
 #include "TMCProcess.h"
@@ -21,6 +21,7 @@
 #include "TRandom.h"
 #include "TSystem.h"
 #include "TVector.h"
+#include "TVirtualMC.h"
 #include "vetoPoint.h"
 
 using ShipUnit::cm;
@@ -29,28 +30,42 @@ using ShipUnit::mm;
 // absorber
 
 // -----   Default constructor   -------------------------------------------
-MuonBackGenerator::MuonBackGenerator() { followMuons = true; }
+MuonBackGenerator::MuonBackGenerator()
+    : MCTrack_vec(nullptr), vetoPoints_vec(nullptr), fUseSTL(false) {
+  followMuons = true;
+}
 // -------------------------------------------------------------------------
 // -----   Default constructor   -------------------------------------------
 Bool_t MuonBackGenerator::Init(const char* fileName) {
   return Init(fileName, 0);
 }
-// -----   Default constructor   -------------------------------------------
-Bool_t MuonBackGenerator::Init(const char* fileName, const int firstEvent) {
-  LOG(info) << "Opening input file " << fileName;
-  fInputFile = TFile::Open(fileName);
-  if (!fInputFile) {
-    LOG(fatal) << "Error opening the Signal file: " << fileName;
+
+Bool_t MuonBackGenerator::Init(const std::vector<std::string>& fileNames) {
+  return Init(fileNames, 0);
+}
+
+Bool_t MuonBackGenerator::Init(const std::vector<std::string>& fileNames,
+                               const int startEvent) {
+  LOG(info) << "Opening input file to find keys " << fileNames.at(0);
+  TFile testFile(fileNames.at(0).c_str());
+  auto testKeys = testFile.GetListOfKeys();
+  if (testKeys == nullptr) {
+    LOG(fatal) << "Error opening the Signal file: " << fileNames.at(0);
   }
-  fn = firstEvent;
+  fn = startEvent;
   fPaintBeam = 5 * cm;  // default value for painting beam
   fSameSeed = 0;
   fPhiRandomize = false;      // default value for phi randomization
   fsmearBeam = 8 * mm;        // default value for smearing beam
   fdownScaleDiMuon = kFALSE;  // only needed for muflux simulation
-  fTree = fInputFile->Get<TTree>("pythia8-Geant4");
-  if (fTree) {
+  if (testKeys->FindObject("pythia8-Geant4")) {
+    fTree = new TChain("pythia8-Geant4");
+    for (auto& f : fileNames) {
+      LOG(info) << "Opening input file " << f;
+      fTree->Add(f.c_str());
+    }
     fNevents = fTree->GetEntries();
+    LOG(info) << "Reading " << fNevents << " entries";
     // count only events with muons
     fTree->SetBranchAddress("id", &id);  // particle id
     fTree->SetBranchAddress("parentid",
@@ -79,35 +94,83 @@ Bool_t MuonBackGenerator::Init(const char* fileName, const int firstEvent) {
     }
   } else {
     id = -1;
-    fTree = fInputFile->Get<TTree>("cbmsim");
+    fTree = new TChain("cbmsim");
+    for (auto& f : fileNames) {
+      LOG(info) << "Opening input file " << f;
+      fTree->Add(f.c_str());
+    }
     fNevents = fTree->GetEntries();
-    MCTrack = new TClonesArray("ShipMCTrack");
-    vetoPoints = new TClonesArray("vetoPoint");
-    fTree->SetBranchAddress("MCTrack", &MCTrack);
-    fTree->SetBranchAddress("vetoPoint", &vetoPoints);
+    LOG(info) << "Reading " << fNevents << " entries";
+    // Detect format by checking branch name:
+    // STL format uses PlaneHAPoint, TClonesArray uses vetoPoint
+    TBranch* mcBranch = fTree->GetBranch("MCTrack");
+    if (!mcBranch) {
+      LOG(fatal) << "MCTrack branch not found in input file";
+    }
+
+    if (fTree->GetBranch("PlaneHAPoint")) {
+      // New STL format
+      fUseSTL = true;
+      MCTrack_vec = nullptr;
+      vetoPoints_vec = nullptr;
+      auto mcStatus = fTree->SetBranchAddress("MCTrack", &MCTrack_vec);
+      auto vetoStatus =
+          fTree->SetBranchAddress("PlaneHAPoint", &vetoPoints_vec);
+      if (mcStatus < 0 || vetoStatus < 0) {
+        LOG(fatal) << "Failed to set branch addresses for STL vector format";
+      }
+      LOG(info) << "Using STL vector format (PlaneHAPoint)";
+    } else if (fTree->GetBranch("vetoPoint")) {
+      // Old TClonesArray format
+      fUseSTL = false;
+      MCTrack = new TClonesArray("ShipMCTrack");
+      vetoPoints = new TClonesArray("vetoPoint");
+      auto mcStatus = fTree->SetBranchAddress("MCTrack", &MCTrack);
+      auto vetoStatus = fTree->SetBranchAddress("vetoPoint", &vetoPoints);
+      if (mcStatus < 0 || vetoStatus < 0) {
+        LOG(fatal) << "Failed to set branch addresses for TClonesArray format";
+      }
+      LOG(info) << "Using TClonesArray format (vetoPoint)";
+    } else {
+      LOG(fatal)
+          << "Neither PlaneHAPoint nor vetoPoint branch found in input file";
+    }
   }
   return kTRUE;
 }
+
+// -----   Default constructor   -------------------------------------------
+Bool_t MuonBackGenerator::Init(const char* fileName, const int startEvent) {
+  std::vector<std::string> fileNames = {fileName};
+  return Init(fileNames, startEvent);
+}
 // -----   Destructor   ----------------------------------------------------
-MuonBackGenerator::~MuonBackGenerator() {}
+MuonBackGenerator::~MuonBackGenerator() {
+  if (!fUseSTL) {
+    delete MCTrack;
+    delete vetoPoints;
+  }
+}
 // -------------------------------------------------------------------------
 Bool_t MuonBackGenerator::checkDiMuon(Int_t muIndex) {
-  Bool_t check = false;
-  auto* mu = dynamic_cast<ShipMCTrack*>(MCTrack->At(muIndex));
+  ShipMCTrack* mu = fUseSTL ? &(*MCTrack_vec)[muIndex]
+                            : dynamic_cast<ShipMCTrack*>(MCTrack->At(muIndex));
   TString pName = mu->GetProcName();
   if (strncmp("Hadronic inelastic", pName.Data(), 18) == 0 ||
       strncmp("Positron annihilation", pName.Data(), 21) == 0 ||
       strncmp("Lepton pair production", pName.Data(), 22) == 0) {
-    check = true;
+    return true;
   }
-  Int_t Pcode =
-      TMath::Abs((dynamic_cast<ShipMCTrack*>(MCTrack->At(mu->GetMotherId()))
-                      ->GetPdgCode()));
-  if (Pcode == 221 || Pcode == 223 || Pcode == 333 || Pcode == 113 ||
-      Pcode == 331) {
-    check = true;
+  Int_t motherId = mu->GetMotherId();
+  if (motherId < 0) {
+    return false;
   }
-  return check;
+  ShipMCTrack* mother = fUseSTL
+                            ? &(*MCTrack_vec)[motherId]
+                            : dynamic_cast<ShipMCTrack*>(MCTrack->At(motherId));
+  Int_t Pcode = TMath::Abs(mother->GetPdgCode());
+  return (Pcode == 221 || Pcode == 223 || Pcode == 333 || Pcode == 113 ||
+          Pcode == 331);
 }
 
 // -----   Passing the event   ---------------------------------------------
@@ -116,6 +179,24 @@ Bool_t MuonBackGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
   Double_t mass = 0., e = 0., tof = 0.;
   std::unordered_map<int, int> muList;
   std::unordered_map<int, std::vector<int>> moList;
+
+  // Helper lambdas to abstract STL vs TClonesArray access
+  auto getVetoSize = [this]() -> int {
+    return fUseSTL ? vetoPoints_vec->size() : vetoPoints->GetEntries();
+  };
+  auto getVetoPoint = [this](int i) -> vetoPoint* {
+    return fUseSTL ? &(*vetoPoints_vec)[i]
+                   : dynamic_cast<vetoPoint*>(vetoPoints->At(i));
+  };
+  auto getMCTrack = [this](int i) -> ShipMCTrack* {
+    return fUseSTL ? &(*MCTrack_vec)[i]
+                   : dynamic_cast<ShipMCTrack*>(MCTrack->At(i));
+  };
+  auto getMCTrackSize = [this]() -> int {
+    return fUseSTL ? MCTrack_vec->size() : MCTrack->GetEntries();
+  };
+
+  bool found_muon = false;
   while (fn < fNevents) {
     fTree->GetEntry(fn);
     muList.clear();
@@ -129,12 +210,13 @@ Bool_t MuonBackGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
       mass = pdgBase->GetParticle(id)->Mass();
       e = TMath::Sqrt(px * px + py * py + pz * pz + mass * mass);
       tof = 0;
+      found_muon = true;
       break;
     }
     if (id == -1) {  // use tree as input file
       Bool_t found = false;
-      for (int i = 0; i < vetoPoints->GetEntries(); i++) {
-        auto* v = dynamic_cast<vetoPoint*>(vetoPoints->At(i));
+      for (int i = 0; i < getVetoSize(); i++) {
+        auto* v = getVetoPoint(i);
         Int_t abspid = TMath::Abs(v->PdgCode());
         if (abspid == 13 || (!followMuons && abspid != 12 && abspid != 14)) {
           found = true;
@@ -143,9 +225,7 @@ Bool_t MuonBackGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
             muList.insert({muIndex, i});
           } else if (abspid == 13) {
             if (checkDiMuon(muIndex)) {
-              moList[(dynamic_cast<ShipMCTrack*>(MCTrack->At(muIndex)))
-                         ->GetMotherId()]
-                  .push_back(i);
+              moList[getMCTrack(muIndex)->GetMotherId()].push_back(i);
             } else {
               muList.insert({muIndex, i});
             }
@@ -158,23 +238,25 @@ Bool_t MuonBackGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
         if (gRandom->Uniform(0., 1.) > 0.99) {
           std::vector<int> list = it->second;
           for (unsigned i = 0; i < list.size(); i++) {
-            auto* v = dynamic_cast<vetoPoint*>(vetoPoints->At(list.at(i)));
+            auto* v = getVetoPoint(list.at(i));
             Int_t muIndex = v->GetTrackID();
             muList.insert({muIndex, i});
           }
         }
       }
       if (!found) {
-        LOGF(warn, "No muon found %i", fn - 1);
+        LOGF(debug, "No muon found %i", fn - 1);
       }
       if (found) {
+        found_muon = true;
         break;
       }
     }
   }
-  if (fn > fNevents - 1) {
-    LOGF(info, "End of file reached %i", fNevents);
-    return kFALSE;
+  if (fn >= fNevents && !found_muon) {
+    LOGF(info, "End of tree reached %i", fNevents);
+    gMC->StopRun();
+    return kTRUE;
   }
   if (fSameSeed) {
     Int_t theSeed = fn + fSameSeed * fNevents;
@@ -183,8 +265,8 @@ Bool_t MuonBackGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
   }
   auto [dx, dy] = CalculateBeamOffset(fsmearBeam, fPaintBeam);
   if (id == -1) {
-    for (int i = 0; i < MCTrack->GetEntries(); i++) {
-      auto* track = dynamic_cast<ShipMCTrack*>(MCTrack->At(i));
+    for (int i = 0; i < getMCTrackSize(); i++) {
+      auto* track = getMCTrack(i);
       Int_t abspid = TMath::Abs(track->GetPdgCode());
       px = track->GetPx();
       py = track->GetPy();
@@ -205,7 +287,7 @@ Bool_t MuonBackGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
         if (element.first == i) {
           wanttracking = true;
           if (!followMuons) {
-            auto* v = dynamic_cast<vetoPoint*>(vetoPoints->At(element.second));
+            auto* v = getVetoPoint(element.second);
             TVector3 lpv = v->LastPoint();
             TVector3 lmv = v->LastMom();
             if (abspid == 22) {

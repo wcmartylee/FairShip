@@ -40,24 +40,23 @@ import os
 import shlex
 import subprocess
 from collections.abc import Mapping, Sequence
-from typing import Union
 
 import ROOT  # type: ignore
 
 __all__ = [
     "_run",
+    "add_hists",
+    "generate_genie_events",
     "get_1D_flux_name",
     "get_2D_flux_name",
-    "make_splines",
-    "generate_genie_events",
-    "make_ntuples",
-    "add_hists",
     "main",
+    "make_ntuples",
+    "make_splines",
 ]
 
 __version__ = "0.1.0"
 
-PathLike = Union[str, os.PathLike]
+PathLike = str | os.PathLike
 
 logger = logging.getLogger(__name__)
 
@@ -387,9 +386,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     """Entry point for the command-line interface."""
     import argparse
 
-    parser = argparse.ArgumentParser(
-        prog="genie-utils", description="GENIE helpers with per-call env overrides"
-    )
+    parser = argparse.ArgumentParser(prog="genie-utils", description="GENIE helpers with per-call env overrides")
     parser.add_argument(
         "--env",
         metavar="KEY=VALUE",
@@ -404,9 +401,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         default=[],
         help="Unset environment variable(s) for the child process (repeatable).",
     )
-    parser.add_argument(
-        "-v", "--verbose", action="count", default=0, help="Increase verbosity."
-    )
+    parser.add_argument("-v", "--verbose", action="count", default=0, help="Increase verbosity.")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p_spl = sub.add_parser("splines", help="Run gmkspl")

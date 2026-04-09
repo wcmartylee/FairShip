@@ -16,7 +16,7 @@ from tabulate import tabulate
 class selection_check:
     """Class to perform various selection checks on the candidate."""
 
-    def __init__(self, geo_file):
+    def __init__(self, geo_file) -> None:
         """Initialize the selection_check class with geometry and configuration."""
         self.geometry_manager = geo_file.Get("FAIRGeom")
         self.ship_geo = load_from_root_file(geo_file, "ShipGeo")
@@ -27,13 +27,13 @@ class selection_check:
             with open(fairship + "/geometry/veto_config_helium.yaml") as file:
                 config = yaml.safe_load(file)
                 self.veto_geo = AttrDict(config)
-                self.veto_geo.z0
+                _ = self.veto_geo.z0
         if self.ship_geo.DecayVolumeMedium == "vacuums":
             with open(fairship + "/geometry/veto_config_vacuums.yaml") as file:
                 config = yaml.safe_load(file)
                 self.veto_geo = AttrDict(config)
 
-    def access_event(self, tree):
+    def access_event(self, tree) -> None:
         """Access event data."""
         self.tree = tree
 
@@ -49,10 +49,7 @@ class selection_check:
         time_vtx_from_strawhits = []
 
         for hit in self.tree.strawtubesPoint:
-            if not (
-                int(str(hit.GetDetectorID())[:1]) == 1
-                or int(str(hit.GetDetectorID())[:1]) == 2
-            ):
+            if not (int(str(hit.GetDetectorID())[:1]) == 1 or int(str(hit.GetDetectorID())[:1]) == 2):
                 continue
 
             if not (hit.GetTrackID() == d1_mc or hit.GetTrackID() == d2_mc):
@@ -93,22 +90,16 @@ class selection_check:
         else:
             P = candidate_mom.Mag()
         for i in range(3):
-            projection_factor += (
-                candidate_mom(i) / P * (target_point(i) - candidate_pos(i))
-            )
+            projection_factor += candidate_mom(i) / P * (target_point(i) - candidate_pos(i))
 
         dist = 0
         for i in range(3):
-            dist += (
-                target_point(i)
-                - candidate_pos(i)
-                - projection_factor * candidate_mom(i) / P
-            ) ** 2
+            dist += (target_point(i) - candidate_pos(i) - projection_factor * candidate_mom(i) / P) ** 2
         dist = ROOT.TMath.Sqrt(dist)
 
         return dist  # in cm
 
-    def dist_to_innerwall(self, candidate):
+    def dist_to_innerwall(self, candidate) -> float | int:
         """Calculate the minimum distance(in XY plane) of the candidate decay vertex to the inner wall of the decay vessel. If outside the decay volume, or if distance > 100cm,Return 0."""
         candidate_pos = ROOT.TVector3()
         candidate.GetVertex(candidate_pos)
@@ -152,9 +143,7 @@ class selection_check:
 
         for tr in [t1, t2]:
             fit_status = self.tree.FitTracks[tr].getFitStatus()
-            nmeas.append(
-                int(round(fit_status.getNdf()))
-            )  # nmeas.append(fit_status.getNdf())
+            nmeas.append(round(fit_status.getNdf()))  # nmeas.append(fit_status.getNdf())
 
         return np.array(nmeas)
 
@@ -177,7 +166,7 @@ class selection_check:
         """Distance of Closest Approach."""
         return candidate.GetDoca()
 
-    def is_in_fiducial(self, candidate):
+    def is_in_fiducial(self, candidate) -> bool:
         """Check if the candidate decay vertex is within the Fiducial Volume."""
         candidate_pos = ROOT.TVector3()
         candidate.GetVertex(candidate_pos)
@@ -189,13 +178,9 @@ class selection_check:
 
         # if self.dist2InnerWall(candidate)<=5*u.cm: return False
 
-        vertex_node = ROOT.gGeoManager.FindNode(
-            candidate_pos.X(), candidate_pos.Y(), candidate_pos.Z()
-        )
+        vertex_node = ROOT.gGeoManager.FindNode(candidate_pos.X(), candidate_pos.Y(), candidate_pos.Z())
         vertex_elem = vertex_node.GetVolume().GetName()
-        if not vertex_elem.startswith("DecayVacuum_"):
-            return False
-        return True
+        return vertex_elem.startswith("DecayVacuum_")
 
     def chi2nDOF(self, candidate):
         """Return the reduced chi^2 of the particle's daughter tracks."""
@@ -208,7 +193,7 @@ class selection_check:
 
         return np.array(chi2ndf)
 
-    def preselection_cut(self, candidate, IP_cut=250, show_table=False):
+    def preselection_cut(self, candidate, IP_cut: float = 250, show_table: bool = False) -> bool:
         """
         Umbrella method to apply the pre-selection cuts on the candidate.
 
@@ -303,9 +288,7 @@ class selection_check:
 
             for row in table:
                 row[3] = (
-                    f"\033[1;32m{row[3]}\033[0m"
-                    if row[3]
-                    else f"\033[1;31m{row[3]}\033[0m"
+                    f"\033[1;32m{row[3]}\033[0m" if row[3] else f"\033[1;31m{row[3]}\033[0m"
                 )  # Green for True, Red for False
 
             print(
@@ -326,12 +309,12 @@ class selection_check:
 class event_inspector:
     """Class to inspect MCtruth of an Event."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize ROOT PDG database."""
         self.pdg = ROOT.TDatabasePDG.Instance()
         pythia8_conf.addHNLtoROOT()
 
-    def dump_event(self, event, mom_threshold=0):
+    def dump_event(self, event, mom_threshold: float = 0) -> None:
         """Dump the MCtruth of the event."""
         headers = [
             "#",
@@ -365,8 +348,4 @@ class event_inspector:
                 ]
             )
 
-        print(
-            tabulate(
-                event_table, headers=headers, floatfmt=".3f", tablefmt="simple_outline"
-            )
-        )
+        print(tabulate(event_table, headers=headers, floatfmt=".3f", tablefmt="simple_outline"))

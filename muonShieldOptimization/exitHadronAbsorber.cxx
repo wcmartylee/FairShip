@@ -4,8 +4,6 @@
 
 #include "exitHadronAbsorber.h"
 
-#include <math.h>
-
 #include <iostream>
 
 #include "FairGeoBuilder.h"
@@ -14,10 +12,7 @@
 #include "FairGeoMedia.h"
 #include "FairGeoNode.h"
 #include "FairGeoVolume.h"
-#include "FairLogger.h"  // for FairLogger, MESSAGE_ORIGIN
 #include "FairRootManager.h"
-#include "FairRun.h"
-#include "FairRuntimeDb.h"
 #include "FairVolume.h"
 #include "ShipDetectorList.h"
 #include "ShipStack.h"
@@ -32,7 +27,6 @@
 #include "TParticle.h"
 #include "TROOT.h"
 #include "TVirtualMC.h"
-#include "vetoPoint.h"
 using std::cout;
 using std::endl;
 
@@ -41,64 +35,43 @@ Double_t m = 100 * cm;   //  m
 Double_t mm = 0.1 * cm;  //  mm
 
 exitHadronAbsorber::exitHadronAbsorber(const char* Name, Bool_t Active)
-    : FairDetector(Name, Active, kVETO),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
+    : Detector(Name, Active, kVETO),
       fOnlyMuons(kFALSE),
       fSkipNeutrinos(kFALSE),
       fVetoName("veto"),
       fzPos(3E8),
       withNtuple(kFALSE),
-      fCylindricalPlane(kFALSE),
-      fexitHadronAbsorberPointCollection(new std::vector<vetoPoint>()) {}
+      fCylindricalPlane(kFALSE) {}
 
 exitHadronAbsorber::exitHadronAbsorber()
-    : FairDetector("exitHadronAbsorber", kTRUE, kVETO),
+    : Detector("exitHadronAbsorber", kTRUE, kVETO),
       fUniqueID(-1),
-      fEventId(-1),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
       fOnlyMuons(kFALSE),
       fSkipNeutrinos(kFALSE),
       fVetoName("veto"),
       fzPos(3E8),
       withNtuple(kFALSE),
       fCylindricalPlane(kFALSE),
-      fUseCaveCoordinates(kFALSE),
-      fexitHadronAbsorberPointCollection(new std::vector<vetoPoint>()) {}
-
-exitHadronAbsorber::~exitHadronAbsorber() {
-  if (fexitHadronAbsorberPointCollection) {
-    delete fexitHadronAbsorberPointCollection;
-  }
-}
+      fUseCaveCoordinates(kFALSE) {}
 
 Bool_t exitHadronAbsorber::ProcessHits(FairVolume* vol) {
   /** This method is called from the MC stepping */
   if (gMC->IsTrackEntering()) {
     fTrackID = gMC->GetStack()->GetCurrentTrackNumber();
-    fEventId = gMC->CurrentEvent();
+    fEventID = gMC->CurrentEvent();
     TParticle* p = gMC->GetStack()->GetCurrentTrack();
     fUniqueID = p->GetUniqueID();
     Int_t pdgCode = p->GetPdgCode();
     gMC->TrackMomentum(fMom);
-    if (!(fOnlyMuons && TMath::Abs(pdgCode) != 13)) {
+    if (!fOnlyMuons || TMath::Abs(pdgCode) == 13) {
       fTime = gMC->TrackTime() * 1.0e09;
       fLength = gMC->TrackLength();
       gMC->TrackPosition(fPos);
       if ((fMom.E() - fMom.M()) > EMax) {
-        AddHit(fTrackID, 111, TVector3(fPos.X(), fPos.Y(), fPos.Z()),
+        AddHit(fEventID, fTrackID, 111, TVector3(fPos.X(), fPos.Y(), fPos.Z()),
                TVector3(fMom.Px(), fMom.Py(), fMom.Pz()), fTime, fLength, 0,
                pdgCode, TVector3(p->Vx(), p->Vy(), p->Vz()),
-               TVector3(p->Px(), p->Py(), p->Pz()), fEventId);
+               TVector3(p->Px(), p->Py(), p->Pz()));
         ShipStack* stack = dynamic_cast<ShipStack*>(gMC->GetStack());
         stack->AddPoint(kVETO);
       }
@@ -177,10 +150,6 @@ void exitHadronAbsorber::Initialize() {
   if (withNtuple) {
     fNtuple = new TNtuple("4DP", "4DP", "id:px:py:pz:x:y:z");
   }
-}
-
-void exitHadronAbsorber::EndOfEvent() {
-  fexitHadronAbsorberPointCollection->clear();
 }
 
 void exitHadronAbsorber::PreTrack() {
@@ -291,7 +260,7 @@ void exitHadronAbsorber::ConstructGeometry() {
 
   FairGeoMedium* ShipMedium = media->getMedium("vacuums");
   TGeoMedium* vac = gGeoManager->GetMedium("vacuums");
-  if (vac == NULL) geoBuild->createMedium(ShipMedium);
+  if (vac == nullptr) geoBuild->createMedium(ShipMedium);
   vac = gGeoManager->GetMedium("vacuums");
   gGeoManager->GetTopVolume();
   TGeoNavigator* nav = gGeoManager->GetCurrentNavigator();
@@ -343,15 +312,10 @@ void exitHadronAbsorber::ConstructGeometry() {
       xLocPlane = global[0];
     }
     sensPlane->SetLineColor(kBlue - 10);
-    // nav->GetCurrentNode()->GetVolume()->AddNode(sensPlane, fzPos<250?2:1, new
-    // TGeoTranslation(0, 0, zLoc));
     nav->GetCurrentNode()->GetVolume()->AddNode(
         sensPlane, 1, new TGeoTranslation(xLocPlane, yLocPlane, zLocPlane));
     AddSensitiveVolume(sensPlane);
   } else {  // add cylindrical sensPlane
-    // if (zLoc < 250*cm){//corresponds to target...
-    // Parameters: name, medium, inner radius, outer radius, half-length (Z),
-    // phi1, phi2
     TGeoVolume* sensPlaneCyl =
         gGeoManager->MakeTube(shapename_prefix + fVetoName + "_tube", vac,
                               12.51 * cm, 12.52 * cm, zLoc / 2.);
@@ -366,39 +330,8 @@ void exitHadronAbsorber::ConstructGeometry() {
   }
 }
 
-vetoPoint* exitHadronAbsorber::AddHit(Int_t trackID, Int_t detID, TVector3 pos,
-                                      TVector3 mom, Double_t time,
-                                      Double_t length, Double_t eLoss,
-                                      Int_t pdgCode, TVector3 Lpos,
-                                      TVector3 Lmom, Int_t eventID) {
-  fexitHadronAbsorberPointCollection->emplace_back(trackID, detID, pos, mom,
-                                                   time, length, eLoss, pdgCode,
-                                                   Lpos, Lmom, eventID);
-  return &(fexitHadronAbsorberPointCollection->back());
-}
-
 void exitHadronAbsorber::Register() {
+  fDetPoints = new std::vector<vetoPoint>();
   TString name = fVetoName + "Point";
-  FairRootManager::Instance()->RegisterAny(
-      name.Data(), fexitHadronAbsorberPointCollection, kTRUE);
-}
-
-TClonesArray* exitHadronAbsorber::GetCollection(Int_t iColl) const {
-  return nullptr;
-}
-
-void exitHadronAbsorber::Reset() {
-  fexitHadronAbsorberPointCollection->clear();
-}
-
-void exitHadronAbsorber::UpdatePointTrackIndices(
-    const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fexitHadronAbsorberPointCollection) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
+  FairRootManager::Instance()->RegisterAny(name.Data(), fDetPoints, kTRUE);
 }

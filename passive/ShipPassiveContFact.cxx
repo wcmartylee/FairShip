@@ -14,15 +14,13 @@
 /////////////////////////////////////////////////////////////
 #include "ShipPassiveContFact.h"
 
-#include <string.h>  // for strcmp, NULL
+#include <cstring>  // for strcmp
 
 #include "FairRuntimeDb.h"  // for FairRuntimeDb
 #include "TList.h"          // for TList
 #include "TString.h"        // for TString
 
 class FairParSet;
-
-using namespace std;
 
 // static ShipPassiveContFact gShipPassiveContFact;
 

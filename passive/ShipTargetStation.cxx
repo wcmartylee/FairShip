@@ -9,6 +9,7 @@
 #include "FairLogger.h"
 #include "FairRun.h"        // for FairRun
 #include "FairRuntimeDb.h"  // for FairRuntimeDb
+#include "ShipGeoUtil.h"
 #include "ShipUnit.h"
 #include "TGeoBBox.h"
 #include "TGeoCompositeShape.h"
@@ -24,61 +25,39 @@
 using ShipUnit::cm;
 using ShipUnit::mm;
 
-ShipTargetStation::~ShipTargetStation() {}
+ShipTargetStation::~ShipTargetStation() = default;
 ShipTargetStation::ShipTargetStation() : FairModule("ShipTargetStation", "") {}
 
 ShipTargetStation::ShipTargetStation(const char* name, const Double_t tl,
-                                     const Double_t tz, const TargetVersion tV,
-                                     const int nS, const int HeT,
-                                     const char* Title)
+                                     const Double_t tz, const int nS,
+                                     const int HeT, const char* Title)
     : FairModule(name, Title) {
   fTargetLength = tl;
   fTargetZ = tz;
-  fTV = tV;
   fnS = nS;
   fHeT = HeT;
-}
-
-// -----   Private method InitMedium
-Int_t ShipTargetStation::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != nullptr) return ShipMedium->getMediumIndex();
-  return geoBuild->createMedium(ShipMedium);
 }
 
 void ShipTargetStation::ConstructGeometry() {
   TGeoVolume* top = gGeoManager->GetTopVolume();
 
-  InitMedium("tungsten");
+  ShipGeo::InitMedium("tungsten");
   TGeoMedium* tungsten = gGeoManager->GetMedium("tungsten");
-  InitMedium("tantalum");
+  ShipGeo::InitMedium("tantalum");
   TGeoMedium* tantalum = gGeoManager->GetMedium("tantalum");
-  InitMedium("molybdenum");
+  ShipGeo::InitMedium("molybdenum");
   TGeoMedium* mo = gGeoManager->GetMedium("molybdenum");
-  InitMedium("iron");
+  ShipGeo::InitMedium("iron");
   TGeoMedium* iron = gGeoManager->GetMedium("iron");
-  InitMedium("steel316L");
+  ShipGeo::InitMedium("steel316L");
   TGeoMedium* steel316L = gGeoManager->GetMedium("steel316L");
-  InitMedium("copper");
+  ShipGeo::InitMedium("copper");
   TGeoMedium* copper = gGeoManager->GetMedium("copper");
 
-  InitMedium("H2O");
-  TGeoMedium* water = gGeoManager->GetMedium("H2O");
-  InitMedium("Inconel718");
+  ShipGeo::InitMedium("Inconel718");
   TGeoMedium* inc718 = gGeoManager->GetMedium("Inconel718");
 
-  InitMedium("vacuums");
+  ShipGeo::InitMedium("vacuums");
   TGeoMedium* vacuum = gGeoManager->GetMedium("vacuums");
 
   double He_T = 273.15 + fHeT;       // in K, use average 90 degrees C.
@@ -86,7 +65,7 @@ void ShipTargetStation::ConstructGeometry() {
 
   std::ostringstream lHename;
   lHename << "PressurisedHe" << fHeT;
-  InitMedium(lHename.str().c_str());
+  ShipGeo::InitMedium(lHename.str().c_str());
   TGeoMedium* pressurised_He = gGeoManager->GetMedium(lHename.str().c_str());
 
   // CAMM- dirty fix to have pressure and temperature correct for Geant4.
@@ -94,7 +73,7 @@ void ShipTargetStation::ConstructGeometry() {
   TGeoMaterial* fixedCooler = pressurised_He->GetMaterial();
   fixedCooler->SetTemperature(He_T);
   fixedCooler->SetPressure(He_P);
-  TGeoMedium* cooler = (fTV == TargetVersion::Jun25) ? pressurised_He : water;
+  TGeoMedium* cooler = pressurised_He;
 
   LOG(info) << "-- Target cooler: " << cooler->GetName()
             << " T=" << cooler->GetMaterial()->GetTemperature()

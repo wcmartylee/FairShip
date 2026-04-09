@@ -37,7 +37,7 @@ def parse_compiler_output(line):
     }
 
 
-def make_relative_path(file_path, repo_name="FairShip"):
+def make_relative_path(file_path, repo_name="FairShip") -> str:
     """
     Convert absolute path to relative path from repo root.
 
@@ -92,7 +92,7 @@ def make_relative_path(file_path, repo_name="FairShip"):
     return path.name
 
 
-def create_annotation(parsed, repo_dir="FairShip"):
+def create_annotation(parsed, repo_dir="FairShip") -> str:
     """
     Create GitHub annotation command from parsed compiler output.
 
@@ -110,24 +110,15 @@ def create_annotation(parsed, repo_dir="FairShip"):
     title = parsed["flag"] if parsed["flag"] else parsed["severity"]
 
     # Escape special characters in message
-    message = (
-        parsed["message"].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-    )
+    message = parsed["message"].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
 
     # Create annotation command
-    annotation = (
-        f"::{severity} "
-        f"file={rel_path},"
-        f"line={parsed['line']},"
-        f"col={parsed['col']},"
-        f"title={title}"
-        f"::{message}"
-    )
+    annotation = f"::{severity} file={rel_path},line={parsed['line']},col={parsed['col']},title={title}::{message}"
 
     return annotation
 
 
-def main():
+def main() -> None:
     """Parse stdin and output annotations."""
     annotation_count = {"error": 0, "warning": 0, "notice": 0}
 

@@ -7,13 +7,10 @@
 // -------------------------------------------------------------------------
 #include "ShipStack.h"
 
-#include <stddef.h>  // for NULL
-
 #include <iosfwd>    // for ostream
 #include <iostream>  // for operator<<, etc
 
 #include "FairDetector.h"        // for FairDetector
-#include "FairLink.h"            // for FairLink
 #include "FairLogger.h"          // for FairLogger, MESSAGE_ORIGIN
 #include "FairMCPoint.h"         // for FairMCPoint
 #include "FairRootManager.h"     // for FairRootManager
@@ -138,7 +135,7 @@ TParticle* ShipStack::PopNextTrack(Int_t& iTrack) {
   // If end of stack: Return empty pointer
   if (fStack.empty()) {
     iTrack = -1;
-    return NULL;
+    return nullptr;
   }
 
   // If not, get next particle from stack
@@ -147,7 +144,7 @@ TParticle* ShipStack::PopNextTrack(Int_t& iTrack) {
 
   if (!thisParticle) {
     iTrack = 0;
-    return NULL;
+    return nullptr;
   }
 
   fCurrentTrack = thisParticle->GetStatusCode();
@@ -176,7 +173,7 @@ TParticle* ShipStack::PopPrimaryForTracking(Int_t iPrim) {
   ",iPrim); Fatal("ShipStack::PopPrimaryForTracking", "Not a primary track");
   }*/
   if (!part->TestBit(kDoneBit))
-    return NULL;
+    return nullptr;
   else
     return part;
 }
@@ -206,7 +203,11 @@ void ShipStack::AddParticle(TParticle* oldPart) {
 void ShipStack::FillTrackArray() {
   LOG(debug) << "ShipStack: Filling MCTrack array...";
 
-  Int_t evtNo = gMC->CurrentEvent();
+  // Some safeties to make sure everything exists
+  if (!gMC) return;
+  if (gMC->GetStack() == nullptr) return;
+
+  Int_t evtNo = -1;
 
   // --> Reset index map and number of output tracks
   fIndexMap.clear();
@@ -214,6 +215,8 @@ void ShipStack::FillTrackArray() {
 
   // --> Check tracks for selection criteria
   SelectTracks();
+
+  if (fNParticles > 0) evtNo = gMC->CurrentEvent();
 
   // --> Loop over fParticles array and copy selected tracks
   for (Int_t iPart = 0; iPart < fNParticles; iPart++) {
@@ -273,7 +276,7 @@ void ShipStack::UpdateTrackIndex(TRefArray* detList) {
     fDetIter->Reset();
   }
 
-  FairDetector* det = NULL;
+  FairDetector* det = nullptr;
   while ((det = dynamic_cast<FairDetector*>(fDetIter->Next()))) {
     // --> Check if detector uses STL containers (std::vector)
     if (auto* stlDet = dynamic_cast<ISTLPointContainer*>(det)) {
@@ -299,7 +302,6 @@ void ShipStack::UpdateTrackIndex(TRefArray* detList) {
                  iTrack);
           }
           point->SetTrackID((*fIndexIter).second);
-          point->SetLink(FairLink("MCTrack", (*fIndexIter).second));
         }
 
       }  // Collections of this detector
@@ -347,11 +349,7 @@ void ShipStack::AddPoint(DetectorId detId) {
   Int_t iDet = detId;
   // cout << "Add point for Detektor" << iDet << endl;
   pair<Int_t, Int_t> a(fCurrentTrack, iDet);
-  if (fPointsMap.find(a) == fPointsMap.end()) {
-    fPointsMap[a] = 1;
-  } else {
-    fPointsMap[a]++;
-  }
+  ++fPointsMap[a];
 }
 // -------------------------------------------------------------------------
 
@@ -362,11 +360,7 @@ void ShipStack::AddPoint(DetectorId detId, Int_t iTrack) {
   }
   Int_t iDet = detId;
   pair<Int_t, Int_t> a(iTrack, iDet);
-  if (fPointsMap.find(a) == fPointsMap.end()) {
-    fPointsMap[a] = 1;
-  } else {
-    fPointsMap[a]++;
-  }
+  ++fPointsMap[a];
 }
 // -------------------------------------------------------------------------
 
@@ -414,7 +408,7 @@ void ShipStack::SelectTracks() {
     Int_t nPoints = 0;
     for (Int_t iDet = kVETO; iDet < kEndOfList; iDet++) {
       pair<Int_t, Int_t> a(i, iDet);
-      if (fPointsMap.find(a) != fPointsMap.end()) {
+      if (fPointsMap.contains(a)) {
         nPoints += fPointsMap[a];
       }
     }

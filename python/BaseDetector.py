@@ -18,9 +18,9 @@ class BaseDetector(ABC):
         branchName=None,
         mcBranchType=None,
         mcBranchName=None,
-        splitLevel=99,
+        splitLevel: int = 99,
         outtree=None,
-    ):
+    ) -> None:
         """Initialize the detector digitizer."""
         self.name = name
         self.intree = intree
@@ -31,33 +31,29 @@ class BaseDetector(ABC):
         self.mcBranch = None
         if mcBranchName:
             self.MCdet = ROOT.std.vector("std::vector< int >")()
-            self.mcBranch = self.outtree.Branch(
-                mcBranchName, self.MCdet, 32000, splitLevel
-            )
+            self.mcBranch = self.outtree.Branch(mcBranchName, self.MCdet, 32000, splitLevel)
 
         if branchName:
-            self.branch = self.outtree.Branch(
-                f"Digi_{branchName}Hits", self.det, 32000, splitLevel
-            )
+            self.branch = self.outtree.Branch(f"Digi_{branchName}Hits", self.det, 32000, splitLevel)
         else:
-            self.branch = self.outtree.Branch(
-                f"Digi_{name}Hits", self.det, 32000, splitLevel
-            )
+            self.branch = self.outtree.Branch(f"Digi_{name}Hits", self.det, 32000, splitLevel)
 
-    def delete(self):
+    def delete(self) -> None:
         """Clear detector hit containers."""
         self.det.clear()
         if self.MCdet:
             self.MCdet.clear()
 
-    def fill(self):
-        """Fill detector hit branches."""
-        self.branch.Fill()
-        if self.mcBranch:
-            self.mcBranch.Fill()
+    def fill(self) -> None:  # noqa: B027
+        """Fill detector hit branches.
+
+        Note: This method is now a no-op to prevent double-filling.
+        All branches are filled synchronously by recoTree.Fill() in the main loop.
+        """
+        pass
 
     @abstractmethod
-    def digitize(self):
+    def digitize(self) -> None:
         """Digitize detector hits.
 
         This method must be implemented by all detector subclasses to convert
@@ -65,7 +61,7 @@ class BaseDetector(ABC):
         """
         pass
 
-    def process(self):
+    def process(self) -> None:
         """Process one event: delete, digitize, and fill."""
         self.delete()
         self.digitize()

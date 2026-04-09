@@ -19,16 +19,16 @@ class FairField;
 class ShipFieldCreator : public FairFieldFactory {
  public:
   ShipFieldCreator();
-  virtual ~ShipFieldCreator();
-  virtual FairField* createFairField();
-  virtual void SetParm();
+  ~ShipFieldCreator() override;
+  FairField* createFairField() override;
+  void SetParm() override;
   ClassDef(ShipFieldCreator, 1);
 
  protected:
   ShipFieldPar* fFieldPar;
 
  private:
-  ShipFieldCreator(const ShipFieldCreator&);
-  ShipFieldCreator& operator=(const ShipFieldCreator&);
+  ShipFieldCreator(const ShipFieldCreator&) = delete;
+  ShipFieldCreator& operator=(const ShipFieldCreator&) = delete;
 };
 #endif  // FIELD_SHIPFIELDCREATOR_H_

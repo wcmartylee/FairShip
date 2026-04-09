@@ -18,12 +18,12 @@
 #include "FairGeoMedia.h"
 #include "FairGeoNode.h"
 #include "FairGeoVolume.h"
-#include "FairLink.h"
 #include "FairRootManager.h"
 #include "FairRun.h"
 #include "FairRuntimeDb.h"
 #include "FairVolume.h"
 #include "ShipDetectorList.h"
+#include "ShipGeoUtil.h"
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
@@ -45,69 +45,16 @@ using std::cout;
 using std::endl;
 
 UpstreamTagger::UpstreamTagger()
-    : FairDetector("UpstreamTagger", kTRUE, kUpstreamTagger),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      //
+    : Detector("UpstreamTagger", kTRUE, kUpstreamTagger),
       det_zPos(0),
-
-      //
       UpstreamTagger_fulldet(0),
-      scoringPlaneUBText(0),
-      //
-      fUpstreamTaggerPoints(nullptr) {}
+      scoringPlaneUBText(0) {}
 
 UpstreamTagger::UpstreamTagger(const char* name, Bool_t active)
-    : FairDetector(name, active, kUpstreamTagger),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      //
+    : Detector(name, active, kUpstreamTagger),
       det_zPos(0),
-
-      //
       UpstreamTagger_fulldet(0),
-      scoringPlaneUBText(0),  // Initialize new scoring plane to nullptr
-                              //
-      fUpstreamTaggerPoints(nullptr) {}
-
-void UpstreamTagger::Initialize() { FairDetector::Initialize(); }
-
-UpstreamTagger::~UpstreamTagger() {
-  if (fUpstreamTaggerPoints) {
-    fUpstreamTaggerPoints->clear();
-    delete fUpstreamTaggerPoints;
-  }
-}
-
-Int_t UpstreamTagger::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != NULL) return ShipMedium->getMediumIndex();
-
-  return geoBuild->createMedium(ShipMedium);
-
-  return 0;
-}
+      scoringPlaneUBText(0) {}
 
 Bool_t UpstreamTagger::ProcessHits(FairVolume* vol) {
   /** This method is called from the MC stepping */
@@ -131,7 +78,7 @@ Bool_t UpstreamTagger::ProcessHits(FairVolume* vol) {
     }
 
     fTrackID = gMC->GetStack()->GetCurrentTrackNumber();
-
+    fEventID = gMC->CurrentEvent();
     Int_t uniqueId;
     gMC->CurrentVolID(uniqueId);
     if (uniqueId > 1000000)  // Solid scintillator case
@@ -151,7 +98,7 @@ Bool_t UpstreamTagger::ProcessHits(FairVolume* vol) {
     Double_t ymean = (fPos.Y() + Pos.Y()) / 2.;
     Double_t zmean = (fPos.Z() + Pos.Z()) / 2.;
 
-    AddHit(fTrackID, uniqueId, TVector3(xmean, ymean, zmean),
+    AddHit(fEventID, fTrackID, uniqueId, TVector3(xmean, ymean, zmean),
            TVector3(fMom.Px(), fMom.Py(), fMom.Pz()), fTime, fLength, fELoss,
            pdgCode, TVector3(Pos.X(), Pos.Y(), Pos.Z()),
            TVector3(Mom.Px(), Mom.Py(), Mom.Pz()));
@@ -164,38 +111,6 @@ Bool_t UpstreamTagger::ProcessHits(FairVolume* vol) {
   return kTRUE;
 }
 
-void UpstreamTagger::EndOfEvent() { fUpstreamTaggerPoints->clear(); }
-
-void UpstreamTagger::Register() {
-  /** This will create a branch in the output tree called
-      UpstreamTaggerPoint, setting the last parameter to kFALSE means:
-      this collection will not be written to the file, it will exist
-      only during the simulation.
-  */
-
-  fUpstreamTaggerPoints = new std::vector<UpstreamTaggerPoint>();
-  FairRootManager::Instance()->RegisterAny("UpstreamTaggerPoint",
-                                           fUpstreamTaggerPoints, kTRUE);
-}
-
-TClonesArray* UpstreamTagger::GetCollection(Int_t iColl) const {
-  return nullptr;
-}
-
-void UpstreamTagger::UpdatePointTrackIndices(
-    const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fUpstreamTaggerPoints) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
-}
-
-void UpstreamTagger::Reset() { fUpstreamTaggerPoints->clear(); }
-
 void UpstreamTagger::ConstructGeometry() {
   TGeoVolume* top = gGeoManager->GetTopVolume();
 
@@ -205,7 +120,7 @@ void UpstreamTagger::ConstructGeometry() {
 
   ///////////////////////////////////////////////////////
 
-  InitMedium("vacuum");
+  ShipGeo::InitMedium("vacuum");
   TGeoMedium* Vacuum_box = gGeoManager->GetMedium("vacuum");
   ///////////////////////////////////////////////////////////////////
 
@@ -226,14 +141,4 @@ void UpstreamTagger::ConstructGeometry() {
   //////////////////////////////////////////////////////////////////
 
   return;
-}
-
-UpstreamTaggerPoint* UpstreamTagger::AddHit(Int_t trackID, Int_t detID,
-                                            TVector3 pos, TVector3 mom,
-                                            Double_t time, Double_t length,
-                                            Double_t eLoss, Int_t pdgCode,
-                                            TVector3 Lpos, TVector3 Lmom) {
-  fUpstreamTaggerPoints->emplace_back(trackID, detID, pos, mom, time, length,
-                                      eLoss, pdgCode, Lpos, Lmom);
-  return &(fUpstreamTaggerPoints->back());
 }

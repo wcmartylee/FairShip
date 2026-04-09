@@ -7,55 +7,64 @@
 # ${ShipRoot_BINARY_DIR} or ${CMAKE_BINARY_DIR}. This difference is important
 # for the base classes which are in FAIRROOT and ShipRoot.
 
-# Check if cmake has the required version
-cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
+# CMake minimum version driven by ROOT 6.36.06
+cmake_minimum_required(VERSION 3.20.0 FATAL_ERROR)
 
-foreach(p CMP0028 # double colon for imported and alias targets
-          CMP0074 # use _ROOT env variables
-          CMP0144 # use <PACKAGENAME>_ROOT variables
-)
-  if(POLICY ${p})
-    cmake_policy(SET ${p} NEW)
-  endif()
-endforeach()
+# CMP0028 and CMP0074 are already NEW at cmake_minimum_required 3.20.
+# CMP0118 (3.20): GENERATED sources visible across directories.
+cmake_policy(SET CMP0118 NEW)
+# CMP0144 (3.27): use <PACKAGENAME>_ROOT variables in find_package.
+if(POLICY CMP0144)
+    cmake_policy(SET CMP0144 NEW)
+endif()
 
-# Set name of our project to "ShipRoot". Has to be done after check of cmake
-# version since this is a new feature
-project(ShipRoot)
+project(FairShip VERSION 0.0.0 LANGUAGES CXX)
+
+include(GNUInstallDirs)
+
+include(GNUInstallDirs)
+# aliBuild modulefile expects libraries in lib/, not lib64/
+set(CMAKE_INSTALL_LIBDIR lib)
+
+# C++20 required; ROOT 6.36 requires at least C++17
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_path(
-  FAIRBASE
-  NAMES FairRun.h
-  PATHS ${CMAKE_SOURCE_DIR}/base/steer ${FAIRBASE}
-  NO_DEFAULT_PATH)
+    FAIRBASE
+    NAMES FairRun.h
+    PATHS ${CMAKE_SOURCE_DIR}/base/steer ${FAIRBASE}
+    NO_DEFAULT_PATH
+)
 
 if(FAIRBASE)
-  message(STATUS "Found FAIRBASE")
-  set(FAIRBASE ${FAIRBASE})
-else(FAIRBASE)
-  message(STATUS "NOT Found FAIRBASE")
-  if(NOT DEFINED ENV{FAIRROOTPATH})
-    message(
-      FATAL_ERROR
-        "You did not define the environment variable FAIRROOTPATH which is needed to find FairRoot. Please set this variable and execute cmake again."
-    )
-  endif(NOT DEFINED ENV{FAIRROOTPATH})
-  set(FAIRROOTPATH $ENV{FAIRROOTPATH})
-endif(FAIRBASE)
+    message(STATUS "Found FAIRBASE")
+    set(FAIRBASE ${FAIRBASE})
+else()
+    message(STATUS "NOT Found FAIRBASE")
+    if(NOT DEFINED ENV{FAIRROOTPATH})
+        message(
+            FATAL_ERROR
+            "You did not define the environment variable FAIRROOTPATH which is needed to find FairRoot. Please set this variable and execute cmake again."
+        )
+    endif()
+    set(FAIRROOTPATH $ENV{FAIRROOTPATH})
+endif()
 
-# where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is
-# checked
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
-set(CMAKE_MODULE_PATH "${FAIRROOTPATH}/share/fairbase/cmake/modules"
-                      ${CMAKE_MODULE_PATH})
-set(CMAKE_MODULE_PATH "${FAIRROOTPATH}/share/fairbase/cmake/modules_old"
-                      ${CMAKE_MODULE_PATH})
+# Where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/
+list(
+    PREPEND CMAKE_MODULE_PATH
+    "${FAIRROOTPATH}/share/fairbase/cmake/modules_old"
+    "${FAIRROOTPATH}/share/fairbase/cmake/modules"
+    "${CMAKE_SOURCE_DIR}/cmake/modules"
+)
 
 if(FAIRROOTPATH)
-  set(CheckSrcDir "${FAIRROOTPATH}/share/fairbase/cmake/checks")
-else(FAIRROOTPATH)
-  set(CheckSrcDir "${CMAKE_SOURCE_DIR}/cmake/checks")
-endif(FAIRROOTPATH)
+    set(CheckSrcDir "${FAIRROOTPATH}/share/fairbase/cmake/checks")
+else()
+    set(CheckSrcDir "${CMAKE_SOURCE_DIR}/cmake/checks")
+endif()
 
 # Load some basic macros which are needed later on
 include(FairMacros)
@@ -66,44 +75,30 @@ include(CheckCompiler)
 # Check the compiler and set the compile and link flags change from DEBUG to
 # RELEASE, don't want to waste CPU time
 if(NOT CMAKE_BUILD_TYPE)
-  message("Set BuildType RELEASE")
-  set(CMAKE_BUILD_TYPE Release)
-endif(NOT CMAKE_BUILD_TYPE)
+    message("Set BuildType RELEASE")
+    set(CMAKE_BUILD_TYPE Release)
+endif()
 check_compiler()
 
-set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
-set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(INCLUDE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/include")
 set(VMCWORKDIR ${ShipRoot_SOURCE_DIR})
-option(USE_PATH_INFO "Information from PATH and LD_LIBRARY_PATH are
-used." OFF)
-
-set(LD_LIBRARY_PATH $ENV{LD_LIBRARY_PATH})
-if(USE_PATH_INFO)
-  set(PATH "$PATH")
-  if(APPLE)
-    set(LD_LIBRARY_PATH $ENV{DYLD_LIBRARY_PATH})
-  else(APPLE)
-    set(LD_LIBRARY_PATH $ENV{LD_LIBRARY_PATH})
-  endif(APPLE)
-else(USE_PATH_INFO)
-  string(REGEX MATCHALL "[^:]+" PATH $ENV{PATH})
-endif(USE_PATH_INFO)
 
 # --------------------- set rpath options -------------
 # When building, use the RPATH
 set(CMAKE_SKIP_BUILD_RPATH FALSE) # don't skip the full RPATH for the build tree
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) # use always the build RPATH for the
-                                          # build tree
+# build tree
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE) # point to directories outside the
-                                            # build tree to the install RPATH
+# build tree to the install RPATH
 
 if(APPLE)
-  set(CMAKE_MACOSX_RPATH TRUE) # use RPATH for MacOSX
-  set(CMAKE_INSTALL_NAME_DIR "@rpath")
-  set(CMAKE_INSTALL_RPATH "@loader_path/") # self relative LIBDIR
+    set(CMAKE_MACOSX_RPATH TRUE) # use RPATH for MacOSX
+    set(CMAKE_INSTALL_NAME_DIR "@rpath")
+    set(CMAKE_INSTALL_RPATH "@loader_path/") # self relative LIBDIR
 else()
-  set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_FULL_LIBDIR}) # install LIBDIR
+    set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_FULL_LIBDIR}) # install LIBDIR
 endif()
 # ------------------- end set rpath options -----------
 
@@ -112,11 +107,11 @@ check_out_of_source_build()
 
 # Check if we are on an UNIX system. If not stop with an error message
 if(NOT UNIX)
-  message(
-    FATAL_ERROR
-      "You're not on an UNIX system. The project was up to now only tested on UNIX systems, so we break here. If you want to go on please edit the CMakeLists.txt in the source directory."
-  )
-endif(NOT UNIX)
+    message(
+        FATAL_ERROR
+        "You're not on an UNIX system. The project was up to now only tested on UNIX systems, so we break here. If you want to go on please edit the CMakeLists.txt in the source directory."
+    )
+endif()
 
 # Set the build type. Possibilities are None, Debug, Release, RelWithDebInfo and
 # MinSizeRel SET(CMAKE_BUILD_TYPE Debug)
@@ -127,10 +122,8 @@ endif(NOT UNIX)
 
 find_package(FairCMakeModules 1.0 REQUIRED)
 include(FairFindPackage2)
-find_package2(PUBLIC ROOT 6.26.14 REQUIRED)
+find_package2(PUBLIC ROOT 6.36 REQUIRED)
 include(ROOTMacros)
-# Include Ship-specific macros to override GENERATE_LIBRARY with target
-# propagation
 include(ShipMacros)
 find_package2(PUBLIC Pythia8 REQUIRED)
 find_package2(PUBLIC EvtGen REQUIRED)
@@ -145,24 +138,12 @@ find_package2(PUBLIC FairLogger REQUIRED)
 find_package2(PUBLIC VMC REQUIRED)
 find_package(genfit2 REQUIRED)
 
-# Configure TPythia6 interface based on ROOT version
-# ROOT < 6.32: TPythia6 is built into libEG (no external dependency needed)
-# ROOT >= 6.32: TPythia6 removed from ROOT, use external EGPythia6 package
-if(ROOT_VERSION VERSION_LESS "6.32")
-  # For older ROOT versions, TPythia6 is built-in
-  message(STATUS "Using built-in TPythia6 from ROOT ${ROOT_VERSION}")
-  set(USE_EXTERNAL_TPYTHIA6 OFF)
-else()
-  # For ROOT >= 6.32, we need external EGPythia6
-  message(STATUS "ROOT ${ROOT_VERSION} requires external EGPythia6")
-  set(USE_EXTERNAL_TPYTHIA6 ON)
-  find_package(ROOTEGPythia6 REQUIRED)
-  message(STATUS "Found ROOTEGPythia6 via CMake config")
-endif()
+# TPythia6 was removed from ROOT in 6.32, use external EGPythia6 package
+find_package(ROOTEGPythia6 REQUIRED)
 
 if(DEFINED $ENV{GSL_ROOT})
-  set(GSL_DIR $ENV{GSL_ROOT})
-endif(DEFINED $ENV{GSL_ROOT})
+    set(GSL_DIR $ENV{GSL_ROOT})
+endif()
 
 # set a variable which should be used in all CMakeLists.txt Defines all basic
 # include directories from fairbase
@@ -175,32 +156,20 @@ setbasicvariables()
 # interested about warnings from the own project. SYSTEM_INCLUDE_DIRECTORIES is
 # defined in FairMacros.cmake. In the moment the defined directories are the
 # root and boost include directories.
-set(SYSTEM_INCLUDE_DIRECTORIES ${SYSTEM_INCLUDE_DIRECTORIES}
-                               ${BASE_INCLUDE_DIRECTORIES})
-
-# Set the library version in the main CMakeLists.txt
-set(FAIRROOT_MAJOR_VERSION 0)
-set(FAIRROOT_MINOR_VERSION 0)
-set(FAIRROOT_PATCH_VERSION 0)
-set(FAIRROOT_VERSION
-    "${FAIRROOT_MAJOR_VERSION}.${FAIRROOT_MINOR_VERSION}.${FAIRROOT_PATCH_VERSION}"
+set(SYSTEM_INCLUDE_DIRECTORIES
+    ${SYSTEM_INCLUDE_DIRECTORIES}
+    ${BASE_INCLUDE_DIRECTORIES}
 )
 
 set(PROJECT_LIBRARY_PROPERTIES
-    ${PROJECT_LIBRARY_PROPERTIES} VERSION "${FAIRROOT_VERSION}" SOVERSION
-    "${FAIRROOT_MAJOR_VERSION}")
+    ${PROJECT_LIBRARY_PROPERTIES}
+    VERSION
+    "${PROJECT_VERSION}"
+    SOVERSION
+    "${PROJECT_VERSION_MAJOR}"
+)
 
-set(CBMLIBDIR ${CMAKE_BINARY_DIR}/lib)
-set(LD_LIBRARY_PATH ${CBMLIBDIR} ${LD_LIBRARY_PATH})
-
-install(
-  DIRECTORY geometry
-  DESTINATION pnd_install
-  PATTERN ".svn" EXCLUDE)
-
-message("-- Set check directory to FairRoot...")
-set(CheckSrcDir "${FAIRROOTPATH}/share/fairbase/cmake/checks")
-# Set(CheckSrcDir "${CMAKE_SOURCE_DIR}/cmake/checks")
+install(DIRECTORY geometry DESTINATION share/${PROJECT_NAME})
 
 # Generate a Clang compile_commands.json "compilation database" file for use
 # with various development tools, such as Vim's YouCompleteMe plugin. See
@@ -211,6 +180,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 # cmake executable to run. The same process will walk through the project's
 # entire directory structure.
 add_subdirectory(shipdata)
+add_subdirectory(Detector)
 add_subdirectory(passive)
 add_subdirectory(SND/EmulsionTarget)
 add_subdirectory(SND/MTC)
@@ -226,11 +196,14 @@ add_subdirectory(muonShieldOptimization)
 add_subdirectory(tests)
 
 add_custom_target(
-  geometry.link ALL
-  COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/geometry
-          ${CMAKE_BINARY_DIR}/geometry
-  COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/macro
-          ${CMAKE_BINARY_DIR}/macro
-  COMMENT
-    "Creating symlinks from ${CMAKE_SOURCE_DIR} to ${CMAKE_BINARY_DIR} for geometry and macro"
+    geometry.link
+    ALL
+    COMMAND
+        ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/geometry
+        ${CMAKE_BINARY_DIR}/geometry
+    COMMAND
+        ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/macro
+        ${CMAKE_BINARY_DIR}/macro
+    COMMENT
+        "Creating symlinks from ${CMAKE_SOURCE_DIR} to ${CMAKE_BINARY_DIR} for geometry and macro"
 )

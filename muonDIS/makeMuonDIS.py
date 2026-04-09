@@ -66,7 +66,7 @@ def rotate(px, py, pz, theta, phi):
     return rotated_momentum.X(), rotated_momentum.Y(), rotated_momentum.Z()
 
 
-def update_file(filename, final_xsec):
+def update_file(filename: str, final_xsec) -> None:
     """Update the DIS cross section of the muon to the converged value from Pythia."""
     file = r.TFile.Open(filename, "read")
 
@@ -103,7 +103,7 @@ headers = [
 Fixtarget = {1: "p+", 0: "n0"}
 
 
-def inspect_file(filename):
+def inspect_file(filename: str) -> None:
     """Inspect the contents of muonDis file."""
     file = r.TFile.Open(filename, "READ")
     tree = file.DIS
@@ -121,15 +121,13 @@ def inspect_file(filename):
         nSBThits = len(event.muon_vetoPoints)
         nUBThits = len(event.muon_UpstreamTaggerPoints)
 
-        table_rows.append(
-            [i, fix_target, nParticles, nSoftTracks, nSBThits, nUBThits, cross_sec]
-        )
+        table_rows.append([i, fix_target, nParticles, nSoftTracks, nSBThits, nUBThits, cross_sec])
 
     file.Close()
     logging.info("\n" + tabulate(table_rows, headers=headers, tablefmt="grid"))
 
 
-def makeMuonDIS():
+def makeMuonDIS() -> None:
     """Generate DIS events."""
     final_xsec = {}
 
@@ -164,9 +162,7 @@ def makeMuonDIS():
     output_tree.Branch("muon_vetoPoints", muon_vetoPoints, 32000, -1)
 
     muon_UpstreamTaggerPoints = r.TClonesArray("UpstreamTaggerPoint")
-    output_tree.Branch(
-        "muon_UpstreamTaggerPoints", muon_UpstreamTaggerPoints, 32000, -1
-    )
+    output_tree.Branch("muon_UpstreamTaggerPoints", muon_UpstreamTaggerPoints, 32000, -1)
 
     myPythia = r.TPythia6()
     myPythia.SetMSEL(2)
@@ -180,9 +176,7 @@ def makeMuonDIS():
     mutype = {-13: "gamma/mu+", 13: "gamma/mu-"}
 
     myPythia.SetMSTU(11, 11)
-    logging.info(
-        f"Processing muon events from {first_mu_event} to {last_mu_event - 1}..."
-    )
+    logging.info(f"Processing muon events from {first_mu_event} to {last_mu_event - 1}...")
 
     nMade = 0
 

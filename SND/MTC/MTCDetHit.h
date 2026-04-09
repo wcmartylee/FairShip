@@ -3,17 +3,15 @@
 // Collaboration
 
 #ifndef SND_MTC_MTCDETHIT_H_
-#define SND_MTC_MTCDETHIT_H_ 1
+#define SND_MTC_MTCDETHIT_H_
 
-#include "MTCDetPoint.h"
-#include "ShipHit.h"
-#include "TObject.h"
-#include "TVector3.h"
+#include <vector>
+
+#include "DetectorHit.h"
 
 class MTCDetPoint;
-class FairVolume;
 
-class MTCDetHit : public ShipHit {
+class MTCDetHit : public SHiP::DetectorHit {
  public:
   /** Default constructor **/
   MTCDetHit();
@@ -25,11 +23,11 @@ class MTCDetHit : public ShipHit {
             const std::vector<Float_t>&);
 
   /** Destructor **/
-  virtual ~MTCDetHit();
+  ~MTCDetHit() override = default;
 
   /** Output to screen **/
-  using ShipHit::Print;
-  void Print();
+  using SHiP::DetectorHit::Print;
+  void Print() const;
   Float_t GetSignal() const { return signals; };
   Float_t GetTime() const { return time; };
   /*
@@ -57,23 +55,22 @@ class MTCDetHit : public ShipHit {
   }
   Int_t GetSiPM() const { return (static_cast<int>(fDetectorID / 1000) % 10); }
   Int_t GetSiPMChan() const { return (fDetectorID % 1000); }
+  TVector3 GetChannelCoordinates() const { return TVector3(Xch, Ych, Zch); }
   Float_t GetEnergy() const;
   void setInvalid() { flag = false; }
   bool isValid() const { return flag; }
   /*
-          SND@LHC comment: from Guido (22.9.2021): A threshold of 3.5pe should
-     be used, which corresponds to 0.031MeV. 1 SiPM channel has 104 pixels,
-     pixel can only see 0 or >0 photons.
+  SND@LHC comment: from Guido (22.9.2021): A threshold of 3.5pe should
+  be used, which corresponds to 0.031MeV. 1 SiPM channel has 104 pixels,
+  pixel can only see 0 or >0 photons.
   */
  private:
   Float_t signals = 0;
   Float_t time;
-  Float_t light_attenuation(Float_t distance);
-  Float_t sipm_saturation(Float_t ly);
-  Float_t n_pixels_to_qdc(Float_t npix);
-  Float_t flag;  ///< flag
+  Float_t Xch = 0.0, Ych = 0.0, Zch = 0.0;
+  Bool_t flag{true};  ///< flag
 
-  ClassDef(MTCDetHit, 4);
+  ClassDef(MTCDetHit, 6);
 };
 
 #endif  // SND_MTC_MTCDETHIT_H_

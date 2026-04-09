@@ -9,8 +9,10 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
+#pragma link C++ class SHiP::Detector<UpstreamTaggerPoint>-;
 #pragma link C++ class UpstreamTagger+;
 #pragma link C++ class UpstreamTaggerPoint+;
+#pragma link C++ class std::vector<UpstreamTaggerPoint>+;
 #pragma link C++ class UpstreamTaggerHit+;
 
 #endif

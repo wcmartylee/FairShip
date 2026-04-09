@@ -1,213 +1,171 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright CERN for the benefit of the SHiP Collaboration
 
-#---Enable Tab completion-----------------------------------------
-try:
-  import rlcompleter, readline
-  readline.parse_and_bind( 'tab: complete' )
-  readline.parse_and_bind( 'set show-all-if-ambiguous On' )
-except:
-  pass
+import os
+import sys
+from collections import Counter
+
+from ROOT import TH1D, TH2D, TH3D, TCanvas, TFile, TProfile, gROOT, gSystem
+
+_error_log: Counter[str] = Counter()
 
 
-from ROOT import TFile,gROOT,TH3D,TH2D,TH1D,TCanvas,TProfile,gSystem
-import os,sys
-
-def readHists(h,fname,wanted=[]):
-  if fname[0:4] == "/eos":
-    eospath = gSystem.Getenv("EOSSHIP")+fname
-    f = TFile.Open(eospath)
-  else:
-    f = TFile(fname)
-  for akey in f.GetListOfKeys():
-    name  =  akey.GetName()
-    try:     hname = int(name)
-    except:  hname = name
-    if len(wanted)>0:
-        if not hname in wanted: continue
-    obj = akey.ReadObj()
-    cln = obj.Class().GetName()
-    if not cln.find('TCanv')<0:
-       h[hname] =  obj.Clone()
-    if cln.find('TH')<0: continue
-    if hname in h:
-       rc = h[hname].Add(obj)
-       if not rc: print("Error when adding histogram ",hname)
+def readHists(h, fname, wanted=None) -> None:
+    if wanted is None:
+        wanted = []
+    if fname[0:4] == "/eos":
+        eospath = gSystem.Getenv("EOSSHIP") + fname
+        f = TFile.Open(eospath)
     else:
-      h[hname] =  obj.Clone()
-      if h[hname].GetSumw2N()==0 : h[hname].Sumw2()
-    h[hname].SetDirectory(gROOT)
-    if cln == 'TH2D' or cln == 'TH2F':
-         for p in [ '_projx','_projy']:
-           if type(hname) == str: projname = hname+p
-           else: projname = str(hname)+p
-           if p.find('x')>-1: h[projname] = h[hname].ProjectionX()
-           else             : h[projname] = h[hname].ProjectionY()
-           h[projname].SetName(name+p)
-           h[projname].SetDirectory(gROOT)
-  return
-def bookHist(h,key=None,title='',nbinsx=100,xmin=0,xmax=1,nbinsy=0,ymin=0,ymax=1,nbinsz=0,zmin=0,zmax=1):
-  if key==None :
-    print('missing key')
+        f = TFile(fname)
+    for akey in f.GetListOfKeys():
+        name = akey.GetName()
+        try:
+            hname = int(name)
+        except ValueError:
+            hname = name
+        if len(wanted) > 0 and hname not in wanted:
+            continue
+        obj = akey.ReadObj()
+        cln = obj.Class().GetName()
+        if "TCanv" in cln:
+            h[hname] = obj.Clone()
+        if "TH" not in cln:
+            continue
+        if hname in h:
+            rc = h[hname].Add(obj)
+            if not rc:
+                print("Error when adding histogram ", hname)
+        else:
+            h[hname] = obj.Clone()
+            if h[hname].GetSumw2N() == 0:
+                h[hname].Sumw2()
+        h[hname].SetDirectory(gROOT)
+        if cln in {"TH2D", "TH2F"}:
+            for p in ["_projx", "_projy"]:
+                if isinstance(hname, str):
+                    projname = hname + p
+                else:
+                    projname = str(hname) + p
+                if "x" in p:
+                    h[projname] = h[hname].ProjectionX()
+                else:
+                    h[projname] = h[hname].ProjectionY()
+                h[projname].SetName(name + p)
+                h[projname].SetDirectory(gROOT)
     return
-  rkey = str(key) # in case somebody wants to use integers, or floats as keys
-  if key in h:    h[key].Reset()
-  elif nbinsz >0:       h[key] = TH3D(rkey,title,nbinsx,xmin,xmax,nbinsy,ymin,ymax,nbinsz,zmin,zmax)
-  elif nbinsy >0:       h[key] = TH2D(rkey,title,nbinsx,xmin,xmax,nbinsy,ymin,ymax)
-  else:                 h[key] = TH1D(rkey,title,nbinsx,xmin,xmax)
-  h[key].SetDirectory(gROOT)
-def bookProf(h,key=None,title='',nbinsx=100,xmin=0,xmax=1,ymin=None,ymax=None,option=""):
-  if key==None :
-    print('missing key')
-    return
-  rkey = str(key) # in case somebody wants to use integers, or floats as keys
-  if key in h:    h[key].Reset()
-  if ymin==None or ymax==None:  h[key] = TProfile(key,title,nbinsx,xmin,xmax,option)
-  else:  h[key] = TProfile(key,title,nbinsx,xmin,xmax,ymin,ymax,option)
-  h[key].SetDirectory(gROOT)
-def writeHists(h,fname,plusCanvas=False):
-  f = TFile(fname,'RECREATE')
-  for akey in h:
-    if not hasattr(h[akey],'Class'): continue
-    cln = h[akey].Class().GetName()
-    if not cln.find('TH')<0 or not cln.find('TP')<0:   h[akey].Write()
-    if plusCanvas and not cln.find('TC')<0:   h[akey].Write()
-  f.Close()
-def bookCanvas(h,key=None,title='',nx=900,ny=600,cx=1,cy=1):
-  if key==None :
-    print('missing key')
-    return
-  if key not in h:
-    h[key]=TCanvas(key,title,nx,ny)
-    h[key].Divide(cx,cy)
-def reportError(s):
- l = sys.modules['__main__'].log
- if s not in l: l[s]=0
- l[s]+=1
-def errorSummary():
- l = sys.modules['__main__'].log
- if len(l) > 0: "Summary of recorded incidents:"
- for e in l:
-    print(e,':',l[e])
-def printout(atc,name,Work):
-  atc.Update()
-  for x in ['.gif','.eps','.jpg'] :
-    temp = name+x
-    atc.Print(temp)
-    if x!='.jpg':
-      os.system('cp '+temp+' '+Work)
 
-def setAttributes(pyl,leaves,printout=False):
-  names = {}
-  if printout: print('entries',leaves.GetEntries())
-  for i in range(0,leaves.GetEntries() ) :
-    leaf = leaves.At(i)
-    name = leaf.GetName()
-    if printout: print(name)
-    names[name]=i
-    pyl.__setattr__(name,leaf)
-  return names
-# read back
-class PyListOfLeaves(dict) :
-    pass
 
-import operator
-def container_sizes(sTree,perEvent=False):
- counter = {}
- print("name      ZipBytes[MB]    TotBytes[MB]    TotalSize[MB]")
- counter['total']=[0,0,0]
- for l in sTree.GetListOfLeaves():
-  b = l.GetBranch()
-  nm = b.GetName()
-  print("%30s :%8.3F   %8.3F    %8.3F "%(nm,b.GetZipBytes()/1.E6,b.GetTotBytes()/1.E6,b.GetTotalSize()/1.E6))
-  bnm = nm.split('.')[0]
-  if bnm not in counter: counter[bnm]=[0,0,0]
-  counter[bnm][0]+=b.GetZipBytes()/1.E6
-  counter[bnm][1]+=b.GetTotBytes()/1.E6
-  counter[bnm][2]+=b.GetTotalSize()/1.E6
-  counter['total'][0]+=b.GetZipBytes()/1.E6
-  counter['total'][1]+=b.GetTotBytes()/1.E6
-  counter['total'][2]+=b.GetTotalSize()/1.E6
- print("---> SUMMARY <---------------")
- N = sTree.GetEntries()/1000.
- if perEvent:
-  print("                     name     ZipBytes[kB]/ev  TotBytes[kB]/ev  TotalSize[kB]/ev")
- else:
-  print("                     name     ZipBytes[MB]  TotBytes[MB]  TotalSize[MB]")
- sorted_c = sorted(counter.items(), key=operator.itemgetter(1))
- sorted_c.reverse()
- for i in range(len(sorted_c)):
-  x = sorted_c[i][0]
-  if perEvent:
-   print("%30s :%8.3F      %8.3F       %8.3F"%(x,counter[x][0]/N,counter[x][1]/N,counter[x][2]/N))
-  else:
-   print("%30s :%8.3F   %8.3F    %8.3F"%(x,counter[x][0],counter[x][1],counter[x][2]))
-
-def stripOffBranches(fout):
-    f = TFile(fout)
-    sTree = f.Get("cbmsim")
-    nEvents = sTree.GetEntries()
-    strip = False
-    oldTargetClass = False
-    if sTree.GetBranch("SmearedHits"):
-         sTree.SetBranchStatus("SmearedHits",0)
-         strip = True
-    if sTree.GetBranch("TargetPoint"):
-         if sTree.GetLeaf("cbmroot.Target.TargetPoint.fEmTop"): oldTargetClass = True # old class
-         else:
-           for x in sTree.GetListOfLeaves():
-              if not x.GetName().find("TargetPoint")<0:
-               b = x.GetBranch().GetName()
-               sTree.SetBranchStatus(b,0)
-         strip = True
-    if not strip: return
-    sFile = fout.replace("_rec.root","_recs.root")
-    recf = TFile(sFile,"recreate")
-    if not oldTargetClass: newTree = sTree.CloneTree(-1,'fast')
+def bookHist(
+    h,
+    key=None,
+    title: str = "",
+    nbinsx: int = 100,
+    xmin: float = 0,
+    xmax: float = 1,
+    nbinsy: int = 0,
+    ymin: float = 0,
+    ymax: float = 1,
+    nbinsz: int = 0,
+    zmin: float = 0,
+    zmax: float = 1,
+) -> None:
+    if key is None:
+        print("missing key")
+        return
+    rkey = str(key)  # in case somebody wants to use integers, or floats as keys
+    if key in h:
+        h[key].Reset()
+    elif nbinsz > 0:
+        h[key] = TH3D(rkey, title, nbinsx, xmin, xmax, nbinsy, ymin, ymax, nbinsz, zmin, zmax)
+    elif nbinsy > 0:
+        h[key] = TH2D(rkey, title, nbinsx, xmin, xmax, nbinsy, ymin, ymax)
     else:
-     newTree = sTree.CloneTree(0)
-     for n in range(nEvents):
-      sTree.GetEntry(n)
-      if oldTargetClass: sTree.TargetPoint.Clear()
-      rc = newTree.Fill()
-      sTree.FitTracks.Delete() # stupid ROOT or whoever, otherwise huge memory leak, does not help
-    sTree.Clear()
-    newTree.AutoSave()
+        h[key] = TH1D(rkey, title, nbinsx, xmin, xmax)
+    h[key].SetDirectory(gROOT)
+
+
+def bookProf(
+    h,
+    key=None,
+    title: str = "",
+    nbinsx: int = 100,
+    xmin: float = 0,
+    xmax: float = 1,
+    ymin: float | None = None,
+    ymax: float | None = None,
+    option: str = "",
+) -> None:
+    if key is None:
+        print("missing key")
+        return
+    rkey = str(key)  # in case somebody wants to use integers, or floats as keys
+    if key in h:
+        h[key].Reset()
+    if ymin is None or ymax is None:
+        h[key] = TProfile(rkey, title, nbinsx, xmin, xmax, option)
+    else:
+        h[key] = TProfile(rkey, title, nbinsx, xmin, xmax, ymin, ymax, option)
+    h[key].SetDirectory(gROOT)
+
+
+def writeHists(h, fname, plusCanvas: bool = False) -> None:
+    f = TFile(fname, "RECREATE")
+    for akey in h:
+        if not hasattr(h[akey], "Class"):
+            continue
+        cln = h[akey].Class().GetName()
+        if "TH" in cln or "TP" in cln:
+            h[akey].Write()
+        if plusCanvas and "TC" in cln:
+            h[akey].Write()
     f.Close()
-    recf.Close()
-    # should do some sanity checks before deleting old file
-    f = TFile(sFile)
-    sTree = f.Get("cbmsim")
-    if nEvents == sTree.GetEntries(): print("looks ok, could be deleted",os.path.abspath('.'))
-    else:  print("stripping failed, keep old file",os.path.abspath('.'))
-    # os.system('mv '+sFile +' '+fout)
-def checkFileExists(x):
-    if x[0:4] == "/eos": f=gSystem.Getenv("EOSSHIP")+x
-    else: f=x
-    test = TFile.Open(f)
-    if not test:
-       print("input file",f," does not exist. Missing authentication?")
-       os._exit(1)
-    if test.FindObjectAny('cbmsim'):
-     return 'tree'
+
+
+def bookCanvas(h, key=None, title: str = "", nx: int = 900, ny: int = 600, cx: int = 1, cy: int = 1) -> None:
+    if key is None:
+        print("missing key")
+        return
+    if key not in h:
+        h[key] = TCanvas(key, title, nx, ny)
+        h[key].Divide(cx, cy)
+
+
+def reportError(s) -> None:
+    _error_log[s] += 1
+
+
+def errorSummary() -> None:
+    if _error_log:
+        print("Summary of recorded incidents:")
+    for e in _error_log:
+        print(e, ":", _error_log[e])
+
+
+def checkFileExists(x) -> str:
+    if isinstance(x, str):
+        tx = [x]
     else:
-     return 'ntuple'
-def findMaximumAndMinimum(histo):
- amin,amax = 1E30, -130
- nmin,nmax = 0, 0
- for n in range(1,histo.GetNbinsX()+1):
-  c =  histo.GetBinContent(n)
-  if c>amax:
-    amax = c
-    nmax = n
-  if c<amin:
-    amin = c
-    nmin = n
- return amin,amax,nmin,nmax
-def makeIntegralDistrib(h,key):
- name = 'I-'+key
- h[name]=h[key].Clone(name)
- h[name].SetTitle('Integral > '+h[key].GetTitle())
- for n in range(1,h[key].GetNbinsX()+1):
-   if n==1: h[name].SetBinContent(1,h[key].GetSumOfWeights())
-   else: h[name].SetBinContent(n,h[name].GetBinContent(n-1)-h[key].GetBinContent(n-1))
+        tx = x
+    if isinstance(tx, (list, tuple)):
+        # See what we are looking at and make sure all the files are of the same type
+        fileType = ""
+        for _f in tx:
+            if _f[0:4] == "/eos":
+                f = gSystem.Getenv("EOSSHIP") + _f
+            else:
+                f = _f
+            test = TFile.Open(f)
+            if not test:
+                print("ERROR FileCheck: input file", f, " does not exist. Missing authentication?")
+                sys.exit(1)
+            if test.FindObjectAny("cbmsim") and fileType in ["tree", ""]:
+                fileType = "tree"
+            elif fileType in ["ntuple", ""]:
+                fileType = "ntuple"
+            else:
+                print("ERROR FileCheck: Supplied list of files not all of tree or ntuple type")
+        return fileType
+    else:
+        print("ERROR FileCheck: File must be either a string or list of files")
+        os._exit(1)

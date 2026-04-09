@@ -5,13 +5,11 @@
 #include "FixedTargetGenerator.h"
 
 #include <TGeoManager.h>
-#include <math.h>
 
 #include <array>
+#include <cmath>
 
 #include "BeamSmearingUtils.h"
-#include "EvtGenBase/EvtRandom.hh"
-#include "EvtGenBase/EvtSimpleRandomEngine.hh"
 #include "FairMCEventHeader.h"
 #include "FairPrimaryGenerator.h"
 #include "HNLPythia8Generator.h"
@@ -71,6 +69,10 @@ Bool_t FixedTargetGenerator::InitForCharmOrBeauty(TString fInName, Int_t nev,
   nEntry = nStart;
   // open input file with charm or beauty
   fin = TFile::Open(fInName);
+  if (!fin) {
+    LOG(fatal) << "Could not open input file: " << fInName.Data();
+    return kFALSE;
+  }
   nTree = dynamic_cast<TNtuple*>(
       fin->FindObjectAny("pythia6"));  // old format, simple ntuple
   nEvents = nTree->GetEntries();
@@ -101,8 +103,13 @@ Bool_t FixedTargetGenerator::InitForCharmOrBeauty(TString fInName, Int_t nev,
   // convert pot to weight corresponding to one spill of 5e13 pot
   // get histogram with number of pot to normalise
   // pot are counted double, i.e. for each signal, i.e. pot/2.
-  Int_t nrcpot = dynamic_cast<TH1F*>(fin->Get("2"))->GetBinContent(1) /
-                 2.;  // number of primary interactions
+  auto* potHist = dynamic_cast<TH1F*>(fin->Get("2"));
+  if (!potHist) {
+    LOG(fatal) << "Histogram '2' not found in input file";
+    return kFALSE;
+  }
+  Int_t nrcpot =
+      potHist->GetBinContent(1) / 2.;  // number of primary interactions
   wspill = nrpotspill * chicc / nrcpot * nEvents / nev;
   LOG(info) << "Input file: " << fInName.Data() << " with " << nEvents
             << " entries, corresponding to nr-pot=" << (nrcpot / chicc);
@@ -125,13 +132,8 @@ Bool_t FixedTargetGenerator::Init() {
   } else if (Option != "charm" && Option != "beauty" && !G4only) {
     LOG(error) << "Option not known " << Option.Data() << ", abort";
   }
-#if PYTHIA_VERSION_INTEGER >= 8300
   if (fUseRandom1) fRandomEngine = std::make_shared<PyTr1Rng>();
   if (fUseRandom3) fRandomEngine = std::make_shared<PyTr3Rng>();
-#else
-  if (fUseRandom1) fRandomEngine = new PyTr1Rng();
-  if (fUseRandom3) fRandomEngine = new PyTr3Rng();
-#endif
   std::vector<int> r = {221, 221, 223, 223, 113, 331, 333};
   std::vector<int> c = {6, 7, 5, 7, 5, 6, 9};  // decay channel mumu mumuX
 
@@ -201,13 +203,8 @@ Bool_t FixedTargetGenerator::Init() {
     Int_t n = 1;
     while (n != 0) {
       n = fPythia->particleData.nextId(n);
-#if PYTHIA_VERSION_INTEGER >= 8300
       std::shared_ptr<Pythia8::ParticleDataEntry> p =
           fPythia->particleData.particleDataEntryPtr(n);
-#else
-      Pythia8::ParticleDataEntry* p =
-          fPythia->particleData.particleDataEntryPtr(n);
-#endif
       if (p->tau0() > 1) {
         std::string particle = std::to_string(n) + ":mayDecay = false";
         fPythia->readString(particle);
@@ -220,13 +217,8 @@ Bool_t FixedTargetGenerator::Init() {
     if (fBoost != 1.) {
       LOG(info) << "Rescale BRs of dimuon decays in Pythia: " << fBoost;
       for (unsigned int i = 0; i < r.size(); ++i) {
-#if PYTHIA_VERSION_INTEGER >= 8300
         std::shared_ptr<Pythia8::ParticleDataEntry> V =
             fPythia->particleData.particleDataEntryPtr(r[i]);
-#else
-        Pythia8::ParticleDataEntry* V =
-            fPythia->particleData.particleDataEntryPtr(r[i]);
-#endif
         Pythia8::DecayChannel ch = V->channel(c[i]);
         if (TMath::Abs(ch.product(0)) != 13 ||
             TMath::Abs(ch.product(1)) != 13) {
@@ -258,33 +250,16 @@ Bool_t FixedTargetGenerator::Init() {
     std::cout << "Using $EVTGENDATA " << evtgendata << std::endl;
     EvtExternalGenList* extPtr = new EvtExternalGenList();
     std::list<EvtDecayBase*> models = extPtr->getListOfModels();
-#if PYTHIA_VERSION_INTEGER < 8315
-    // Define the random number generator
-    EvtRandomEngine* eng = new EvtSimpleRandomEngine();
-    EvtRandom::setRandomEngine(eng);
-    EvtGen* myEvtGenPtr = new EvtGen(DecayFile.Data(), ParticleFile.Data(), eng,
-                                     fsrPtrIn, &models, 1, false);
-#endif
     TString UdecayFile = getenv("FAIRSHIP");
     UdecayFile += "/gconfig/USERDECAY.DEC";
-#if PYTHIA_VERSION_INTEGER >= 8315
     evtgenP = new Pythia8::EvtGenDecays(fPythiaP, DecayFile.Data(),
                                         ParticleFile.Data(), extPtr);
-#else
-    evtgenP = new EvtGenDecays(fPythiaP, DecayFile.Data(), ParticleFile.Data(),
-                               myEvtGenPtr);
-#endif
     evtgenP->readDecayFile(
         UdecayFile.Data());  // will make update of EvtGen with user decay file
     // use one instance of EvtGen, requires patch to Pythia8Plugins/EvtGen.h
     if (Option == "Primary") {
-#if PYTHIA_VERSION_INTEGER >= 8315
       evtgenN =
           new Pythia8::EvtGenDecays(fPythiaN, DecayFile.Data(), "", extPtr);
-#else
-      evtgenN = new EvtGenDecays(fPythiaN, DecayFile.Data(),
-                                 ParticleFile.Data(), myEvtGenPtr);
-#endif
     }
   }
   if (targetFromGeometry) {
@@ -315,7 +290,7 @@ Bool_t FixedTargetGenerator::Init() {
     TObjArray* nodes = target->GetVolume()->GetNodes();
     // Get the first and last node of the target to calculate the material seen
     TGeoNode* first = static_cast<TGeoNode*>(nodes->At(0));
-    TGeoNode* last = static_cast<TGeoNode*>(nodes->At(nodes->GetSize()));
+    TGeoNode* last = static_cast<TGeoNode*>(nodes->At(nodes->GetSize() - 1));
     nav->cd(targetName + "/" + first->GetName());
     TGeoBBox* sha = static_cast<TGeoBBox*>(first->GetVolume()->GetShape());
     Double_t dz = sha->GetDZ();
@@ -364,7 +339,6 @@ Bool_t FixedTargetGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
     Double_t prob2int = -1.;
     Double_t rndm = 0.;
     Double_t sigma;
-    Int_t count = 0;
     Double_t zinterStart = start[2];
     if (Option == "charm" || Option == "beauty") {
       // simulate more downstream interaction points for interactions down in
@@ -383,7 +357,7 @@ Bool_t FixedTargetGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
         bparam = shipgen::MeanMaterialBudget(start, point, mparam);
         Double_t interLength = mparam[8];
         TGeoNode* node = gGeoManager->FindNode(point[0], point[1], point[2]);
-        TGeoMaterial* mat = 0;
+        TGeoMaterial* mat = nullptr;
         if (node && !gGeoManager->IsOutside()) {
           mat = node->GetVolume()->GetMaterial();
           Double_t n = mat->GetDensity() / mat->GetA();
@@ -394,7 +368,6 @@ Bool_t FixedTargetGenerator::ReadEvent(FairPrimaryGenerator* cpg) {
           prob2int = 0.;
         }
         rndm = gRandom->Uniform(0., 1.);
-        count += 1;
       }
       zinterStart = zinter;
       ck -= 1;

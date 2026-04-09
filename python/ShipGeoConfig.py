@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 # SPDX-FileCopyrightText: Copyright CERN for the benefit of the SHiP Collaboration
 
+from __future__ import annotations
+
+import json
 import os
 import pickle
-import json
 
 
 class AttrDict(dict):
@@ -13,11 +15,11 @@ class AttrDict(dict):
     assert d.key == 1
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.__dict__ = self
 
-    def clone(self):
+    def clone(self) -> AttrDict:
         result = AttrDict()
         for k, v in self.items():
             if isinstance(v, AttrDict):
@@ -28,17 +30,18 @@ class AttrDict(dict):
 
 
 class Config(AttrDict):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-    def loads(self, buff):
+    def loads(self, buff: bytes):
         rv = pickle.loads(buff)
         self.clear()
         self.update(rv)
         return self
 
-    def loads_json(self, json_str):
+    def loads_json(self, json_str: str):
         """Deserialize config from JSON string"""
+
         def dict_to_attrdict(d):
             """Recursively convert dict to AttrDict"""
             if isinstance(d, dict):
@@ -58,7 +61,7 @@ class Config(AttrDict):
             self[k] = dict_to_attrdict(v)
         return self
 
-    def clone(self):
+    def clone(self) -> Config:
         result = Config()
         for k, v in self.items():
             if isinstance(v, AttrDict):
@@ -67,33 +70,29 @@ class Config(AttrDict):
                 result[k] = v
         return result
 
-    def dumps(self):
+    def dumps(self) -> bytes:
         return pickle.dumps(self)
 
-    def dumps_json(self):
+    def dumps_json(self) -> str:
         """Serialize config to JSON string"""
         return json.dumps(self, indent=2, default=str)
 
     def load(self, filename):
-        with open(os.path.expandvars(filename)) as fh:
+        with open(os.path.expandvars(filename), "rb") as fh:
             self.loads(fh.read())
         return self
 
-    def dump(self, filename):
-        with open(os.path.expandvars(filename), "w") as fh:
+    def dump(self, filename) -> int:
+        with open(os.path.expandvars(filename), "wb") as fh:
             return fh.write(self.dumps())
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "ShipGeoConfig:\n  " + "\n  ".join(
-            [
-                f"{k}: {self[k].__str__()}"
-                for k in sorted(self.keys())
-                if not k.startswith("_")
-            ]
+            [f"{k}: {self[k].__str__()}" for k in sorted(self.keys()) if not k.startswith("_")]
         )
 
 
-def load_from_root_file(root_file, key='ShipGeo'):
+def load_from_root_file(root_file, key: str = "ShipGeo") -> Config:
     """
     Load configuration from ROOT file.
 
@@ -125,14 +124,14 @@ def load_from_root_file(root_file, key='ShipGeo'):
         content_str = str(config_obj)
 
         # Auto-detect format by checking first character
-        if content_str.startswith('{'):
+        if content_str.startswith("{"):
             # JSON format - parse it
             config = Config()
             config.loads_json(content_str)
         else:
             # Assume pickle format - unpickle it
             # Convert to bytes for pickle (using latin-1 encoding)
-            pickle_bytes = content_str.encode('latin-1')
+            pickle_bytes = content_str.encode("latin-1")
             config = pickle.loads(pickle_bytes)
 
             # Ensure it's a Config object (might be if it was pickled as Config)

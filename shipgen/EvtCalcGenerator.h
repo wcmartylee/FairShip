@@ -3,28 +3,29 @@
 // Collaboration
 
 #ifndef SHIPGEN_EVTCALCGENERATOR_H_
-#define SHIPGEN_EVTCALCGENERATOR_H_ 1
+#define SHIPGEN_EVTCALCGENERATOR_H_
 
 #include <memory>
 
-#include "FairGenerator.h"
+#include "Generator.h"
 #include "TFile.h"
 #include "TTree.h"
 
 class FairPrimaryGenerator;
 
-class EvtCalcGenerator : public FairGenerator {
+class EvtCalcGenerator : public SHiP::Generator {
  public:
   /** default constructor **/
   EvtCalcGenerator();
 
   /** destructor **/
-  virtual ~EvtCalcGenerator();
+  ~EvtCalcGenerator() override;
 
   /** public method ReadEvent **/
-  Bool_t ReadEvent(FairPrimaryGenerator*);
-  virtual Bool_t Init(const char*, int);  //!
-  virtual Bool_t Init(const char*);       //!
+  using SHiP::Generator::Init;
+  Bool_t ReadEvent(FairPrimaryGenerator*) override;
+  Bool_t Init(const char*, int) override;
+  Bool_t Init(const char*) override;
 
   Int_t GetNevents() { return fNevents; }
   void SetPositions(Double_t zTa, Double_t zDV) {
@@ -76,7 +77,6 @@ class EvtCalcGenerator : public FairGenerator {
   int fn;
   int nBranches;
   int Ndau;
-  ClassDef(EvtCalcGenerator, 1);
 };
 
 #endif  // SHIPGEN_EVTCALCGENERATOR_H_

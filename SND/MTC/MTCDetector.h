@@ -5,38 +5,31 @@
 #ifndef SND_MTC_MTCDETECTOR_H_
 #define SND_MTC_MTCDETECTOR_H_
 
+#include <array>
 #include <map>
 #include <string>  // for string
-#include <vector>
 
-#include "FairDetector.h"
-#include "FairModule.h"  // for FairModule
-#include "ISTLPointContainer.h"
+#include "Detector.h"
 #include "MTCDetPoint.h"
-#include "Rtypes.h"  // for ShipMuonShield::Class, Bool_t, etc
-#include "TClonesArray.h"
 #include "TGeoMatrix.h"
-#include "TLorentzVector.h"
-#include "TVector3.h"
 
-class MTCDetPoint;
 class TGeoVolume;
 class TGeoVolumeAssembly;
 class TGeoMedium;
 class FairVolume;
-class TClonesArray;
 
-class MTCDetector : public FairDetector, public ISTLPointContainer {
+class MTCDetector : public SHiP::Detector<MTCDetPoint> {
  public:
   MTCDetector(const char* name, Bool_t Active, const char* Title = "",
               Int_t DetId = 0);
   MTCDetector();
-  virtual ~MTCDetector();
 
-  void SetMTCParameters(Double_t width, Double_t height, Double_t angle,
-                        Double_t ironThick, Double_t sciFiThick,
-                        Int_t channelAggregated, Double_t scintThick,
-                        Int_t nLayers, Double_t zCenter, Double_t fieldY);
+  void SetMTCParameters(Double_t width, Double_t height,
+                        Double_t fiber_tilt_angle, Double_t iron_thickness,
+                        Double_t scifi_thickness, Int_t num_of_agg_channels,
+                        Double_t scint_cell_size, Double_t scint_thickness,
+                        Int_t number_of_layers, Double_t z_position,
+                        Double_t field_strength);
   virtual void CreateScintModule(const char* name,
                                  TGeoVolumeAssembly* modMotherVol,
                                  Double_t z_shift, Double_t width,
@@ -48,8 +41,7 @@ class MTCDetector : public FairDetector, public ISTLPointContainer {
                                  TGeoVolumeAssembly* modMotherVol,
                                  Double_t width, Double_t height,
                                  Double_t thickness, Int_t LayerId);
-  virtual void ConstructGeometry();
-  virtual void Initialize();
+  void ConstructGeometry() override;
   /** Get position of single fibre in global coordinate system**/
   void GetPosition(Int_t fDetectorID, TVector3& vLeft,
                    TVector3& vRight);  // or top and bottom
@@ -75,32 +67,9 @@ class MTCDetector : public FairDetector, public ISTLPointContainer {
   Int_t Get_NSiPMChan() const { return fNSiPMChan; }
   Float_t Get_SciFiActiveX() const { return fSciFiActiveX; }
   virtual void SiPMOverlap();
-  virtual Bool_t ProcessHits(FairVolume* vol = 0);
-  MTCDetPoint* AddHit(Int_t trackID, Int_t detID, TVector3 pos, TVector3 mom,
-                      Double_t time, Double_t length, Double_t eLoss,
-                      Int_t pdgCode);
-
-  virtual void Register();
-  virtual void EndOfEvent();
-  virtual TClonesArray* GetCollection(Int_t iColl) const;
-
-  /** Update track indices in point collection (for std::vector migration) */
-  void UpdatePointTrackIndices(const std::map<Int_t, Int_t>& indexMap);
-
-  virtual void Reset();
+  Bool_t ProcessHits(FairVolume* vol = 0) override;
 
  private:
-  /** Track information to be stored until the track leaves the
-   active volume.
-   */
-  Int_t fTrackID;       //!  track index
-  Int_t fPdgCode;       //!  pdg code
-  Int_t fVolumeID;      //!  volume id
-  TLorentzVector fPos;  //!  position at entrance
-  TLorentzVector fMom;  //!  momentum at entrance
-  Double32_t fTime;     //!  time
-  Double32_t fLength;   //!  length
-  Double32_t fELoss;    //!  energy loss
   Double_t fWidth;
   Double_t fHeight;
   Double_t fSciFiActiveX;
@@ -109,6 +78,7 @@ class MTCDetector : public FairDetector, public ISTLPointContainer {
   Double_t fIronThick;
   Double_t fSciFiThick;
   Double_t fScintThick;
+  Double_t fScintCellSize;
   Int_t fLayers;
   Double_t fZCenter;
   Double_t fFieldY;
@@ -143,13 +113,10 @@ class MTCDetector : public FairDetector, public ISTLPointContainer {
   std::map<Int_t, std::map<Int_t, std::array<float, 2>>>
       siPMFibres_V;                             //! inverse mapping
   std::map<Int_t, float> SiPMPos_U, SiPMPos_V;  //! local SiPM channel position
-  /** container for data points */
-  std::vector<MTCDetPoint>* fMTCDetectorPoints;
 
-  MTCDetector(const MTCDetector&);
-  MTCDetector& operator=(const MTCDetector&);
-  Int_t InitMedium(const char* name);
-  ClassDef(MTCDetector, 3)
+  MTCDetector(const MTCDetector&) = delete;
+  MTCDetector& operator=(const MTCDetector&) = delete;
+  ClassDefOverride(MTCDetector, 4)
 };
 
 #endif  // SND_MTC_MTCDETECTOR_H_

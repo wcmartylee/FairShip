@@ -11,8 +11,7 @@
 
 #include "ShipGeoCave.h"
 
-#include <string.h>  // for strcmp
-
+#include <cstring>   // for strcmp
 #include <iostream>  // for cout
 
 #include "FairGeoBasicShape.h"  // for FairGeoBasicShape
@@ -22,7 +21,8 @@
 #include "FairGeoShapes.h"      // for FairGeoShapes
 #include "TList.h"              // for TList
 
-using namespace std;
+using std::cout;
+using std::ios;
 
 ShipGeoCave::ShipGeoCave() : FairGeoSet(), name("cave") {
   // Constructor
@@ -31,7 +31,7 @@ ShipGeoCave::ShipGeoCave() : FairGeoSet(), name("cave") {
   maxModules = 1;
 }
 
-Bool_t ShipGeoCave::read(fstream& fin, FairGeoMedia* media) {
+Bool_t ShipGeoCave::read(std::fstream& fin, FairGeoMedia* media) {
   // Reads the geometry from file
   if (!media) {
     return kFALSE;
@@ -95,7 +95,7 @@ void ShipGeoCave::addRefNodes() {
   }
 }
 
-void ShipGeoCave::write(fstream& fout) {
+void ShipGeoCave::write(std::fstream& fout) {
   // Writes the geometry to file
   fout.setf(ios::fixed, ios::floatfield);
   FairGeoNode* volu = getVolume(name);

@@ -8,9 +8,9 @@
 
 #include "strawtubes.h"
 
+#include <array>
 #include <iostream>
 #include <sstream>
-#include <tuple>
 
 #include "FairGeoBuilder.h"
 #include "FairGeoInterface.h"
@@ -18,13 +18,13 @@
 #include "FairGeoMedia.h"
 #include "FairGeoNode.h"
 #include "FairGeoVolume.h"
-#include "FairLink.h"
 #include "FairLogger.h"
 #include "FairRootManager.h"
 #include "FairRun.h"
 #include "FairRuntimeDb.h"
 #include "FairVolume.h"
 #include "ShipDetectorList.h"
+#include "ShipGeoUtil.h"
 #include "ShipStack.h"
 #include "TClonesArray.h"
 #include "TGeoBBox.h"
@@ -43,71 +43,13 @@ using std::cout;
 using std::endl;
 
 strawtubes::strawtubes()
-    : FairDetector("strawtubes", kTRUE, kStraw),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fMedium("air"),
-      fstrawtubesPoints(nullptr) {}
+    : Detector("strawtubes", kTRUE, kStraw), fMedium("air") {}
 
 strawtubes::strawtubes(std::string medium)
-    : FairDetector("strawtubes", kTRUE, kStraw),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fMedium(medium),
-      fstrawtubesPoints(nullptr) {}
+    : Detector("strawtubes", kTRUE, kStraw), fMedium(medium) {}
 
 strawtubes::strawtubes(const char* name, Bool_t active)
-    : FairDetector(name, active, kStraw),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fstrawtubesPoints(nullptr) {}
-
-strawtubes::~strawtubes() {
-  if (fstrawtubesPoints) {
-    fstrawtubesPoints->clear();
-    delete fstrawtubesPoints;
-  }
-}
-
-void strawtubes::Initialize() {
-  FairDetector::Initialize();
-  //  FairRuntimeDb* rtdb= FairRun::Instance()->GetRuntimeDb();
-  //  vetoGeoPar* par=(vetoGeoPar*)(rtdb->getContainer("vetoGeoPar"));
-}
-
-// -----   Private method InitMedium
-Int_t strawtubes::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != NULL) return ShipMedium->getMediumIndex();
-
-  return geoBuild->createMedium(ShipMedium);
-}
+    : Detector(name, active, kStraw) {}
 
 Bool_t strawtubes::ProcessHits(FairVolume* vol) {
   /** This method is called from the MC stepping */
@@ -131,6 +73,7 @@ Bool_t strawtubes::ProcessHits(FairVolume* vol) {
     TParticle* p = gMC->GetStack()->GetCurrentTrack();
     Int_t pdgCode = p->GetPdgCode();
     fTrackID = gMC->GetStack()->GetCurrentTrackNumber();
+    fEventID = gMC->CurrentEvent();
     Int_t straw_uniqueId;
     gMC->CurrentVolID(straw_uniqueId);
     if (fVolumeID == straw_uniqueId) {
@@ -156,7 +99,7 @@ Bool_t strawtubes::ProcessHits(FairVolume* vol) {
     TVector3 uCrossv = u.Cross(v);
     Double_t dist2Wire = fabs(pq.Dot(uCrossv)) / (uCrossv.Mag() + 1E-8);
     Double_t deltaTrackLength = gMC->TrackLength() - fLength;
-    AddHit(fTrackID, straw_uniqueId, TVector3(xmean, ymean, zmean),
+    AddHit(fEventID, fTrackID, straw_uniqueId, TVector3(xmean, ymean, zmean),
            TVector3(fMom.Px(), fMom.Py(), fMom.Pz()), fTime, deltaTrackLength,
            fELoss, pdgCode, dist2Wire);
     if (dist2Wire > f_inner_straw_diameter / 2) {
@@ -188,35 +131,6 @@ Bool_t strawtubes::ProcessHits(FairVolume* vol) {
   return kTRUE;
 }
 
-void strawtubes::EndOfEvent() { fstrawtubesPoints->clear(); }
-
-void strawtubes::Register() {
-  /** This will create a branch in the output tree called
-      strawtubesPoint, setting the last parameter to kFALSE means:
-      this collection will not be written to the file, it will exist
-      only during the simulation.
-  */
-
-  fstrawtubesPoints = new std::vector<strawtubesPoint>();
-  FairRootManager::Instance()->RegisterAny("strawtubesPoint", fstrawtubesPoints,
-                                           kTRUE);
-}
-
-TClonesArray* strawtubes::GetCollection(Int_t iColl) const { return nullptr; }
-
-void strawtubes::UpdatePointTrackIndices(
-    const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fstrawtubesPoints) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
-}
-
-void strawtubes::Reset() { fstrawtubesPoints->clear(); }
 void strawtubes::SetDesign(Int_t design) {
   f_design = design;  //!  SST design label
 }
@@ -278,19 +192,19 @@ void strawtubes::ConstructGeometry() {
       implement here you own way of constructing the geometry. */
 
   TGeoVolume* top = gGeoManager->GetTopVolume();
-  InitMedium("aluminium");
+  ShipGeo::InitMedium("aluminium");
   TGeoMedium* Al = gGeoManager->GetMedium("aluminium");
-  InitMedium("steel");
+  ShipGeo::InitMedium("steel");
   TGeoMedium* steel = gGeoManager->GetMedium("steel");
-  InitMedium("mylar");
+  ShipGeo::InitMedium("mylar");
   TGeoMedium* mylar = gGeoManager->GetMedium("mylar");
-  InitMedium("STTmix8020_1bar");
+  ShipGeo::InitMedium("STTmix8020_1bar");
   TGeoMedium* sttmix8020_1bar = gGeoManager->GetMedium("STTmix8020_1bar");
-  InitMedium("tungsten");
+  ShipGeo::InitMedium("tungsten");
   TGeoMedium* tungsten = gGeoManager->GetMedium("tungsten");
-  InitMedium("cfrp");
+  ShipGeo::InitMedium("cfrp");
   TGeoMedium* cfrp = gGeoManager->GetMedium("cfrp");
-  InitMedium(fMedium.c_str());
+  ShipGeo::InitMedium(fMedium.c_str());
   TGeoMedium* med = gGeoManager->GetMedium(fMedium.c_str());
   TGeoMedium* FrameMatPtr;
 
@@ -408,34 +322,30 @@ void strawtubes::ConstructGeometry() {
 
     for (Int_t vnb = 0; vnb < 4; vnb++) {
       // View loop
-      TString nmview;
-      Double_t angle;
-      Double_t stereo_growth;
-      Double_t stereo_pitch;
-      Double_t offset_layer;
-      Int_t straws_per_layer;
-
-      switch (vnb) {
-        case 0:
-          angle = 0.;
-          nmview = nmstation + "_y1";
-          break;
-        case 1:
-          angle = f_view_angle;
-          nmview = nmstation + "_u";
-          break;
-        case 2:
-          angle = -f_view_angle;
-          nmview = nmstation + "_v";
-          break;
-        case 3:
-          angle = 0.;
-          nmview = nmstation + "_y2";
-          break;
-        default:
-          angle = 0.;
-          nmview = nmstation + "_y1";
-      }
+      const Double_t angle = [&] {
+        switch (vnb) {
+          case 1:
+            return f_view_angle;
+          case 2:
+            return -f_view_angle;
+          default:
+            return 0.;
+        }
+      }();
+      const TString nmview = [&] {
+        switch (vnb) {
+          case 0:
+            return nmstation + "_y1";
+          case 1:
+            return nmstation + "_u";
+          case 2:
+            return nmstation + "_v";
+          case 3:
+            return nmstation + "_y2";
+          default:
+            return nmstation + "_y1";
+        }
+      }();
 
       // Adjustments in the stereo views
       // stereo_growth: extension of stereo views beyond aperture
@@ -443,13 +353,13 @@ void strawtubes::ConstructGeometry() {
       // offset_layer: layer offset in stereo views
       // straws_per_layer: number of straws in one layer with stereo extension
       // If angle == 0., all numbers return the case of non-stereo views.
-      stereo_growth =
+      const Double_t stereo_growth =
           TMath::Tan(TMath::Abs(angle) * TMath::Pi() / 180.0) * straw_length;
-      stereo_pitch =
+      const Double_t stereo_pitch =
           f_straw_pitch / TMath::Cos(TMath::Abs(angle) * TMath::Pi() / 180.0);
-      offset_layer =
+      const Double_t offset_layer =
           f_offset_layer / TMath::Cos(TMath::Abs(angle) * TMath::Pi() / 180.0);
-      straws_per_layer =
+      const Int_t straws_per_layer =
           std::ceil(2 * (f_aperture_height + stereo_growth) / stereo_pitch);
 
       // CFRP plate
@@ -570,7 +480,7 @@ void strawtubes::ConstructGeometry() {
 // -----   Public method StrawDecode -------------------------------------------
 // -----   returns station, view, layer, straw number in a tuple
 // -----------------------------------
-std::tuple<Int_t, Int_t, Int_t, Int_t> strawtubes::StrawDecode(Int_t detID) {
+std::array<Int_t, 4> strawtubes::StrawDecode(Int_t detID) {
   Int_t statnb, vnb, lnb, snb;
   statnb = detID / 1e6;
   vnb = (detID - statnb * 1e6) / 1e5;
@@ -583,9 +493,9 @@ std::tuple<Int_t, Int_t, Int_t, Int_t> strawtubes::StrawDecode(Int_t detID) {
     LOG(warning) << detID << " -> station: " << statnb << ", view: " << vnb
                  << ", layer: " << lnb << ", straw: " << snb;
     LOG(warning) << "strawtubes detID is 7-digit!";
-    return std::make_tuple(0, -1, -1, 0);
+    return {0, -1, -1, 0};
   } else {
-    return std::make_tuple(statnb, vnb, lnb, snb);
+    return {statnb, vnb, lnb, snb};
   }
 }
 // -----   Public method StrawEndPoints
@@ -601,23 +511,18 @@ void strawtubes::StrawEndPoints(Int_t fDetectorID, TVector3& vbot,
   stat += statnb;
   stat += "_";
   stat += statnb;
-  TString view;
-  switch (vnb) {
-    case 0:
-      view = "_y1";
-      break;
-    case 1:
-      view = "_u";
-      break;
-    case 2:
-      view = "_v";
-      break;
-    case 3:
-      view = "_y2";
-      break;
-    default:
-      view = "_y1";
-  }
+  const TString view = [&] {
+    switch (vnb) {
+      case 1:
+        return TString("_u");
+      case 2:
+        return TString("_v");
+      case 3:
+        return TString("_y2");
+      default:
+        return TString("_y1");
+    }
+  }();
   TGeoNavigator* nav = gGeoManager->GetCurrentNavigator();
   TString prefix = "Tr";
   prefix += statnb;
@@ -652,12 +557,4 @@ void strawtubes::StrawEndPoints(Int_t fDetectorID, TVector3& vbot,
   nav->LocalToMaster(bot, Gbot);
   vtop.SetXYZ(Gtop[0], Gtop[1], Gtop[2]);
   vbot.SetXYZ(Gbot[0], Gbot[1], Gbot[2]);
-}
-strawtubesPoint* strawtubes::AddHit(Int_t trackID, Int_t detID, TVector3 pos,
-                                    TVector3 mom, Double_t time,
-                                    Double_t length, Double_t eLoss,
-                                    Int_t pdgCode, Double_t dist2Wire) {
-  fstrawtubesPoints->emplace_back(trackID, detID, pos, mom, time, length, eLoss,
-                                  pdgCode, dist2Wire);
-  return &(fstrawtubesPoints->back());
 }

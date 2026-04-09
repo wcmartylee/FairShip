@@ -10,6 +10,7 @@
 #ifndef FIELD_SHIPCOMPFIELD_H_
 #define FIELD_SHIPCOMPFIELD_H_
 
+#include <span>
 #include <string>
 #include <vector>
 
@@ -60,18 +61,20 @@ class ShipCompField : public TVirtualMagField {
 
   //! Get the vector of fields
   /*!
-    \returns the vector of fields
+    \returns a non-owning view of the fields
   */
-  std::vector<TVirtualMagField*> getCompFields() const { return theFields_; }
+  std::span<TVirtualMagField* const> getCompFields() const {
+    return theFields_;
+  }
 
   //! ClassDef for ROOT
   ClassDef(ShipCompField, 1);
 
  protected:
  private:
-  //! Private copy and assignment operators.
-  ShipCompField(const ShipCompField&);
-  ShipCompField& operator=(const ShipCompField&);
+  //! Deleted copy and assignment operators.
+  ShipCompField(const ShipCompField&) = delete;
+  ShipCompField& operator=(const ShipCompField&) = delete;
 
   //! The vector of the various magnetic field pointers comprising the composite
   std::vector<TVirtualMagField*> theFields_;

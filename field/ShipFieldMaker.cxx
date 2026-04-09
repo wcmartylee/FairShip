@@ -16,11 +16,13 @@
 
 #include "ShipFieldMaker.h"
 
+#include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
 
+#include "FairLogger.h"
 #include "ShipBFieldMap.h"
 #include "ShipBellField.h"
 #include "ShipConstField.h"
@@ -40,13 +42,13 @@
 
 ShipFieldMaker::ShipFieldMaker(Bool_t verbose)
     : TG4VUserPostDetConstruction(),
-      globalField_(0),
+      globalField_(nullptr),
       theFields_(),
       regionInfo_(),
       localInfo_(),
       verbose_(verbose),
       Tesla_(10.0),  // To convert T to kGauss for VMC/FairRoot
-      theNode_(0),
+      theNode_(nullptr),
       gotNode_(kFALSE) {}
 
 ShipFieldMaker::~ShipFieldMaker() {
@@ -73,7 +75,12 @@ void ShipFieldMaker::readInputFile(const std::string& inputFile) {
     return;
   }
 
-  std::string fullFileName = getenv("VMCWORKDIR");
+  const char* vmcworkdir = getenv("VMCWORKDIR");
+  if (!vmcworkdir) {
+    LOG(fatal) << "VMCWORKDIR environment variable not set";
+    return;
+  }
+  std::string fullFileName = vmcworkdir;
   fullFileName += "/";
   fullFileName += inputFile.c_str();
 
@@ -387,7 +394,12 @@ void ShipFieldMaker::defineFieldMap(const TString& name,
   // Check if the field is already in the map
   if (!this->gotField(name)) {
     // Add the VMCWORKDIR prefix to this map file location
-    std::string fullFileName = getenv("VMCWORKDIR");
+    const char* vmcworkdir = getenv("VMCWORKDIR");
+    if (!vmcworkdir) {
+      LOG(fatal) << "VMCWORKDIR environment variable not set";
+      return;
+    }
+    std::string fullFileName = vmcworkdir;
     fullFileName += "/";
     fullFileName += mapFileName.Data();
 
@@ -1146,7 +1158,7 @@ void ShipFieldMaker::plotField(Int_t type, const TVector3& xAxis,
   Double_t dx = xAxis(2);
   Int_t Nx(0);
   if (dx > 0.0) {
-    Nx = static_cast<Int_t>(((xMax - xMin) / dx) + 0.5);
+    Nx = std::lround((xMax - xMin) / dx);
   }
 
   Double_t yMin = yAxis(0);
@@ -1154,7 +1166,7 @@ void ShipFieldMaker::plotField(Int_t type, const TVector3& xAxis,
   Double_t dy = yAxis(2);
   Int_t Ny(0);
   if (dy > 0.0) {
-    Ny = static_cast<Int_t>(((yMax - yMin) / dy) + 0.5);
+    Ny = std::lround((yMax - yMin) / dy);
   }
 
   // Create a 2d histogram

@@ -5,9 +5,9 @@
 // MTC detector specific headers
 #include "MTCDetector.h"
 
-#include "FairLink.h"
 #include "MTCDetPoint.h"
 #include "ShipDetectorList.h"
+#include "ShipGeoUtil.h"
 #include "ShipStack.h"
 #include "ShipUnit.h"
 
@@ -33,19 +33,15 @@
 #include "FairGeoMedia.h"
 #include "FairGeoNode.h"
 #include "FairGeoVolume.h"
-#include "FairRootManager.h"
 #include "FairRun.h"
 #include "FairRuntimeDb.h"
 #include "FairVolume.h"
 
 // Additional standard headers
-#include "TClonesArray.h"
 #include "TList.h"      // for TListIter, TList (ptr only)
 #include "TObjArray.h"  // for TObjArray
 #include "TString.h"    // for TString
 #include "TVirtualMC.h"
-
-using namespace ShipUnit;
 
 namespace {
 Double_t ycross(Double_t a, Double_t R, Double_t x) {
@@ -115,10 +111,10 @@ Double_t area(Double_t a, Double_t R, Double_t xL, Double_t xR) {
   }
 
   if (!(rightC < 0)) {
-    fracR = fraction(R, abs(xR - a), rightC);
+    fracR = fraction(R, TMath::Abs(xR - a), rightC);
   }
   if (!(leftC < 0)) {
-    fracL = fraction(R, abs(xL - a), leftC);
+    fracL = fraction(R, TMath::Abs(xL - a), leftC);
   }
 
   Double_t theAnswer = 0;
@@ -143,69 +139,29 @@ Double_t area(Double_t a, Double_t R, Double_t xL, Double_t xR) {
 }
 }  // namespace
 
-MTCDetector::MTCDetector()
-    : FairDetector("MTC", kTRUE, kMTC),
-      fTrackID(-1),
-      fPdgCode(),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fMTCDetectorPoints(nullptr) {}
+MTCDetector::MTCDetector() : Detector("MTC", kTRUE, kMTC) {}
 
-MTCDetector::MTCDetector(const char* name, Bool_t Active, const char* Title,
-                         Int_t DetId)
-    : FairDetector(name, Active, kMTC),
-      fTrackID(-1),
-      fVolumeID(-1),
-      fPos(),
-      fMom(),
-      fTime(-1.),
-      fLength(-1.),
-      fELoss(-1),
-      fMTCDetectorPoints(nullptr) {}
+MTCDetector::MTCDetector(const char* name, Bool_t Active, const char* /*Title*/,
+                         Int_t /*DetId*/)
+    : Detector(name, Active, kMTC) {}
 
-MTCDetector::~MTCDetector() {
-  if (fMTCDetectorPoints) {
-    fMTCDetectorPoints->clear();
-    delete fMTCDetectorPoints;
-  }
-}
-
-// -----   Private method InitMedium
-Int_t MTCDetector::InitMedium(const char* name) {
-  static FairGeoLoader* geoLoad = FairGeoLoader::Instance();
-  static FairGeoInterface* geoFace = geoLoad->getGeoInterface();
-  static FairGeoMedia* media = geoFace->getMedia();
-  static FairGeoBuilder* geoBuild = geoLoad->getGeoBuilder();
-
-  FairGeoMedium* ShipMedium = media->getMedium(name);
-
-  if (!ShipMedium) {
-    Fatal("InitMedium", "Material %s not defined in media file.", name);
-    return -1111;
-  }
-  TGeoMedium* medium = gGeoManager->GetMedium(name);
-  if (medium != nullptr) return ShipMedium->getMediumIndex();
-  return geoBuild->createMedium(ShipMedium);
-}
-
-void MTCDetector::SetMTCParameters(Double_t w, Double_t h, Double_t angle,
-                                   Double_t iron, Double_t sciFi,
-                                   Int_t num_of_agg_channels, Double_t scint,
-                                   Int_t layers, Double_t z, Double_t field) {
-  fWidth = w;
-  fHeight = h;
-  fSciFiBendingAngle = angle;
-  fIronThick = iron;
-  fSciFiThick = sciFi;
+void MTCDetector::SetMTCParameters(
+    Double_t width, Double_t height, Double_t fiber_tilt_angle,
+    Double_t iron_thickness, Double_t scifi_thickness,
+    Int_t num_of_agg_channels, Double_t scint_cell_size,
+    Double_t scint_thickness, Int_t number_of_layers, Double_t z_position,
+    Double_t field_strength) {
+  fWidth = width;
+  fHeight = height;
+  fSciFiBendingAngle = fiber_tilt_angle;
+  fIronThick = iron_thickness;
+  fSciFiThick = scifi_thickness;
   fChannelAggregated = num_of_agg_channels;
-  fScintThick = scint;
-  fLayers = layers;
-  fZCenter = z;
-  fFieldY = field;
+  fScintCellSize = scint_cell_size;
+  fScintThick = scint_thickness;
+  fLayers = number_of_layers;
+  fZCenter = z_position;
+  fFieldY = field_strength;
   fSciFiActiveX = fWidth - fWidth * tan(fSciFiBendingAngle * TMath::DegToRad());
   fSciFiActiveY = fHeight;
 }
@@ -359,15 +315,15 @@ void MTCDetector::CreateSciFiModule(const char* name,
 
 void MTCDetector::ConstructGeometry() {
   // Initialize media (using FairROOT's interface)
-  InitMedium("SciFiMat");
-  InitMedium("Epoxy");
-  InitMedium("air");
+  ShipGeo::InitMedium("SciFiMat");
+  ShipGeo::InitMedium("Epoxy");
+  ShipGeo::InitMedium("air");
   TGeoMedium* air = gGeoManager->GetMedium("air");
   TGeoMedium* ironMed = gGeoManager->GetMedium("iron");
   // For the scintillator, you may use the same medium as SciFiMat or another if
   // defined.
   TGeoMedium* scintMed = gGeoManager->GetMedium("SciFiMat");
-  InitMedium("silicon");
+  ShipGeo::InitMedium("silicon");
 
   // Define the module spacing based on three sublayers:
   //   fIronThick (outer iron), fSciFiThick (SciFi module/fiber module),
@@ -397,8 +353,8 @@ void MTCDetector::ConstructGeometry() {
   // Define a layer for the SciFi module
   CreateSciFiModule("MTC", sensitiveModule, fWidth, fHeight, fSciFiThick, 1);
   CreateScintModule("MTC", sensitiveModule, fSciFiThick / 2 + fScintThick / 2,
-                    fWidth, fHeight, fScintThick, 1.0, 1.0, scintMed,
-                    kAzure + 7, 30, 1);
+                    fWidth, fHeight, fScintThick, fScintCellSize,
+                    fScintCellSize, scintMed, kAzure + 7, 30, 1);
 
   for (Int_t i = 0; i < fLayers; i++) {
     // Compute the center position (z) for the current module
@@ -420,8 +376,6 @@ void MTCDetector::ConstructGeometry() {
   gGeoManager->GetTopVolume()->AddNode(envVol, 1,
                                        new TGeoTranslation(0, 0, fZCenter));
 }
-// Standard FairDetector methods
-void MTCDetector::Initialize() { FairDetector::Initialize(); }
 
 Bool_t MTCDetector::ProcessHits(FairVolume* vol) {
   /** This method is called from the MC stepping */
@@ -786,40 +740,4 @@ void MTCDetector::SiPMmapping() {
       }
     }
   }
-}
-
-void MTCDetector::Register() {
-  if (!fMTCDetectorPoints) {
-    fMTCDetectorPoints = new std::vector<MTCDetPoint>();
-  }
-  FairRootManager::Instance()->RegisterAny("MTCDetPoint", fMTCDetectorPoints,
-                                           kTRUE);
-  LOG(debug) << this->GetName()
-             << ", Register() says: registered MTCDetPoint collection";
-}
-
-TClonesArray* MTCDetector::GetCollection(Int_t iColl) const { return nullptr; }
-
-void MTCDetector::UpdatePointTrackIndices(
-    const std::map<Int_t, Int_t>& indexMap) {
-  for (auto& point : *fMTCDetectorPoints) {
-    Int_t oldTrackID = point.GetTrackID();
-    auto iter = indexMap.find(oldTrackID);
-    if (iter != indexMap.end()) {
-      point.SetTrackID(iter->second);
-      point.SetLink(FairLink("MCTrack", iter->second));
-    }
-  }
-}
-
-void MTCDetector::Reset() { fMTCDetectorPoints->clear(); }
-
-void MTCDetector::EndOfEvent() { fMTCDetectorPoints->clear(); }
-
-MTCDetPoint* MTCDetector::AddHit(Int_t trackID, Int_t detID, TVector3 pos,
-                                 TVector3 mom, Double_t time, Double_t length,
-                                 Double_t eLoss, Int_t pdgCode) {
-  fMTCDetectorPoints->emplace_back(trackID, detID, pos, mom, time, length,
-                                   eLoss, pdgCode);
-  return &(fMTCDetectorPoints->back());
 }
