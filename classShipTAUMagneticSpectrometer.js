@@ -2,14 +2,15 @@ var classShipTAUMagneticSpectrometer =
 [
     [ "ShipTAUMagneticSpectrometer", "classShipTAUMagneticSpectrometer.html#a0a95a5ea4f48efeb38ca809103823203", null ],
     [ "ShipTAUMagneticSpectrometer", "classShipTAUMagneticSpectrometer.html#aa034db1318c65af7e7267bdccb1a4ca8", null ],
-    [ "~ShipTAUMagneticSpectrometer", "classShipTAUMagneticSpectrometer.html#a10262545a9d6dd6a53a2525b631aadf2", null ],
-    [ "ConstructGeometry", "classShipTAUMagneticSpectrometer.html#a98ab005807dcce5f989e5aa01b4b1c85", null ],
+    [ "~ShipTAUMagneticSpectrometer", "classShipTAUMagneticSpectrometer.html#a7e2240217d0a02f71634cdff53999cfb", null ],
+    [ "ConstructGeometry", "classShipTAUMagneticSpectrometer.html#aa86f07a8e8ee5912ab17ff682d1011d0", null ],
     [ "Initialize", "classShipTAUMagneticSpectrometer.html#a8df67f8bc0a23c15e29f2e21f47550af", null ],
     [ "AirLenght", "classShipTAUMagneticSpectrometer.html#a6362c913eb26c37d97d3617b26376669", null ],
     [ "DriftGap", "classShipTAUMagneticSpectrometer.html#ac506d476916c75ea7ef7fdadee216ed7", null ],
     [ "GapFromVacuum", "classShipTAUMagneticSpectrometer.html#a8830b299f287f54198ff559416c58cae", null ],
-    [ "IronLenght", "classShipTAUMagneticSpectrometer.html#ae77fc80d5fcad9b0e6faedf8c35f936a", null ],
+    [ "IronLenght", "classShipTAUMagneticSpectrometer.html#a7aec3c768bb5b16c975c6fb20cf174d4", null ],
     [ "MagneticField", "classShipTAUMagneticSpectrometer.html#a6a2969415fcb8f94ecf23183ed9de481", null ],
     [ "MiddleGap", "classShipTAUMagneticSpectrometer.html#aa467ecbbcc6edde152b8483e39611b30", null ],
-    [ "SpectrometerLenght", "classShipTAUMagneticSpectrometer.html#a076ce0f705c65bd499dede1944c647ab", null ]
+    [ "SpectrometerLenght", "classShipTAUMagneticSpectrometer.html#a076ce0f705c65bd499dede1944c647ab", null ],
+    [ "zLastSlab", "classShipTAUMagneticSpectrometer.html#ae44cea024ab6f01cd6dd6290251465eb", null ]
 ];
