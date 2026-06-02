@@ -12,6 +12,7 @@ import ROOT
 
 # For modules
 import shipDet_conf
+import shipunit as u
 
 # For ShipGeo
 from ShipGeoConfig import load_from_root_file
@@ -71,7 +72,11 @@ def run_track_pattern_recognition(input_file, geo_file, output_file, method, dy=
     run.SetName("TGeant4")  # Transport engine
     # Create dummy output file as the  input file is updated directly and
     # histograms are written to output file (hists.root by default)
-    run.SetSink(ROOT.FairRootFileSink(ROOT.TMemFile("output", "recreate")))
+    import tempfile
+
+    sink = ROOT.FairRootFileSink(tempfile.mktemp(suffix=".root"))
+    run.SetSink(sink)
+    ROOT.SetOwnership(sink, False)  # C++ FairRun takes ownership
     run.SetUserConfig("g4Config_basic.C")  # geant4 transport not used, only needed for the mag field
     run.GetRuntimeDb()
 
@@ -344,10 +349,6 @@ def run_track_pattern_recognition(input_file, geo_file, output_file, method, dy=
             metrics["reco_frac_tot"] += [frac_tot]
 
             # Momentum
-            hits["Pz"]
-            hits["Px"]
-            hits["Py"]
-
             p, px, py, pz = getPtruthFirst(sTree, tmax_tot)
             pt = math.sqrt(px**2 + py**2)
 
@@ -693,14 +694,18 @@ def getReconstructibleTracks(iEvent: int, sTree, sGeo, ShipGeo):
     hits4 = {}
     trackoutsidestations = []
 
+    margin = 5.0 * u.cm
+    x_bound = ShipGeo.strawtubes_geo.width - margin
+    y_bound = ShipGeo.strawtubes_geo.height - margin
+
     for i in range(nHits):
         if i in duplicatestrawhit:
             continue
 
         ahit = sTree.strawtubesPoint[i]
 
-        # is hit inside acceptance? if not mark the track as bad
-        if ((ahit.GetX() / 245.0) ** 2 + (ahit.GetY() / 495.0) ** 2) >= 1.0:
+        # is hit inside acceptance (width/height minus margin)?
+        if abs(ahit.GetX()) >= x_bound or abs(ahit.GetY()) >= y_bound:
             if ahit.GetTrackID() not in trackoutsidestations:
                 trackoutsidestations.append(ahit.GetTrackID())
 

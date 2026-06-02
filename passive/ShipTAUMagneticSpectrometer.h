@@ -19,14 +19,13 @@ class ShipTAUMagneticSpectrometer : public FairModule {
       const char* Title = "ShipTAUMagneticSpectrometer");
   ShipTAUMagneticSpectrometer();
   ~ShipTAUMagneticSpectrometer() override;
-  void ConstructGeometry();
+  void ConstructGeometry() override;
   void Initialize();
- ClassDef(ShipTAUMagneticSpectrometer, 1)
 
-     protected
-     : Double_t
-       zLastSlab;  // z distance of the center of the last Fe slab of the second
-                   // spectrometer in cm from the center of the vacuum tube
+ protected:
+  Double_t
+      zLastSlab;  // z distance of the center of the last Fe slab of the second
+                  // spectrometer in cm from the center of the vacuum tube
   Double_t IronLenght;
   Double_t AirLenght;  // distance between the center of 2 iron slabs
   Double_t SpectrometerLenght;

@@ -42,7 +42,7 @@ ecut = 0.0
 # -------------------------------------------------------------------
 ROOT.gRandom.SetSeed(theSeed)  # this should be propagated via ROOT to Pythia8 and Geant4VMC
 shipRoot_conf.configure()  # load basic libraries, prepare atexit for python
-ship_geo = geometry_config.create_config(Yheight=10, shieldName="warm_opt")
+ship_geo = geometry_config.create_config(Yheight=10, shieldName="TRY_2025")
 
 # -----Timer--------------------------------------------------------
 timer = ROOT.TStopwatch()
@@ -51,7 +51,9 @@ timer.Start()
 # -----Create simulation run----------------------------------------
 run = ROOT.FairRunSim()
 run.SetName(mcEngine)  # Transport engine
-run.SetSink(ROOT.FairRootFileSink(outFile))  # Output file
+sink = ROOT.FairRootFileSink(outFile)
+run.SetSink(sink)
+ROOT.SetOwnership(sink, False)  # C++ FairRun takes ownership
 run.SetUserConfig("g4Config.C")  # user configuration file default g4Config.C
 rtdb = run.GetRuntimeDb()
 

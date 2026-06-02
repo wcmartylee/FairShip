@@ -14,14 +14,84 @@ it in future.
 
 ### Added
 
-* Add new 2026_04_01_SHiP_MainSpectrometerField_V13.root fieldmap
-
 ### Changed
-* Make artificial retina the baseline option for pattern recognition
 
 ### Fixed
 
 ### Removed
+
+## 26.05 - 2026-05-25
+
+### Added
+
+* Added ParticleGunGenerator #1183
+* Add time window event overlay script (`macro/make_time_window.py`) for constructing realistic pileup from MC truth events
+* Add `SetStartT` and `GetEventID` accessors to `ShipMCTrack`
+* Add beam smearing and painting support to `DPPythia8Generator`
+
+### Changed
+
+* Update default spectrometer field map to 2025 MgB2 map (`2025_02_12_SHiP_SpectrometerField_ECN3_MgB2.root`)
+* Replace incorrectly oriented spectrometer field maps with corrected versions (2026_05_07)
+
+### Fixed
+
+* Import EGPythia6 library from basiclibs in makeMuonDIS
+* Remove deprecated attribute syntax in the GST TTree copy within GENIE run_simScript option
+* Keep FixedTargetGenerator retrying if Pythia fails to generate an event, until a max number of retries is reached
+* Recompute the two-track DOCA at the chi^2-optimal vertex (`HNLPosFit`) instead of the iterative geometric one. The geometric DOCA was evaluated with tangent-line linearisations at the geometric iteration's converged z and overestimated the line-to-line distance wherever Migrad shifted the vertex; re-extrapolating the genfit states the small residual dz to `HNLPosFit.Z()` recovers a substantial fraction of signal at the standard DOCA preselection cut on HNL signal MC.
+* Anchor `Chamber1.z` to the decay vessel geometry so the HNL minimum decay length and the muon-DIS start position track the upstream end of the decay vessel; the legacy formula in `geometry_config.py` left both ~1.8 m too far downstream after the March 2025 coordinate-system change, reducing HNL generation acceptance by about 3.6 % of the decay vessel volume.
+* Work around ROOT 6.40 GIL bug that crashes on `TH1::Fit()` warnings by guarding with `GetEntries() > 0`
+* Prevent double-delete segfaults with ROOT 6.40 PyROOT ownership changes by transferring ownership to C++ for objects managed by FairRoot, genfit, and Geant4
+* Guard meson-production chain export for proton-bremsstrahlung mode in `DPPythia8Generator`, fixing duplicated dark photon and spurious Pythia system entry
+* Support both old (2018) and new MuonBack production files by detecting `PlaneHAPoint` branch and setting correct z-offset (#1181)
+* Guard vertex fit against unconverged Migrad and failed HESSE to prevent unreliable vertex positions
+* Restore chi2 assignment in vertex fit TMinuit callback (`f.value` instead of local rebind)
+* Keep ROOT streamers (`+` LinkDef flag) for `MTCDetector` and `strawtubes`, needed for dynamic downcasting via `run.GetListOfModules()`
+* Remove unused ROOT streamers from other detector classes
+* Check if `inputfile` is a list or single string in `run_simScript.py`
+* Show full path format in `--field_map` help text
+* Make sumw cache unique per file and fail fast on unknown Point class in time window overlay script
+
+### Removed
+
+* Remove duplicate `makeMuonDIS.py` from `muonShieldOptimization/` (canonical version is in `muonDIS/`)
+* Remove incorrectly oriented field maps added in 26.04
+
+## 26.04 - 2026-04-30
+
+### Added
+
+* Add angular acceptance cut in HNL and DP generators to skip events outside the decay vessel
+* Add FileSummary to run_fixedTarget.py to save all the options for reference (#1140)
+* Add new 2026_04_01_SHiP_MainSpectrometerField_V13.root fieldmap
+* Add GenFit unbiased hit residuals and pulls to tracking benchmark
+* Add type stubs for ROOT, XRootD, acts, and genfit
+* Add CI workflow to publish plots to GitHub Pages and embed in PR comments
+
+### Changed
+* Make artificial retina the baseline option for pattern recognition
+* `nrOfRetries()` in HNL and DP generators now counts only production failures; geometric acceptance rejections are tracked separately via `nrOfGeoRejections()`
+* Read vessel end dimensions from veto YAML config instead of hardcoding in `geometry_config.py`
+* Replace uproot with PyROOT in compare_histograms
+
+### Fixed
+
+* Add missing SetPaintRadius method and proper beam smearing in DPPythia8Generator class.
+* Fix vertex finding for upstream vertices by using stepwise extrapolation
+* Derive track fit seed from pattern recognition and first hit position instead of hard-coded coordinate (#763)
+* Replace obsolete elliptical acceptance cut with rectangular acceptance in track pattern recognition
+* Fix CI build warnings: add missing `override` specifiers, fix `Print()` and `Init()` virtual hiding, remove unused `FairShipFields` LinkDef entry
+* Remove no-effect statements (unused object creation, bare index accesses) from Python scripts
+* Determine track charge from pattern recognition slope bending and fit both charge hypotheses
+* Skip inconsistent track hypothesis after fit
+* Improve track fitting loop robustness and add convergence check
+* Replace `from ROOT import` with namespace-qualified access
+* Update references to removed muon shield configurations
+
+### Removed
+
+* Remove fake pattern recognition fallback
 
 ## 26.03 - 2026-03-31
 

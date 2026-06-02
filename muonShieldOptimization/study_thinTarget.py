@@ -48,7 +48,7 @@ if theSeed > 900000000:
     theSeed = theSeed % 900000000
 ROOT.gRandom.SetSeed(theSeed)
 shipRoot_conf.configure()  # load basic libraries, prepare atexit for python
-ship_geo = geometry_config.create_config(Yheight=10, shieldName="warm_opt")
+ship_geo = geometry_config.create_config(Yheight=10, shieldName="TRY_2025")
 
 # -----Timer--------------------------------------------------------
 timer = ROOT.TStopwatch()
@@ -58,7 +58,9 @@ timer.Start()
 gFairBaseContFact = ROOT.FairBaseContFact()  # required by change to FairBaseContFact to avoid TList::Clear errors
 run = ROOT.FairRunSim()
 run.SetName(mcEngine)  # Transport engine
-run.SetSink(ROOT.FairRootFileSink(outFile))  # Output file
+sink = ROOT.FairRootFileSink(outFile)
+run.SetSink(sink)
+ROOT.SetOwnership(sink, False)  # C++ FairRun takes ownership
 run.SetUserConfig("g4Config.C")  # user configuration file default g4Config.C
 rtdb = run.GetRuntimeDb()
 
