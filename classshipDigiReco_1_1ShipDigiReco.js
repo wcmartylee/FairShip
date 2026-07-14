@@ -1,6 +1,6 @@
 var classshipDigiReco_1_1ShipDigiReco =
 [
-    [ "__init__", "classshipDigiReco_1_1ShipDigiReco.html#af3eba756365a33fe6498b13d04577f20", null ],
+    [ "__init__", "classshipDigiReco_1_1ShipDigiReco.html#a6478031fc70d5599ec2a11f87899ebe9", null ],
     [ "_compute_seed_state", "classshipDigiReco_1_1ShipDigiReco.html#ac564a7d329df8511cd4987a36d6455a0", null ],
     [ "digitize", "classshipDigiReco_1_1ShipDigiReco.html#ad5784402bac7294d364aa95047a86c76", null ],
     [ "findGoodTracks", "classshipDigiReco_1_1ShipDigiReco.html#a04f488c41f82467b97c1c91eedfd01f5", null ],
@@ -13,6 +13,7 @@ var classshipDigiReco_1_1ShipDigiReco =
     [ "bfield", "classshipDigiReco_1_1ShipDigiReco.html#a97271c1be5a7dca5054299973c3e2ec3", null ],
     [ "digiMTC", "classshipDigiReco_1_1ShipDigiReco.html#adee80199ed862daf9e63fce6014c0b2d", null ],
     [ "digiSBT", "classshipDigiReco_1_1ShipDigiReco.html#a65eabfbe07243c8d20a72cc52a9ed173", null ],
+    [ "digiSiliconTarget", "classshipDigiReco_1_1ShipDigiReco.html#ae2bcc6c6eb238859f594cca33e3614f6", null ],
     [ "digiSplitcal", "classshipDigiReco_1_1ShipDigiReco.html#a8ca1a58b87c5049c4ba31f7c7f04e4f9", null ],
     [ "eventHeader", "classshipDigiReco_1_1ShipDigiReco.html#a8e5e31ba378ecc05524cf6e44bfd57e3", null ],
     [ "fGenFitArray", "classshipDigiReco_1_1ShipDigiReco.html#adb0f9a6ffec36c45b363a1088b74576b", null ],
@@ -41,6 +42,8 @@ var classshipDigiReco_1_1ShipDigiReco =
     [ "Tracklets", "classshipDigiReco_1_1ShipDigiReco.html#a2b61741c8e142e08bb64b7288fe79e36", null ],
     [ "upstreamTaggerDetector", "classshipDigiReco_1_1ShipDigiReco.html#a730348eb662b22ed5b755ae782a92bcf", null ],
     [ "v_drift", "classshipDigiReco_1_1ShipDigiReco.html#ac37808cf4026c7e6eb83174ec03ebcab", null ],
+    [ "validation", "classshipDigiReco_1_1ShipDigiReco.html#ae700a52f7333e3894dcced3b1ae4929d", null ],
+    [ "validation_stats", "classshipDigiReco_1_1ShipDigiReco.html#a598627d4dc8cf15bc8a6f70d15d1139f", null ],
     [ "Vertexing", "classshipDigiReco_1_1ShipDigiReco.html#a6d1eda59c9098b43bb73cf17cc0877c1", null ],
     [ "vetoHitOnTrackArray", "classshipDigiReco_1_1ShipDigiReco.html#a54283f8e004587c908a80f9a2483128f", null ],
     [ "vetoHitOnTrackBranch", "classshipDigiReco_1_1ShipDigiReco.html#ac2183ffb516c391bcd688c91b35f1177", null ]

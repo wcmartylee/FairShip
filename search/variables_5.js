@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['e_0',['E',['../namespacemakeMuonEM.html#a2f541edec5da16cf64dcce3ea03d80c8',1,'makeMuonEM']]],
-  ['e13_1',['e13',['../namespacerun__fixedTarget.html#a05d4d5d811ac982fb950c0e77dff935b',1,'run_fixedTarget']]],
+  ['e_0',['e',['../structTrackBuffer.html#ab58809fbaaf19dd4093d14caa0d0f2e0',1,'TrackBuffer::e'],['../namespacemakeMuonEM.html#a2f541edec5da16cf64dcce3ea03d80c8',1,'makeMuonEM.E']]],
+  ['e13_1',['e13',['../namespacerun__fixedTarget.html#a05d4d5d811ac982fb950c0e77dff935b',1,'run_fixedTarget.e13'],['../namespacemakeDecay.html#ae036a600a0fe461ba6d63d7c5a7d1eb0',1,'makeDecay.e13']]],
   ['e_5fsi_2',['e_si',['../namespaceshipunit.html#aa4f540f7dedc6234c8b6620bc2c1fb07',1,'shipunit.e_SI'],['../namespacehepunit.html#af875140c15decb3950dea5e4b73f9212',1,'hepunit.e_SI']]],
   ['e_5fsquared_3',['e_squared',['../namespaceshipunit.html#a4674e521cd11cd1285bd45539a4a5322',1,'shipunit.e_squared'],['../namespacehepunit.html#acd336a10b0bd5eb9bb2286a9534c3a49',1,'hepunit.e_squared']]],
   ['ecut_4',['ecut',['../classMuonBackGenerator.html#a69b3ae0f15d91b15e14655080d17db39',1,'MuonBackGenerator::ecut'],['../namespacestudy__thinTarget.html#af22b0230911110381a9456faaa67d77b',1,'study_thinTarget.ecut'],['../namespacestudy__muMSC.html#ae0e2151c318c7666057adb54d84926f0',1,'study_muMSC.ecut'],['../namespacestudy__GammaConv.html#a147a7866f4638ffd619406fd06f8cdfb',1,'study_GammaConv.ecut'],['../namespacecompactingBackgroundProduction.html#a68e9182156087adfdb0fed8323680296',1,'compactingBackgroundProduction.ecut']]],
@@ -9,18 +9,18 @@ var searchData=
   ['ekin_6',['Ekin',['../namespacestudy__thinTarget.html#abf343d15ac513f7c099b042aa8b8910d',1,'study_thinTarget']]],
   ['el_7',['El',['../classGenieGenerator.html#a0eff1f335e976e9bf72f9eea7e5e759d',1,'GenieGenerator']]],
   ['electron_5fcharge_8',['electron_charge',['../namespaceshipunit.html#a2f449457e963e6f62570ea6ef59ebd1c',1,'shipunit.electron_charge'],['../namespacehepunit.html#ab3e88da4302bb320dc0abdfb2fcdf4d2',1,'hepunit.electron_charge']]],
-  ['electron_5fcompton_5flength_9',['electron_compton_length',['../namespacehepunit.html#aec998eed09ff804df400f0b478764c10',1,'hepunit.electron_Compton_length'],['../namespaceshipunit.html#a37554b94c872b532446a17f2e602abde',1,'shipunit.electron_Compton_length']]],
+  ['electron_5fcompton_5flength_9',['electron_compton_length',['../namespaceshipunit.html#a37554b94c872b532446a17f2e602abde',1,'shipunit.electron_Compton_length'],['../namespacehepunit.html#aec998eed09ff804df400f0b478764c10',1,'hepunit.electron_Compton_length']]],
   ['electron_5fmass_5fc2_10',['electron_mass_c2',['../namespaceshipunit.html#a87fd5b2db5e2548f7089becbe9817cc3',1,'shipunit.electron_mass_c2'],['../namespacehepunit.html#a8c2e039b337bc495c7c449d34163271b',1,'hepunit.electron_mass_c2']]],
   ['electronvolt_11',['electronvolt',['../namespaceshipunit.html#afadb11f38d5de46f492c62f96e1ee412',1,'shipunit.electronvolt'],['../namespacehepunit.html#a4e7a64b0590ccbd535c3891b3d80741f',1,'hepunit.electronvolt']]],
-  ['elm_5fcoupling_12',['elm_coupling',['../namespaceshipunit.html#a35894ea0f42f28d4eba5dbd269133b6d',1,'shipunit.elm_coupling'],['../namespacehepunit.html#ad9f74f71a44f6b7d18bc771fd1e7dcc9',1,'hepunit.elm_coupling']]],
-  ['emax_13',['emax',['../classFixedTargetGenerator.html#a07b7f7762d6efdf651d166d15361dd83',1,'FixedTargetGenerator::EMax'],['../classexitHadronAbsorber.html#ad60adebeb36d9c452ac1460abc39afe2',1,'exitHadronAbsorber::EMax']]],
+  ['elm_5fcoupling_12',['elm_coupling',['../namespacehepunit.html#ad9f74f71a44f6b7d18bc771fd1e7dcc9',1,'hepunit.elm_coupling'],['../namespaceshipunit.html#a35894ea0f42f28d4eba5dbd269133b6d',1,'shipunit.elm_coupling']]],
+  ['emax_13',['emax',['../classexitHadronAbsorber.html#ad60adebeb36d9c452ac1460abc39afe2',1,'exitHadronAbsorber::EMax'],['../classFixedTargetGenerator.html#a07b7f7762d6efdf651d166d15361dd83',1,'FixedTargetGenerator::EMax']]],
   ['emp_14',['emp',['../namespacestudy__muMSC.html#a5c13fb2f4d3d920a9cd1ea5a775bf8fc',1,'study_muMSC.emP'],['../namespacestudy__GammaConv.html#a48249c4eb38f3ec77516942c84aad0be',1,'study_GammaConv.emP']]],
   ['emplatewidth_15',['EmPlateWidth',['../classTarget.html#af0074d7ab164fbfdba20c110fc256d80',1,'Target']]],
   ['empty_16',['empty',['../namespacerun__simScript.html#ae9cb26d82672ec852f43e2d668b3a7cf',1,'run_simScript']]],
   ['emulsionthickness_17',['EmulsionThickness',['../classTarget.html#acb6109a2d29999852b9b188a172a8e6b',1,'Target']]],
   ['emulsionx_18',['EmulsionX',['../classTarget.html#afb1de534a204baf0bf4cd04d85a92af6',1,'Target']]],
   ['emulsiony_19',['EmulsionY',['../classTarget.html#a4f413bdaa4b87fe74788e5cc3c6f4457',1,'Target']]],
-  ['end_20',['end',['../classFixedTargetGenerator.html#a59ae4f1dfb442d58254275e5a83692ce',1,'FixedTargetGenerator::end'],['../classPythia8Generator.html#accaba94561242bc1e06134f27a30bb0d',1,'Pythia8Generator::end']]],
+  ['end_20',['end',['../classPythia8Generator.html#accaba94561242bc1e06134f27a30bb0d',1,'Pythia8Generator::end'],['../classFixedTargetGenerator.html#a59ae4f1dfb442d58254275e5a83692ce',1,'FixedTargetGenerator::end']]],
   ['endofhadronabsorber_21',['endOfHadronAbsorber',['../namespacemergeMbias.html#ac1ba9c5e18f9a604f0c372e588cc6a67',1,'mergeMbias']]],
   ['endz_22',['endz',['../classMuDISGenerator.html#aebd4e2db02a83054f90440088fd8d9a7',1,'MuDISGenerator::endZ'],['../classFixedTargetGenerator.html#a6e276b38f39dac3a7b26dd4eac990c95',1,'FixedTargetGenerator::endZ'],['../classGenieGenerator.html#a29396a1cf89c0f75beefde980874eefc',1,'GenieGenerator::endZ'],['../classPythia8Generator.html#a3f7b61dbce42df88afc6859845bc0540',1,'Pythia8Generator::endZ']]],
   ['energycut_23',['EnergyCut',['../namespacerun__simScript.html#a25a12c56a31e27776669952116892e5d',1,'run_simScript']]],
@@ -40,6 +40,7 @@ var searchData=
   ['evtgenp_37',['evtgenP',['../classFixedTargetGenerator.html#aeec5ade00ef00598d968b593a9c5dec5',1,'FixedTargetGenerator']]],
   ['exclude_38',['exclude',['../namespacerun__simScript.html#abcf5040fef2f5816464371dd3982d3a8',1,'run_simScript']]],
   ['exemplary_39',['EXEMPLARY',['../BSD-3-Clause_8txt.html#abaf96cc8da1166ab46de1fe3d960417d',1,'BSD-3-Clause.txt']]],
-  ['expectedpars_40',['expectedPars',['../structModelSpec.html#af3f40e0ec1c08f9fa649e851f9edf91c',1,'ModelSpec']]],
-  ['ezero_41',['Ezero',['../classNtupleGenerator.html#ab05d064a7e4ee7380e3f6bb41cb44d46',1,'NtupleGenerator']]]
+  ['exist_5fok_40',['exist_ok',['../namespacerun__tracking__scan.html#a5cd4b30d3b678aec7802fdf6770cb417',1,'run_tracking_scan']]],
+  ['expectedpars_41',['expectedPars',['../structModelSpec.html#af3f40e0ec1c08f9fa649e851f9edf91c',1,'ModelSpec']]],
+  ['ezero_42',['Ezero',['../classNtupleGenerator.html#ab05d064a7e4ee7380e3f6bb41cb44d46',1,'NtupleGenerator']]]
 ];

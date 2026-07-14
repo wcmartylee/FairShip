@@ -17,9 +17,11 @@ var searchData=
   ['shipunit_14',['shipunit',['../namespaceshipunit.html',1,'shipunit'],['../namespaceShipUnit.html',1,'ShipUnit']]],
   ['shipvertex_15',['shipVertex',['../namespaceshipVertex.html',1,'']]],
   ['shipveto_16',['shipVeto',['../namespaceshipVeto.html',1,'']]],
-  ['splitcaldetector_17',['splitcalDetector',['../namespacesplitcalDetector.html',1,'']]],
-  ['strawtubesdetector_18',['strawtubesDetector',['../namespacestrawtubesDetector.html',1,'']]],
-  ['study_5fgammaconv_19',['study_GammaConv',['../namespacestudy__GammaConv.html',1,'']]],
-  ['study_5fmumsc_20',['study_muMSC',['../namespacestudy__muMSC.html',1,'']]],
-  ['study_5fthintarget_21',['study_thinTarget',['../namespacestudy__thinTarget.html',1,'']]]
+  ['silicontargetdetector_17',['SiliconTargetDetector',['../namespaceSiliconTargetDetector.html',1,'']]],
+  ['skim_5fmuonback_5fsmoke_18',['skim_muonback_smoke',['../namespaceskim__muonback__smoke.html',1,'']]],
+  ['splitcaldetector_19',['splitcalDetector',['../namespacesplitcalDetector.html',1,'']]],
+  ['strawtubesdetector_20',['strawtubesDetector',['../namespacestrawtubesDetector.html',1,'']]],
+  ['study_5fgammaconv_21',['study_GammaConv',['../namespacestudy__GammaConv.html',1,'']]],
+  ['study_5fmumsc_22',['study_muMSC',['../namespacestudy__muMSC.html',1,'']]],
+  ['study_5fthintarget_23',['study_thinTarget',['../namespacestudy__thinTarget.html',1,'']]]
 ];
