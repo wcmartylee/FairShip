@@ -105,8 +105,8 @@ Functions</h2></td></tr>
 <tr class="separator:a6500b277d02453ad29b61dda2281a7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cfc0857eacf293ed0d9c8b83e9f226a" id="r_a8cfc0857eacf293ed0d9c8b83e9f226a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeomGeant4.html#a8cfc0857eacf293ed0d9c8b83e9f226a">printWF</a> (vl, alreadyPrinted, bool onlyWithField=True)</td></tr>
 <tr class="separator:a8cfc0857eacf293ed0d9c8b83e9f226a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a724303a4fd9998c82c60471393aa37a0" id="r_a724303a4fd9998c82c60471393aa37a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeomGeant4.html#a724303a4fd9998c82c60471393aa37a0">nextLevel</a> (lv, int magnetMass, onlyWithField, exclude, alreadyPrinted)</td></tr>
-<tr class="separator:a724303a4fd9998c82c60471393aa37a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b3a37be8c641c12bb33aa7dabf9d8dc" id="r_a0b3a37be8c641c12bb33aa7dabf9d8dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeomGeant4.html#a0b3a37be8c641c12bb33aa7dabf9d8dc">nextLevel</a> (lv, magnetMass, onlyWithField, exclude, alreadyPrinted)</td></tr>
+<tr class="separator:a0b3a37be8c641c12bb33aa7dabf9d8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f2dbb7cfd99fcab16c9f0edb9d36a29" id="r_a0f2dbb7cfd99fcab16c9f0edb9d36a29"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeomGeant4.html#a0f2dbb7cfd99fcab16c9f0edb9d36a29">printWeightsandFields</a> (bool onlyWithField=True, exclude=None)</td></tr>
 <tr class="separator:a0f2dbb7cfd99fcab16c9f0edb9d36a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92c04a276d287a72320c3f0ed4f5a420" id="r_a92c04a276d287a72320c3f0ed4f5a420"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegeomGeant4.html#a92c04a276d287a72320c3f0ed4f5a420">addVMCFields</a> (shipGeo, str controlFile=&quot;&quot;, bool verbose=False, bool withVirtualMC=True)</td></tr>
@@ -244,8 +244,8 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  194</span>    <span class="keywordflow">if</span> len(fieldsList) &gt; 1:</div>
 <div class="line"><span class="lineno">  195</span>        fieldMaker.defineComposite(<span class="stringliteral">&quot;TotalField&quot;</span>, *fieldsList)  <span class="comment"># fieldsList MUST have length &lt;=4</span></div>
 <div class="line"><span class="lineno">  196</span>        fieldMaker.defineGlobalField(<span class="stringliteral">&quot;TotalField&quot;</span>)</div>
-<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  198</span>        fieldMaker.defineGlobalField(<span class="stringliteral">&quot;MainSpecMap&quot;</span>)</div>
+<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">elif</span> fieldsList:</div>
+<div class="line"><span class="lineno">  198</span>        fieldMaker.defineGlobalField(fieldsList[0])</div>
 <div class="line"><span class="lineno">  199</span>    <span class="keywordflow">if</span> withVirtualMC:</div>
 <div class="line"><span class="lineno">  200</span>        <span class="comment"># Force the VMC to update/reset the fields defined by the fieldMaker object.</span></div>
 <div class="line"><span class="lineno">  201</span>        <span class="comment"># Get the ROOT/Geant4 geometry manager</span></div>
@@ -375,8 +375,8 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a724303a4fd9998c82c60471393aa37a0" name="a724303a4fd9998c82c60471393aa37a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a724303a4fd9998c82c60471393aa37a0">&#9670;&#160;</a></span>nextLevel()</h2>
+<a id="a0b3a37be8c641c12bb33aa7dabf9d8dc" name="a0b3a37be8c641c12bb33aa7dabf9d8dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3a37be8c641c12bb33aa7dabf9d8dc">&#9670;&#160;</a></span>nextLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -390,7 +390,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>magnetMass</em>, </td>
         </tr>
         <tr>
@@ -420,20 +420,20 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="geomGeant4_8py_source.html#l00134">134</a> of file <a class="el" href="geomGeant4_8py_source.html">geomGeant4.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  134</span><span class="keyword">def </span>nextLevel(lv, magnetMass: int, onlyWithField, exclude, alreadyPrinted):</div>
-<div class="line"><span class="lineno">  135</span>    tmp = 0</div>
-<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">for</span> da <span class="keywordflow">in</span> range(lv.GetNoDaughters()):</div>
-<div class="line"><span class="lineno">  137</span>        lvn = lv.GetDaughter(da)</div>
-<div class="line"><span class="lineno">  138</span>        name = lvn.GetName().c_str()</div>
-<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">if</span> name <span class="keywordflow">in</span> exclude:</div>
-<div class="line"><span class="lineno">  140</span>            <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">  141</span>        lvln = lvn.GetLogicalVolume()</div>
-<div class="line"><span class="lineno">  142</span>        <span class="keywordflow">if</span> lvln.GetNoDaughters() &gt; 0:</div>
-<div class="line"><span class="lineno">  143</span>            xtmp, _dummy = nextLevel(lvln, magnetMass, onlyWithField, exclude, alreadyPrinted)</div>
-<div class="line"><span class="lineno">  144</span>            magnetMass += xtmp</div>
+<div class="fragment"><div class="line"><span class="lineno">  134</span><span class="keyword">def </span>nextLevel(lv, magnetMass, onlyWithField, exclude, alreadyPrinted):</div>
+<div class="line"><span class="lineno">  135</span>    <span class="comment"># Recursively accumulate the magnet mass over the subtree&#39;s leaf volumes;</span></div>
+<div class="line"><span class="lineno">  136</span>    <span class="comment"># printWF counts only the first leaf per unique volume name.</span></div>
+<div class="line"><span class="lineno">  137</span>    <span class="keywordflow">for</span> da <span class="keywordflow">in</span> range(lv.GetNoDaughters()):</div>
+<div class="line"><span class="lineno">  138</span>        lvn = lv.GetDaughter(da)</div>
+<div class="line"><span class="lineno">  139</span>        name = lvn.GetName().c_str()</div>
+<div class="line"><span class="lineno">  140</span>        <span class="keywordflow">if</span> name <span class="keywordflow">in</span> exclude:</div>
+<div class="line"><span class="lineno">  141</span>            <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">  142</span>        lvln = lvn.GetLogicalVolume()</div>
+<div class="line"><span class="lineno">  143</span>        <span class="keywordflow">if</span> lvln.GetNoDaughters() &gt; 0:</div>
+<div class="line"><span class="lineno">  144</span>            magnetMass = nextLevel(lvln, magnetMass, onlyWithField, exclude, alreadyPrinted)</div>
 <div class="line"><span class="lineno">  145</span>        <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  146</span>            tmp += printWF(lvn, alreadyPrinted, onlyWithField)</div>
-<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">return</span> tmp, magnetMass</div>
+<div class="line"><span class="lineno">  146</span>            magnetMass += printWF(lvn, alreadyPrinted, onlyWithField)</div>
+<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">return</span> magnetMass</div>
 <div class="line"><span class="lineno">  148</span> </div>
 <div class="line"><span class="lineno">  149</span> </div>
 </div><!-- fragment -->
@@ -521,7 +521,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  157</span>    world = gn.GetWorldVolume().GetLogicalVolume()</div>
 <div class="line"><span class="lineno">  158</span>    magnetMass = 0</div>
 <div class="line"><span class="lineno">  159</span>    alreadyPrinted: dict[str, str] = {}</div>
-<div class="line"><span class="lineno">  160</span>    _dummy, nM = nextLevel(world, magnetMass, onlyWithField, exclude, alreadyPrinted)</div>
+<div class="line"><span class="lineno">  160</span>    nM = nextLevel(world, magnetMass, onlyWithField, exclude, alreadyPrinted)</div>
 <div class="line"><span class="lineno">  161</span>    print(<span class="stringliteral">&quot;total magnet mass&quot;</span>, nM / 1000.0, <span class="stringliteral">&quot;t&quot;</span>)</div>
 <div class="line"><span class="lineno">  162</span>    <span class="keywordflow">return</span></div>
 <div class="line"><span class="lineno">  163</span> </div>
