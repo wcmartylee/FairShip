@@ -230,7 +230,7 @@ def set_upstream_tagger(c) -> None:
 def create_config(
     DecayVolumeMedium: str = "helium",
     Yheight: float = 6.0,
-    strawDesign: int = 10,
+    strawDesign: int = 7,
     shieldName: str = "TRY_2025",
     nuTargetPassive: int = 1,
     SND: bool = True,
@@ -243,7 +243,7 @@ def create_config(
     Args:
         DecayVolumeMedium: Medium in decay volume ("helium" or "vacuums"), default: "helium"
         Yheight: Height of vacuum tank in meters, default: 6.0
-        strawDesign: Straw tube design (4=Aluminium frame, 10=steel frame), default: 10
+        strawDesign: SST design, default: 7
         shieldName: Name of shield configuration, default: "TRY_2025"
         nuTargetPassive: Target type (0=with active layers, 1=only passive), default: 1
         SND: Enable SND detector, default: True
@@ -286,8 +286,6 @@ def create_config(
     c.cave = AttrDict()
     c.cave.floorHeightMuonShield = 5 * u.m
     c.cave.floorHeightTankA = 4.2 * u.m
-    if strawDesign == 10:
-        c.cave.floorHeightMuonShield = c.cave.floorHeightTankA  # avoid the gap, for 2018 geometry
     c.cave.floorHeightTankB = 2 * u.m
     # ECN3 cavern, see passive/ShipCave.cxx
     c.cave.TCC8_length = 170 * u.m
