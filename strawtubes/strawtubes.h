@@ -35,6 +35,7 @@ class strawtubes : public SHiP::Detector<strawtubesPoint> {
   Bool_t ProcessHits(FairVolume* v = nullptr) override;
 
   void SetDesign(Int_t design);
+  void SetgdmlFlag(Bool_t flag);
   void SetzPositions(Double_t z1, Double_t z2, Double_t z3, Double_t z4);
   void SetApertureArea(Double_t width, Double_t height);
   void SetStrawDiameter(Double_t outer_straw_diameter, Double_t wall_thickness);
@@ -64,6 +65,7 @@ class strawtubes : public SHiP::Detector<strawtubesPoint> {
   active volume.
   */
   Int_t f_design;                   //!  SST design label
+  Bool_t f_gdml_flag;               //!  flag for usage of gdml frame
   Double_t f_T1_z;                  //!  z-position of tracking station 1
   Double_t f_T2_z;                  //!  z-position of tracking station 2
   Double_t f_T3_z;                  //!  z-position of tracking station 3

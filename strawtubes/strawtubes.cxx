@@ -141,6 +141,10 @@ void strawtubes::SetDesign(Int_t design) {
   f_design = design;  //!  SST design label
 }
 
+void strawtubes::SetgdmlFlag(Bool_t flag) {
+  f_gdml_flag = flag;  //!  flag for usage of gdml frame
+}
+
 void strawtubes::SetzPositions(Double_t z1, Double_t z2, Double_t z3,
                                Double_t z4) {
   f_T1_z = z1;  //!  z-position of tracking station 1
@@ -342,13 +346,22 @@ void strawtubes::ConstructGeometry() {
       top->AddNode(statbase, statnb + 4, place_base);
     }
 
-    // Import station frame
-    TGeoVolume* statframe = TGeoVolume::Import(f_frame_path, "statframe");
-    statframe->SetName(nmstation + "_frame");
-    statframe->SetMedium(med);
-    statframe->GetNode("V-Frame_4_x_6-0_1")->GetVolume()->SetMedium(FrameMatPtr);
-    vol->AddNode(statframe, statnb * 1e6,
-		 new TGeoTranslation(0, -floor_offset / 2., 0));
+    if(f_gdml_flag) {
+      // Import gdml station frame
+      TGeoVolume* statframe = TGeoVolume::Import(f_frame_path, "statframe");
+      statframe->SetName(nmstation + "_frame");
+      statframe->SetMedium(med);
+      statframe->GetNode("V-Frame_4_x_6-0_1")->GetVolume()->SetMedium(FrameMatPtr);
+      vol->AddNode(statframe, statnb * 1e6,
+		   new TGeoTranslation(0, -floor_offset / 2., 0));
+    } else {
+      // Use TGeo station frame
+      TGeoVolume* statframe =
+	  new TGeoVolume(nmstation + "_frame", detcomp1, FrameMatPtr);
+      vol->AddNode(statframe, statnb * 1e6,
+		   new TGeoTranslation(0, -floor_offset / 2., 0));
+      statframe->SetLineColor(kRed);
+    }
 
     for (Int_t vnb = 0; vnb < 4; vnb++) {
       // View loop

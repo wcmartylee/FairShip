@@ -328,6 +328,9 @@ parser.add_argument(
     choices=range(1, 10),
 )
 parser.add_argument(
+    "--nogdmlFrame", help="Don't use gdml frame.", action="store_true"
+)
+parser.add_argument(
     "-F",
     dest="deepCopy",
     help="default = False: copy only stable particles to stack, except for HNL events",
@@ -517,6 +520,7 @@ elif options.debug == 3:
 ship_geo = geometry_config.create_config(
     Yheight=options.dy,
     strawDesign=options.strawDesign,
+    nogdmlFrame=options.nogdmlFrame,
     muShieldGeo=options.geofile,
     shieldName=options.shieldName,
     DecayVolumeMedium=options.decayVolMed,

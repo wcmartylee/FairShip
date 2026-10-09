@@ -224,6 +224,10 @@ def configure_strawtubes(yaml_file: str, frame_design: str, ship_geo) -> None:
 
     strawtubes = ROOT.strawtubes(ship_geo.strawtubes_geo.medium)
     strawtubes.SetDesign(ship_geo.strawDesign)
+    if ship_geo.nogdmlFrame:
+        strawtubes.SetgdmlFlag(0)
+    else:
+        strawtubes.SetgdmlFlag(1)
     strawtubes.SetzPositions(
         ship_geo.TrackStation1.z,
         ship_geo.TrackStation2.z,
