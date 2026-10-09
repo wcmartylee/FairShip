@@ -145,6 +145,7 @@ def create_config(
     DecayVolumeMedium: str = "helium",
     Yheight: float = 6.0,
     strawDesign: int = 10,
+    nogdmlFrame: bool = False,
     muShieldGeo=None,
     shieldName: str = "TRY_2025",
     nuTargetPassive: int = 1,
@@ -159,6 +160,7 @@ def create_config(
         DecayVolumeMedium: Medium in decay volume ("helium" or "vacuums"), default: "helium"
         Yheight: Height of vacuum tank in meters, default: 6.0
         strawDesign: Straw tube design (4=Aluminium frame, 10=steel frame), default: 10
+        nogdmlFrame: SST frame without usage of gdml file, default: False
         muShieldGeo: Muon shield geometry file (for experts), default: None
         shieldName: Name of shield configuration, default: "TRY_2025"
         nuTargetPassive: Target type (0=with active layers, 1=only passive), default: 1
@@ -197,6 +199,7 @@ def create_config(
     extraVesselLength = 10 * u.m
     windowBulge = 25 * u.cm
     c.strawDesign = strawDesign
+    c.nogdmlFrame = nogdmlFrame
     c.magnetDesign = 4
     # cave parameters
     c.cave = AttrDict()
