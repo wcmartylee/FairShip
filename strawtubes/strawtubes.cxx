@@ -206,8 +206,8 @@ void strawtubes::ConstructGeometry() {
       implement here you own way of constructing the geometry. */
 
   TGeoVolume* top = gGeoManager->GetTopVolume();
-  ShipGeo::InitMedium("aluminium");
-  TGeoMedium* Al = gGeoManager->GetMedium("aluminium");
+  ShipGeo::InitMedium("Aluminium");
+  TGeoMedium* Al = gGeoManager->GetMedium("Aluminium");
   ShipGeo::InitMedium("steel");
   TGeoMedium* steel = gGeoManager->GetMedium("steel");
   ShipGeo::InitMedium("mylar");
