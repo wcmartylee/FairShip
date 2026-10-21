@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['basedetector_0',['BaseDetector',['../classBaseDetector_1_1BaseDetector.html',1,'BaseDetector']]],
-  ['block_1',['block',['../classstudy__GammaConv_1_1Block.html',1,'study_GammaConv.Block'],['../classstudy__muMSC_1_1Block.html',1,'study_muMSC.Block'],['../classstudy__thinTarget_1_1Block.html',1,'study_thinTarget.Block']]]
+  ['actsshipfield_0',['ActsShipField',['../classSHiP_1_1ActsShipField.html',1,'SHiP']]],
+  ['actsstrawgeometry_1',['ActsStrawGeometry',['../classSHiP_1_1ActsStrawGeometry.html',1,'SHiP']]],
+  ['actsstrawtracker_2',['ActsStrawTracker',['../classSHiP_1_1ActsStrawTracker.html',1,'SHiP']]],
+  ['attrdict_3',['AttrDict',['../classShipGeoConfig_1_1AttrDict.html',1,'ShipGeoConfig']]]
 ];

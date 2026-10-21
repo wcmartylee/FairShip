@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['rpvsusy_0',['RPVSUSY',['../classrpvsusy_1_1RPVSUSY.html',1,'rpvsusy']]],
-  ['rpvsusybranchings_1',['RPVSUSYbranchings',['../classrpvsusy_1_1RPVSUSYbranchings.html',1,'rpvsusy']]],
-  ['rulers_2',['Rulers',['../classeventDisplay_1_1Rulers.html',1,'eventDisplay']]]
+  ['newmudisgenerator_0',['NewMuDISGenerator',['../classNewMuDISGenerator.html',1,'']]],
+  ['ntuplegenerator_1',['NtupleGenerator',['../classNtupleGenerator.html',1,'']]],
+  ['nucleusmodel_2',['NucleusModel',['../classmakeCascadePythia8_1_1NucleusModel.html',1,'makeCascadePythia8']]]
 ];

@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -89,21 +94,24 @@ $(document).ready(function(){initNavTree('FixedTargetGenerator_8cxx.html',''); i
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">FixedTargetGenerator.cxx File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="FixedTargetGenerator_8h_source.html">FixedTargetGenerator.h</a>&quot;</code><br />
 <code>#include &lt;TGeoManager.h&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="BeamSmearingUtils_8h_source.html">BeamSmearingUtils.h</a>&quot;</code><br />
 <code>#include &quot;FairMCEventHeader.h&quot;</code><br />
 <code>#include &quot;FairPrimaryGenerator.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="HNLPythia8Generator_8h_source.html">HNLPythia8Generator.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="MeanMaterialBudget_8h_source.html">MeanMaterialBudget.h</a>&quot;</code><br />
 <code>#include &quot;Pythia8Plugins/EvtGen.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="PythiaUnits_8h_source.html">PythiaUnits.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ShipUnit_8h_source.html">ShipUnit.h</a>&quot;</code><br />
 <code>#include &quot;TGeoBBox.h&quot;</code><br />
 <code>#include &quot;TGeoNode.h&quot;</code><br />
@@ -115,153 +123,49 @@ $(document).ready(function(){initNavTree('FixedTargetGenerator_8cxx.html',''); i
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FixedTargetGenerator.cxx:</div>
 <div class="dyncontent">
-<div class="center"><img src="FixedTargetGenerator_8cxx__incl.png" border="0" usemap="#ashipgen_2FixedTargetGenerator_8cxx" alt=""/></div>
-<map name="ashipgen_2FixedTargetGenerator_8cxx" id="ashipgen_2FixedTargetGenerator_8cxx">
-<area shape="rect" title=" " alt="" coords="1319,5,1562,31"/>
-<area shape="rect" href="FixedTargetGenerator_8h.html" title=" " alt="" coords="279,79,451,104"/>
-<area shape="poly" title=" " alt="" coords="1319,27,942,47,465,81,465,76,942,42,1319,22"/>
-<area shape="rect" title=" " alt="" coords="5,225,68,251"/>
-<area shape="poly" title=" " alt="" coords="1319,23,1068,27,757,36,457,53,334,66,240,81,142,101,104,119,64,154,48,182,41,212,36,211,43,180,60,150,101,114,140,96,239,76,333,61,456,48,757,31,1068,21,1319,17"/>
-<area shape="rect" title=" " alt="" coords="184,152,263,177"/>
-<area shape="poly" title=" " alt="" coords="1319,21,1047,22,719,30,563,37,428,48,325,62,290,71,267,81,254,93,244,108,231,140,226,138,239,105,250,89,265,76,288,66,324,57,427,43,563,32,719,25,1047,17,1319,16"/>
-<area shape="rect" title=" " alt="" coords="475,79,599,104"/>
-<area shape="poly" title=" " alt="" coords="1319,28,1004,47,810,62,613,81,612,76,810,57,1003,42,1319,22"/>
-<area shape="rect" title=" " alt="" coords="623,79,679,104"/>
-<area shape="poly" title=" " alt="" coords="1319,24,1192,29,1037,40,866,56,693,82,692,76,866,51,1036,34,1191,24,1319,19"/>
-<area shape="rect" href="BeamSmearingUtils_8h.html" title=" " alt="" coords="1284,79,1448,104"/>
-<area shape="poly" title=" " alt="" coords="1431,33,1390,71,1386,67,1427,29"/>
-<area shape="rect" title=" " alt="" coords="903,79,1064,104"/>
-<area shape="poly" title=" " alt="" coords="1368,33,1071,79,1070,74,1367,28"/>
-<area shape="rect" title=" " alt="" coords="1088,79,1260,104"/>
-<area shape="poly" title=" " alt="" coords="1399,33,1231,78,1230,72,1397,28"/>
-<area shape="rect" href="HNLPythia8Generator_8h.html" title=" " alt="" coords="704,79,879,104"/>
-<area shape="poly" title=" " alt="" coords="1333,33,893,81,892,76,1333,28"/>
-<area shape="rect" href="MeanMaterialBudget_8h.html" title=" " alt="" coords="1791,79,1962,104"/>
-<area shape="poly" title=" " alt="" coords="1511,28,1794,74,1793,79,1510,33"/>
-<area shape="rect" title=" " alt="" coords="1586,79,1767,104"/>
-<area shape="poly" title=" " alt="" coords="1479,28,1626,72,1625,77,1478,33"/>
-<area shape="rect" href="ShipUnit_8h.html" title=" " alt="" coords="1472,79,1561,104"/>
-<area shape="poly" title=" " alt="" coords="1455,29,1496,67,1492,71,1451,33"/>
-<area shape="rect" title=" " alt="" coords="1987,79,2089,104"/>
-<area shape="poly" title=" " alt="" coords="1562,28,1751,48,1973,76,1973,81,1751,53,1562,33"/>
-<area shape="rect" title=" " alt="" coords="2113,79,2216,104"/>
-<area shape="poly" title=" " alt="" coords="1563,24,1807,44,2100,76,2099,81,1806,49,1562,30"/>
-<area shape="rect" title=" " alt="" coords="2241,79,2358,104"/>
-<area shape="poly" title=" " alt="" coords="1562,23,1861,42,2042,57,2227,76,2227,81,2042,62,1860,47,1562,28"/>
-<area shape="rect" title=" " alt="" coords="2383,79,2443,104"/>
-<area shape="poly" title=" " alt="" coords="1562,17,1721,20,1921,30,2143,47,2370,76,2369,82,2143,53,1920,35,1721,26,1562,22"/>
-<area shape="rect" title=" " alt="" coords="2467,79,2580,104"/>
-<area shape="poly" title=" " alt="" coords="1562,20,1955,36,2201,53,2453,76,2453,81,2201,58,1954,41,1562,25"/>
-<area shape="rect" title=" " alt="" coords="2605,79,2679,104"/>
-<area shape="poly" title=" " alt="" coords="1562,16,1757,18,2012,27,2299,45,2446,59,2591,76,2591,81,2445,64,2298,50,2012,32,1757,24,1562,21"/>
-<area shape="rect" title=" " alt="" coords="779,225,839,251"/>
-<area shape="poly" title=" " alt="" coords="384,102,500,175,570,196,628,205,689,211,765,223,765,228,688,216,628,210,569,202,498,180,381,107"/>
-<area shape="rect" title=" " alt="" coords="655,225,755,251"/>
-<area shape="poly" title=" " alt="" coords="376,103,409,139,432,159,456,175,529,196,642,221,640,226,528,201,454,180,428,163,405,143,372,106"/>
-<area shape="rect" href="Generator_8h.html" title=" " alt="" coords="287,152,386,177"/>
-<area shape="poly" title=" " alt="" coords="363,105,349,140,344,138,358,103"/>
-<area shape="rect" title=" " alt="" coords="605,152,733,177"/>
-<area shape="poly" title=" " alt="" coords="414,101,607,146,606,151,413,107"/>
-<area shape="rect" title=" " alt="" coords="74,152,159,177"/>
-<area shape="poly" title=" " alt="" coords="326,107,171,151,169,146,324,101"/>
-<area shape="poly" title=" " alt="" coords="343,106,260,148,257,143,341,102"/>
-<area shape="rect" title=" " alt="" coords="511,152,581,177"/>
-<area shape="poly" title=" " alt="" coords="395,102,505,144,503,149,393,107"/>
-<area shape="poly" title=" " alt="" coords="387,168,551,188,766,223,765,228,551,193,386,174"/>
-<area shape="poly" title=" " alt="" coords="387,173,642,222,641,227,386,178"/>
-<area shape="poly" title=" " alt="" coords="288,180,82,228,81,223,286,175"/>
-<area shape="rect" title=" " alt="" coords="93,225,167,251"/>
-<area shape="poly" title=" " alt="" coords="304,180,177,223,176,218,303,175"/>
-<area shape="rect" title=" " alt="" coords="191,225,250,251"/>
-<area shape="poly" title=" " alt="" coords="319,180,253,220,250,216,317,175"/>
-<area shape="rect" title=" " alt="" coords="275,225,399,251"/>
-<area shape="poly" title=" " alt="" coords="339,178,339,212,334,212,334,178"/>
-<area shape="rect" title=" " alt="" coords="423,225,485,251"/>
-<area shape="poly" title=" " alt="" coords="357,175,424,216,422,220,354,180"/>
-<area shape="rect" title=" " alt="" coords="509,225,631,251"/>
-<area shape="poly" title=" " alt="" coords="375,175,520,219,519,224,373,180"/>
-<area shape="poly" title=" " alt="" coords="1370,105,1368,141,1362,162,1349,179,1321,192,1272,202,1132,219,853,237,852,232,1132,214,1271,197,1320,186,1346,175,1357,160,1363,141,1365,104"/>
-<area shape="rect" title=" " alt="" coords="1444,152,1523,177"/>
-<area shape="poly" title=" " alt="" coords="1386,102,1454,142,1451,147,1383,106"/>
-<area shape="poly" title=" " alt="" coords="788,106,747,179,723,215,718,212,742,176,783,103"/>
-<area shape="poly" title=" " alt="" coords="719,107,400,156,399,151,718,101"/>
-<area shape="poly" title=" " alt="" coords="773,106,702,147,699,143,770,102"/>
-<area shape="poly" title=" " alt="" coords="704,105,277,155,276,150,703,100"/>
-<area shape="poly" title=" " alt="" coords="753,107,595,152,593,147,751,101"/>
-<area shape="rect" title=" " alt="" coords="1258,152,1335,177"/>
-<area shape="poly" title=" " alt="" coords="879,100,1069,124,1244,149,1244,155,1069,130,879,106"/>
-<area shape="rect" title=" " alt="" coords="808,152,873,177"/>
-<area shape="poly" title=" " alt="" coords="802,103,827,139,823,142,797,106"/>
-<area shape="rect" title=" " alt="" coords="898,152,1002,177"/>
-<area shape="poly" title=" " alt="" coords="818,102,913,144,911,149,816,106"/>
-<area shape="rect" title=" " alt="" coords="1026,152,1130,177"/>
-<area shape="poly" title=" " alt="" coords="838,101,1019,146,1018,151,837,107"/>
-<area shape="rect" title=" " alt="" coords="1154,152,1234,177"/>
-<area shape="poly" title=" " alt="" coords="865,101,1141,149,1140,154,864,107"/>
-<area shape="rect" title=" " alt="" coords="1850,152,1903,177"/>
-<area shape="poly" title=" " alt="" coords="1879,104,1879,138,1874,138,1874,104"/>
-<area shape="poly" title=" " alt="" coords="1514,105,1497,141,1492,139,1509,103"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="FixedTargetGenerator_8cxx__incl.svg" width="3691" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="FixedTargetGenerator_8cxx_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a918077216eb661c02ed2a5bfd06bb77d" id="r_a918077216eb661c02ed2a5bfd06bb77d"><td class="memItemLeft" align="right" valign="top">const Double_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FixedTargetGenerator_8cxx.html#a918077216eb661c02ed2a5bfd06bb77d">c_light</a> = 2.99792458e+10</td></tr>
-<tr class="separator:a918077216eb661c02ed2a5bfd06bb77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a357b34ec460558c0942628e20a171eef" id="r_a357b34ec460558c0942628e20a171eef"><td class="memItemLeft" align="right" valign="top">constexpr Double_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FixedTargetGenerator_8cxx.html#a357b34ec460558c0942628e20a171eef">mbarn</a> = 1E-3 * 1E-24 * TMath::Na()</td></tr>
-<tr class="separator:a357b34ec460558c0942628e20a171eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a918077216eb661c02ed2a5bfd06bb77d" name="a918077216eb661c02ed2a5bfd06bb77d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a918077216eb661c02ed2a5bfd06bb77d">&#9670;&#160;</a></span>c_light</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const Double_t c_light = 2.99792458e+10</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="FixedTargetGenerator_8cxx_source.html#l00029">29</a> of file <a class="el" href="FixedTargetGenerator_8cxx_source.html">FixedTargetGenerator.cxx</a>.</p>
-
-</div>
-</div>
-<a id="a357b34ec460558c0942628e20a171eef" name="a357b34ec460558c0942628e20a171eef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a357b34ec460558c0942628e20a171eef">&#9670;&#160;</a></span>mbarn</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr Double_t mbarn = 1E-3 * 1E-24 * TMath::Na()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="FixedTargetGenerator_8cxx_source.html#l00031">31</a> of file <a class="el" href="FixedTargetGenerator_8cxx_source.html">FixedTargetGenerator.cxx</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_077298d11411e0d78a9900d1a8de44bb.html">shipgen</a></li><li class="navelem"><a class="el" href="FixedTargetGenerator_8cxx.html">FixedTargetGenerator.cxx</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

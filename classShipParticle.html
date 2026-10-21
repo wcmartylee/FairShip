@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -102,22 +107,12 @@ $(document).ready(function(){initNavTree('classShipParticle.html',''); initResiz
 <div class="dynheader">
 Inheritance diagram for ShipParticle:</div>
 <div class="dyncontent">
-<div class="center"><img src="classShipParticle__inherit__graph.png" border="0" usemap="#aShipParticle_inherit__map" alt="Inheritance graph"/></div>
-<map name="aShipParticle_inherit__map" id="aShipParticle_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,79,104,104"/>
-<area shape="rect" title=" " alt="" coords="19,5,91,31"/>
-<area shape="poly" title=" " alt="" coords="57,44,57,79,52,79,52,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classShipParticle__inherit__graph.svg" width="110" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for ShipParticle:</div>
 <div class="dyncontent">
-<div class="center"><img src="classShipParticle__coll__graph.png" border="0" usemap="#aShipParticle_coll__map" alt="Collaboration graph"/></div>
-<map name="aShipParticle_coll__map" id="aShipParticle_coll__map">
-<area shape="rect" title=" " alt="" coords="5,79,104,104"/>
-<area shape="rect" title=" " alt="" coords="19,5,91,31"/>
-<area shape="poly" title=" " alt="" coords="57,44,57,79,52,79,52,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classShipParticle__coll__graph.svg" width="110" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -705,7 +700,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="ShipParticle_8h_source.html#l00046">46</a> of file <a class="el" href="ShipParticle_8h_source.html">ShipParticle.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   46</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classShipParticle.html#a2d448d601d72656ac8946838e157949c">fDaughter</a>[<a class="code hl_variable" href="namespaceShipAna.html#aa4bf87f4d17f9d38b1d8f4d009bb54b3">i</a>]; }</div>
-<div class="ttc" id="anamespaceShipAna_html_aa4bf87f4d17f9d38b1d8f4d009bb54b3"><div class="ttname"><a href="namespaceShipAna.html#aa4bf87f4d17f9d38b1d8f4d009bb54b3">ShipAna.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definition</b> <a href="ShipAna_8py_source.html#l00102">ShipAna.py:102</a></div></div>
+<div class="ttc" id="anamespaceShipAna_html_aa4bf87f4d17f9d38b1d8f4d009bb54b3"><div class="ttname"><a href="namespaceShipAna.html#aa4bf87f4d17f9d38b1d8f4d009bb54b3">ShipAna.i</a></div><div class="ttdeci">int i</div><div class="ttdef"><b>Definition</b> <a href="ShipAna_8py_source.html#l00108">ShipAna.py:108</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -893,9 +888,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="ShipParticle_8cxx_source.html#l00114">114</a> of file <a class="el" href="ShipParticle_8cxx_source.html">ShipParticle.cxx</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  114</span>                                                             {</div>
-<div class="line"><span class="lineno">  115</span>  <a class="code hl_variable" href="namespacestudy__GammaConv.html#aab8cdf7e5072c55e440f32b0377eab32">momentum</a>.SetPxPyPzE(<a class="code hl_variable" href="classShipParticle.html#a2c31648b5db06515fd5b7ee5098e0e35">fPx</a>, <a class="code hl_variable" href="classShipParticle.html#ab639806e90588591e8f42746b8604a6f">fPy</a>, <a class="code hl_variable" href="classShipParticle.html#a5d53f1ab1fe1343c85a97e179124a5e7">fPz</a>, <a class="code hl_variable" href="classShipParticle.html#a0dd9530159d6bcadbcc6768c282b14bb">fE</a>);</div>
+<div class="line"><span class="lineno">  115</span>  <a class="code hl_variable" href="namespacestudy__GammaConv.html#ae7cafac6179ebc8cb6564e8cfc465345">momentum</a>.SetPxPyPzE(<a class="code hl_variable" href="classShipParticle.html#a2c31648b5db06515fd5b7ee5098e0e35">fPx</a>, <a class="code hl_variable" href="classShipParticle.html#ab639806e90588591e8f42746b8604a6f">fPy</a>, <a class="code hl_variable" href="classShipParticle.html#a5d53f1ab1fe1343c85a97e179124a5e7">fPz</a>, <a class="code hl_variable" href="classShipParticle.html#a0dd9530159d6bcadbcc6768c282b14bb">fE</a>);</div>
 <div class="line"><span class="lineno">  116</span>}</div>
-<div class="ttc" id="anamespacestudy__GammaConv_html_aab8cdf7e5072c55e440f32b0377eab32"><div class="ttname"><a href="namespacestudy__GammaConv.html#aab8cdf7e5072c55e440f32b0377eab32">study_GammaConv.momentum</a></div><div class="ttdeci">dict momentum</div><div class="ttdef"><b>Definition</b> <a href="study__GammaConv_8py_source.html#l00033">study_GammaConv.py:33</a></div></div>
+<div class="ttc" id="anamespacestudy__GammaConv_html_ae7cafac6179ebc8cb6564e8cfc465345"><div class="ttname"><a href="namespacestudy__GammaConv.html#ae7cafac6179ebc8cb6564e8cfc465345">study_GammaConv.momentum</a></div><div class="ttdeci">momentum</div><div class="ttdef"><b>Definition</b> <a href="study__GammaConv_8py_source.html#l00042">study_GammaConv.py:42</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1512,7 +1507,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="ShipParticle_8h_source.html#l00093">93</a> of file <a class="el" href="ShipParticle_8h_source.html">ShipParticle.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   93</span>{ <a class="code hl_variable" href="classShipParticle.html#a9941b4a04c22dfca915d05d774036cd4">fDoca</a> = <a class="code hl_variable" href="namespacerun__fixedTarget.html#a68f8e54ebe34ed88a1aff4505c32be7c">x</a>; }</div>
-<div class="ttc" id="anamespacerun__fixedTarget_html_a68f8e54ebe34ed88a1aff4505c32be7c"><div class="ttname"><a href="namespacerun__fixedTarget.html#a68f8e54ebe34ed88a1aff4505c32be7c">run_fixedTarget.x</a></div><div class="ttdeci">x</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00575">run_fixedTarget.py:575</a></div></div>
+<div class="ttc" id="anamespacerun__fixedTarget_html_a68f8e54ebe34ed88a1aff4505c32be7c"><div class="ttname"><a href="namespacerun__fixedTarget.html#a68f8e54ebe34ed88a1aff4505c32be7c">run_fixedTarget.x</a></div><div class="ttdeci">x</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00705">run_fixedTarget.py:705</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1997,12 +1992,43 @@ Private Attributes</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classShipParticle.html">ShipParticle</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

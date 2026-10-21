@@ -1,20 +1,9 @@
 var searchData=
 [
-  ['target_0',['Target',['../classTarget.html',1,'']]],
-  ['targetpoint_1',['TargetPoint',['../classTargetPoint.html',1,'']]],
-  ['targettracker_2',['TargetTracker',['../classTargetTracker.html',1,'']]],
-  ['task_3',['task',['../classshipVertex_1_1Task.html',1,'shipVertex.Task'],['../classshipVeto_1_1Task.html',1,'shipVeto.Task']]],
-  ['tevtgendecayer_4',['TEvtGenDecayer',['../classTEvtGenDecayer.html',1,'']]],
-  ['timedet_5',['TimeDet',['../classTimeDet.html',1,'']]],
-  ['timedetector_6',['timeDetector',['../classtimeDetector_1_1timeDetector.html',1,'timeDetector']]],
-  ['timedethit_7',['TimeDetHit',['../classTimeDetHit.html',1,'']]],
-  ['timedetpoint_8',['TimeDetPoint',['../classTimeDetPoint.html',1,'']]],
-  ['tpythia6generator_9',['tPythia6Generator',['../classtPythia6Generator.html',1,'']]],
-  ['trackbuffer_10',['TrackBuffer',['../structTrackBuffer.html',1,'']]],
-  ['trackinfo_11',['TrackInfo',['../classTrackInfo.html',1,'']]],
-  ['trackingbenchmark_12',['TrackingBenchmark',['../classtracking__benchmark_1_1TrackingBenchmark.html',1,'tracking_benchmark']]],
-  ['tracklet_13',['Tracklet',['../classTracklet.html',1,'']]],
-  ['transforminfo_14',['transformInfo',['../structShipFieldMaker_1_1transformInfo.html',1,'ShipFieldMaker']]],
-  ['ttpoint_15',['TTPoint',['../classTTPoint.html',1,'']]],
-  ['ttreegenerator_16',['TTreeGenerator',['../classSHiP_1_1TTreeGenerator.html',1,'SHiP']]]
+  ['recotrack_0',['RecoTrack',['../classSHiP_1_1RecoTrack.html',1,'SHiP']]],
+  ['recovertex_1',['RecoVertex',['../classSHiP_1_1RecoVertex.html',1,'SHiP']]],
+  ['region_2',['Region',['../structUpstreamTagger_1_1Region.html',1,'UpstreamTagger']]],
+  ['rpvsusy_3',['RPVSUSY',['../classrpvsusy_1_1RPVSUSY.html',1,'rpvsusy']]],
+  ['rpvsusybranchings_4',['RPVSUSYbranchings',['../classrpvsusy_1_1RPVSUSYbranchings.html',1,'rpvsusy']]],
+  ['rulers_5',['Rulers',['../classeventDisplay_1_1Rulers.html',1,'eventDisplay']]]
 ];

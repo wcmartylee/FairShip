@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -118,7 +123,7 @@ $(document).ready(function(){initNavTree('inspectGeant4Geo_8py_source.html','');
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespaceinspectGeant4Geo.html#a03bb0ea2b3838f3314e786e86914e25c">   20</a></span>run = ROOT.FairRunSim()</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespaceinspectGeant4Geo.html#a4b772d604d4af9e7575633f7cf48e7b2">   21</a></span>ShipGeo = load_from_root_file(fgeo, <span class="stringliteral">&quot;ShipGeo&quot;</span>)</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespaceinspectGeant4Geo.html#a7b5821cffd485ff8a225c9f2df441372">   22</a></span>modules = <a class="code hl_function" href="namespaceshipDet__conf.html#a7f232397871353ce80c1ea03eb15bd20">shipDet_conf.configure</a>(run, ShipGeo)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespaceinspectGeant4Geo.html#a7b5821cffd485ff8a225c9f2df441372">   22</a></span>modules = <a class="code hl_function" href="namespaceshipDet__conf.html#a6e3eaea419c04a40644184c1c4bd7ae0">shipDet_conf.configure</a>(run, ShipGeo)</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>run.SetUserConfig(<span class="stringliteral">&quot;g4Config.C&quot;</span>)</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>run.SetName(<span class="stringliteral">&quot;TGeant4&quot;</span>)</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">import</span> tempfile</div>
@@ -134,16 +139,47 @@ $(document).ready(function(){initNavTree('inspectGeant4Geo_8py_source.html','');
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><a class="code hl_function" href="namespacegeomGeant4.html#a0f2dbb7cfd99fcab16c9f0edb9d36a29">geomGeant4.printWeightsandFields</a>()</div>
 <div class="ttc" id="anamespacegeomGeant4_html_a0f2dbb7cfd99fcab16c9f0edb9d36a29"><div class="ttname"><a href="namespacegeomGeant4.html#a0f2dbb7cfd99fcab16c9f0edb9d36a29">geomGeant4.printWeightsandFields</a></div><div class="ttdeci">None printWeightsandFields(bool onlyWithField=True, exclude=None)</div><div class="ttdef"><b>Definition</b> <a href="geomGeant4_8py_source.html#l00150">geomGeant4.py:150</a></div></div>
 <div class="ttc" id="anamespacegeomGeant4_html_aba553dcfd77eda82c10886fd0fec4e91"><div class="ttname"><a href="namespacegeomGeant4.html#aba553dcfd77eda82c10886fd0fec4e91">geomGeant4.printVMCFields</a></div><div class="ttdeci">None printVMCFields()</div><div class="ttdef"><b>Definition</b> <a href="geomGeant4_8py_source.html#l00214">geomGeant4.py:214</a></div></div>
-<div class="ttc" id="anamespaceshipDet__conf_html_a7f232397871353ce80c1ea03eb15bd20"><div class="ttname"><a href="namespaceshipDet__conf.html#a7f232397871353ce80c1ea03eb15bd20">shipDet_conf.configure</a></div><div class="ttdeci">configure(run, ship_geo)</div><div class="ttdef"><b>Definition</b> <a href="shipDet__conf_8py_source.html#l00270">shipDet_conf.py:270</a></div></div>
-<div class="ttc" id="anamespaceshipRoot__conf_html_a59bfc0b1b7bf8bc3e1a1270881622da6"><div class="ttname"><a href="namespaceshipRoot__conf.html#a59bfc0b1b7bf8bc3e1a1270881622da6">shipRoot_conf.configure</a></div><div class="ttdeci">None configure(darkphoton=None)</div><div class="ttdef"><b>Definition</b> <a href="shipRoot__conf_8py_source.html#l00049">shipRoot_conf.py:49</a></div></div>
+<div class="ttc" id="anamespaceshipDet__conf_html_a6e3eaea419c04a40644184c1c4bd7ae0"><div class="ttname"><a href="namespaceshipDet__conf.html#a6e3eaea419c04a40644184c1c4bd7ae0">shipDet_conf.configure</a></div><div class="ttdeci">configure(run, ship_geo, str|None geofile=None)</div><div class="ttdef"><b>Definition</b> <a href="shipDet__conf_8py_source.html#l00486">shipDet_conf.py:486</a></div></div>
+<div class="ttc" id="anamespaceshipRoot__conf_html_a59bfc0b1b7bf8bc3e1a1270881622da6"><div class="ttname"><a href="namespaceshipRoot__conf.html#a59bfc0b1b7bf8bc3e1a1270881622da6">shipRoot_conf.configure</a></div><div class="ttdeci">None configure(darkphoton=None)</div><div class="ttdef"><b>Definition</b> <a href="shipRoot__conf_8py_source.html#l00045">shipRoot_conf.py:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_3b579af105d68949fc87077585f616df.html">macro</a></li><li class="navelem"><a class="el" href="inspectGeant4Geo_8py.html">inspectGeant4Geo.py</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -105,26 +110,12 @@ $(document).ready(function(){initNavTree('classSHiP_1_1TTreeGenerator.html','');
 <div class="dynheader">
 Inheritance diagram for SHiP::TTreeGenerator:</div>
 <div class="dyncontent">
-<div class="center"><img src="classSHiP_1_1TTreeGenerator__inherit__graph.png" border="0" usemap="#aSHiP_1_1TTreeGenerator_inherit__map" alt="Inheritance graph"/></div>
-<map name="aSHiP_1_1TTreeGenerator_inherit__map" id="aSHiP_1_1TTreeGenerator_inherit__map">
-<area shape="rect" title="A FairRoot generator that reads particle data from ROOT TTrees." alt="" coords="5,152,165,177"/>
-<area shape="rect" href="classSHiP_1_1Generator.html" title=" " alt="" coords="23,79,148,104"/>
-<area shape="poly" title=" " alt="" coords="88,118,88,152,83,152,83,118"/>
-<area shape="rect" title=" " alt="" coords="30,5,141,31"/>
-<area shape="poly" title=" " alt="" coords="88,44,88,79,83,79,83,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classSHiP_1_1TTreeGenerator__inherit__graph.svg" width="171" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for SHiP::TTreeGenerator:</div>
 <div class="dyncontent">
-<div class="center"><img src="classSHiP_1_1TTreeGenerator__coll__graph.png" border="0" usemap="#aSHiP_1_1TTreeGenerator_coll__map" alt="Collaboration graph"/></div>
-<map name="aSHiP_1_1TTreeGenerator_coll__map" id="aSHiP_1_1TTreeGenerator_coll__map">
-<area shape="rect" title="A FairRoot generator that reads particle data from ROOT TTrees." alt="" coords="5,152,165,177"/>
-<area shape="rect" href="classSHiP_1_1Generator.html" title=" " alt="" coords="23,79,148,104"/>
-<area shape="poly" title=" " alt="" coords="88,118,88,152,83,152,83,118"/>
-<area shape="rect" title=" " alt="" coords="30,5,141,31"/>
-<area shape="poly" title=" " alt="" coords="88,44,88,79,83,79,83,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classSHiP_1_1TTreeGenerator__coll__graph.svg" width="171" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -696,25 +687,26 @@ Additional Inherited Members</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  117</span>                                    {</div>
 <div class="line"><span class="lineno">  118</span>  <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>) <span class="keywordflow">return</span> kFALSE;</div>
 <div class="line"><span class="lineno">  119</span> </div>
-<div class="line"><span class="lineno">  120</span>  <span class="keywordtype">bool</span> ok = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  120</span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  121</span> </div>
-<div class="line"><span class="lineno">  122</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;px&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#aadd01d7ad30979dbd41e674ad8cc5c69">fPx</a>) &gt;= 0);</div>
-<div class="line"><span class="lineno">  123</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;py&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a7e4ab9f56349943b7b9918c603b4a240">fPy</a>) &gt;= 0);</div>
-<div class="line"><span class="lineno">  124</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;pz&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a1961bf5c5c805cd8069471bdc0943759">fPz</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  122</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;px&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#aadd01d7ad30979dbd41e674ad8cc5c69">fPx</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  123</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;py&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a7e4ab9f56349943b7b9918c603b4a240">fPy</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  124</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;pz&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a1961bf5c5c805cd8069471bdc0943759">fPz</a>) &gt;= 0);</div>
 <div class="line"><span class="lineno">  125</span> </div>
-<div class="line"><span class="lineno">  126</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;x&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#ab80c4aecbf7a57a8bde6a2a85f271f71">fX</a>) &gt;= 0);</div>
-<div class="line"><span class="lineno">  127</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;y&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#aea90a6dfe0f07ee72c516dcfbcc6c58c">fY</a>) &gt;= 0);</div>
-<div class="line"><span class="lineno">  128</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;z&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a8e4876b0dea793a0a4202b08ff50174a">fZ</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  126</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;x&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#ab80c4aecbf7a57a8bde6a2a85f271f71">fX</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  127</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;y&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#aea90a6dfe0f07ee72c516dcfbcc6c58c">fY</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  128</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;z&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a8e4876b0dea793a0a4202b08ff50174a">fZ</a>) &gt;= 0);</div>
 <div class="line"><span class="lineno">  129</span> </div>
-<div class="line"><span class="lineno">  130</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;id&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a43fed14eb5263032c5621e24604ba3d5">fPdgId</a>) &gt;= 0);</div>
-<div class="line"><span class="lineno">  131</span>  ok &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;w&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#adf1997b9204033123373c9dd46b9c3f1">fWeight</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  130</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;id&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a43fed14eb5263032c5621e24604ba3d5">fPdgId</a>) &gt;= 0);</div>
+<div class="line"><span class="lineno">  131</span>  <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> &amp;= (<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#a063b21c07435b4c313d5e0f210336e39">fInputTree</a>-&gt;SetBranchAddress(<span class="stringliteral">&quot;w&quot;</span>, &amp;<a class="code hl_variable" href="classSHiP_1_1TTreeGenerator.html#adf1997b9204033123373c9dd46b9c3f1">fWeight</a>) &gt;= 0);</div>
 <div class="line"><span class="lineno">  132</span> </div>
 <div class="line"><span class="lineno">  133</span>  <span class="keywordflow">if</span> (!ok) {</div>
 <div class="line"><span class="lineno">  134</span>    LOG(error) &lt;&lt; <span class="stringliteral">&quot;TTreeGenerator: failed to bind one or more branches&quot;</span>;</div>
 <div class="line"><span class="lineno">  135</span>  }</div>
 <div class="line"><span class="lineno">  136</span> </div>
-<div class="line"><span class="lineno">  137</span>  <span class="keywordflow">return</span> ok ? kTRUE : kFALSE;</div>
+<div class="line"><span class="lineno">  137</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">ok</a> ? kTRUE : kFALSE;</div>
 <div class="line"><span class="lineno">  138</span>}</div>
+<div class="ttc" id="anamespaceprepareEvents_html_abd6c4941a145bc9fb87ae6746dd7d6df"><div class="ttname"><a href="namespaceprepareEvents.html#abd6c4941a145bc9fb87ae6746dd7d6df">prepareEvents.ok</a></div><div class="ttdeci">ok</div><div class="ttdef"><b>Definition</b> <a href="prepareEvents_8py_source.html#l00126">prepareEvents.py:126</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -761,7 +753,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  113</span> </div>
 <div class="line"><span class="lineno">  114</span>  <span class="keywordflow">return</span> kTRUE;</div>
 <div class="line"><span class="lineno">  115</span>}</div>
-<div class="ttc" id="anamespacerun__fixedTarget_html_ad5019a2bfcd85504e1ed4b193811c920"><div class="ttname"><a href="namespacerun__fixedTarget.html#ad5019a2bfcd85504e1ed4b193811c920">run_fixedTarget.primGen</a></div><div class="ttdeci">primGen</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00431">run_fixedTarget.py:431</a></div></div>
+<div class="ttc" id="anamespacerun__fixedTarget_html_ad5019a2bfcd85504e1ed4b193811c920"><div class="ttname"><a href="namespacerun__fixedTarget.html#ad5019a2bfcd85504e1ed4b193811c920">run_fixedTarget.primGen</a></div><div class="ttdeci">primGen</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00523">run_fixedTarget.py:523</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1139,12 +1131,43 @@ Additional Inherited Members</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceSHiP.html">SHiP</a></li><li class="navelem"><a class="el" href="classSHiP_1_1TTreeGenerator.html">TTreeGenerator</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

@@ -1,16 +1,18 @@
 var searchData=
 [
-  ['checkmagfields_0',['checkMagFields',['../namespacecheckMagFields.html',1,'']]],
-  ['checkzpositions_1',['checkZpositions',['../namespacecheckZpositions.html',1,'']]],
-  ['cmbg_5fconf_2',['CMBG_conf',['../namespaceCMBG__conf.html',1,'']]],
-  ['compactingbackgroundproduction_3',['compactingBackgroundProduction',['../namespacecompactingBackgroundProduction.html',1,'']]],
-  ['config_5ftester_4',['config_tester',['../namespaceconfig__tester.html',1,'']]],
-  ['configgeniegenerator_5',['configGenieGenerator',['../namespaceconfigGenieGenerator.html',1,'']]],
-  ['convertevtcalc_6',['convertEvtCalc',['../namespaceconvertEvtCalc.html',1,'']]],
-  ['convertmap_7',['convertMap',['../namespaceconvertMap.html',1,'']]],
-  ['convertmisismap_8',['convertMisisMap',['../namespaceconvertMisisMap.html',1,'']]],
-  ['convertnoisymap_9',['convertNoisyMap',['../namespaceconvertNoisyMap.html',1,'']]],
-  ['convertralmap_10',['convertRALMap',['../namespaceconvertRALMap.html',1,'']]],
-  ['converttoacts_11',['convertToACTS',['../namespaceconvertToACTS.html',1,'']]],
-  ['converttreetorntuple_12',['convertTreeToRNTuple',['../namespaceconvertTreeToRNTuple.html',1,'']]]
+  ['canonicalisefieldmap_0',['canonicaliseFieldMap',['../namespacecanonicaliseFieldMap.html',1,'']]],
+  ['check_5fmuonback_5fplane_1',['check_muonback_plane',['../namespacecheck__muonback__plane.html',1,'']]],
+  ['checkmagfields_2',['checkMagFields',['../namespacecheckMagFields.html',1,'']]],
+  ['checkzpositions_3',['checkZpositions',['../namespacecheckZpositions.html',1,'']]],
+  ['cmbg_5fconf_4',['CMBG_conf',['../namespaceCMBG__conf.html',1,'']]],
+  ['compactingbackgroundproduction_5',['compactingBackgroundProduction',['../namespacecompactingBackgroundProduction.html',1,'']]],
+  ['config_5ftester_6',['config_tester',['../namespaceconfig__tester.html',1,'']]],
+  ['configgeniegenerator_7',['configGenieGenerator',['../namespaceconfigGenieGenerator.html',1,'']]],
+  ['conftest_8',['conftest',['../namespaceconftest.html',1,'']]],
+  ['convertevtcalc_9',['convertEvtCalc',['../namespaceconvertEvtCalc.html',1,'']]],
+  ['convertmap_10',['convertMap',['../namespaceconvertMap.html',1,'']]],
+  ['convertmisismap_11',['convertMisisMap',['../namespaceconvertMisisMap.html',1,'']]],
+  ['convertnoisymap_12',['convertNoisyMap',['../namespaceconvertNoisyMap.html',1,'']]],
+  ['convertralmap_13',['convertRALMap',['../namespaceconvertRALMap.html',1,'']]],
+  ['converttreetorntuple_14',['convertTreeToRNTuple',['../namespaceconvertTreeToRNTuple.html',1,'']]]
 ];

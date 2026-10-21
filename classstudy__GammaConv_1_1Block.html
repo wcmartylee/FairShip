@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -99,22 +104,12 @@ $(document).ready(function(){initNavTree('classstudy__GammaConv_1_1Block.html','
 <div class="dynheader">
 Inheritance diagram for study_GammaConv.Block:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstudy__GammaConv_1_1Block__inherit__graph.png" border="0" usemap="#astudy__GammaConv_8Block_inherit__map" alt="Inheritance graph"/></div>
-<map name="astudy__GammaConv_8Block_inherit__map" id="astudy__GammaConv_8Block_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,79,195,104"/>
-<area shape="rect" title=" " alt="" coords="23,5,177,31"/>
-<area shape="poly" title=" " alt="" coords="103,44,103,79,97,79,97,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstudy__GammaConv_1_1Block__inherit__graph.svg" width="200" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for study_GammaConv.Block:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstudy__GammaConv_1_1Block__coll__graph.png" border="0" usemap="#astudy__GammaConv_8Block_coll__map" alt="Collaboration graph"/></div>
-<map name="astudy__GammaConv_8Block_coll__map" id="astudy__GammaConv_8Block_coll__map">
-<area shape="rect" title=" " alt="" coords="5,79,195,104"/>
-<area shape="rect" title=" " alt="" coords="23,5,177,31"/>
-<area shape="poly" title=" " alt="" coords="103,44,103,79,97,79,97,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstudy__GammaConv_1_1Block__coll__graph.svg" width="200" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -135,7 +130,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00072">72</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00081">81</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a11928da889cf62357fb566888ad4018a" name="a11928da889cf62357fb566888ad4018a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11928da889cf62357fb566888ad4018a">&#9670;&#160;</a></span>__init__()</h2>
@@ -153,11 +148,11 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00075">75</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>    <span class="keyword">def </span>__init__(self) -&gt; None:</div>
-<div class="line"><span class="lineno">   76</span>        ROOT.pyFairModule.__init__(self, self)</div>
-<div class="line"><span class="lineno">   77</span>        self.sensPlane = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">   78</span> </div>
+<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00084">84</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>    <span class="keyword">def </span>__init__(self) -&gt; None:</div>
+<div class="line"><span class="lineno">   85</span>        ROOT.pyFairModule.__init__(self, self)</div>
+<div class="line"><span class="lineno">   86</span>        self.sensPlane = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">   87</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -178,24 +173,24 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00079">79</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   79</span>    <span class="keyword">def </span>ConstructGeometry(self) -&gt; None:</div>
-<div class="line"><span class="lineno">   80</span>        print(<span class="stringliteral">&quot;Construct Block&quot;</span>)</div>
-<div class="line"><span class="lineno">   81</span>        top = ROOT.gGeoManager.GetTopVolume()</div>
-<div class="line"><span class="lineno">   82</span>        geoLoad = ROOT.FairGeoLoader.Instance()</div>
-<div class="line"><span class="lineno">   83</span>        geoFace = geoLoad.getGeoInterface()</div>
-<div class="line"><span class="lineno">   84</span>        media = geoFace.getMedia()</div>
-<div class="line"><span class="lineno">   85</span>        geoBuild = geoLoad.getGeoBuilder()</div>
-<div class="line"><span class="lineno">   86</span>        ShipMedium = media.getMedium(material)</div>
-<div class="line"><span class="lineno">   87</span>        W = ROOT.gGeoManager.GetMedium(material)</div>
-<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> W:</div>
-<div class="line"><span class="lineno">   89</span>            geoBuild.createMedium(ShipMedium)</div>
-<div class="line"><span class="lineno">   90</span>            W = ROOT.gGeoManager.GetMedium(material)</div>
-<div class="line"><span class="lineno">   91</span>        aBox = ROOT.gGeoManager.MakeBox(<span class="stringliteral">&quot;target&quot;</span>, W, 100.0 * u.cm, 100.0 * u.cm, thickness)</div>
-<div class="line"><span class="lineno">   92</span>        top.AddNode(aBox, 1, ROOT.TGeoTranslation(0, 0, 0))</div>
-<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">if</span> self.sensPlane:</div>
-<div class="line"><span class="lineno">   94</span>            self.sensPlane.AddSensitiveVolume(aBox)</div>
-<div class="line"><span class="lineno">   95</span> </div>
+<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00088">88</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   88</span>    <span class="keyword">def </span>ConstructGeometry(self) -&gt; None:</div>
+<div class="line"><span class="lineno">   89</span>        print(<span class="stringliteral">&quot;Construct Block&quot;</span>)</div>
+<div class="line"><span class="lineno">   90</span>        top = ROOT.gGeoManager.GetTopVolume()</div>
+<div class="line"><span class="lineno">   91</span>        geoLoad = ROOT.FairGeoLoader.Instance()</div>
+<div class="line"><span class="lineno">   92</span>        geoFace = geoLoad.getGeoInterface()</div>
+<div class="line"><span class="lineno">   93</span>        media = geoFace.getMedia()</div>
+<div class="line"><span class="lineno">   94</span>        geoBuild = geoLoad.getGeoBuilder()</div>
+<div class="line"><span class="lineno">   95</span>        ShipMedium = media.getMedium(material)</div>
+<div class="line"><span class="lineno">   96</span>        W = ROOT.gGeoManager.GetMedium(material)</div>
+<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> W:</div>
+<div class="line"><span class="lineno">   98</span>            geoBuild.createMedium(ShipMedium)</div>
+<div class="line"><span class="lineno">   99</span>            W = ROOT.gGeoManager.GetMedium(material)</div>
+<div class="line"><span class="lineno">  100</span>        aBox = ROOT.gGeoManager.MakeBox(<span class="stringliteral">&quot;target&quot;</span>, W, 100.0 * u.cm, 100.0 * u.cm, thickness)</div>
+<div class="line"><span class="lineno">  101</span>        top.AddNode(aBox, 1, ROOT.TGeoTranslation(0, 0, 0))</div>
+<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> self.sensPlane:</div>
+<div class="line"><span class="lineno">  103</span>            self.sensPlane.AddSensitiveVolume(aBox)</div>
+<div class="line"><span class="lineno">  104</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -214,10 +209,10 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00096">96</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span>    <span class="keyword">def </span>InitParContainers() -&gt; None:</div>
-<div class="line"><span class="lineno">   97</span>        print(<span class="stringliteral">&quot;not implemented!&quot;</span>)</div>
-<div class="line"><span class="lineno">   98</span> </div>
+<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00105">105</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>    <span class="keyword">def </span>InitParContainers() -&gt; None:</div>
+<div class="line"><span class="lineno">  106</span>        print(<span class="stringliteral">&quot;not implemented!&quot;</span>)</div>
+<div class="line"><span class="lineno">  107</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -247,11 +242,11 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00099">99</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   99</span>    <span class="keyword">def </span>makeSensitive(self, sensPlane) -&gt; None:</div>
-<div class="line"><span class="lineno">  100</span>        self.sensPlane = sensPlane</div>
-<div class="line"><span class="lineno">  101</span> </div>
-<div class="line"><span class="lineno">  102</span> </div>
+<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00108">108</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>    <span class="keyword">def </span>makeSensitive(self, sensPlane) -&gt; None:</div>
+<div class="line"><span class="lineno">  109</span>        self.sensPlane = sensPlane</div>
+<div class="line"><span class="lineno">  110</span> </div>
+<div class="line"><span class="lineno">  111</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -268,7 +263,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00077">77</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="study__GammaConv_8py_source.html#l00086">86</a> of file <a class="el" href="study__GammaConv_8py_source.html">study_GammaConv.py</a>.</p>
 
 </div>
 </div>
@@ -277,12 +272,43 @@ Public Attributes</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacestudy__GammaConv.html">study_GammaConv</a></li><li class="navelem"><a class="el" href="classstudy__GammaConv_1_1Block.html">Block</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

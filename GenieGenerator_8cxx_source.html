@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -119,7 +124,7 @@ $(document).ready(function(){initNavTree('GenieGenerator_8cxx_source.html',''); 
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;TRandom.h&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;TSystem.h&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">using </span>ShipUnit::m;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">using </span><a class="code hl_variable" href="namespaceShipUnit.html#a7b82ae8775009208066598546951dd22">ShipUnit::m</a>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">using </span>std::cout;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">using </span>std::endl;</div>
@@ -445,7 +450,7 @@ $(document).ready(function(){initNavTree('GenieGenerator_8cxx_source.html',''); 
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  Double_t zrelative = z - <a class="code hl_variable" href="classGenieGenerator.html#a0b934c83601ea29b2d32f9a2635ec686">ztarget</a>;</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  Double_t tof = TMath::Sqrt(x * x + y * y + zrelative * zrelative) /</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                 2.99792458e+10;  <span class="comment">// speed of light in cm/s</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                 <a class="code hl_variable" href="namespaceShipUnit.html#aa5c80d1a788735fe9fd41b509583437b">ShipUnit::c_light</a> / <a class="code hl_variable" href="namespaceShipUnit.html#af5da50ee86db44fd81351c6c3a3dcf06">ShipUnit::s</a>;  <span class="comment">// s</span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  cpg-&gt;AddTrack(</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      <a class="code hl_variable" href="classGenieGenerator.html#a1c0fa21753f252e11ebbbd43ac06a6df">neu</a>, pout[0], pout[1], pout[2], x, y, z, -1, <span class="keyword">false</span>,</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      TMath::Sqrt(pout[0] * pout[0] + pout[1] * pout[1] + pout[2] * pout[2]),</div>
@@ -529,15 +534,49 @@ $(document).ready(function(){initNavTree('GenieGenerator_8cxx_source.html',''); 
 <div class="ttc" id="aclassGenieGenerator_html_af171ff89a6f21d1795c8cf0c225af84f"><div class="ttname"><a href="classGenieGenerator.html#af171ff89a6f21d1795c8cf0c225af84f">GenieGenerator::pzl</a></div><div class="ttdeci">Double_t pzl</div><div class="ttdef"><b>Definition</b> <a href="GenieGenerator_8h_source.html#l00051">GenieGenerator.h:51</a></div></div>
 <div class="ttc" id="aclassGenieGenerator_html_afd16e50e7e921ed4b9c6d6ea270504ac"><div class="ttname"><a href="classGenieGenerator.html#afd16e50e7e921ed4b9c6d6ea270504ac">GenieGenerator::pyl</a></div><div class="ttdeci">Double_t pyl</div><div class="ttdef"><b>Definition</b> <a href="GenieGenerator_8h_source.html#l00051">GenieGenerator.h:51</a></div></div>
 <div class="ttc" id="aclassSHiP_1_1Generator_html_a225ef62e734c3b42f9ddc1ce9c44538a"><div class="ttname"><a href="classSHiP_1_1Generator.html#a225ef62e734c3b42f9ddc1ce9c44538a">SHiP::Generator::IncrementCounter</a></div><div class="ttdeci">void IncrementCounter(const std::string &amp;name, Long64_t delta=1)</div><div class="ttdef"><b>Definition</b> <a href="Generator_8h_source.html#l00065">Generator.h:65</a></div></div>
+<div class="ttc" id="anamespaceShipUnit_html_a7b82ae8775009208066598546951dd22"><div class="ttname"><a href="namespaceShipUnit.html#a7b82ae8775009208066598546951dd22">ShipUnit::m</a></div><div class="ttdeci">constexpr double m</div><div class="ttdef"><b>Definition</b> <a href="ShipUnit_8h_source.html#l00024">ShipUnit.h:24</a></div></div>
+<div class="ttc" id="anamespaceShipUnit_html_aa5c80d1a788735fe9fd41b509583437b"><div class="ttname"><a href="namespaceShipUnit.html#aa5c80d1a788735fe9fd41b509583437b">ShipUnit::c_light</a></div><div class="ttdeci">constexpr double c_light</div><div class="ttdef"><b>Definition</b> <a href="ShipUnit_8h_source.html#l00044">ShipUnit.h:44</a></div></div>
+<div class="ttc" id="anamespaceShipUnit_html_af5da50ee86db44fd81351c6c3a3dcf06"><div class="ttname"><a href="namespaceShipUnit.html#af5da50ee86db44fd81351c6c3a3dcf06">ShipUnit::s</a></div><div class="ttdeci">constexpr double s</div><div class="ttdef"><b>Definition</b> <a href="ShipUnit_8h_source.html#l00031">ShipUnit.h:31</a></div></div>
 <div class="ttc" id="anamespaceshipgen_html_ac85d3b1e8d74de7b65eee39a98e92c1b"><div class="ttname"><a href="namespaceshipgen.html#ac85d3b1e8d74de7b65eee39a98e92c1b">shipgen::MeanMaterialBudget</a></div><div class="ttdeci">double MeanMaterialBudget(std::span&lt; const double, 3 &gt; start, std::span&lt; const double, 3 &gt; end, std::span&lt; double, 10 &gt; mparam)</div><div class="ttdef"><b>Definition</b> <a href="MeanMaterialBudget_8cxx_source.html#l00016">MeanMaterialBudget.cxx:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_077298d11411e0d78a9900d1a8de44bb.html">shipgen</a></li><li class="navelem"><a class="el" href="GenieGenerator_8cxx.html">GenieGenerator.cxx</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

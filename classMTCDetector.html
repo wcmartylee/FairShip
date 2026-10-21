@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -103,30 +108,12 @@ $(document).ready(function(){initNavTree('classMTCDetector.html',''); initResiza
 <div class="dynheader">
 Inheritance diagram for MTCDetector:</div>
 <div class="dyncontent">
-<div class="center"><img src="classMTCDetector__inherit__graph.png" border="0" usemap="#aMTCDetector_inherit__map" alt="Inheritance graph"/></div>
-<map name="aMTCDetector_inherit__map" id="aMTCDetector_inherit__map">
-<area shape="rect" title=" " alt="" coords="76,152,183,177"/>
-<area shape="rect" href="classSHiP_1_1Detector.html" title=" " alt="" coords="14,79,245,104"/>
-<area shape="poly" title=" " alt="" coords="132,118,132,152,127,152,127,118"/>
-<area shape="rect" title=" " alt="" coords="5,5,107,31"/>
-<area shape="poly" title=" " alt="" coords="80,38,119,77,116,80,76,42"/>
-<area shape="rect" href="classISTLPointContainer.html" title="Interface for detectors using STL containers (std::vector) for MC points." alt="" coords="131,5,277,31"/>
-<area shape="poly" title=" " alt="" coords="184,42,143,80,140,77,180,38"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMTCDetector__inherit__graph.svg" width="283" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for MTCDetector:</div>
 <div class="dyncontent">
-<div class="center"><img src="classMTCDetector__coll__graph.png" border="0" usemap="#aMTCDetector_coll__map" alt="Collaboration graph"/></div>
-<map name="aMTCDetector_coll__map" id="aMTCDetector_coll__map">
-<area shape="rect" title=" " alt="" coords="76,152,183,177"/>
-<area shape="rect" href="classSHiP_1_1Detector.html" title=" " alt="" coords="14,79,245,104"/>
-<area shape="poly" title=" " alt="" coords="132,118,132,152,127,152,127,118"/>
-<area shape="rect" title=" " alt="" coords="5,5,107,31"/>
-<area shape="poly" title=" " alt="" coords="80,38,119,77,116,80,76,42"/>
-<area shape="rect" href="classISTLPointContainer.html" title="Interface for detectors using STL containers (std::vector) for MC points." alt="" coords="131,5,277,31"/>
-<area shape="poly" title=" " alt="" coords="184,42,143,80,140,77,180,38"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMTCDetector__coll__graph.svg" width="283" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -137,7 +124,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae95d16080d7f14faa1866452e1271eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ebae99bd9cee2427cbf349a23bb0c9b" id="r_a6ebae99bd9cee2427cbf349a23bb0c9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMTCDetector.html#a6ebae99bd9cee2427cbf349a23bb0c9b">SetMTCParameters</a> (Double_t width, Double_t height, Double_t fiber_tilt_angle, Double_t iron_thickness, Double_t scifi_thickness, Int_t num_of_agg_channels, Double_t scint_cell_size, Double_t scint_thickness, Int_t number_of_layers, Double_t z_position, Double_t field_strength)</td></tr>
 <tr class="separator:a6ebae99bd9cee2427cbf349a23bb0c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a857bede1a01f9044a12e4f55da685694" id="r_a857bede1a01f9044a12e4f55da685694"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMTCDetector.html#a857bede1a01f9044a12e4f55da685694">CreateScintModule</a> (const char *name, TGeoVolumeAssembly *modMotherVol, Double_t z_shift, Double_t width, Double_t height, Double_t thickness, Double_t cellSizeX, Double_t cellSizeY, TGeoMedium *material, Int_t color, Double_t transparency, Int_t LayerId)</td></tr>
+<tr class="memitem:a857bede1a01f9044a12e4f55da685694" id="r_a857bede1a01f9044a12e4f55da685694"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMTCDetector.html#a857bede1a01f9044a12e4f55da685694">CreateScintModule</a> (const char *name, TGeoVolumeAssembly *modMotherVol, Double_t z_shift, Double_t width, Double_t height, Double_t thickness, Double_t cellSizeX, Double_t cellSizeY, TGeoMedium *<a class="el" href="ActsStrawGeometry_8cpp.html#ab28a4576d44aa77518d33e053ea2ca12">material</a>, Int_t color, Double_t transparency, Int_t LayerId)</td></tr>
 <tr class="separator:a857bede1a01f9044a12e4f55da685694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8745cfc61c044fd896b67b21cebdf066" id="r_a8745cfc61c044fd896b67b21cebdf066"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMTCDetector.html#a8745cfc61c044fd896b67b21cebdf066">CreateSciFiModule</a> (const char *name, TGeoVolumeAssembly *modMotherVol, Double_t width, Double_t height, Double_t thickness, Int_t LayerId)</td></tr>
 <tr class="separator:a8745cfc61c044fd896b67b21cebdf066"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -810,7 +797,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  182</span>  scint_volume-&gt;AddNode(scint_mat, 0, <span class="keyword">new</span> TGeoTranslation(0, 0, 0));</div>
 <div class="line"><span class="lineno">  183</span>  <span class="keyword">auto</span> cell = <span class="keyword">new</span> TGeoBBox(Form(<span class="stringliteral">&quot;%s_cell&quot;</span>, name), cellSizeX / 2, cellSizeY / 2,</div>
 <div class="line"><span class="lineno">  184</span>                           thickness / 2);</div>
-<div class="line"><span class="lineno">  185</span>  <span class="keyword">auto</span> cellVol = <span class="keyword">new</span> TGeoVolume(Form(<span class="stringliteral">&quot;%s_cell&quot;</span>, name), cell, material);</div>
+<div class="line"><span class="lineno">  185</span>  <span class="keyword">auto</span> cellVol = <span class="keyword">new</span> TGeoVolume(Form(<span class="stringliteral">&quot;%s_cell&quot;</span>, name), cell, <a class="code hl_variable" href="ActsStrawGeometry_8cpp.html#ab28a4576d44aa77518d33e053ea2ca12">material</a>);</div>
 <div class="line"><span class="lineno">  186</span>  cellVol-&gt;SetLineColor(color);</div>
 <div class="line"><span class="lineno">  187</span>  cellVol-&gt;SetTransparency(transparency);</div>
 <div class="line"><span class="lineno">  188</span>  AddSensitiveVolume(cellVol);</div>
@@ -826,6 +813,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  198</span>    }</div>
 <div class="line"><span class="lineno">  199</span>  }</div>
 <div class="line"><span class="lineno">  200</span>}</div>
+<div class="ttc" id="aActsStrawGeometry_8cpp_html_ab28a4576d44aa77518d33e053ea2ca12"><div class="ttname"><a href="ActsStrawGeometry_8cpp.html#ab28a4576d44aa77518d33e053ea2ca12">material</a></div><div class="ttdeci">std::shared_ptr&lt; const Acts::HomogeneousSurfaceMaterial &gt; material</div><div class="ttdef"><b>Definition</b> <a href="ActsStrawGeometry_8cpp_source.html#l00073">ActsStrawGeometry.cpp:73</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1395,11 +1383,11 @@ Additional Inherited Members</h2></td></tr>
 <div class="ttc" id="aclassSHiP_1_1Detector_html_a9885b9592a20ae576f27735098c33952"><div class="ttname"><a href="classSHiP_1_1Detector.html#a9885b9592a20ae576f27735098c33952">SHiP::Detector&lt; MTCDetPoint &gt;::AddHit</a></div><div class="ttdeci">MTCDetPoint * AddHit(Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition</b> <a href="Detector_8h_source.html#l00038">Detector.h:38</a></div></div>
 <div class="ttc" id="aclassSHiP_1_1Detector_html_a9a38f37bdd864a330614332b9846f206"><div class="ttname"><a href="classSHiP_1_1Detector.html#a9a38f37bdd864a330614332b9846f206">SHiP::Detector&lt; MTCDetPoint &gt;::fMom</a></div><div class="ttdeci">TLorentzVector fMom</div><div class="ttdoc">position at entrance</div><div class="ttdef"><b>Definition</b> <a href="Detector_8h_source.html#l00086">Detector.h:86</a></div></div>
 <div class="ttc" id="aclassShipStack_html"><div class="ttname"><a href="classShipStack.html">ShipStack</a></div><div class="ttdef"><b>Definition</b> <a href="ShipStack_8h_source.html#l00046">ShipStack.h:46</a></div></div>
-<div class="ttc" id="anamespacemakeCascade_html_a4af6ee173bd7ee58725a4483fc98f07e"><div class="ttname"><a href="namespacemakeCascade.html#a4af6ee173bd7ee58725a4483fc98f07e">makeCascade.stack</a></div><div class="ttdeci">list stack</div><div class="ttdef"><b>Definition</b> <a href="makeCascade_8py_source.html#l00328">makeCascade.py:328</a></div></div>
+<div class="ttc" id="anamespacemakeCascade_html_a4af6ee173bd7ee58725a4483fc98f07e"><div class="ttname"><a href="namespacemakeCascade.html#a4af6ee173bd7ee58725a4483fc98f07e">makeCascade.stack</a></div><div class="ttdeci">list stack</div><div class="ttdef"><b>Definition</b> <a href="makeCascade_8py_source.html#l00327">makeCascade.py:327</a></div></div>
 <div class="ttc" id="anamespacemakeDecay_html_a9c90b95001a4909a6c5383da1b3066d9"><div class="ttname"><a href="namespacemakeDecay.html#a9c90b95001a4909a6c5383da1b3066d9">makeDecay.p</a></div><div class="ttdeci">p</div><div class="ttdef"><b>Definition</b> <a href="makeDecay_8py_source.html#l00092">makeDecay.py:92</a></div></div>
-<div class="ttc" id="anamespacerun__fixedTarget_html_a68f8e54ebe34ed88a1aff4505c32be7c"><div class="ttname"><a href="namespacerun__fixedTarget.html#a68f8e54ebe34ed88a1aff4505c32be7c">run_fixedTarget.x</a></div><div class="ttdeci">x</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00575">run_fixedTarget.py:575</a></div></div>
-<div class="ttc" id="anamespacerun__fixedTarget_html_a8849978ebdda515280cb5b90b4d173a5"><div class="ttname"><a href="namespacerun__fixedTarget.html#a8849978ebdda515280cb5b90b4d173a5">run_fixedTarget.gMC</a></div><div class="ttdeci">gMC</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00478">run_fixedTarget.py:478</a></div></div>
-<div class="ttc" id="anamespacerun__simScript_html_a90c25390918b8dd5a6f17d8efa00c9ed"><div class="ttname"><a href="namespacerun__simScript.html#a90c25390918b8dd5a6f17d8efa00c9ed">run_simScript.z</a></div><div class="ttdeci">z</div><div class="ttdef"><b>Definition</b> <a href="run__simScript_8py_source.html#l00705">run_simScript.py:705</a></div></div>
+<div class="ttc" id="anamespacerun__fixedTarget_html_a68f8e54ebe34ed88a1aff4505c32be7c"><div class="ttname"><a href="namespacerun__fixedTarget.html#a68f8e54ebe34ed88a1aff4505c32be7c">run_fixedTarget.x</a></div><div class="ttdeci">x</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00705">run_fixedTarget.py:705</a></div></div>
+<div class="ttc" id="anamespacerun__fixedTarget_html_a8849978ebdda515280cb5b90b4d173a5"><div class="ttname"><a href="namespacerun__fixedTarget.html#a8849978ebdda515280cb5b90b4d173a5">run_fixedTarget.gMC</a></div><div class="ttdeci">gMC</div><div class="ttdef"><b>Definition</b> <a href="run__fixedTarget_8py_source.html#l00586">run_fixedTarget.py:586</a></div></div>
+<div class="ttc" id="anamespacerun__simScript_html_a90c25390918b8dd5a6f17d8efa00c9ed"><div class="ttname"><a href="namespacerun__simScript.html#a90c25390918b8dd5a6f17d8efa00c9ed">run_simScript.z</a></div><div class="ttdeci">z</div><div class="ttdef"><b>Definition</b> <a href="run__simScript_8py_source.html#l00799">run_simScript.py:799</a></div></div>
 <div class="ttc" id="anamespacerun__tracking__scan_html_a60149f5e9c7fe53ba27d5ee50faa64de"><div class="ttname"><a href="namespacerun__tracking__scan.html#a60149f5e9c7fe53ba27d5ee50faa64de">run_tracking_scan.y</a></div><div class="ttdeci">y</div><div class="ttdef"><b>Definition</b> <a href="run__tracking__scan_8py_source.html#l00327">run_tracking_scan.py:327</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1634,8 +1622,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="ttc" id="aclassMTCDetector_html_af0d5aa1a1f53c4078c281a29ce620818"><div class="ttname"><a href="classMTCDetector.html#af0d5aa1a1f53c4078c281a29ce620818">MTCDetector::SiPMPos_V</a></div><div class="ttdeci">std::map&lt; Int_t, float &gt; SiPMPos_V</div><div class="ttdef"><b>Definition</b> <a href="MTCDetector_8h_source.html#l00115">MTCDetector.h:115</a></div></div>
 <div class="ttc" id="aclassMTCDetector_html_afa87dfe0b28157190f0c7267c3a6c3fb"><div class="ttname"><a href="classMTCDetector.html#afa87dfe0b28157190f0c7267c3a6c3fb">MTCDetector::siPMFibres_U</a></div><div class="ttdeci">std::map&lt; Int_t, std::map&lt; Int_t, std::array&lt; float, 2 &gt; &gt; &gt; siPMFibres_U</div><div class="ttdoc">mapping of fibres to SiPM channels</div><div class="ttdef"><b>Definition</b> <a href="MTCDetector_8h_source.html#l00110">MTCDetector.h:110</a></div></div>
 <div class="ttc" id="aclassMTCDetector_html_afd86dacd0abbb9628d302fa9e1bfb1f6"><div class="ttname"><a href="classMTCDetector.html#afd86dacd0abbb9628d302fa9e1bfb1f6">MTCDetector::GetPosition</a></div><div class="ttdeci">void GetPosition(Int_t fDetectorID, TVector3 &amp;vLeft, TVector3 &amp;vRight)</div><div class="ttdef"><b>Definition</b> <a href="MTCDetector_8cxx_source.html#l00519">MTCDetector.cxx:519</a></div></div>
-<div class="ttc" id="anamespacemakeCascade_html_a14cea4d78b73e5ff8a7eefb813be9886"><div class="ttname"><a href="namespacemakeCascade.html#a14cea4d78b73e5ff8a7eefb813be9886">makeCascade.tmp</a></div><div class="ttdeci">tmp</div><div class="ttdef"><b>Definition</b> <a href="makeCascade_8py_source.html#l00460">makeCascade.py:460</a></div></div>
-<div class="ttc" id="anamespacemakeMuonEM_html_a04298ed1d5fc7dbec7e764537bfec5d5"><div class="ttname"><a href="namespacemakeMuonEM.html#a04298ed1d5fc7dbec7e764537bfec5d5">makeMuonEM.w</a></div><div class="ttdeci">w</div><div class="ttdef"><b>Definition</b> <a href="makeMuonEM_8py_source.html#l00049">makeMuonEM.py:49</a></div></div>
+<div class="ttc" id="anamespacemakeCascade_html_a14cea4d78b73e5ff8a7eefb813be9886"><div class="ttname"><a href="namespacemakeCascade.html#a14cea4d78b73e5ff8a7eefb813be9886">makeCascade.tmp</a></div><div class="ttdeci">tmp</div><div class="ttdef"><b>Definition</b> <a href="makeCascade_8py_source.html#l00457">makeCascade.py:457</a></div></div>
+<div class="ttc" id="anamespacemakeMuonEM_html_a04298ed1d5fc7dbec7e764537bfec5d5"><div class="ttname"><a href="namespacemakeMuonEM.html#a04298ed1d5fc7dbec7e764537bfec5d5">makeMuonEM.w</a></div><div class="ttdeci">w</div><div class="ttdef"><b>Definition</b> <a href="makeMuonEM_8py_source.html#l00048">makeMuonEM.py:48</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2656,12 +2644,43 @@ Additional Inherited Members</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMTCDetector.html">MTCDetector</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

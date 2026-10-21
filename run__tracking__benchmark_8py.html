@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -125,10 +130,10 @@ Variables</h2></td></tr>
 <tr class="separator:a69275dcd6b4ef7d8a47b83292ab4470d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad25daeeff22fe10abc028f837702536f" id="r_ad25daeeff22fe10abc028f837702536f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#ad25daeeff22fe10abc028f837702536f">run_tracking_benchmark.action</a></td></tr>
 <tr class="separator:ad25daeeff22fe10abc028f837702536f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6028e7a9de31e5976d0fff46998abaf0" id="r_a6028e7a9de31e5976d0fff46998abaf0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a6028e7a9de31e5976d0fff46998abaf0">run_tracking_benchmark.None</a></td></tr>
-<tr class="separator:a6028e7a9de31e5976d0fff46998abaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa48dd3742c688dacd0400587d71e95c6" id="r_aa48dd3742c688dacd0400587d71e95c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#aa48dd3742c688dacd0400587d71e95c6">run_tracking_benchmark.choices</a></td></tr>
 <tr class="separator:aa48dd3742c688dacd0400587d71e95c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6028e7a9de31e5976d0fff46998abaf0" id="r_a6028e7a9de31e5976d0fff46998abaf0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a6028e7a9de31e5976d0fff46998abaf0">run_tracking_benchmark.None</a></td></tr>
+<tr class="separator:a6028e7a9de31e5976d0fff46998abaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a411386b16cb7fa4d0592963fbdf0049c" id="r_a411386b16cb7fa4d0592963fbdf0049c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a411386b16cb7fa4d0592963fbdf0049c">run_tracking_benchmark.options</a> = parser.parse_args()</td></tr>
 <tr class="separator:a411386b16cb7fa4d0592963fbdf0049c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57cbc8cdb82de8abc4ed53f21c0a3faa" id="r_a57cbc8cdb82de8abc4ed53f21c0a3faa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a57cbc8cdb82de8abc4ed53f21c0a3faa">run_tracking_benchmark.outputDir</a></td></tr>
@@ -147,27 +152,58 @@ Variables</h2></td></tr>
 <tr class="separator:a75a1c03e23028ff2e391bd2a0bda5908"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afce5d2f3df5b881f52407bd7bd412437" id="r_afce5d2f3df5b881f52407bd7bd412437"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">run_tracking_benchmark.fairship</a> = os.environ.get(&quot;FAIRSHIP&quot;, &quot;&quot;)</td></tr>
 <tr class="separator:afce5d2f3df5b881f52407bd7bd412437"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dc73049005a803550b22a76cf8957d0" id="r_a9dc73049005a803550b22a76cf8957d0"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a9dc73049005a803550b22a76cf8957d0">run_tracking_benchmark.sim_script</a> = os.path.join(<a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a>, &quot;macro&quot;, &quot;run_simScript.py&quot;) if <a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a> else &quot;macro/run_simScript.py&quot;</td></tr>
+<tr class="memitem:a9dc73049005a803550b22a76cf8957d0" id="r_a9dc73049005a803550b22a76cf8957d0"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a9dc73049005a803550b22a76cf8957d0">run_tracking_benchmark.sim_script</a> = os.path.join(<a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a>, &quot;macro&quot;, &quot;run_simScript.py&quot;) <a class="el" href="CMakeLists_8txt.html#ae8b0a475e97263c5c960adf255ce96dc">if</a> <a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a> else &quot;macro/run_simScript.py&quot;</td></tr>
 <tr class="separator:a9dc73049005a803550b22a76cf8957d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac877adb617f49dc84d9dea141c9f7079" id="r_ac877adb617f49dc84d9dea141c9f7079"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#ac877adb617f49dc84d9dea141c9f7079">run_tracking_benchmark.sim_cmd</a></td></tr>
 <tr class="separator:ac877adb617f49dc84d9dea141c9f7079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99239ccdf49ba4311c7ba42b1c12eff8" id="r_a99239ccdf49ba4311c7ba42b1c12eff8"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a99239ccdf49ba4311c7ba42b1c12eff8">run_tracking_benchmark.reco_script</a> = os.path.join(<a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a>, &quot;macro&quot;, &quot;ShipReco.py&quot;) if <a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a> else &quot;macro/ShipReco.py&quot;</td></tr>
+<tr class="memitem:a99239ccdf49ba4311c7ba42b1c12eff8" id="r_a99239ccdf49ba4311c7ba42b1c12eff8"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a99239ccdf49ba4311c7ba42b1c12eff8">run_tracking_benchmark.reco_script</a> = os.path.join(<a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a>, &quot;macro&quot;, &quot;ShipReco.py&quot;) <a class="el" href="CMakeLists_8txt.html#ae8b0a475e97263c5c960adf255ce96dc">if</a> <a class="el" href="namespacerun__tracking__benchmark.html#afce5d2f3df5b881f52407bd7bd412437">fairship</a> else &quot;macro/ShipReco.py&quot;</td></tr>
 <tr class="separator:a99239ccdf49ba4311c7ba42b1c12eff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a175f00ff4337e1d683dc6d1869514258" id="r_a175f00ff4337e1d683dc6d1869514258"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a175f00ff4337e1d683dc6d1869514258">run_tracking_benchmark.reco_cmd</a></td></tr>
 <tr class="separator:a175f00ff4337e1d683dc6d1869514258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a216a12c6c77d62d92c785889a48831d6" id="r_a216a12c6c77d62d92c785889a48831d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a216a12c6c77d62d92c785889a48831d6">run_tracking_benchmark.cwd</a></td></tr>
 <tr class="separator:a216a12c6c77d62d92c785889a48831d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2791cc514778c53e29deca9703690c3d" id="r_a2791cc514778c53e29deca9703690c3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a2791cc514778c53e29deca9703690c3d">run_tracking_benchmark.bench</a> = <a class="el" href="classtracking__benchmark_1_1TrackingBenchmark.html">tracking_benchmark.TrackingBenchmark</a>(<a class="el" href="namespacerun__tracking__benchmark.html#a5a81780897b74f9995f7ca1285a2358b">sim_file</a>, <a class="el" href="namespacerun__tracking__benchmark.html#a15b79cc4621930776c946bd45d169eec">reco_file</a>, <a class="el" href="namespacerun__tracking__benchmark.html#a46c1da04523b070ce3999fb8f8862367">geo_file</a>)</td></tr>
+<tr class="memitem:a2791cc514778c53e29deca9703690c3d" id="r_a2791cc514778c53e29deca9703690c3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__tracking__benchmark.html#a2791cc514778c53e29deca9703690c3d">run_tracking_benchmark.bench</a></td></tr>
 <tr class="separator:a2791cc514778c53e29deca9703690c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_3b579af105d68949fc87077585f616df.html">macro</a></li><li class="navelem"><a class="el" href="run__tracking__benchmark_8py.html">run_tracking_benchmark.py</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

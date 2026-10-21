@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -129,7 +134,7 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:af0bee5d03f6eab7bea29fc1cbb4e25ea" id="r_af0bee5d03f6eab7bea29fc1cbb4e25ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#af0bee5d03f6eab7bea29fc1cbb4e25ea">mergeMbias.pdg</a> = ROOT.TDatabasePDG()</td></tr>
 <tr class="separator:af0bee5d03f6eab7bea29fc1cbb4e25ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa78ee55d809f949885ed280052d9c3" id="r_aafa78ee55d809f949885ed280052d9c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#aafa78ee55d809f949885ed280052d9c3">mergeMbias.mu</a> = pdg.GetParticle(13)</td></tr>
+<tr class="memitem:aafa78ee55d809f949885ed280052d9c3" id="r_aafa78ee55d809f949885ed280052d9c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#aafa78ee55d809f949885ed280052d9c3">mergeMbias.mu</a> = ut.get_particle(13)</td></tr>
 <tr class="separator:aafa78ee55d809f949885ed280052d9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa85a082f32184ed210c0627286497d0e" id="r_aa85a082f32184ed210c0627286497d0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#aa85a082f32184ed210c0627286497d0e">mergeMbias.Mmu</a> = mu.Mass()</td></tr>
 <tr class="separator:aa85a082f32184ed210c0627286497d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,7 +144,7 @@ Variables</h2></td></tr>
 <tr class="separator:a9a94ea0085e090e0c8254d8a9ff77483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1243a109cb5cb7d4aed6fb2d7117cbd9" id="r_a1243a109cb5cb7d4aed6fb2d7117cbd9"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#a1243a109cb5cb7d4aed6fb2d7117cbd9">mergeMbias.eospath</a> = ROOT.gSystem.Getenv(&quot;EOSSHIP&quot;) + &quot;/eos/experiment/ship/data/&quot;</td></tr>
 <tr class="separator:a1243a109cb5cb7d4aed6fb2d7117cbd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecbed99f072995cde06221015f615f6d" id="r_aecbed99f072995cde06221015f615f6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#aecbed99f072995cde06221015f615f6d">mergeMbias.ship_geo</a> = <a class="el" href="namespacegeometry__config.html#afb514e222a0f704f678c3b3f465ee7e7">geometry_config.create_config</a>(Yheight=10.0)</td></tr>
+<tr class="memitem:aecbed99f072995cde06221015f615f6d" id="r_aecbed99f072995cde06221015f615f6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#aecbed99f072995cde06221015f615f6d">mergeMbias.ship_geo</a> = <a class="el" href="namespacegeometry__config.html#a14c64c715c02fde546cf42f7c9d6f09f">geometry_config.create_config</a>(Yheight=10.0)</td></tr>
 <tr class="separator:aecbed99f072995cde06221015f615f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1ba9c5e18f9a604f0c372e588cc6a67" id="r_ac1ba9c5e18f9a604f0c372e588cc6a67"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemergeMbias.html#ac1ba9c5e18f9a604f0c372e588cc6a67">mergeMbias.endOfHadronAbsorber</a> = (<a class="el" href="namespacemergeMbias.html#aecbed99f072995cde06221015f615f6d">ship_geo</a>[&quot;muShield&quot;].Entrance[0] + 2 * <a class="el" href="namespacemergeMbias.html#aecbed99f072995cde06221015f615f6d">ship_geo</a>[&quot;muShield&quot;].half_length[0]) / 100.0</td></tr>
 <tr class="separator:ac1ba9c5e18f9a604f0c372e588cc6a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,12 +167,43 @@ Variables</h2></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_3b579af105d68949fc87077585f616df.html">macro</a></li><li class="navelem"><a class="el" href="mergeMbias_8py.html">mergeMbias.py</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ntuplegenerator_0',['NtupleGenerator',['../classNtupleGenerator.html',1,'']]]
+  ['linesegment_0',['LineSegment',['../structSHiP_1_1LineSegment.html',1,'SHiP']]]
 ];

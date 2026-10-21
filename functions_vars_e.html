@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -92,8 +97,10 @@ $(document).ready(function(){initNavTree('functions_vars_e.html',''); initResiza
 <div class="textblock">Here is a list of all variables with links to the classes they belong to:</div>
 
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>E&#160;:&#160;<a class="el" href="classDISparticle.html#aea56345d0c04a5d18c73c6b1ff752c3a">DISparticle</a></li>
 <li>e&#160;:&#160;<a class="el" href="structTrackBuffer.html#ab58809fbaaf19dd4093d14caa0d0f2e0">TrackBuffer</a></li>
 <li>ecut&#160;:&#160;<a class="el" href="classMuonBackGenerator.html#a69b3ae0f15d91b15e14655080d17db39">MuonBackGenerator</a></li>
+<li>edges&#160;:&#160;<a class="el" href="classevent__histogram_1_1EventHistogram.html#a11298d067f838a5563ad09904ccff998">event_histogram.EventHistogram</a></li>
 <li>Ef&#160;:&#160;<a class="el" href="classGenieGenerator.html#aeccda1bacf472b4e29661781d21653b0">GenieGenerator</a></li>
 <li>El&#160;:&#160;<a class="el" href="classGenieGenerator.html#a0eff1f335e976e9bf72f9eea7e5e759d">GenieGenerator</a></li>
 <li>EMax&#160;:&#160;<a class="el" href="classexitHadronAbsorber.html#ad60adebeb36d9c452ac1460abc39afe2">exitHadronAbsorber</a>, <a class="el" href="classFixedTargetGenerator.html#a07b7f7762d6efdf651d166d15361dd83">FixedTargetGenerator</a></li>
@@ -102,7 +109,7 @@ $(document).ready(function(){initNavTree('functions_vars_e.html',''); initResiza
 <li>EmulsionX&#160;:&#160;<a class="el" href="classTarget.html#afb1de534a204baf0bf4cd04d85a92af6">Target</a></li>
 <li>EmulsionY&#160;:&#160;<a class="el" href="classTarget.html#a4f413bdaa4b87fe74788e5cc3c6f4457">Target</a></li>
 <li>end&#160;:&#160;<a class="el" href="classFixedTargetGenerator.html#a59ae4f1dfb442d58254275e5a83692ce">FixedTargetGenerator</a>, <a class="el" href="classPythia8Generator.html#accaba94561242bc1e06134f27a30bb0d">Pythia8Generator</a></li>
-<li>endZ&#160;:&#160;<a class="el" href="classFixedTargetGenerator.html#a6e276b38f39dac3a7b26dd4eac990c95">FixedTargetGenerator</a>, <a class="el" href="classGenieGenerator.html#a29396a1cf89c0f75beefde980874eefc">GenieGenerator</a>, <a class="el" href="classMuDISGenerator.html#aebd4e2db02a83054f90440088fd8d9a7">MuDISGenerator</a>, <a class="el" href="classPythia8Generator.html#a3f7b61dbce42df88afc6859845bc0540">Pythia8Generator</a></li>
+<li>endZ&#160;:&#160;<a class="el" href="classFixedTargetGenerator.html#a6e276b38f39dac3a7b26dd4eac990c95">FixedTargetGenerator</a>, <a class="el" href="classGenieGenerator.html#a29396a1cf89c0f75beefde980874eefc">GenieGenerator</a>, <a class="el" href="classMuDISGenerator.html#aebd4e2db02a83054f90440088fd8d9a7">MuDISGenerator</a>, <a class="el" href="structMuGeoProcessor_1_1Segment.html#aeaa2b56b717cf5be4bb485affac32fe9">MuGeoProcessor::Segment</a>, <a class="el" href="classPythia8Generator.html#a3f7b61dbce42df88afc6859845bc0540">Pythia8Generator</a></li>
 <li>epsilon&#160;:&#160;<a class="el" href="classdarkphoton_1_1DarkPhoton.html#a12eb971f9c654199ed012a2c87c6ee27">darkphoton.DarkPhoton</a></li>
 <li>Ev&#160;:&#160;<a class="el" href="classGenieGenerator.html#a54166a35edcde3605f9d18bcfca7a92c">GenieGenerator</a></li>
 <li>eventHeader&#160;:&#160;<a class="el" href="classshipDigiReco_1_1ShipDigiReco.html#a8e5e31ba378ecc05524cf6e44bfd57e3">shipDigiReco.ShipDigiReco</a></li>
@@ -110,15 +117,48 @@ $(document).ready(function(){initNavTree('functions_vars_e.html',''); initResiza
 <li>evtgenN&#160;:&#160;<a class="el" href="classFixedTargetGenerator.html#ac91569df5a1c7106332667b2cc03c943">FixedTargetGenerator</a></li>
 <li>evtgenP&#160;:&#160;<a class="el" href="classFixedTargetGenerator.html#aeec5ade00ef00598d968b593a9c5dec5">FixedTargetGenerator</a></li>
 <li>expectedPars&#160;:&#160;<a class="el" href="structModelSpec.html#af3f40e0ec1c08f9fa649e851f9edf91c">ModelSpec</a></li>
+<li>extensions&#160;:&#160;<a class="el" href="structSHiP_1_1ActsStrawTracker_1_1Impl.html#abe22eb9eca81a47a056f540270b5e7ac">SHiP::ActsStrawTracker::Impl</a></li>
+<li>extrapolator&#160;:&#160;<a class="el" href="structSHiP_1_1ActsStrawTracker_1_1Impl.html#a76d7bd8a73752e21f14b088150696217">SHiP::ActsStrawTracker::Impl</a></li>
 <li>Ezero&#160;:&#160;<a class="el" href="classNtupleGenerator.html#ab05d064a7e4ee7380e3f6bb41cb44d46">NtupleGenerator</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

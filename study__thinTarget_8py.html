@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -137,7 +142,7 @@ Variables</h2></td></tr>
 <tr class="separator:ac1292d52ae3c8da74f0c07a22cf4cc78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22b0230911110381a9456faaa67d77b" id="r_af22b0230911110381a9456faaa67d77b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#af22b0230911110381a9456faaa67d77b">study_thinTarget.ecut</a> = 0.0</td></tr>
 <tr class="separator:af22b0230911110381a9456faaa67d77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a033878c5a0d6d8cdded748c6d3b40c96" id="r_a033878c5a0d6d8cdded748c6d3b40c96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#a033878c5a0d6d8cdded748c6d3b40c96">study_thinTarget.ship_geo</a> = <a class="el" href="namespacegeometry__config.html#afb514e222a0f704f678c3b3f465ee7e7">geometry_config.create_config</a>(Yheight=10, shieldName=&quot;TRY_2025&quot;)</td></tr>
+<tr class="memitem:a033878c5a0d6d8cdded748c6d3b40c96" id="r_a033878c5a0d6d8cdded748c6d3b40c96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#a033878c5a0d6d8cdded748c6d3b40c96">study_thinTarget.ship_geo</a> = <a class="el" href="namespacegeometry__config.html#a14c64c715c02fde546cf42f7c9d6f09f">geometry_config.create_config</a>(Yheight=10, shieldName=&quot;TRY_2025&quot;)</td></tr>
 <tr class="separator:a033878c5a0d6d8cdded748c6d3b40c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a781dc49671893f41b9cabf200aaec718" id="r_a781dc49671893f41b9cabf200aaec718"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#a781dc49671893f41b9cabf200aaec718">study_thinTarget.timer</a> = ROOT.TStopwatch()</td></tr>
 <tr class="separator:a781dc49671893f41b9cabf200aaec718"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,7 +180,7 @@ Variables</h2></td></tr>
 <tr class="separator:a39aa964b0e7234068dd84e1db8e82ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad42514fa94c85147992a2838f87d2465" id="r_ad42514fa94c85147992a2838f87d2465"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#ad42514fa94c85147992a2838f87d2465">study_thinTarget.oTrack</a> = sTree.MCTrack[aHit.GetTrackID()]</td></tr>
 <tr class="separator:ad42514fa94c85147992a2838f87d2465"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46a2c36f58cdfbc3bcad456445df083d" id="r_a46a2c36f58cdfbc3bcad456445df083d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#a46a2c36f58cdfbc3bcad456445df083d">study_thinTarget._p</a> = pdg.GetParticle(oTrack.GetPdgCode())</td></tr>
+<tr class="memitem:a46a2c36f58cdfbc3bcad456445df083d" id="r_a46a2c36f58cdfbc3bcad456445df083d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#a46a2c36f58cdfbc3bcad456445df083d">study_thinTarget._p</a> = ut.get_particle(oTrack.GetPdgCode())</td></tr>
 <tr class="separator:a46a2c36f58cdfbc3bcad456445df083d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affb86d37468067d55d1131cfc854169d" id="r_affb86d37468067d55d1131cfc854169d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestudy__thinTarget.html#affb86d37468067d55d1131cfc854169d">study_thinTarget.M</a> = _p.Mass()</td></tr>
 <tr class="separator:affb86d37468067d55d1131cfc854169d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,12 +207,43 @@ Variables</h2></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_72a79d73443babb282d0800e65628bdf.html">muonShieldOptimization</a></li><li class="navelem"><a class="el" href="study__thinTarget_8py.html">study_thinTarget.py</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

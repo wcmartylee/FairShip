@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -98,7 +103,7 @@ $(document).ready(function(){initNavTree('namespacerun__fixedTarget.html',''); i
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ace8e54c5ffd9284df4a7dde24a57c645" id="r_ace8e54c5ffd9284df4a7dde24a57c645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#ace8e54c5ffd9284df4a7dde24a57c645">get_work_dir</a> (run_number, <a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>|<a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a> tag=<a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a>)</td></tr>
+<tr class="memitem:ace8e54c5ffd9284df4a7dde24a57c645" id="r_ace8e54c5ffd9284df4a7dde24a57c645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#ace8e54c5ffd9284df4a7dde24a57c645">get_work_dir</a> (run_number, <a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>|<a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a> <a class="el" href="namespacerun__fixedTarget.html#a615d4ec228616ed5ef67a86a38b42088">tag</a>=<a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a>)</td></tr>
 <tr class="separator:ace8e54c5ffd9284df4a7dde24a57c645"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -133,6 +138,8 @@ Variables</h2></td></tr>
 <tr class="separator:ac40dee23afd16ecfff6ae82bd8e8cf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1277424a1c78c806b635aedae63a6c4" id="r_af1277424a1c78c806b635aedae63a6c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#af1277424a1c78c806b635aedae63a6c4">float</a></td></tr>
 <tr class="separator:af1277424a1c78c806b635aedae63a6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd658b1a487f82668f5db9fc802218b1" id="r_abd658b1a487f82668f5db9fc802218b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#abd658b1a487f82668f5db9fc802218b1">choices</a></td></tr>
+<tr class="separator:abd658b1a487f82668f5db9fc802218b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af456af4c4bac33f8b8ba95ab99319708" id="r_af456af4c4bac33f8b8ba95ab99319708"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#af456af4c4bac33f8b8ba95ab99319708">BooleanOptionalAction</a></td></tr>
 <tr class="separator:af456af4c4bac33f8b8ba95ab99319708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad50662eb5b8a53f8ea74c76843ad04f6" id="r_ad50662eb5b8a53f8ea74c76843ad04f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#ad50662eb5b8a53f8ea74c76843ad04f6">False</a></td></tr>
@@ -141,14 +148,16 @@ Variables</h2></td></tr>
 <tr class="separator:a3df52dc2c722f5f071c210b25264e220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd583ebbc467395a63d606f36b87fe68" id="r_abd583ebbc467395a63d606f36b87fe68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a></td></tr>
 <tr class="separator:abd583ebbc467395a63d606f36b87fe68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd658b1a487f82668f5db9fc802218b1" id="r_abd658b1a487f82668f5db9fc802218b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#abd658b1a487f82668f5db9fc802218b1">choices</a></td></tr>
-<tr class="separator:abd658b1a487f82668f5db9fc802218b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05d4d5d811ac982fb950c0e77dff935b" id="r_a05d4d5d811ac982fb950c0e77dff935b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a05d4d5d811ac982fb950c0e77dff935b">e13</a></td></tr>
 <tr class="separator:a05d4d5d811ac982fb950c0e77dff935b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff2f6c052d8e7f65a00570cbf5be9305" id="r_aff2f6c052d8e7f65a00570cbf5be9305"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a></td></tr>
 <tr class="separator:aff2f6c052d8e7f65a00570cbf5be9305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a662a9a9869bd1c3d220c638d0a0eb271" id="r_a662a9a9869bd1c3d220c638d0a0eb271"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a662a9a9869bd1c3d220c638d0a0eb271">args</a> = ap.parse_args()</td></tr>
 <tr class="separator:a662a9a9869bd1c3d220c638d0a0eb271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39a4acf8ad97c2bacd02c9148625d38c" id="r_a39a4acf8ad97c2bacd02c9148625d38c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a39a4acf8ad97c2bacd02c9148625d38c">clones_per_split</a> = args.kaon_pion_splits + args.intermediate_kaon_pion_splits</td></tr>
+<tr class="separator:a39a4acf8ad97c2bacd02c9148625d38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838e53c078c81fc6bfbb79f41d49a022" id="r_a838e53c078c81fc6bfbb79f41d49a022"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a838e53c078c81fc6bfbb79f41d49a022">shower_safety_factor</a> = ROOT.exitHadronAbsorber.kShowerSafetyFactor</td></tr>
+<tr class="separator:a838e53c078c81fc6bfbb79f41d49a022"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac90e8784f1df97ed6d22cbfb15202420" id="r_ac90e8784f1df97ed6d22cbfb15202420"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#ac90e8784f1df97ed6d22cbfb15202420">charm</a></td></tr>
 <tr class="separator:ac90e8784f1df97ed6d22cbfb15202420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c85c49a7d2a826a1546503659f48708" id="r_a0c85c49a7d2a826a1546503659f48708"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a0c85c49a7d2a826a1546503659f48708">beauty</a></td></tr>
@@ -159,6 +168,8 @@ Variables</h2></td></tr>
 <tr class="separator:ac032ee804f477784e61c14479b39ee57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accca7dd8bbe46e322f0d0d370d827f63" id="r_accca7dd8bbe46e322f0d0d370d827f63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#accca7dd8bbe46e322f0d0d370d827f63">charmInputFile</a> = args.charmInputFile</td></tr>
 <tr class="separator:accca7dd8bbe46e322f0d0d370d827f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615d4ec228616ed5ef67a86a38b42088" id="r_a615d4ec228616ed5ef67a86a38b42088"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a615d4ec228616ed5ef67a86a38b42088">tag</a> = &quot;charm&quot;</td></tr>
+<tr class="separator:a615d4ec228616ed5ef67a86a38b42088"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae13a0ef257f9f8bc0985fd40a8b0bf79" id="r_ae13a0ef257f9f8bc0985fd40a8b0bf79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#ae13a0ef257f9f8bc0985fd40a8b0bf79">work_dir</a></td></tr>
 <tr class="separator:ae13a0ef257f9f8bc0985fd40a8b0bf79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c69a894251ef9de75b9a06ec7d12804" id="r_a0c69a894251ef9de75b9a06ec7d12804"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a0c69a894251ef9de75b9a06ec7d12804">seed</a> = args.seed</td></tr>
@@ -167,7 +178,7 @@ Variables</h2></td></tr>
 <tr class="separator:a11b5b46e5234c652e24de4ee32caa056"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6da492a6b2ce007f57e5a1b618fb40e2" id="r_a6da492a6b2ce007f57e5a1b618fb40e2"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a6da492a6b2ce007f57e5a1b618fb40e2">ship_geo_kwargs</a></td></tr>
 <tr class="separator:a6da492a6b2ce007f57e5a1b618fb40e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e3246d1e1694b94a0e038535d2baed0" id="r_a3e3246d1e1694b94a0e038535d2baed0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a3e3246d1e1694b94a0e038535d2baed0">ship_geo</a> = <a class="el" href="namespacegeometry__config.html#afb514e222a0f704f678c3b3f465ee7e7">geometry_config.create_config</a>(**<a class="el" href="namespacerun__fixedTarget.html#a6da492a6b2ce007f57e5a1b618fb40e2">ship_geo_kwargs</a>)</td></tr>
+<tr class="memitem:a3e3246d1e1694b94a0e038535d2baed0" id="r_a3e3246d1e1694b94a0e038535d2baed0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a3e3246d1e1694b94a0e038535d2baed0">ship_geo</a> = <a class="el" href="namespacegeometry__config.html#a14c64c715c02fde546cf42f7c9d6f09f">geometry_config.create_config</a>(**<a class="el" href="namespacerun__fixedTarget.html#a6da492a6b2ce007f57e5a1b618fb40e2">ship_geo_kwargs</a>)</td></tr>
 <tr class="separator:a3e3246d1e1694b94a0e038535d2baed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83ae1eef33ac629133d4a2441e993a62" id="r_a83ae1eef33ac629133d4a2441e993a62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a83ae1eef33ac629133d4a2441e993a62">txt</a> = &quot;pythia8_Geant4_&quot;</td></tr>
 <tr class="separator:a83ae1eef33ac629133d4a2441e993a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,7 +224,15 @@ Variables</h2></td></tr>
 <tr class="separator:ad5019a2bfcd85504e1ed4b193811c920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5d197a44fb50031e902eba201329ecc" id="r_ad5d197a44fb50031e902eba201329ecc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#ad5d197a44fb50031e902eba201329ecc">P8gen</a> = ROOT.FixedTargetGenerator()</td></tr>
 <tr class="separator:ad5d197a44fb50031e902eba201329ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c78f606364f1a830180c31f402fabec" id="r_a7c78f606364f1a830180c31f402fabec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a7c78f606364f1a830180c31f402fabec">cs</a> = derive_cross_sections(args.target_composition, args.A, args.chicc, args.chibb)</td></tr>
+<tr class="memitem:a5e380c2810640ae62ab6b75f25037be7" id="r_a5e380c2810640ae62ab6b75f25037be7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a5e380c2810640ae62ab6b75f25037be7">sigma_QQ</a> = _fin.Get(&quot;sigma_QQ&quot;).GetVal() <a class="el" href="CMakeLists_8txt.html#ae8b0a475e97263c5c960adf255ce96dc">if</a> _fin.Get(&quot;sigma_QQ&quot;) else <a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a></td></tr>
+<tr class="separator:a5e380c2810640ae62ab6b75f25037be7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed45e47bf61acf32c032a77a3cf9d035" id="r_aed45e47bf61acf32c032a77a3cf9d035"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#aed45e47bf61acf32c032a77a3cf9d035">_ntuple</a> = _fin.Get(&quot;pythia6&quot;)</td></tr>
+<tr class="separator:aed45e47bf61acf32c032a77a3cf9d035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95ddf63078ab83418774fba4c0554260" id="r_a95ddf63078ab83418774fba4c0554260"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a95ddf63078ab83418774fba4c0554260">input_is_beauty</a> = file_is_beauty(_ntuple.M)</td></tr>
+<tr class="separator:a95ddf63078ab83418774fba4c0554260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addbbdbc8c12ba647dd9f529db31613a7" id="r_addbbdbc8c12ba647dd9f529db31613a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#addbbdbc8c12ba647dd9f529db31613a7">flavour</a> = &quot;beauty&quot; <a class="el" href="CMakeLists_8txt.html#ae8b0a475e97263c5c960adf255ce96dc">if</a> <a class="el" href="namespacerun__fixedTarget.html#a95ddf63078ab83418774fba4c0554260">input_is_beauty</a> else &quot;charm&quot;</td></tr>
+<tr class="separator:addbbdbc8c12ba647dd9f529db31613a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c78f606364f1a830180c31f402fabec" id="r_a7c78f606364f1a830180c31f402fabec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a7c78f606364f1a830180c31f402fabec">cs</a> = derive_cross_sections(args.target_composition, args.A, args.chicc, args.chibb, <a class="el" href="namespacerun__fixedTarget.html#a5e380c2810640ae62ab6b75f25037be7">sigma_QQ</a>, args.beauty)</td></tr>
 <tr class="separator:a7c78f606364f1a830180c31f402fabec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8849978ebdda515280cb5b90b4d173a5" id="r_a8849978ebdda515280cb5b90b4d173a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a8849978ebdda515280cb5b90b4d173a5">gMC</a> = ROOT.TVirtualMC.GetMC()</td></tr>
 <tr class="separator:a8849978ebdda515280cb5b90b4d173a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,7 +250,7 @@ Variables</h2></td></tr>
 <tr class="separator:a8dcf429ee35cfb45c4d1bb5bbf5d74fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bae912e73b74a6d75fa0ff9f485e1c1" id="r_a4bae912e73b74a6d75fa0ff9f485e1c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a4bae912e73b74a6d75fa0ff9f485e1c1">tmpFile</a> = <a class="el" href="namespacerun__fixedTarget.html#ae509765a529dfe63f10403bfbb4e6c23">outFile</a> + &quot;tmp&quot;</td></tr>
 <tr class="separator:a4bae912e73b74a6d75fa0ff9f485e1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44a2f398422c952305b4ee8df6ee9da0" id="r_a44a2f398422c952305b4ee8df6ee9da0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a44a2f398422c952305b4ee8df6ee9da0">fin</a> = ROOT.gROOT.GetListOfFiles()[0]</td></tr>
+<tr class="memitem:a44a2f398422c952305b4ee8df6ee9da0" id="r_a44a2f398422c952305b4ee8df6ee9da0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#a44a2f398422c952305b4ee8df6ee9da0">fin</a> = ROOT.gROOT.GetListOfFiles().FindObject(<a class="el" href="namespacerun__fixedTarget.html#ae509765a529dfe63f10403bfbb4e6c23">outFile</a>)</td></tr>
 <tr class="separator:a44a2f398422c952305b4ee8df6ee9da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb198cfaf268451c0899cebf70da5dc4" id="r_abb198cfaf268451c0899cebf70da5dc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerun__fixedTarget.html#abb198cfaf268451c0899cebf70da5dc4">fHeader</a> = fin.Get(&quot;FileHeader&quot;)</td></tr>
 <tr class="separator:abb198cfaf268451c0899cebf70da5dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -301,23 +320,47 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00041">41</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span><span class="keyword">def </span>get_work_dir(run_number, tag: str | <span class="keywordtype">None</span> = <span class="keywordtype">None</span>) -&gt; str:</div>
-<div class="line"><span class="lineno">   42</span>    <span class="keyword">import</span> socket</div>
-<div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>    host = socket.gethostname()</div>
-<div class="line"><span class="lineno">   45</span>    job_base_name = os.path.splitext(os.path.basename(os.sys.argv[0]))[0]</div>
-<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">if</span> tag:</div>
-<div class="line"><span class="lineno">   47</span>        out_dir = f<span class="stringliteral">&quot;{host}_{job_base_name}_{run_number}_{tag}&quot;</span></div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">   49</span>        out_dir = f<span class="stringliteral">&quot;{host}_{job_base_name}_{run_number}&quot;</span></div>
-<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">return</span> out_dir</div>
-<div class="line"><span class="lineno">   51</span> </div>
-<div class="line"><span class="lineno">   52</span> </div>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00043">43</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span><span class="keyword">def </span>get_work_dir(run_number, tag: str | <span class="keywordtype">None</span> = <span class="keywordtype">None</span>) -&gt; str:</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keyword">import</span> socket</div>
+<div class="line"><span class="lineno">   45</span> </div>
+<div class="line"><span class="lineno">   46</span>    host = socket.gethostname()</div>
+<div class="line"><span class="lineno">   47</span>    job_base_name = os.path.splitext(os.path.basename(os.sys.argv[0]))[0]</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> tag:</div>
+<div class="line"><span class="lineno">   49</span>        out_dir = f<span class="stringliteral">&quot;{host}_{job_base_name}_{run_number}_{tag}&quot;</span></div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">   51</span>        out_dir = f<span class="stringliteral">&quot;{host}_{job_base_name}_{run_number}&quot;</span></div>
+<div class="line"><span class="lineno">   52</span>    <span class="keywordflow">return</span> out_dir</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="aed45e47bf61acf32c032a77a3cf9d035" name="aed45e47bf61acf32c032a77a3cf9d035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed45e47bf61acf32c032a77a3cf9d035">&#9670;&#160;</a></span>_ntuple</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">run_fixedTarget._ntuple = _fin.Get(&quot;pythia6&quot;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00560">560</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
 <a id="ab5d680c22d22a38d96db40834019c7bf" name="ab5d680c22d22a38d96db40834019c7bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab5d680c22d22a38d96db40834019c7bf">&#9670;&#160;</a></span>action</h2>
 
@@ -330,7 +373,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00056">56</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00058">58</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -346,7 +389,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00055">55</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00057">57</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -362,7 +405,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00222">222</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00277">277</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -378,7 +421,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00234">234</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00316">316</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -394,7 +437,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00082">82</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00092">92</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -410,7 +453,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00325">325</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00410">410</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -426,7 +469,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00233">233</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00315">315</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -442,7 +485,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00247">247</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00329">329</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -458,7 +501,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00020">20</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00022">22</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -474,7 +517,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00126">126</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00088">88</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -490,7 +533,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00576">576</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00706">706</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
+<a id="a39a4acf8ad97c2bacd02c9148625d38c" name="a39a4acf8ad97c2bacd02c9148625d38c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39a4acf8ad97c2bacd02c9148625d38c">&#9670;&#160;</a></span>clones_per_split</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">run_fixedTarget.clones_per_split = args.kaon_pion_splits + args.intermediate_kaon_pion_splits</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00303">303</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -506,7 +565,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00530">530</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00657">657</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -522,7 +581,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00116">116</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00169">169</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -533,12 +592,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">run_fixedTarget.cs = derive_cross_sections(args.target_composition, args.A, args.chicc, args.chibb)</td>
+          <td class="memname">run_fixedTarget.cs = derive_cross_sections(args.target_composition, args.A, args.chicc, args.chibb, <a class="el" href="namespacerun__fixedTarget.html#a5e380c2810640ae62ab6b75f25037be7">sigma_QQ</a>, args.beauty)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00463">463</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00570">570</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -554,7 +613,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00506">506</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00633">633</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -570,7 +629,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00339">339</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00424">424</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -586,7 +645,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00058">58</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00060">60</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -602,7 +661,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00058">58</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00060">60</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -618,7 +677,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00023">23</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00025">25</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -634,7 +693,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00022">22</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00024">24</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -650,7 +709,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00139">139</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00192">192</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -666,7 +725,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00096">96</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00149">149</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -682,7 +741,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00582">582</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00712">712</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -698,7 +757,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00518">518</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00645">645</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -709,12 +768,28 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">run_fixedTarget.fin = ROOT.gROOT.GetListOfFiles()[0]</td>
+          <td class="memname">run_fixedTarget.fin = ROOT.gROOT.GetListOfFiles().FindObject(<a class="el" href="namespacerun__fixedTarget.html#ae509765a529dfe63f10403bfbb4e6c23">outFile</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00515">515</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00642">642</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
+<a id="addbbdbc8c12ba647dd9f529db31613a7" name="addbbdbc8c12ba647dd9f529db31613a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addbbdbc8c12ba647dd9f529db31613a7">&#9670;&#160;</a></span>flavour</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a> run_fixedTarget.flavour = &quot;beauty&quot; <a class="el" href="CMakeLists_8txt.html#ae8b0a475e97263c5c960adf255ce96dc">if</a> <a class="el" href="namespacerun__fixedTarget.html#a95ddf63078ab83418774fba4c0554260">input_is_beauty</a> else &quot;charm&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00566">566</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -730,7 +805,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00065">65</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00067">67</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -746,7 +821,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00561">561</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00690">690</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -762,7 +837,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00594">594</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00724">724</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -778,7 +853,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00479">479</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00587">587</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -794,7 +869,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00341">341</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00426">426</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -810,7 +885,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00287">287</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00372">372</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -826,7 +901,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00478">478</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00586">586</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -842,7 +917,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00494">494</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00621">621</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -858,7 +933,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00057">57</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00059">59</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -874,7 +949,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00526">526</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00653">653</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
+<a id="a95ddf63078ab83418774fba4c0554260" name="a95ddf63078ab83418774fba4c0554260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95ddf63078ab83418774fba4c0554260">&#9670;&#160;</a></span>input_is_beauty</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">run_fixedTarget.input_is_beauty = file_is_beauty(_ntuple.M)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00562">562</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -890,7 +981,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00058">58</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00060">60</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -906,7 +997,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00340">340</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00425">425</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -922,7 +1013,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00037">37</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00039">39</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -938,7 +1029,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00342">342</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00427">427</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -954,7 +1045,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00018">18</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00020">20</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -976,7 +1067,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">    5</span>        SC_key=ship_geo.SC_mag,</div>
 <div class="line"><span class="lineno">    6</span>    )</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00382">382</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00466">466</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -992,7 +1083,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00375">375</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00459">459</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1008,7 +1099,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00563">563</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00692">692</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1024,7 +1115,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00118">118</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00171">171</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1040,7 +1131,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00549">549</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00678">678</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1056,7 +1147,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00299">299</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00384">384</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1072,7 +1163,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00021">21</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00023">23</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1088,7 +1179,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00432">432</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00524">524</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1104,7 +1195,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00380">380</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00464">464</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1120,7 +1211,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00300">300</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00385">385</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1136,7 +1227,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00525">525</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00652">652</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1152,7 +1243,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00431">431</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00523">523</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1168,7 +1259,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00495">495</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00622">622</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1184,7 +1275,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00496">496</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00623">623</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1200,7 +1291,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00236">236</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00318">318</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1216,7 +1307,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00555">555</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00684">684</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1232,7 +1323,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00588">588</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00718">718</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1248,7 +1339,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00589">589</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00719">719</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1264,7 +1355,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00320">320</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00405">405</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1371,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00505">505</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00632">632</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1296,7 +1387,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00307">307</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00392">392</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1312,7 +1403,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00277">277</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00362">362</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1328,7 +1419,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00393">393</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00477">477</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1344,7 +1435,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00354">354</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00439">439</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1360,7 +1451,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00400">400</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00487">487</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1376,7 +1467,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00605">605</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00735">735</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1387,12 +1478,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">run_fixedTarget.ship_geo = <a class="el" href="namespacegeometry__config.html#afb514e222a0f704f678c3b3f465ee7e7">geometry_config.create_config</a>(**<a class="el" href="namespacerun__fixedTarget.html#a6da492a6b2ce007f57e5a1b618fb40e2">ship_geo_kwargs</a>)</td>
+          <td class="memname">run_fixedTarget.ship_geo = <a class="el" href="namespacegeometry__config.html#a14c64c715c02fde546cf42f7c9d6f09f">geometry_config.create_config</a>(**<a class="el" href="namespacerun__fixedTarget.html#a6da492a6b2ce007f57e5a1b618fb40e2">ship_geo_kwargs</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00294">294</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00379">379</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1414,7 +1505,39 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">    5</span>    <span class="stringliteral">&quot;TARGET_YAML&quot;</span>: args.TARGET_YAML,</div>
 <div class="line"><span class="lineno">    6</span>}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00288">288</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00373">373</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
+<a id="a838e53c078c81fc6bfbb79f41d49a022" name="a838e53c078c81fc6bfbb79f41d49a022"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838e53c078c81fc6bfbb79f41d49a022">&#9670;&#160;</a></span>shower_safety_factor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">run_fixedTarget.shower_safety_factor = ROOT.exitHadronAbsorber.kShowerSafetyFactor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00306">306</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
+<a id="a5e380c2810640ae62ab6b75f25037be7" name="a5e380c2810640ae62ab6b75f25037be7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e380c2810640ae62ab6b75f25037be7">&#9670;&#160;</a></span>sigma_QQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">run_fixedTarget.sigma_QQ = _fin.Get(&quot;sigma_QQ&quot;).GetVal() <a class="el" href="CMakeLists_8txt.html#ae8b0a475e97263c5c960adf255ce96dc">if</a> _fin.Get(&quot;sigma_QQ&quot;) else <a class="el" href="namespacerun__fixedTarget.html#abd583ebbc467395a63d606f36b87fe68">None</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00559">559</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1430,7 +1553,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00019">19</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00021">21</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1446,7 +1569,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00311">311</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00396">396</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1462,7 +1585,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00150">150</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00203">203</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1478,7 +1601,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00562">562</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00691">691</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1494,7 +1617,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00560">560</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00689">689</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+
+</div>
+</div>
+<a id="a615d4ec228616ed5ef67a86a38b42088" name="a615d4ec228616ed5ef67a86a38b42088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615d4ec228616ed5ef67a86a38b42088">&#9670;&#160;</a></span>tag</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerun__fixedTarget.html#aff2f6c052d8e7f65a00570cbf5be9305">str</a> run_fixedTarget.tag = &quot;charm&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00333">333</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1510,7 +1649,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00344">344</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00429">429</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1533,7 +1672,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">    6</span>    HeT=ship_geo.target.HeT,</div>
 <div class="line"><span class="lineno">    7</span>)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00331">331</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00416">416</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1688,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00552">552</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00681">681</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1565,7 +1704,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00303">303</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00388">388</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1581,7 +1720,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00513">513</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00640">640</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1597,7 +1736,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00553">553</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00682">682</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1613,7 +1752,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00296">296</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00381">381</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1629,7 +1768,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00058">58</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00060">60</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1645,7 +1784,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00235">235</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00317">317</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1661,7 +1800,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00251">251</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00340">340</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1677,7 +1816,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00575">575</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00705">705</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
@@ -1693,18 +1832,49 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00578">578</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__fixedTarget_8py_source.html#l00708">708</a> of file <a class="el" href="run__fixedTarget_8py_source.html">run_fixedTarget.py</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacerun__fixedTarget.html">run_fixedTarget</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

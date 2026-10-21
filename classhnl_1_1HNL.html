@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -99,22 +104,12 @@ $(document).ready(function(){initNavTree('classhnl_1_1HNL.html',''); initResizab
 <div class="dynheader">
 Inheritance diagram for hnl.HNL:</div>
 <div class="dyncontent">
-<div class="center"><img src="classhnl_1_1HNL__inherit__graph.png" border="0" usemap="#ahnl_8HNL_inherit__map" alt="Inheritance graph"/></div>
-<map name="ahnl_8HNL_inherit__map" id="ahnl_8HNL_inherit__map">
-<area shape="rect" title=" " alt="" coords="41,79,114,104"/>
-<area shape="rect" href="classhnl_1_1HNLbranchings.html" title=" " alt="" coords="5,5,149,31"/>
-<area shape="poly" title=" " alt="" coords="80,44,80,79,75,79,75,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classhnl_1_1HNL__inherit__graph.svg" width="155" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for hnl.HNL:</div>
 <div class="dyncontent">
-<div class="center"><img src="classhnl_1_1HNL__coll__graph.png" border="0" usemap="#ahnl_8HNL_coll__map" alt="Collaboration graph"/></div>
-<map name="ahnl_8HNL_coll__map" id="ahnl_8HNL_coll__map">
-<area shape="rect" title=" " alt="" coords="41,79,114,104"/>
-<area shape="rect" href="classhnl_1_1HNLbranchings.html" title=" " alt="" coords="5,5,149,31"/>
-<area shape="poly" title=" " alt="" coords="80,44,80,79,75,79,75,44"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classhnl_1_1HNL__coll__graph.svg" width="155" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -192,7 +187,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">HNL physics according to the nuMSM
 </pre> 
-<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00713">713</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00712">712</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa2443ea4331c14cc636ac92dc3250ba1" name="aa2443ea4331c14cc636ac92dc3250ba1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2443ea4331c14cc636ac92dc3250ba1">&#9670;&#160;</a></span>__init__()</h2>
@@ -239,17 +234,17 @@ couplings (list of [U2e, U2mu, U2tau])
 </pre> 
 <p>Reimplemented from <a class="el" href="classhnl_1_1HNLbranchings.html#a516b5329f58b5fa1871134766c1ba951">hnl.HNLbranchings</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00718">718</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  718</span>    <span class="keyword">def </span>__init__(self, mass, couplings, debug: bool = <span class="keyword">False</span>) -&gt; <span class="keywordtype">None</span>:</div>
-<div class="line"><span class="lineno">  719</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  720</span><span class="stringliteral">        Initialize with mass and couplings of the HNL</span></div>
-<div class="line"><span class="lineno">  721</span><span class="stringliteral"></span> </div>
-<div class="line"><span class="lineno">  722</span><span class="stringliteral">        Inputs:</span></div>
-<div class="line"><span class="lineno">  723</span><span class="stringliteral">        mass (GeV)</span></div>
-<div class="line"><span class="lineno">  724</span><span class="stringliteral">        couplings (list of [U2e, U2mu, U2tau])</span></div>
-<div class="line"><span class="lineno">  725</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  726</span>        HNLbranchings.__init__(self, mass, couplings, debug)</div>
-<div class="line"><span class="lineno">  727</span> </div>
+<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00717">717</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  717</span>    <span class="keyword">def </span>__init__(self, mass, couplings, debug: bool = <span class="keyword">False</span>) -&gt; <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  718</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  719</span><span class="stringliteral">        Initialize with mass and couplings of the HNL</span></div>
+<div class="line"><span class="lineno">  720</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  721</span><span class="stringliteral">        Inputs:</span></div>
+<div class="line"><span class="lineno">  722</span><span class="stringliteral">        mass (GeV)</span></div>
+<div class="line"><span class="lineno">  723</span><span class="stringliteral">        couplings (list of [U2e, U2mu, U2tau])</span></div>
+<div class="line"><span class="lineno">  724</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  725</span>        HNLbranchings.__init__(self, mass, couplings, debug)</div>
+<div class="line"><span class="lineno">  726</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -284,18 +279,18 @@ couplings (list of [U2e, U2mu, U2tau])
 Inputs:
 - system: choose between default (i.e. SI, result in s) or FairShip (result in ns)
 </pre> 
-<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00728">728</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  728</span>    <span class="keyword">def </span>computeNLifetime(self, system: str = <span class="stringliteral">&quot;SI&quot;</span>):</div>
-<div class="line"><span class="lineno">  729</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  730</span><span class="stringliteral">        Compute the HNL lifetime</span></div>
-<div class="line"><span class="lineno">  731</span><span class="stringliteral"></span> </div>
-<div class="line"><span class="lineno">  732</span><span class="stringliteral">        Inputs:</span></div>
-<div class="line"><span class="lineno">  733</span><span class="stringliteral">        - system: choose between default (i.e. SI, result in s) or FairShip (result in ns)</span></div>
-<div class="line"><span class="lineno">  734</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  735</span>        self.NLifetime = c.hGeV / self.NDecayWidth()</div>
-<div class="line"><span class="lineno">  736</span>        <span class="keywordflow">if</span> system == <span class="stringliteral">&quot;FairShip&quot;</span>:</div>
-<div class="line"><span class="lineno">  737</span>            self.NLifetime *= 1.0e9</div>
-<div class="line"><span class="lineno">  738</span>        <span class="keywordflow">return</span> self.NLifetime</div>
+<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00727">727</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  727</span>    <span class="keyword">def </span>computeNLifetime(self, system: str = <span class="stringliteral">&quot;SI&quot;</span>):</div>
+<div class="line"><span class="lineno">  728</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  729</span><span class="stringliteral">        Compute the HNL lifetime</span></div>
+<div class="line"><span class="lineno">  730</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  731</span><span class="stringliteral">        Inputs:</span></div>
+<div class="line"><span class="lineno">  732</span><span class="stringliteral">        - system: choose between default (i.e. SI, result in s) or FairShip (result in ns)</span></div>
+<div class="line"><span class="lineno">  733</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  734</span>        self.NLifetime = c.hGeV / self.NDecayWidth()</div>
+<div class="line"><span class="lineno">  735</span>        <span class="keywordflow">if</span> system == <span class="stringliteral">&quot;FairShip&quot;</span>:</div>
+<div class="line"><span class="lineno">  736</span>            self.NLifetime *= 1.0e9</div>
+<div class="line"><span class="lineno">  737</span>        <span class="keywordflow">return</span> self.NLifetime</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -312,7 +307,7 @@ Inputs:
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00735">735</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hnl_8py_source.html#l00734">734</a> of file <a class="el" href="hnl_8py_source.html">hnl.py</a>.</p>
 
 </div>
 </div>
@@ -321,12 +316,43 @@ Inputs:
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacehnl.html">hnl</a></li><li class="navelem"><a class="el" href="classhnl_1_1HNL.html">HNL</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

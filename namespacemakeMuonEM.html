@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -181,17 +186,16 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   19</span><span class="keyword">def </span>getMasssq(pid):</div>
 <div class="line"><span class="lineno">   20</span>    apid = abs(int(pid))</div>
 <div class="line"><span class="lineno">   21</span>    <span class="keywordflow">if</span> apid <span class="keywordflow">not</span> <span class="keywordflow">in</span> masssq:</div>
-<div class="line"><span class="lineno">   22</span>        _p = PDG.GetParticle(apid)</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keyword">assert</span> _p <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>, f<span class="stringliteral">&quot;Unknown PDG: {apid}&quot;</span></div>
-<div class="line"><span class="lineno">   24</span>        masssq[apid] = _p.Mass() ** 2</div>
-<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">return</span> masssq[apid]</div>
+<div class="line"><span class="lineno">   22</span>        _p = ut.get_particle(apid)</div>
+<div class="line"><span class="lineno">   23</span>        masssq[apid] = _p.Mass() ** 2</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keywordflow">return</span> masssq[apid]</div>
+<div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span> </div>
-<div class="line"><span class="lineno">   27</span> </div>
-<div class="line"><span class="lineno">   28</span><span class="comment"># prepare muon input for FairShip/Geant4 processing</span></div>
-<div class="line"><span class="lineno">   29</span><span class="comment"># incoming muon,      id:px:py:pz:x:y:z:ox:oy:oz:pythiaid:parentid:ecut:w</span></div>
-<div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span><span class="comment"># just duplicate muon n times, rather stupid job</span></div>
-<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   27</span><span class="comment"># prepare muon input for FairShip/Geant4 processing</span></div>
+<div class="line"><span class="lineno">   28</span><span class="comment"># incoming muon,      id:px:py:pz:x:y:z:ox:oy:oz:pythiaid:parentid:ecut:w</span></div>
+<div class="line"><span class="lineno">   29</span> </div>
+<div class="line"><span class="lineno">   30</span><span class="comment"># just duplicate muon n times, rather stupid job</span></div>
+<div class="line"><span class="lineno">   31</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -208,7 +212,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00037">37</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00036">36</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -224,7 +228,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00038">38</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00037">37</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -240,7 +244,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00034">34</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00033">33</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -256,7 +260,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00051">51</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00050">50</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -272,7 +276,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00041">41</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00040">40</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -288,7 +292,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00033">33</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00032">32</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -304,7 +308,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00035">35</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00034">34</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -320,7 +324,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00036">36</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00035">35</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -336,7 +340,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00059">59</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00058">58</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -368,7 +372,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00052">52</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00051">51</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -400,7 +404,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00053">53</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00052">52</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -448,7 +452,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00050">50</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00049">49</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -464,7 +468,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00060">60</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00059">59</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -496,7 +500,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00049">49</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00048">48</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -512,7 +516,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00047">47</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00046">46</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -528,7 +532,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00047">47</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00046">46</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -544,7 +548,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00047">47</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00046">46</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -560,7 +564,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00045">45</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00044">44</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -576,7 +580,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00042">42</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00041">41</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -592,7 +596,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00049">49</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00048">48</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -608,7 +612,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00048">48</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00047">47</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -624,7 +628,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00048">48</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00047">47</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
@@ -640,18 +644,49 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00048">48</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="makeMuonEM_8py_source.html#l00047">47</a> of file <a class="el" href="makeMuonEM_8py_source.html">makeMuonEM.py</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemakeMuonEM.html">makeMuonEM</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>

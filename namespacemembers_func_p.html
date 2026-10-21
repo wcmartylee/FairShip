@@ -17,6 +17,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="ship-doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -24,6 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="ship-symbol-white.png"/></td>
   <td id="projectalign">
    <div id="projectname">FairShip
    </div>
@@ -92,6 +97,7 @@ $(document).ready(function(){initNavTree('namespacemembers_func_p.html',''); ini
 <div class="textblock">Here is a list of all namespace functions with links to the namespace documentation for each function:</div>
 
 <h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>parse_args()&#160;:&#160;<a class="el" href="namespacemakeCascadePythia8.html#a55fa4e57a40a969024e2c393fd0f6751">makeCascadePythia8</a></li>
 <li>parse_arguments()&#160;:&#160;<a class="el" href="namespaceconfig__tester.html#af6ab071229fcb09f54a127736615d555">config_tester</a>, <a class="el" href="namespaceexperimental_1_1eminem__importer.html#a1ebd3ad1ef4b46ba84738e49b52757d7">experimental.eminem_importer</a></li>
 <li>parse_custom_config_units()&#160;:&#160;<a class="el" href="namespaceexperimental_1_1eminem__importer.html#afe4ebcd7f7c27c9e53df5b5fe9832d9c">experimental.eminem_importer</a></li>
 <li>parse_file()&#160;:&#160;<a class="el" href="namespaceconvertEvtCalc.html#a323c5eda6e581f54e1bb13a038600b63">convertEvtCalc</a></li>
@@ -110,6 +116,9 @@ $(document).ready(function(){initNavTree('namespacemembers_func_p.html',''); ini
 <li>pMin()&#160;:&#160;<a class="el" href="namespaceproton__bremsstrahlung.html#a3779ff27265babd92dc0a1c43321ba08">proton_bremsstrahlung</a></li>
 <li>PoorE791_tune()&#160;:&#160;<a class="el" href="namespacemakeCascade.html#a3895fb5c4acb0b8f50b36593a1e1fd02">makeCascade</a></li>
 <li>positionText()&#160;:&#160;<a class="el" href="namespaceeventDisplay.html#a8c09306706c8d8799e481bbcf952403b">eventDisplay</a></li>
+<li>positionToActs()&#160;:&#160;<a class="el" href="namespaceSHiP_1_1ActsFrame.html#aa289858ebacbeabf87471ccf21dc0104">SHiP::ActsFrame</a></li>
+<li>positionToShip()&#160;:&#160;<a class="el" href="namespaceSHiP_1_1ActsFrame.html#a917736bca928342e572d413953f6624a">SHiP::ActsFrame</a></li>
+<li>post_process()&#160;:&#160;<a class="el" href="namespaceMuDISGenerator__postProcessing.html#a682170391e99b26004b4ad8cda34f499">MuDISGenerator_postProcessing</a></li>
 <li>PoT()&#160;:&#160;<a class="el" href="namespaceextractMuonsAndUpdateWeight.html#a57763c60dba4b7e8637e1cb6b4d6b3f5">extractMuonsAndUpdateWeight</a></li>
 <li>potFromFileHeader()&#160;:&#160;<a class="el" href="namespacerunCharmHadProd.html#aa92fded32b5286edc3a6a5d4b11e61cf">runCharmHadProd</a></li>
 <li>print_default_config()&#160;:&#160;<a class="el" href="namespaceexperimental_1_1eminem__importer.html#a20777b76f4ed64b3a87d6976f7457a71">experimental.eminem_importer</a></li>
@@ -119,6 +128,7 @@ $(document).ready(function(){initNavTree('namespacemembers_func_p.html',''); ini
 <li>print_scale_factor()&#160;:&#160;<a class="el" href="namespacepythia8__conf__utils.html#ac3cc6b58962bc0ff9d48e7317dd512f5">pythia8_conf_utils</a></li>
 <li>print_section()&#160;:&#160;<a class="el" href="namespacevalidationTools.html#a18c246303c5a140d447fcd798dd4ab9a">validationTools</a></li>
 <li>print_simulation_output_summary()&#160;:&#160;<a class="el" href="namespacevalidationTools.html#ac349eb89a40b005ef651d6c1097ecab1">validationTools</a></li>
+<li>print_table()&#160;:&#160;<a class="el" href="namespacesplit__weight__uncertainties.html#aa3aa89834d816b4c46e9e0434206c3ee">split_weight_uncertainties</a></li>
 <li>printAndCopy()&#160;:&#160;<a class="el" href="namespaceana__ShipMuon.html#af403d931869ad7ecdb0f13f79b35dd93">ana_ShipMuon</a></li>
 <li>printFailedJobs()&#160;:&#160;<a class="el" href="namespacerun__reco.html#a65a88e0c2c6866584af433f15bd3c11c">run_reco</a></li>
 <li>printFittedTracks()&#160;:&#160;<a class="el" href="namespaceeventDisplay.html#af7004ffe473f320744a68c7f62fcfcbb">eventDisplay</a></li>
@@ -127,21 +137,54 @@ $(document).ready(function(){initNavTree('namespacemembers_func_p.html',''); ini
 <li>printVMCFields()&#160;:&#160;<a class="el" href="namespacegeomGeant4.html#aba553dcfd77eda82c10886fd0fec4e91">geomGeant4</a></li>
 <li>printWeightsandFields()&#160;:&#160;<a class="el" href="namespacegeomGeant4.html#a0f2dbb7cfd99fcab16c9f0edb9d36a29">geomGeant4</a></li>
 <li>printWF()&#160;:&#160;<a class="el" href="namespacegeomGeant4.html#a8cfc0857eacf293ed0d9c8b83e9f226a">geomGeant4</a></li>
-<li>processFile()&#160;:&#160;<a class="el" href="namespaceextractMuonsAndUpdateWeight.html#aabe80f39b29e261cb965455cf6b6882e">extractMuonsAndUpdateWeight</a>, <a class="el" href="namespaceextractNeutrinosAndUpdateWeight.html#ad16dffb65fa314ca691c505a2983b244">extractNeutrinosAndUpdateWeight</a></li>
+<li>processFile()&#160;:&#160;<a class="el" href="namespaceextractMuonsAndUpdateWeight.html#a70a6083dac0b34d42ad8f64e3db0e041">extractMuonsAndUpdateWeight</a>, <a class="el" href="namespaceextractNeutrinosAndUpdateWeight.html#ad16dffb65fa314ca691c505a2983b244">extractNeutrinosAndUpdateWeight</a></li>
 <li>prodRate()&#160;:&#160;<a class="el" href="namespaceproton__bremsstrahlung.html#abcb3a72611c1a17d989c096c777046dc">proton_bremsstrahlung</a></li>
 <li>projection()&#160;:&#160;<a class="el" href="namespaceeventDisplay.html#a9a959c9a60a2f0b87f24aa8bb161dcef">eventDisplay</a></li>
 <li>projection_prescale()&#160;:&#160;<a class="el" href="namespaceeventDisplay.html#a2b9736a0e63d8714fd66efc242d2c22f">eventDisplay</a></li>
 <li>PRVersion()&#160;:&#160;<a class="el" href="namespaceeventDisplay.html#a1e0993e5a4524fabfdf23c8925f00bd2">eventDisplay</a></li>
 <li>pTransverse()&#160;:&#160;<a class="el" href="namespaceproton__bremsstrahlung.html#a3482a5300d8f420ddc9befd32ec770f7">proton_bremsstrahlung</a></li>
 <li>ptSquare()&#160;:&#160;<a class="el" href="namespaceproton__bremsstrahlung.html#a4a7ab8940c1a8fe1f2e16c15c5d57e40">proton_bremsstrahlung</a></li>
+<li>PythiaLengthToCm()&#160;:&#160;<a class="el" href="namespaceshipgen.html#abf37dd718f47d2835452543cb4b3f0a1">shipgen</a></li>
+<li>PythiaTimeToS()&#160;:&#160;<a class="el" href="namespaceshipgen.html#a1712d3106f13d600a33e5016f447f592">shipgen</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- start footer part -->
+<!-- SHiP Doxygen theme footer. Version-independent: only standard Doxygen
+     placeholders are used, so it works with Doxygen 1.9.x and 1.1x alike. -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.8</li>
   </ul>
 </div>
+<!-- SHiP theme: scripts (doxygen-awesome extensions) -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeDarkModeToggle.init();
+  DoxygenAwesomeFragmentCopyButton.init();
+  DoxygenAwesomeParagraphLink.init();
+  DoxygenAwesomeInteractiveToc.init();
+  DoxygenAwesomeTabs.init();
+  /* favicon + collaboration footer line (no HTML_HEADER needed) */
+  (function () {
+    var rel = "";
+    var link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png"; link.sizes = "192x192";
+    link.href = rel + "favicon-192.png";
+    document.head.appendChild(link);
+    var footer = document.createElement("div");
+    footer.className = "ship-footer";
+    footer.innerHTML =
+      '<span>&copy; CERN for the benefit of the SHiP Collaboration</span>' +
+      '<a href="https://shipsoft.github.io/Documentation/">SHiP Software documentation</a>' +
+      '<a href="https://github.com/ShipSoft">github.com/ShipSoft</a>' +
+      '<a href="https://ship.web.cern.ch/">ship.web.cern.ch</a>';
+    var content = document.getElementById("doc-content") || document.body;
+    content.appendChild(footer);
+  })();
+</script>
 </body>
 </html>
