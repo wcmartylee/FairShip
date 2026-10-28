@@ -268,7 +268,7 @@ void strawtubes::ConstructGeometry() {
   move_up->RegisterYourself();
 
   // Composite shape to create frame structure
-  TGeoCompositeShape* frame_part =
+  [[maybe_unused]] TGeoCompositeShape* frame_part =
     new TGeoCompositeShape("frame_part", "(frame_outer_shape:move_up)-carve_out");
 
   // Combine two frame parts
