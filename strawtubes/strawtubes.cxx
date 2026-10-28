@@ -240,34 +240,46 @@ void strawtubes::ConstructGeometry() {
   Double_t eps = 0.0001;
   // Straw (half) length
   Double_t straw_length = f_aperture_width;
-  // Width of frame: standard HEA 500 I-beam width
-  Double_t frame_width = 49.;
+  // Size of frame: standard HEA 500 I-beam
+  Double_t beam_height = 49.; // in cm
+  Double_t beam_width = 4.03; // effective width in cm
   // Offset due to floor space limitation
   Double_t floor_offset = 14.;
 
   Double_t rmin, rmax, T_station_z;
 
   // Arguments of boxes are half-lengths
-  [[maybe_unused]] TGeoBBox* detbox1 = new TGeoBBox(
-      "detbox1", f_aperture_width + frame_width,
-      f_aperture_height + frame_width - floor_offset / 2., f_station_length);
-  [[maybe_unused]] TGeoBBox* detbox2 = new TGeoBBox(
-      "detbox2", f_aperture_width + eps,
+  [[maybe_unused]] TGeoBBox* frame_outer_shape = new TGeoBBox(
+      "frame_outer_shape", f_aperture_width + beam_height,
+      f_aperture_height + beam_height - floor_offset / 2., beam_width);
+  [[maybe_unused]] TGeoBBox* carve_out = new TGeoBBox(
+      "carve_out", f_aperture_width + eps,
       f_aperture_height + eps,
-      f_station_length + eps);
-  [[maybe_unused]] TGeoBBox* detbox3 = new TGeoBBox(
-      "detbox3", straw_length + eps,
-      f_aperture_height +
-          TMath::Tan(f_view_angle * TMath::Pi() / 180.0) * straw_length * 2 +
-          f_offset_layer / TMath::Cos(f_view_angle * TMath::Pi() / 180.0) + eps,
-      (3 * f_delta_z_view + f_delta_z_layer + f_outer_straw_diameter) / 2. + eps);
+      beam_width + eps);
+  //[[maybe_unused]] TGeoBBox* detbox3 = new TGeoBBox(
+  //    "detbox3", straw_length + eps,
+  //    f_aperture_height +
+  //        TMath::Tan(f_view_angle * TMath::Pi() / 180.0) * straw_length * 2 +
+  //        f_offset_layer / TMath::Cos(f_view_angle * TMath::Pi() / 180.0) + eps,
+  //        (3 * f_delta_z_view + f_delta_z_layer + f_outer_straw_diameter) / 2. + eps);
+  // Moving up due to floor space limination
   TGeoTranslation* move_up =
       new TGeoTranslation("move_up", 0, floor_offset / 2., 0);
   move_up->RegisterYourself();
 
-  // Composite shape to create frame
-  TGeoCompositeShape* detcomp1 =
-    new TGeoCompositeShape("detcomp1", "(detbox1:move_up)-detbox2-detbox3");
+  // Composite shape to create frame structure
+  TGeoCompositeShape* frame_part =
+    new TGeoCompositeShape("frame_part", "(frame_outer_shape:move_up)-carve_out");
+
+  // Combine two frame parts
+  TGeoTranslation* move_forward =
+    new TGeoTranslation("move_forward", 0, 0, -beam_width / 2. - 20.); // leave space for straws (40 cm wide)
+  TGeoTranslation* move_backward =
+    new TGeoTranslation("move_backward", 0, 0, beam_width / 2. + 20.);
+  move_forward->RegisterYourself();
+  move_backward->RegisterYourself();
+  TGeoCompositeShape* frame =
+    new TGeoCompositeShape("frame", "(frame_part:move_forward)+(frame_part:move_backward)");
   
   // Volume: straw
   rmin = f_inner_straw_diameter / 2.;
@@ -355,9 +367,9 @@ void strawtubes::ConstructGeometry() {
       vol->AddNode(statframe, statnb * 1e6,
 		   new TGeoTranslation(0, -floor_offset / 2., 0));
     } else {
-      // Use TGeo station frame
+      // Use approximated station frame
       TGeoVolume* statframe =
-	  new TGeoVolume(nmstation + "_frame", detcomp1, FrameMatPtr);
+	  new TGeoVolume(nmstation + "_frame", frame, FrameMatPtr);
       vol->AddNode(statframe, statnb * 1e6,
 		   new TGeoTranslation(0, -floor_offset / 2., 0));
       statframe->SetLineColor(kRed);
